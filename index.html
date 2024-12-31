@@ -451,6 +451,190 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/FZU_DS/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="SolitudeAB">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SolitudeAB">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/FZU_DS/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8/" class="post-title-link" itemprop="url">文件管理器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-12-31 00:00:00 / 修改时间：19:04:24" itemprop="dateCreated datePublished" datetime="2024-12-31T00:00:00+08:00">2024-12-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法与数据结构</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>测试用例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">10</span><br><span class="line">1 2 10 1</span><br><span class="line">1 2 20 2</span><br><span class="line">1 2 30 3</span><br><span class="line">1 2 40 3</span><br><span class="line">1 2 50 3</span><br><span class="line">3 1 5</span><br><span class="line">4 1 9</span><br><span class="line">3 2 3</span><br><span class="line">4 2 3</span><br><span class="line">4 2 10</span><br></pre></td></tr></table></figure>
+<h3 id="mine"><a href="#mine" class="headerlink" title="mine"></a>mine</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> max1 = <span class="number">5</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> max2 = <span class="number">100000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">File</span> &#123;</span><br><span class="line">	<span class="type">int</span> name;<span class="comment">//文件名</span></span><br><span class="line">	<span class="type">int</span> size;<span class="comment">//大小</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	vector&lt;File&gt; folders[<span class="number">5</span>];<span class="comment">//文件夹</span></span><br><span class="line">	<span class="type">int</span> Q;</span><br><span class="line">	cin &gt;&gt; Q;</span><br><span class="line">	<span class="keyword">while</span> (Q--) &#123;</span><br><span class="line">		<span class="type">int</span> op;</span><br><span class="line">		cin &gt;&gt; op;</span><br><span class="line">		<span class="type">int</span> folder, name, size, k;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (op == <span class="number">1</span>) &#123;</span><br><span class="line">			cin &gt;&gt; folder &gt;&gt; name &gt;&gt; size;</span><br><span class="line">			vector&lt;File&gt;::iterator it = <span class="built_in">find_if</span>(folders[folder].<span class="built_in">begin</span>(), folders[folder].<span class="built_in">end</span>(), [name](File f) &#123;<span class="keyword">return</span> f.name == name; &#125;);<span class="comment">//匿名函数</span></span><br><span class="line">			<span class="keyword">if</span> (it != folders[folder].<span class="built_in">end</span>()) &#123; it-&gt;size = size; &#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				File f;</span><br><span class="line">				f.name = name;</span><br><span class="line">				f.size = size;</span><br><span class="line">				folders[folder].<span class="built_in">push_back</span>(f);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="number">2</span>) &#123;</span><br><span class="line">			cin &gt;&gt; folder &gt;&gt; name;</span><br><span class="line">			vector&lt;File&gt;::iterator it = <span class="built_in">find_if</span>(folders[folder].<span class="built_in">begin</span>(), folders[folder].<span class="built_in">end</span>(), [name](File f) &#123;<span class="keyword">return</span> f.name == name; &#125;);<span class="comment">//匿名函数</span></span><br><span class="line">			<span class="keyword">if</span> (it != folders[folder].<span class="built_in">end</span>()) &#123; folders[folder].<span class="built_in">erase</span>(it); &#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="number">3</span>) &#123;</span><br><span class="line">			cin &gt;&gt; folder &gt;&gt; k;</span><br><span class="line">			<span class="built_in">sort</span>(folders[folder].<span class="built_in">begin</span>(), folders[folder].<span class="built_in">end</span>(), [](File f1, File f2) &#123;<span class="keyword">return</span> f<span class="number">1.</span>size == f<span class="number">2.</span>size ? f<span class="number">1.</span>name &lt; f<span class="number">2.</span>name : f<span class="number">1.</span>size &gt; f<span class="number">2.</span>size; &#125;);</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; folders[folder].<span class="built_in">size</span>() &amp;&amp; k; i++, k--) &#123;</span><br><span class="line">				<span class="keyword">if</span> (i != <span class="number">0</span>) &#123; cout &lt;&lt; <span class="string">&quot; &quot;</span>; &#125;</span><br><span class="line">				cout &lt;&lt; folders[folder][i].name;</span><br><span class="line">			&#125;</span><br><span class="line">			cout &lt;&lt; endl;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="number">4</span>) &#123;</span><br><span class="line">			cin &gt;&gt; folder &gt;&gt; k;</span><br><span class="line">			<span class="built_in">sort</span>(folders[folder].<span class="built_in">begin</span>(), folders[folder].<span class="built_in">end</span>(), [](File f1, File f2) &#123;<span class="keyword">return</span> f<span class="number">1.</span>size == f<span class="number">2.</span>size ? f<span class="number">1.</span>name &lt; f<span class="number">2.</span>name : f<span class="number">1.</span>size &lt; f<span class="number">2.</span>size; &#125;);</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; folders[folder].<span class="built_in">size</span>() &amp;&amp; k; i++, k--) &#123;</span><br><span class="line">				<span class="keyword">if</span> (i != <span class="number">0</span>) &#123; cout &lt;&lt; <span class="string">&quot; &quot;</span>; &#125;</span><br><span class="line">				cout &lt;&lt; folders[folder][i].name;</span><br><span class="line">			&#125;</span><br><span class="line">			cout &lt;&lt; endl;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="other"><a href="#other" class="headerlink" title="other"></a>other</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/FZU_DS/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/FZU_DS/%E5%9B%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="SolitudeAB">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SolitudeAB">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/FZU_DS/%E5%9B%BE/" class="post-title-link" itemprop="url">图</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-12-31 00:00:00 / 修改时间：19:04:19" itemprop="dateCreated datePublished" datetime="2024-12-31T00:00:00+08:00">2024-12-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法与数据结构</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="10-31-Sins-of-a-Solar-Empire-P6"><a href="#10-31-Sins-of-a-Solar-Empire-P6" class="headerlink" title="10.31 Sins of a Solar Empire P6"></a>10.31 Sins of a Solar Empire P6</h3><p>**实验任务</p>
+<p>正如你所知道的s_sin是一个贪玩的不得了的小P孩QAQ，你也知道他最近很喜欢玩一个叫做太阳帝国的原罪的策略游戏去年他已经和疯狂的AI交战了整整一年。而现在，战斗的序幕又要拉开了。</p>
+<p>在某个星球上，该星球由n*m个方格组成，每个方格中可能为boss，s_sin，障碍，道路，小怪。s_sin想要去打爆boss，假设他可以秒杀boss，现在他的任务只需要到达boss所在的位置。如果s_sin想要到达某个方格，但方格中有小怪，那么必须打死小怪，才能到达这个方格。假设s_sin只能向上、下、左、右移动一个格子，移动一步用时1个时间单位，杀死小怪也用1个时间单位。假设s_sin很强壮，可以杀死所有小怪。</p>
+<p>试计算s_sin到达boss位置至少需要多少时间。注意：障碍是不能通过的。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/FZU_DS/%E5%9B%BE/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/PTA/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -633,98 +817,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/PTA/%E4%BA%8C%E5%8F%89%E6%A0%91%E8%AF%B4%E6%98%8E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="SolitudeAB">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SolitudeAB">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/PTA/%E4%BA%8C%E5%8F%89%E6%A0%91%E8%AF%B4%E6%98%8E/" class="post-title-link" itemprop="url">二叉树说明</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-12-31 00:00:00 / 修改时间：19:06:09" itemprop="dateCreated datePublished" datetime="2024-12-31T00:00:00+08:00">2024-12-31</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法与数据结构</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>906</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="已知二叉树的前序遍历和中序遍历，如何得到它的后序遍历？"><a href="#已知二叉树的前序遍历和中序遍历，如何得到它的后序遍历？" class="headerlink" title="已知二叉树的前序遍历和中序遍历，如何得到它的后序遍历？"></a>已知二叉树的前序遍历和中序遍历，如何得到它的后序遍历？</h2><p>对一棵二叉树进行遍历，我们可以采取3中顺序进行遍历，分别是前序遍历、中序遍历和后序遍历。这三种方式是以访问父节点的顺序来进行命名的。假设父节点是N，左节点是L，右节点是R，那么对应的访问遍历顺序如下：</p>
-<p>前序遍历    N－&gt;L－&gt;R<br>中序遍历    L－&gt;N－&gt;R<br>后序遍历    L－&gt;R－&gt;N</p>
-<p>所以，对于以下这棵树，三种遍历方式的结果是：</p>
-<p><img src="https://i-blog.csdnimg.cn/blog_migrate/e1d5be45e572fa0202cdd7b2dd73afb1.png" alt="img"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/PTA/%E4%BA%8C%E5%8F%89%E6%A0%91%E8%AF%B4%E6%98%8E/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/PTA/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -817,6 +909,98 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/PTA/%E4%BA%8C%E5%8F%89%E6%A0%91%E8%AF%B4%E6%98%8E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="SolitudeAB">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SolitudeAB">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/PTA/%E4%BA%8C%E5%8F%89%E6%A0%91%E8%AF%B4%E6%98%8E/" class="post-title-link" itemprop="url">二叉树说明</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-12-31 00:00:00 / 修改时间：19:06:09" itemprop="dateCreated datePublished" datetime="2024-12-31T00:00:00+08:00">2024-12-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法与数据结构</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>906</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="已知二叉树的前序遍历和中序遍历，如何得到它的后序遍历？"><a href="#已知二叉树的前序遍历和中序遍历，如何得到它的后序遍历？" class="headerlink" title="已知二叉树的前序遍历和中序遍历，如何得到它的后序遍历？"></a>已知二叉树的前序遍历和中序遍历，如何得到它的后序遍历？</h2><p>对一棵二叉树进行遍历，我们可以采取3中顺序进行遍历，分别是前序遍历、中序遍历和后序遍历。这三种方式是以访问父节点的顺序来进行命名的。假设父节点是N，左节点是L，右节点是R，那么对应的访问遍历顺序如下：</p>
+<p>前序遍历    N－&gt;L－&gt;R<br>中序遍历    L－&gt;N－&gt;R<br>后序遍历    L－&gt;R－&gt;N</p>
+<p>所以，对于以下这棵树，三种遍历方式的结果是：</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/e1d5be45e572fa0202cdd7b2dd73afb1.png" alt="img"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/PTA/%E4%BA%8C%E5%8F%89%E6%A0%91%E8%AF%B4%E6%98%8E/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/PTA/%E5%9B%BE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -886,189 +1070,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/PTA/%E5%9B%BE/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/PTA/%E6%8E%92%E5%BA%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="SolitudeAB">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SolitudeAB">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/PTA/%E6%8E%92%E5%BA%8F/" class="post-title-link" itemprop="url">排序</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-12-31 00:00:00 / 修改时间：19:06:29" itemprop="dateCreated datePublished" datetime="2024-12-31T00:00:00+08:00">2024-12-31</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法与数据结构</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>6.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="7-1-选择法排序"><a href="#7-1-选择法排序" class="headerlink" title="7-1 选择法排序"></a>7-1 选择法排序</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; v;</span><br><span class="line">queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="type">int</span>* arr = <span class="keyword">new</span> <span class="type">int</span>[n];</span><br><span class="line">    <span class="type">int</span> temp = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        cin &gt;&gt; arr[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; n; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[i] &lt; arr[j]) &#123;</span><br><span class="line">                temp = arr[i];</span><br><span class="line">                arr[i] = arr[j];</span><br><span class="line">                arr[j] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">0</span>) &#123;</span><br><span class="line">            cout &lt;&lt; arr[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; arr[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="7-2-冒泡法排序"><a href="#7-2-冒泡法排序" class="headerlink" title="7-2 冒泡法排序"></a>7-2 冒泡法排序</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; v;</span><br><span class="line">queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="type">int</span>* arr = <span class="keyword">new</span> <span class="type">int</span>[n];</span><br><span class="line">    <span class="type">int</span> K, count = <span class="number">0</span>;</span><br><span class="line">    cin &gt;&gt; K;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        cin &gt;&gt; arr[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = n; i &gt; <span class="number">1</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; i - <span class="number">1</span>; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="type">int</span> temp;</span><br><span class="line">                temp = arr[j];</span><br><span class="line">                arr[j] = arr[j<span class="number">+1</span>];</span><br><span class="line">                arr[j<span class="number">+1</span>] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        count++;</span><br><span class="line">        <span class="keyword">if</span> (count == K) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">0</span>) &#123;</span><br><span class="line">            cout &lt;&lt; arr[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; arr[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="7-3-两个有序链表序列的合并"><a href="#7-3-两个有序链表序列的合并" class="headerlink" title="7-3 两个有序链表序列的合并"></a>7-3 两个有序链表序列的合并</h3>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/PTA/%E6%8E%92%E5%BA%8F/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/FZU_DS/%E5%9B%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="SolitudeAB">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SolitudeAB">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/FZU_DS/%E5%9B%BE/" class="post-title-link" itemprop="url">图</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-12-31 00:00:00 / 修改时间：19:04:19" itemprop="dateCreated datePublished" datetime="2024-12-31T00:00:00+08:00">2024-12-31</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法与数据结构</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="10-31-Sins-of-a-Solar-Empire-P6"><a href="#10-31-Sins-of-a-Solar-Empire-P6" class="headerlink" title="10.31 Sins of a Solar Empire P6"></a>10.31 Sins of a Solar Empire P6</h3><p>**实验任务</p>
-<p>正如你所知道的s_sin是一个贪玩的不得了的小P孩QAQ，你也知道他最近很喜欢玩一个叫做太阳帝国的原罪的策略游戏去年他已经和疯狂的AI交战了整整一年。而现在，战斗的序幕又要拉开了。</p>
-<p>在某个星球上，该星球由n*m个方格组成，每个方格中可能为boss，s_sin，障碍，道路，小怪。s_sin想要去打爆boss，假设他可以秒杀boss，现在他的任务只需要到达boss所在的位置。如果s_sin想要到达某个方格，但方格中有小怪，那么必须打死小怪，才能到达这个方格。假设s_sin只能向上、下、左、右移动一个格子，移动一步用时1个时间单位，杀死小怪也用1个时间单位。假设s_sin很强壮，可以杀死所有小怪。</p>
-<p>试计算s_sin到达boss位置至少需要多少时间。注意：障碍是不能通过的。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/12/31/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/FZU_DS/%E5%9B%BE/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
