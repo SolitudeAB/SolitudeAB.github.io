@@ -1,0 +1,382 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>如何在 GitHub 上写博客？ | SolitudeAB</title><meta name="author" content="SolitudeAB"><meta name="copyright" content="SolitudeAB"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="这些年我用 GitHub 倒腾的博客没有十个，也有八九个了，今天我就手把手教你如何在 GitHub 上写博客，文章较长，细节较多，记得先收藏，如果有帮助记得点赞，如果搭建成功，可以留言一下你的博客。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何在 GitHub 上写博客？">
+<meta property="og:url" content="http://example.com/2025/01/01/others/index.html">
+<meta property="og:site_name" content="SolitudeAB">
+<meta property="og:description" content="这些年我用 GitHub 倒腾的博客没有十个，也有八九个了，今天我就手把手教你如何在 GitHub 上写博客，文章较长，细节较多，记得先收藏，如果有帮助记得点赞，如果搭建成功，可以留言一下你的博客。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/avatar.jpg">
+<meta property="article:published_time" content="2024-12-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-01-02T06:41:27.069Z">
+<meta property="article:author" content="SolitudeAB">
+<meta property="article:tag" content="建站记录">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/avatar.jpg"><link rel="shortcut icon" href="/img/avatar.jpg"><link rel="canonical" href="http://example.com/2025/01/01/others/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/seach.xml","preload":false,"top_n_per_article":3,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '如何在 GitHub 上写博客？',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><link rel="stylesheet" href="/css/transpancy.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="SolitudeAB" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="web_bg" style="background:url(https://cdn.jsdelivr.net/gh/SolitudeAB/blog-img/background0.jpg);background-attachment: local;background-position: center;background-size: cover;background-repeat: no-repeat;"></div><div id="web_bg" style="background-image: url(url(https://cdn.jsdelivr.net/gh/SolitudeAB/blog-img/background0.jpg));"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">17</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/avatar.jpg" alt="Logo"><span class="site-name">SolitudeAB</span></a><a class="nav-page-title" href="/"><span class="site-name">如何在 GitHub 上写博客？</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">如何在 GitHub 上写博客？</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-12-31T16:00:00.000Z" title="发表于 2025-01-01 00:00:00">2025-01-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-01-02T06:41:27.069Z" title="更新于 2025-01-02 14:41:27">2025-01-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/">建站记录</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>这些年我用 GitHub 倒腾的博客没有十个，也有八九个了，今天我就手把手教你<strong>如何在 GitHub 上写博客，文章较长，细节较多，记得先收藏，如果有帮助记得点赞，如果搭建成功，可以留言一下你的博客。</strong></p>
+<h2 id="准备条件"><a href="#准备条件" class="headerlink" title="准备条件"></a><strong>准备条件</strong></h2><p>在这里先跟大家说一些准备条件，有些同学可能一听到搭建博客就望而却步。弄个博客网站，不得有台服务器吗？不得搞数据库吗？不得注册域名吗？没事，如果都没有，那照样是能搭建一个博客的。</p>
+<p>GitHub 是个好东西啊，它提供了 GitHub Pages 帮助我们来架设一个静态网站，这就解决了服务器的问题。</p>
+<p>Hexo 这个博客框架没有那么重量级，它是 MarkDown 直接写文章的，然后 Hexo 可以直接将文章编译成静态网页文件并发布，所以这样文章的内容、标题、标签等信息就没必要存数据库里面了，是直接纯静态页面了，这就解决了数据库的问题。</p>
+<p>GitHub Pages 允许每个账户创建一个名为 {username}.<a href="https://link.zhihu.com/?target=http%3A//github.io">http://github.io</a> 的仓库，另外它还会自动为这个仓库分配一个 <a href="https://link.zhihu.com/?target=http%3A//github.io">http://github.io</a> 的二级域名，这就解决了域名的问题，当然如果想要自定义域名的话，也可以支持。</p>
+<p>所以说，基本上，先注册个 GitHub 账号就能搞了，下面我们来正式开始吧。</p>
+<p>关于如何使用 GitHub 请阅读这篇文章：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/369486197">还不会使用 GitHub ？ GitHub 教程来了！万字图文详解</a></p>
+<p>另外，整理了一些电子书，应该对你很有帮助：</p>
+<p><a href="https://link.zhihu.com/?target=https%3A//github.com/iCSToCS/CSBook">iCSToCS/CSBookgithub.com/iCSToCS/CSBook<img src="https://pica.zhimg.com/v2-a81f0c86c6000418eb85ab1d3dbbe28e_180x120.jpg" alt="img"></a></p>
+<h2 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a><strong>新建项目</strong></h2><p>首先在 GitHub 新建一个仓库（Repository），名称为 {username}.<a href="https://link.zhihu.com/?target=http%3A//github.io">http://github.io</a>，注意这个名比较特殊，必须要是 <a href="https://link.zhihu.com/?target=http%3A//github.io">http://github.io</a> 为后缀结尾的。比如 NightTeam 的 GitHub 用户名就叫 NightTeam，那我就新建一个 <a href="https://link.zhihu.com/?target=http%3A//nightteam.github.io">http://nightteam.github.io</a>，新建完成之后就可以进行后续操作了。</p>
+<p>另外如果 GitHub 没有配置 SSH 连接的建议配置一下，这样后面在部署博客的时候会更方便。</p>
+<h2 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a><strong>安装环境</strong></h2><h3 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a><strong>安装 Node.js</strong></h3><p>首先在自己的电脑上安装 Node.js，下载地址：<a href="https://link.zhihu.com/?target=https%3A//nodejs.org/zh-cn/download/">https://nodejs.org/zh-cn/download/</a>，可以安装 Stable 版本。</p>
+<p>安装完毕之后，确保环境变量配置好，能正常使用 npm 命令。</p>
+<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a><strong>安装 Hexo</strong></h3><p>接下来就需要安装 Hexo 了，这是一个博客框架，Hexo 官方还提供了一个命令行工具，用于快速创建项目、页面、编译、部署 Hexo 博客，所以在这之前我们需要先安装 Hexo 的命令行工具。</p>
+<p>命令如下：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></tbody></table></figure>
+<p>安装完毕之后，确保环境变量配置好，能正常使用 hexo 命令。</p>
+<h2 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a><strong>初始化项目</strong></h2><p>接下来我们使用 Hexo 的命令行创建一个项目，并将其在本地跑起来，整体跑通看看。</p>
+<p>首先使用如下命令创建项目：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init {name}</span><br></pre></td></tr></tbody></table></figure>
+<p>这里的 name 就是项目名，我这里要创建 NightTeam 的博客，我就把项目取名为 nightteam 了，用了纯小写，命令如下：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init nightteam</span><br></pre></td></tr></tbody></table></figure>
+<p>这样 nightteam 文件夹下就会出现 Hexo 的初始化文件，包括 themes、scaffolds、source 等文件夹，这些内容暂且先不用管是做什么的，我们先知道有什么，然后一步步走下去看看都发生了什么变化。</p>
+<p>接下来我们首先进入新生成的文件夹里面，然后调用 Hexo 的 generate 命令，将 Hexo 编译生成 HTML 代码，命令如下：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></tbody></table></figure>
+<p>可以看到输出结果里面包含了 js、css、font 等内容，并发现他们都处在了项目根目录下的 public 文件夹下面了。</p>
+<p>然后我们利用 Hexo 提供的 serve 命令把博客在本地运行起来，命令如下：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo serve</span><br></pre></td></tr></tbody></table></figure>
+<p>运行之后命令行输出如下：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INFO  Start processing</span><br><span class="line">INFO  Hexois running at http://localhost:4000 . Press Ctrl+C to stop </span><br></pre></td></tr></tbody></table></figure>
+<p>它告诉我们在本地 4000 端口上就可以查看博客站点了，如图所示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/SolitudeAB/blog-img/v2-f7a0d722b670429e6e23ed8d86823b4c_1440w.jpg" alt="img"></p>
+<p>这样一个博客的架子就出来了，我们只用了三个命令就完成了。</p>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a><strong>部署</strong></h2><p>接下来我们来将这个初始化的博客进行一下部署，放到 GitHub Pages 上面验证一下其可用性。成功之后我们可以再进行后续的修改，比如修改主题、修改页面配置等等。</p>
+<p>那么怎么把这个页面部署到 GitHub Pages 上面呢，其实 Hexo 已经给我们提供一个命令，利用它我们可以直接将博客一键部署，不需要手动去配置服务器或进行其他的各项配置。</p>
+<p>部署命令如下：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></tbody></table></figure>
+<p>在部署之前，我们需要先知道博客的部署地址，它需要对应 GitHub 的一个 Repository 的地址，这个信息需要我们来配置一下。</p>
+<p>打开根目录下的 _config.yml 文件，找到 Deployment 这个地方，把刚才新建的 Repository 的地址贴过来，然后指定分支为 master 分支，最终修改为如下内容：</p>
+<p><img src="https://pic4.zhimg.com/v2-58f606f59ffea1edbbe2e4eccbb8e707_1440w.jpg" alt="img"></p>
+<p>我的就修改为如下内容：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/SolitudeAB/blog-img/v2-c4b116a6a82b7914e20faf193838c63d_1440w.jpg" alt="img"></p>
+<p>另外我们还需要额外安装一个支持 Git 的部署插件，名字叫做 hexo-deployer-git，有了它我们才可以顺利将其部署到 GitHub 上面，如果不安装的话，在执行部署命令时会报如下错误：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Deployer not found: git</span><br></pre></td></tr></tbody></table></figure>
+<p>好，那就让我们安装下这个插件，在项目目录下执行安装命令如下：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></tbody></table></figure>
+<p>安装成功之后，执行部署命令：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></tbody></table></figure>
+<p>运行结果类似如下：</p>
+<p><img src="https://pic2.zhimg.com/v2-207ea40880e68fd5aa37261af20b5807_1440w.jpg" alt="img"></p>
+<p>如果出现类似上面的内容，就证明我们的博客已经成功部署到 GitHub Pages 上面了，这时候我们访问一下 GitHub Repository 同名的链接，比如我的 NightTeam 博客的 Repository 名称取的是 <a href="https://link.zhihu.com/?target=http%3A//nightteam.github.io">http://nightteam.github.io</a>，那我就访问 <a href="https://link.zhihu.com/?target=http%3A//nightteam.github.io">http://nightteam.github.io</a>，这时候我们就可以看到跟本地一模一样的博客内容了。</p>
+<p><img src="https://pic4.zhimg.com/v2-2e202bf18935a7c12eedb8633d254a11_1440w.jpg" alt="img"></p>
+<p>这时候我们去 GitHub 上面看看 Hexo 上传了什么内容，打开之后可以看到 master 分支有了这样的内容：</p>
+<p><img src="https://pica.zhimg.com/v2-3c851d9321c74ff931712d839e2eb73e_1440w.jpg" alt="img"></p>
+<p>仔细看看，这实际上是博客文件夹下面的 public 文件夹下的所有内容，Hexo 把编译之后的静态页面内容上传到 GitHub 的 master 分支上面去了。</p>
+<p>这时候可能就有人有疑问了，那我博客的源码也想放到 GitHub 上面怎么办呢？其实很简单，新建一个其他的分支就好了，比如我这边就新建了一个 source 分支，代表博客源码的意思。</p>
+<p>具体的添加过程就很简单了，参加如下命令：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git checkout -b source</span><br><span class="line">git add -A</span><br><span class="line">git commit -m "init blog"</span><br><span class="line">git remote add origin git@github.com:{username}/{username}.github.io.git</span><br><span class="line">git push origin source</span><br></pre></td></tr></tbody></table></figure>
+<p>成功之后，可以到 GitHub 上再切换下默认分支，比如我就把默认的分支设置为了 source，当然不换也可以。</p>
+<p><strong>补充一句，多看书总是没有坏处的，把看书时的心得笔记放到博客上，也是一种学习方式。</strong></p>
+<p><a href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMzU1ODg0OTkxNQ%3D%3D%26mid%3D100005447%26idx%3D1%26sn%3D21a43fc9ebe2028d9ee7d3f8374783bf%26chksm%3D7c211c534b5695452062c17f6cdf8ef1604d29a49171cc50a91e8fc04a19342bda847366581a%23rd">程序员必备的书籍有哪些？（含下载方式）</a></p>
+<h2 id="配置站点信息"><a href="#配置站点信息" class="headerlink" title="配置站点信息"></a><strong>配置站点信息</strong></h2><p>完成如上内容之后，实际上我们只完成了<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=170795624&amp;content_type=Article&amp;match_order=1&amp;q=博客搭建&amp;zhida_source=entity">博客搭建</a>的一小步，因为我们仅仅是把初始化的页面部署成功了，博客里面还没有设置任何有效的信息。下面就让我们来进行一下博客的基本配置，另外换一个好看的主题，配置一些其他的内容，让博客真正变成属于我们自己的博客吧。</p>
+<p>下面我就以自己的站点 NightTeam 为例，修改一些基本的配置，比如站点名、站点描述等等。</p>
+<p>修改根目录下的 _config.yml 文件，找到 Site 区域，这里面可以配置站点标题 title、副标题 subtitle 等内容、关键字 keywords 等内容，比如我的就修改为如下内容：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: NightTeam</span><br><span class="line">subtitle: 一个专注技术的组织</span><br><span class="line">description: 涉猎的主要编程语言为 Python、Rust、C++、Go，领域涵盖爬虫、深度学习、服务研发和对象存储等。</span><br><span class="line">keywords: "Python, Rust, C++, Go, 爬虫, 深度学习, 服务研发, 对象存储"</span><br><span class="line">author: NightTeam</span><br></pre></td></tr></tbody></table></figure>
+<p>这里大家可以参照格式把内容改成自己的。</p>
+<p>另外还可以设置一下语言，如果要设置为汉语的话可以将 language 的字段设置为 zh-CN，修改如下：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">language: zh-CN</span><br></pre></td></tr></tbody></table></figure>
+<p>这样就完成了站点基本信息的配置，完成之后可以看到一些基本信息就修改过来了，页面效果如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/SolitudeAB/blog-img/v2-69f1bbf60b1483446875a51eea033ef9_1440w.jpg" alt="img"></p>
+<h2 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a><strong>修改主题</strong></h2><p>目前来看，整个页面的样式个人感觉并不是那么好看，想换一个风格，这就涉及到主题的配置了。目前 Hexo 里面应用最多的主题基本就是 Next 主题了，个人感觉这个主题还是挺好看的，另外它支持的插件和功能也极为丰富，配置了这个主题，我们的博客可以支持更多的扩展功能，比如阅览进度条、中英文空格排版、图片懒加载等等。</p>
+<p>那么首先就让我们来安装下 Next 这个主题吧，目前 Next 主题已经更新到 7.x 版本了，我们可以直接到 Next 主题的 GitHub Repository 上把这个主题下载下来。</p>
+<p>主题的 GitHub 地址是：<a href="https://link.zhihu.com/?target=https%3A//github.com/theme-next/hexo-theme-next">https://github.com/theme-next/hexo-theme-next</a>，我们可以直接把 master 分支 Clone 下来。</p>
+<p>首先命令行进入到项目的根目录，执行如下命令即可：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></tbody></table></figure>
+<p>执行完毕之后 Next 主题的源码就会出现在项目的 themes/next 文件夹下。</p>
+<p>然后我们需要修改下博客所用的主题名称，修改项目根目录下的 _config.yml 文件，找到 theme 字段，修改为 next 即可，修改如下：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></tbody></table></figure>
+<p>然后本地重新开启服务，访问刷新下页面，就可以看到 next 主题就切换成功了，预览效果如下：</p>
+<p><img src="https://picx.zhimg.com/v2-4ab7d9bfd0036e92f63203eeafdddf5d_1440w.jpg" alt="img"></p>
+<h2 id="主题配置"><a href="#主题配置" class="headerlink" title="主题配置"></a><strong>主题配置</strong></h2><p>现在我们已经成功切换到 next 主题上面了，接下来我们就对主题进行进一步地详细配置吧，比如修改样式、增加其他各项功能的支持，下面逐项道来。</p>
+<p>Next 主题内部也提供了一个配置文件，名字同样叫做 _config.yml，只不过位置不一样，它在 themes/next 文件夹下，Next 主题里面所有的功能都可以通过这个配置文件来控制，下文所述的内容都是修改的 themes/next/_config.yml 文件。</p>
+<h3 id="样式"><a href="#样式" class="headerlink" title="样式"></a><strong>样式</strong></h3><p>Next 主题还提供了多种样式，风格都是类似黑白的搭配，但整个布局位置不太一样，通过修改配置文件的 scheme 字段即可，我选了 Pisces 样式，修改 _config.yml （注意是 themes/next/_config.yml 文件）如下：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scheme: Pisces</span><br></pre></td></tr></tbody></table></figure>
+<p>刷新页面之后就会变成这种样式，如图所示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/SolitudeAB/blog-img/v2-20e8c6bb647a02441ccfd1930d1484f9_1440w.jpg" alt="img"></p>
+<p>另外还有几个可选项，比如：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># scheme: Muse</span><br><span class="line">#scheme: Mist</span><br><span class="line">scheme: Pisces</span><br><span class="line">#scheme: Gemini</span><br></pre></td></tr></tbody></table></figure>
+<p>大家可以自行根据喜好选择。</p>
+<h3 id="favicon"><a href="#favicon" class="headerlink" title="favicon"></a><strong>favicon</strong></h3><p>favicon 就是站点标签栏的小图标，默认是用的 Hexo 的小图标，如果我们有站点 Logo 的图片的话，我们可以自己定制小图标。</p>
+<p>但这并不意味着我们需要自己用 PS 自己来设计，已经有一个网站可以直接将图片转化为站点小图标，站点链接为：<a href="https://link.zhihu.com/?target=https%3A//realfavicongenerator.net">https://realfavicongenerator.net</a>[1]，到这里上传一张图，便可以直接打包下载各种尺寸和适配不同设备的小图标。</p>
+<p>图标下载下来之后把它放在 themes/next/source/images 目录下面。</p>
+<p>然后在配置文件里面找到 favicon 配置项，把一些相关路径配置进去即可，示例如下：</p>
+<p><img src="https://pic2.zhimg.com/v2-d63b377fb895d4064ee8c72d46a45a2d_1440w.jpg" alt="img"></p>
+<p>配置完成之后刷新页面，整个页面的标签图标就被更新了。</p>
+<h3 id="avatar"><a href="#avatar" class="headerlink" title="avatar"></a><strong>avatar</strong></h3><p>avatar 这个就类似站点的头像，如果设置了这个，会在站点的作者信息旁边额外显示一个头像，比如我这边有一张 avatar.png 图片：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/SolitudeAB/blog-img/v2-5d168143fb53a125b6be49fccff5a46d_1440w.jpg" alt="img"></p>
+<p>将其放置到 themes/next/source/images/avatar.png 路径，然后在主题 _config.yml 文件下编辑 avatar 的配置，修改为正确的路径即可。</p>
+<p><img src="https://pic2.zhimg.com/v2-5d149a49184f4b06871e4037f580b563_1440w.jpg" alt="img"></p>
+<p>这里有 rounded 选项是是否显示圆形，rotated 是是否带有旋转效果，大家可以根据喜好选择是否开启。</p>
+<p>效果如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/SolitudeAB/blog-img/v2-d7c0cf3ae7ac500a5d9c1eb6dc580edd_1440w.jpg" alt="img"></p>
+<p>配置完成之后就会显示头像。</p>
+<h3 id="rss"><a href="#rss" class="headerlink" title="rss"></a><strong>rss</strong></h3><p>博客一般是需要 RSS 订阅的，如果要开启 RSS 订阅，这里需要安装一个插件，叫做 hexo-generator-feed，安装完成之后，站点会自动生成 RSS Feed 文件，安装命令如下：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-feed --save</span><br></pre></td></tr></tbody></table></figure>
+<p>在项目根目录下运行这个命令，安装完成之后不需要其他的配置，以后每次编译生成站点的时候就会自动生成 RSS Feed 文件了。</p>
+<h3 id="code"><a href="#code" class="headerlink" title="code"></a><strong>code</strong></h3><p>作为程序猿，代码块的显示还是需要很讲究的，默认的代码块我个人不是特别喜欢，因此我把代码的颜色修改为黑色，并把复制按钮的样式修改为类似 Mac 的样式，修改 _config.yml 文件的 codeblock 区块如下：</p>
+<p><img src="https://pic2.zhimg.com/v2-7941a7561406404708ca63a6a71be76b_1440w.jpg" alt="img"></p>
+<p>修改前的代码样式：</p>
+<p><img src="https://pic1.zhimg.com/v2-21004bfd97961e586a2576ca2a5f68fa_1440w.jpg" alt="img"></p>
+<p>修改后的代码样式：</p>
+<p><img src="https://picx.zhimg.com/v2-d9a11592b4758413b6a399ee8df3c821_1440w.jpg" alt="img"></p>
+<p>嗯，个人觉得整体看起来逼格高了不少。</p>
+<h3 id="top"><a href="#top" class="headerlink" title="top"></a><strong>top</strong></h3><p>我们在浏览网页的时候，如果已经看完了想快速返回到网站的上端，一般都是有一个按钮来辅助的，这里也支持它的配置，修改 _config.yml 的 back2top 字段即可，我的设置如下：</p>
+<p><img src="https://pic1.zhimg.com/v2-013b9a741ad6e13b45cefa5eb04158e2_1440w.jpg" alt="img"></p>
+<p>enable 默认为 true，即默认显示。sidebar 如果设置为 true，按钮会出现在侧栏下方，个人觉得并不是很好看，就取消了，scrollpercent 就是显示阅读百分比，个人觉得还不错，就将其设置为 true。</p>
+<p>具体的效果大家可以设置后根据喜好选择。</p>
+<h3 id="reading-process"><a href="#reading-process" class="headerlink" title="reading_process"></a><strong>reading_process</strong></h3><p>reading_process，阅读进度。大家可能注意到有些站点的最上侧会出现一个细细的进度条，代表页面加载进度和阅读进度，如果大家想设置的话也可以试试，我将其打开了，修改 _config.yml 如下：</p>
+<p><img src="https://pic1.zhimg.com/v2-56c6165e6ce714126ed976b802b31cf2_1440w.jpg" alt="img"></p>
+<p>设置之后显示效果如下：</p>
+<p><img src="https://pic2.zhimg.com/v2-d8754aaa53d04f9fbb4506aa6262f2cf_1440w.jpg" alt="img"></p>
+<h3 id="bookmark"><a href="#bookmark" class="headerlink" title="bookmark"></a><strong>bookmark</strong></h3><p>书签，可以根据阅读历史记录，在下次打开页面的时候快速帮助我们定位到上次的位置，大家可以根据喜好开启和关闭，我的配置如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/SolitudeAB/blog-img/v2-734de19aeaaf2a0f52afe5525ab6483d_1440w.jpg" alt="img"></p>
+<p><strong>多看书总是没有坏处的，把看书时的心得笔记放到博客上，也是一种学习方式。</strong></p>
+<p><a href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMzU1ODg0OTkxNQ%3D%3D%26mid%3D100005447%26idx%3D1%26sn%3D21a43fc9ebe2028d9ee7d3f8374783bf%26chksm%3D7c211c534b5695452062c17f6cdf8ef1604d29a49171cc50a91e8fc04a19342bda847366581a%23rd">程序员必备的书籍有哪些？（含下载方式）</a></p>
+<h3 id="github-banner"><a href="#github-banner" class="headerlink" title="github_banner"></a><strong>github_banner</strong></h3><p>在一些技术博客上，大家可能注意到在页面的右上角有个 GitHub 图标，点击之后可以跳转到其源码页面，可以为 GitHub Repository 引流，大家如果想显示的话可以自行选择打开，我的配置如下：</p>
+<p><img src="https://pic1.zhimg.com/v2-8ca24abd3879a853c1e85fb0de4c6846_1440w.jpg" alt="img"></p>
+<p>记得修改下链接 permalink 和标题 title，显示效果如下：</p>
+<p><img src="https://pic4.zhimg.com/v2-54f7770e6f9f5da44ddb1e31156a52d9_1440w.jpg" alt="img"></p>
+<p>可以看到在页面右上角显示了 GitHub 的图标，点击可以进去到 Repository 页面。</p>
+<h3 id="gitalk"><a href="#gitalk" class="headerlink" title="gitalk"></a><strong>gitalk</strong></h3><p>由于 Hexo 的博客是静态博客，而且也没有连接数据库的功能，所以它的评论功能是不能自行集成的，但可以集成第三方的服务。</p>
+<p>Next 主题里面提供了多种评论插件的集成，有 changyan | disqus | disqusjs | facebook_comments_plugin | gitalk | livere | valine | vkontakte 这些。</p>
+<p>作为一名程序员，我个人比较喜欢 gitalk，它是利用 GitHub 的 Issue 来当评论，样式也比较不错。</p>
+<p>首先需要在 GitHub 上面注册一个 OAuth Application，链接为：<a href="https://link.zhihu.com/?target=https%3A//github.com/settings/applications/new">https://github.com/settings/applications/new</a>，注册完毕之后拿到 Client ID、Client Secret 就可以了。</p>
+<p>首先需要在 _config.yml 文件的 comments 区域配置使用 gitalk：</p>
+<p><img src="https://pica.zhimg.com/v2-3069040981826d816a1a7f25ec010a98_1440w.jpg" alt="img"></p>
+<p>主要是 comments.active 字段选择对应的名称即可。</p>
+<p>然后找打 gitalk 配置，添加它的各项配置：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/SolitudeAB/blog-img/v2-7c83e977b325a79a14d47f050864681f_1440w.jpg" alt="img"></p>
+<p>配置完成之后 gitalk 就可以使用了，点击进入文章页面，就会出现如下页面：</p>
+<p><img src="https://pic3.zhimg.com/v2-559e8819d4853ea0129a7391bb9c67b2_1440w.jpg" alt="img"></p>
+<p>GitHub 授权登录之后就可以使用了，评论的内容会自动出现在 Issue 里面。</p>
+<h3 id="pangu"><a href="#pangu" class="headerlink" title="pangu"></a><strong>pangu</strong></h3><p>我个人有个强迫症，那就是写中文和英文的时候中间必须要留有间距，一个简单直接的方法就是中间加个空格，但某些情况下可能习惯性不加或者忘记加了，这就导致中英文混排并不是那么美观。</p>
+<p>pangu 就是来解决这个问题的，我们只需要在主题里面开启这个选项，在编译生成页面的时候，中英文之间就会自动添加空格，看起来更加美观。</p>
+<p>具体的修改如下：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pangu: true</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="math"><a href="#math" class="headerlink" title="math"></a><strong>math</strong></h3><p>可能在一些情况下我们需要写一个公式，比如演示一个算法推导过程，MarkDown 是支持公式显示的，Hexo 的 Next 主题同样是支持的。</p>
+<p>Next 主题提供了两个渲染引擎，分别是 mathjax 和 katex，后者相对前者来说渲染速度更快，而且不需要 JavaScript 的额外支持，但后者支持的功能现在还不如前者丰富，具体的对比可以看官方文档：<a href="https://link.zhihu.com/?target=https%3A//theme-next.org/docs/third-party-services/math-equations">https://theme-next.org/docs/third-party-services/math-equations</a>。</p>
+<p>所以我这里选择了 mathjax，通过修改配置即可启用：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/SolitudeAB/blog-img/v2-a62dd177301c9a10db561efb844a47fa_1440w.jpg" alt="img"></p>
+<p>mathjax 的使用需要我们额外安装一个插件，叫做 hexo-renderer-kramed，另外也可以安装 hexo-renderer-pandoc，命令如下：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm un hexo-renderer-marked --save</span><br><span class="line">npm i hexo-renderer-kramed --save</span><br></pre></td></tr></tbody></table></figure>
+<p>另外还有其他的插件支持，大家可以到官方文档查看。</p>
+<h3 id="pjax"><a href="#pjax" class="headerlink" title="pjax"></a><strong>pjax</strong></h3><p>可能大家听说过 Ajax，没听说过 pjax，这个技术实际上就是利用 Ajax 技术实现了局部页面刷新，既可以实现 URL 的更换，有可以做到无刷新加载。</p>
+<p>要开启这个功能需要先将 pjax 功能开启，然后安装对应的 pjax 依赖库，首先修改 _config.yml 修改如下：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pjax: true</span><br></pre></td></tr></tbody></table></figure>
+<p>然后安装依赖库，切换到 next 主题下，然后安装依赖库：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd themes/next</span><br><span class="line">$ git clone theme-next/theme-next-pjax source/lib/pjax</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="文章"><a href="#文章" class="headerlink" title="文章"></a><strong>文章</strong></h2><p>现在整个站点只有一篇文章，那么我们怎样来增加其他的文章呢？</p>
+<p>这个很简单，只需要调用 Hexo 提供的命令即可，比如我们要新建一篇「HelloWorld」的文章，命令如下：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new hello-world</span><br></pre></td></tr></tbody></table></figure>
+<p>创建的文章会出现在 source/_posts 文件夹下，是 MarkDown 格式。</p>
+<p>在文章开头通过如下格式添加必要信息：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/SolitudeAB/blog-img/v2-32a7128a11514dfc685da1886481181c_1440w.jpg" alt="img"></p>
+<p>开头下方撰写正文，MarkDown 格式书写即可。</p>
+<p>这样在下次编译的时候就会自动识别标题、时间、类别等等，另外还有其他的一些参数设置，可以参考文档：<a href="https://link.zhihu.com/?target=https%3A//hexo.io/zh-cn/docs/writing.html">https://hexo.io/zh-cn/docs/writing.html</a>。</p>
+<h2 id="标签页"><a href="#标签页" class="headerlink" title="标签页"></a><strong>标签页</strong></h2><p>现在我们的博客只有首页、文章页，如果我们想要增加标签页，可以自行添加，这里 Hexo 也给我们提供了这个功能，在根目录执行命令如下：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></tbody></table></figure>
+<p>执行这个命令之后会自动帮我们生成一个 source/tags/index.md 文件，内容就只有这样子的：</p>
+<p><img src="https://pic4.zhimg.com/v2-08aa303d94d97f9ae54661868cc00d65_1440w.jpg" alt="img"></p>
+<p>我们可以自行添加一个 type 字段来指定页面的类型：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">type: tags</span><br><span class="line">comments:false </span><br></pre></td></tr></tbody></table></figure>
+<p>然后再在主题的 _config.yml 文件将这个页面的链接添加到主菜单里面，修改 menu 字段如下：</p>
+<p><img src="https://pic3.zhimg.com/v2-baa662c5f96094ff93f1b117c16ad3f6_1440w.jpg" alt="img"></p>
+<p>这样重新本地启动看下页面状态，效果如下：</p>
+<p><img src="https://picx.zhimg.com/v2-6fd01415fd544fd6671d4f9d718bbc67_1440w.jpg" alt="img"></p>
+<p>可以看到左侧导航也出现了标签，点击之后右侧会显示标签的列表。</p>
+<h3 id="分类页"><a href="#分类页" class="headerlink" title="分类页"></a><strong>分类页</strong></h3><p>分类功能和标签类似，一个文章可以对应某个分类，如果要增加分类页面可以使用如下命令创建：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></tbody></table></figure>
+<p>然后同样地，会生成一个 source/categories/index.md 文件。</p>
+<p>我们可以自行添加一个 type 字段来指定页面的类型：</p>
+<p><img src="https://pic2.zhimg.com/v2-b1814bd2fdd5329fd345b8b5f58edc25_1440w.jpg" alt="img"></p>
+<p>然后再在主题的 _config.yml 文件将这个页面的链接添加到主菜单里面，修改 menu 字段如下：</p>
+<p><img src="https://pic1.zhimg.com/v2-5c101a2b21a2c7f678990fb03ffe87b8_1440w.jpg" alt="img"></p>
+<p>这样页面就会增加分类的支持，效果如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/SolitudeAB/blog-img/v2-2d0de859f6ccd6bfec4cc301ce6dee91_1440w.jpg" alt="img"></p>
+<h2 id="搜索页"><a href="#搜索页" class="headerlink" title="搜索页"></a><strong>搜索页</strong></h2><p>很多情况下我们需要搜索全站的内容，所以一个搜索功能的支持也是很有必要的。</p>
+<p>如果要添加搜索的支持，需要先安装一个插件，叫做 hexo-generator-searchdb，命令如下：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></tbody></table></figure>
+<p>然后在项目的 _config.yml 里面添加搜索设置如下：</p>
+<p><img src="https://picx.zhimg.com/v2-02dfede3f1e48b6d84346223bde6d74b_1440w.jpg" alt="img"></p>
+<p>然后在主题的 _config.yml 里面修改如下：</p>
+<p><img src="https://pica.zhimg.com/v2-011b4a2d503960b05d9c542a2f18624e_1440w.jpg" alt="img"></p>
+<h2 id="部署脚本"><a href="#部署脚本" class="headerlink" title="部署脚本"></a><strong>部署脚本</strong></h2><p>最后我这边还增加了一个简易版的部署脚本，其实就是重新 gererate 下文件，然后重新部署。在根目录下新建一个 deploy.sh 的脚本文件，内容如下：</p>
+<p>hexo clean</p>
+<p>hexo generate</p>
+<p>hexo deploy</p>
+<p>这样我们在部署发布的时候只需要执行：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh deploy.sh</span><br></pre></td></tr></tbody></table></figure>
+<p>就可以完成博客的更新了，非常简单。</p>
+<h2 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a><strong>自定义域名</strong></h2><p>将页面修改之后可以用上面的脚本重新部署下博客，其内容便会跟着更新。</p>
+<p>另外我们也可以在 GitHub 的 Repository 里面设置域名，找到 Settings，拉到下面，可以看到有个 GitHub Pages 的配置项，如图所示：</p>
+<p><img src="https://pica.zhimg.com/v2-2074f86ef4d52c22c0f8782d301f11aa_1440w.jpg" alt="img"></p>
+<p>下面有个 custom domain 的选项，输入你想自定义的<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=170795624&amp;content_type=Article&amp;match_order=1&amp;q=域名地址&amp;zhida_source=entity">域名地址</a>，然后添加 CNAME 解析就好了。</p>
+<p>另外下面还有一个 Enforce HTTPS 的选项，GitHub Pages 会在我们配置自定义域名之后自动帮我们配置 HTTPS 服务。刚配置完自定义域名的时候可能这个选项是不可用的，一段时间后等到其可以勾选了，直接勾选即可，这样整个博客就会变成 HTTPS 的协议的了。</p>
+<p>另外有一个值得注意的地方，如果配置了自定义域名，在目前的情况下，每次部署的时候这个自定义域名的设置是会被自动清除的。所以为了避免这个情况，我们需要在项目目录下面新建一个 CNAME 文件，路径为 source/CNAME，内容就是自定义域名。</p>
+<p>比如我就在 source 目录下新建了一个 CNAME 文件，内容为：</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blog.nightteam.cn</span><br></pre></td></tr></tbody></table></figure>
+<p>这样避免了每次部署的时候自定义域名被清除的情况了。</p>
+<p>以上就是从零搭建一个 Hexo 博客的流程，希望对大家有帮助。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">SolitudeAB</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/01/01/others/">http://example.com/2025/01/01/others/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">SolitudeAB</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/">建站记录</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer=""></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/01/01/first/" title="建站记录（二）：对butterfly项目的架构的梳理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">建站记录（二）：对butterfly项目的架构的梳理</div></div><div class="info-2"><div class="info-item-1"> 前言在很多功能的实现过程中，我都因为不熟悉项目架构和具体代码而束手无策，尝试很多方法也事倍功半，因此决定在继续搭建博客之前先对butterfly主题的框架梳理一遍，在gpt的帮助下通读一遍代码，至少要知道各级文件之间的联系、某项具体功能由哪些文件负责，在了解这些之后再去有的放矢地修改。 本文会按顺序对以下重点文件进行分析 1234567891011plaintext项目根目录/├── source/│      ├── _data/│      ├── _posts/│      ├── categories/ 等│      └── css/└── themes/        └── butterfly/              └── layout/              └── source/  项目根目录123456789101112131415161718plaintext项目根目录/├── .deploy_git/├── .github/├── node_modules/├── scaffolds/├── source/                  ...</div></div></div></a><a class="pagination-related" href="/2024/12/31/test/" title="test"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">test</div></div><div class="info-2"><div class="info-item-1">  ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/01/01/first/" title="建站记录（二）：对butterfly项目的架构的梳理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-01</div><div class="info-item-2">建站记录（二）：对butterfly项目的架构的梳理</div></div><div class="info-2"><div class="info-item-1"> 前言在很多功能的实现过程中，我都因为不熟悉项目架构和具体代码而束手无策，尝试很多方法也事倍功半，因此决定在继续搭建博客之前先对butterfly主题的框架梳理一遍，在gpt的帮助下通读一遍代码，至少要知道各级文件之间的联系、某项具体功能由哪些文件负责，在了解这些之后再去有的放矢地修改。 本文会按顺序对以下重点文件进行分析 1234567891011plaintext项目根目录/├── source/│      ├── _data/│      ├── _posts/│      ├── categories/ 等│      └── css/└── themes/        └── butterfly/              └── layout/              └── source/  项目根目录123456789101112131415161718plaintext项目根目录/├── .deploy_git/├── .github/├── node_modules/├── scaffolds/├── source/                  ...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info-name">SolitudeAB</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">17</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SolitudeAB"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E6%9D%A1%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">准备条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.</span> <span class="toc-text">新建项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="toc-number">3.</span> <span class="toc-text">安装环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Node-js"><span class="toc-number">3.1.</span> <span class="toc-text">安装 Node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Hexo"><span class="toc-number">3.2.</span> <span class="toc-text">安装 Hexo</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE"><span class="toc-number">4.</span> <span class="toc-text">初始化项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2"><span class="toc-number">5.</span> <span class="toc-text">部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%AB%99%E7%82%B9%E4%BF%A1%E6%81%AF"><span class="toc-number">6.</span> <span class="toc-text">配置站点信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%BB%E9%A2%98"><span class="toc-number">7.</span> <span class="toc-text">修改主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE"><span class="toc-number">8.</span> <span class="toc-text">主题配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B7%E5%BC%8F"><span class="toc-number">8.1.</span> <span class="toc-text">样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#favicon"><span class="toc-number">8.2.</span> <span class="toc-text">favicon</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#avatar"><span class="toc-number">8.3.</span> <span class="toc-text">avatar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rss"><span class="toc-number">8.4.</span> <span class="toc-text">rss</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#code"><span class="toc-number">8.5.</span> <span class="toc-text">code</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#top"><span class="toc-number">8.6.</span> <span class="toc-text">top</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reading-process"><span class="toc-number">8.7.</span> <span class="toc-text">reading_process</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bookmark"><span class="toc-number">8.8.</span> <span class="toc-text">bookmark</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#github-banner"><span class="toc-number">8.9.</span> <span class="toc-text">github_banner</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gitalk"><span class="toc-number">8.10.</span> <span class="toc-text">gitalk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pangu"><span class="toc-number">8.11.</span> <span class="toc-text">pangu</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#math"><span class="toc-number">8.12.</span> <span class="toc-text">math</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pjax"><span class="toc-number">8.13.</span> <span class="toc-text">pjax</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0"><span class="toc-number">9.</span> <span class="toc-text">文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE%E9%A1%B5"><span class="toc-number">10.</span> <span class="toc-text">标签页</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB%E9%A1%B5"><span class="toc-number">10.1.</span> <span class="toc-text">分类页</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E9%A1%B5"><span class="toc-number">11.</span> <span class="toc-text">搜索页</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E8%84%9A%E6%9C%AC"><span class="toc-number">12.</span> <span class="toc-text">部署脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="toc-number">13.</span> <span class="toc-text">自定义域名</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/01/first/" title="建站记录（二）：对butterfly项目的架构的梳理">建站记录（二）：对butterfly项目的架构的梳理</a><time datetime="2024-12-31T16:00:00.000Z" title="发表于 2025-01-01 00:00:00">2025-01-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/01/others/" title="如何在 GitHub 上写博客？">如何在 GitHub 上写博客？</a><time datetime="2024-12-31T16:00:00.000Z" title="发表于 2025-01-01 00:00:00">2025-01-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/31/test/" title="test">test</a><time datetime="2024-12-30T16:59:14.000Z" title="发表于 2024-12-31 00:59:14">2024-12-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/31/algorithm/tree/" title="树">树</a><time datetime="2024-12-30T16:00:00.000Z" title="发表于 2024-12-31 00:00:00">2024-12-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/31/algorithm/classical_sort/" title="经典排序算法">经典排序算法</a><time datetime="2024-12-30T16:00:00.000Z" title="发表于 2024-12-31 00:00:00">2024-12-31</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">©2024 - 2025 By SolitudeAB</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><div class="js-pjax"></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
