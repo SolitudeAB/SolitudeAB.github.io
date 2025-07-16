@@ -1,0 +1,198 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>SolitudeAB | SolitudeAB</title><meta name="author" content="SolitudeAB"><meta name="copyright" content="SolitudeAB"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="类比：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SolitudeAB">
+<meta property="og:url" content="http://example.com/2025/07/16/z.nn.linear/index.html">
+<meta property="og:site_name" content="SolitudeAB">
+<meta property="og:description" content="类比：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/avatar.jpg">
+<meta property="article:published_time" content="2025-07-16T04:48:40.711Z">
+<meta property="article:modified_time" content="2025-07-16T04:48:41.083Z">
+<meta property="article:author" content="SolitudeAB">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/avatar.jpg"><link rel="shortcut icon" href="/img/avatar.jpg"><link rel="canonical" href="http://example.com/2025/07/16/z.nn.linear/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/seach.xml","preload":false,"top_n_per_article":3,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'SolitudeAB',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><link rel="stylesheet" href="/css/transpancy.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="SolitudeAB" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="web_bg" style="background:url(/img/background1.jpg);background-attachment: local;background-position: center;background-size: cover;background-repeat: no-repeat;"></div><div id="web_bg" style="background-image: url(url(/img/background1.jpg));"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/avatar.jpg" alt="Logo"><span class="site-name">SolitudeAB</span></a><a class="nav-page-title" href="/"><span class="site-name">SolitudeAB</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">无标题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-07-16T04:48:40.711Z" title="发表于 2025-07-16 12:48:40">2025-07-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-07-16T04:48:41.083Z" title="更新于 2025-07-16 12:48:41">2025-07-16</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h3 id="类比："><a href="#类比：" class="headerlink" title="类比："></a>类比：</h3><p>想象你有一台咖啡机，它有一个输入口和一个输出口。输入口可以放入咖啡豆和水，这些输入会经过咖啡机的处理，最终变成一杯咖啡。<code>nn.Linear</code> 就像这台咖啡机，它有输入和输出，它的作用是将输入“转换”成输出。</p>
+<h3 id="什么是-nn-Linear？"><a href="#什么是-nn-Linear？" class="headerlink" title="什么是 nn.Linear？"></a>什么是 <code>nn.Linear</code>？</h3><p>在神经网络中，<code>nn.Linear</code> 是一个线性层，它的作用是接收一个输入向量，通过一定的“加权”和“偏移”处理，输出一个新的向量。简单来说，<code>nn.Linear</code> 会根据一定的规则将输入数据转化为输出数据。</p>
+<h3 id="数学解释："><a href="#数学解释：" class="headerlink" title="数学解释："></a>数学解释：</h3><p><code>nn.Linear</code> 可以看作是一个矩阵乘法操作。它接受一个输入向量 <code>x</code>，然后用一个权重矩阵 <code>W</code> 进行乘法操作，再加上一个偏置项 <code>b</code>。公式是：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">复制代码y = W * x + b</span><br></pre></td></tr></tbody></table></figure>
+<p>其中：</p>
+<ul>
+<li><code>x</code> 是输入向量。</li>
+<li><code>W</code> 是权重矩阵，它控制每个输入特征对输出的影响。</li>
+<li><code>b</code> 是偏置项，它帮助调整输出的结果。</li>
+<li><code>y</code> 是输出向量。</li>
+</ul>
+<h3 id="举个例子："><a href="#举个例子：" class="headerlink" title="举个例子："></a>举个例子：</h3><p>假设我们有一个非常简单的神经网络，它的输入是一个 2 维向量 <code>[x1, x2]</code>。如果我们使用一个 <code>nn.Linear</code> 层，它的输出是一个 3 维的向量 <code>[y1, y2, y3]</code>。</p>
+<ul>
+<li>输入向量是 <code>[x1, x2]</code>，也就是咖啡机放入的原料。</li>
+<li>权重矩阵 <code>W</code> 是一个 3x2 的矩阵（因为我们要从 2 维的输入转到 3 维的输出）。</li>
+<li>偏置项 <code>b</code> 是一个 3 维的向量，用来调整输出。</li>
+</ul>
+<p>在这个 <code>nn.Linear</code> 层中，输入 <code>[x1, x2]</code> 会与 <code>W</code> 矩阵相乘，然后加上偏置 <code>b</code>，最终输出 3 维向量 <code>[y1, y2, y3]</code>。</p>
+<h3 id="直观理解："><a href="#直观理解：" class="headerlink" title="直观理解："></a>直观理解：</h3><ol>
+<li><strong>输入</strong>：你传入的数据（例如，学生的数学成绩和英语成绩）。</li>
+<li><strong>加权计算</strong>：<code>nn.Linear</code> 会给每个输入数据分配不同的权重，就像老师给每个学科的成绩打分一样。</li>
+<li><strong>输出</strong>：通过加权计算后，你得到一个新的输出（例如，学生的总成绩或一个预测值）。</li>
+</ol>
+<h3 id="作用："><a href="#作用：" class="headerlink" title="作用："></a>作用：</h3><ol>
+<li><strong>信息传递</strong>：<code>nn.Linear</code> 层是神经网络中信息传递的关键，它将输入的数据转化成模型能理解的输出。</li>
+<li><strong>学习规则</strong>：在训练过程中，神经网络会不断调整这些权重和偏置，让输出更接近正确答案，从而完成任务，比如分类或预测。</li>
+</ol>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p><code>nn.Linear</code> 就是神经网络中的一个“转换器”，它通过矩阵乘法和加偏置的方式，将输入数据转化成输出数据。它的作用就像是将原始数据加上权重和调整，帮助神经网络理解并做出预测。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">SolitudeAB</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/07/16/z.nn.linear/">http://example.com/2025/07/16/z.nn.linear/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">SolitudeAB</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer=""></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/07/16/z.softmax%20%E5%87%BD%E6%95%B0/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2"></div></div><div class="info-2"><div class="info-item-1">Softmax 是一种数学函数，通常用于机器学习和深度学习中，特别是在分类问题里。它的作用是将一组数转换成一个概率分布，简单来说，Softmax 会把输入的数值（通常是网络的输出）转换成一个范围在 0 到 1 之间的概率，并且这些概率的总和为 1。 怎么理解 Softmax？假设你有几个分类结果的得分，比如在一个三分类问题中，你得到了以下三个得分：  类别 1 得分：2.0 类别 2 得分：1.0 类别 3 得分：0.1  这些得分并不能直接告诉我们哪个类别是最有可能的，Softmax 就是用来将这些得分转换成概率的。 Softmax 的计算过程Softmax 的公式大致如下： P(y=i)=ezi∑jezjP(y=i)=∑jezjezi  ziz**i 是每个类别的得分（比如 2.0, 1.0, 0.1）。 eziezi 是对每个得分取指数（exponential），这个步骤让更高的得分变得更明显。 然后，把每个类别的指数结果除以所有类别的指数结果之和，这样所有类别的概率加起来就等于 1。  例子：我们拿上面的得分举个例子：  计算每个得分的指数（e的幂）： 类别 1:...</div></div></div></a><a class="pagination-related" href="/2025/07/16/z.nn.Embedding/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2"></div></div><div class="info-2"><div class="info-item-1">什么是 nn.Embedding？nn.Embedding 就像一个“词典”或者“查找表”，它把一些数字（比如，单词的编号）转换成一个个有意义的“向量”（向量就是一串数字，代表某个东西的特征）。 为什么要用它？假设你有一个句子，比如：“我 喜欢 学习”。在计算机的眼里，计算机并不理解“我”这个字，或者“喜欢”这个字，它只能看到数字。为了让计算机能够理解这些词语，我们需要把每个词语转换成一个“数字编号”。但是，单纯的数字编号其实并不能告诉计算机这些词语的意思。 这时候，nn.Embedding 就来了。它会把每个编号的单词转换成一个“有意义”的数字序列（这个序列我们叫它“向量”）。这些“向量”能够包含关于这个词的更多信息，比如它和其他词的关系。 举个简单的例子假设我们有三个单词：“苹果”, “香蕉”, “橙子”，我们给每个词一个编号：  苹果：0 香蕉：1 橙子：2  我们用 nn.Embedding 创建一个“查找表”，它把这些数字编号转换成一组数字。比如：  苹果（编号 0）变成 [0.2, 0.5, -0.3] 香蕉（编号 1）变成 [0.1, -0.4,...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info-name">SolitudeAB</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SolitudeAB"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E6%AF%94%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">类比：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-nn-Linear%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">什么是 nn.Linear？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E8%A7%A3%E9%87%8A%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">数学解释：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BE%E4%B8%AA%E4%BE%8B%E5%AD%90%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">举个例子：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">直观理解：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%EF%BC%9A"><span class="toc-number">6.</span> <span class="toc-text">作用：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">7.</span> <span class="toc-text">总结：</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/16/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%94%A8Python%E6%90%AD%E5%BB%BALLMCreate%20a%20LLM%20/" title="无标题">无标题</a><time datetime="2025-07-16T04:48:40.737Z" title="发表于 2025-07-16 12:48:40">2025-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/16/%E6%9C%AC%E5%9C%B0%E7%9F%A5%E8%AF%86%E5%BA%93/" title="无标题">无标题</a><time datetime="2025-07-16T04:48:40.729Z" title="发表于 2025-07-16 12:48:40">2025-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/16/z.softmax%20%E5%87%BD%E6%95%B0/" title="无标题">无标题</a><time datetime="2025-07-16T04:48:40.720Z" title="发表于 2025-07-16 12:48:40">2025-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/16/z.nn.linear/" title="无标题">无标题</a><time datetime="2025-07-16T04:48:40.711Z" title="发表于 2025-07-16 12:48:40">2025-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/16/z.nn.Embedding/" title="无标题">无标题</a><time datetime="2025-07-16T04:48:40.703Z" title="发表于 2025-07-16 12:48:40">2025-07-16</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">©2024 - 2025 By SolitudeAB</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><div class="js-pjax"></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
