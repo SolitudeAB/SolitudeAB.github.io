@@ -138,29 +138,6 @@
   </entry>
   <entry>
     <title></title>
-    <url>/2025/07/16/z.nn.Embedding/</url>
-    <content><![CDATA[<h3 id="什么是-nn-Embedding？"><a href="#什么是-nn-Embedding？" class="headerlink" title="什么是 nn.Embedding？"></a>什么是 <code>nn.Embedding</code>？</h3><p><code>nn.Embedding</code> 就像一个“词典”或者“查找表”，它把一些数字（比如，单词的编号）转换成一个个有意义的“向量”（向量就是一串数字，代表某个东西的特征）。</p>
-<h3 id="为什么要用它？"><a href="#为什么要用它？" class="headerlink" title="为什么要用它？"></a>为什么要用它？</h3><p>假设你有一个句子，比如：“我 喜欢 学习”。在计算机的眼里，计算机并不理解“我”这个字，或者“喜欢”这个字，它只能看到数字。为了让计算机能够理解这些词语，我们需要把每个词语转换成一个“数字编号”。但是，单纯的数字编号其实并不能告诉计算机这些词语的意思。</p>
-<p>这时候，<code>nn.Embedding</code> 就来了。它会把每个编号的单词转换成一个“有意义”的数字序列（这个序列我们叫它“向量”）。这些“向量”能够包含关于这个词的更多信息，比如它和其他词的关系。</p>
-<h3 id="举个简单的例子"><a href="#举个简单的例子" class="headerlink" title="举个简单的例子"></a>举个简单的例子</h3><p>假设我们有三个单词：<strong>“苹果”</strong>, <strong>“香蕉”</strong>, <strong>“橙子”</strong>，我们给每个词一个编号：</p>
-<ul>
-<li>苹果：0</li>
-<li>香蕉：1</li>
-<li>橙子：2</li>
-</ul>
-<p>我们用 <code>nn.Embedding</code> 创建一个“查找表”，它把这些数字编号转换成一组数字。比如：</p>
-<ul>
-<li>苹果（编号 0）变成 [0.2, 0.5, -0.3]</li>
-<li>香蕉（编号 1）变成 [0.1, -0.4, 0.7]</li>
-<li>橙子（编号 2）变成 [-0.2, 0.6, 0.9]</li>
-</ul>
-<p>这些数字就是“向量”，它们能帮助计算机更好地理解这些单词。虽然我们现在看的这些向量数字看起来有点复杂，但它们可以让计算机知道“苹果”和“香蕉”之间有什么关系，或者“苹果”和“橙子”有什么相似之处。</p>
-<h3 id="什么时候用到？"><a href="#什么时候用到？" class="headerlink" title="什么时候用到？"></a>什么时候用到？</h3><p>比如，在做 <strong>自然语言处理</strong>（NLP）时，计算机要处理文本、分析句子里的单词、理解意思。这时候就可以用 <code>nn.Embedding</code> 来把单词转换成向量。这样，计算机就可以通过这些向量“比较”单词之间的关系，做一些像翻译、语法分析、情感分析等任务。</p>
-<h3 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a>总结一下</h3><p><code>nn.Embedding</code> 就是一个帮助计算机把离散的东西（比如单词的编号）转换成一个“向量”的工具，这样计算机就能更好地理解这些东西之间的关系。简单来说，它就是把“编号”变成了“有意思的数字”，让计算机能够做更多的聪明的事情。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
     <url>/2025/07/16/z.nn.linear/</url>
     <content><![CDATA[<h3 id="类比："><a href="#类比：" class="headerlink" title="类比："></a>类比：</h3><p>想象你有一台咖啡机，它有一个输入口和一个输出口。输入口可以放入咖啡豆和水，这些输入会经过咖啡机的处理，最终变成一杯咖啡。<code>nn.Linear</code> 就像这台咖啡机，它有输入和输出，它的作用是将输入“转换”成输出。</p>
 <h3 id="什么是-nn-Linear？"><a href="#什么是-nn-Linear？" class="headerlink" title="什么是 nn.Linear？"></a>什么是 <code>nn.Linear</code>？</h3><p>在神经网络中，<code>nn.Linear</code> 是一个线性层，它的作用是接收一个输入向量，通过一定的“加权”和“偏移”处理，输出一个新的向量。简单来说，<code>nn.Linear</code> 会根据一定的规则将输入数据转化为输出数据。</p>
@@ -190,6 +167,29 @@
 <li><strong>学习规则</strong>：在训练过程中，神经网络会不断调整这些权重和偏置，让输出更接近正确答案，从而完成任务，比如分类或预测。</li>
 </ol>
 <h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p><code>nn.Linear</code> 就是神经网络中的一个“转换器”，它通过矩阵乘法和加偏置的方式，将输入数据转化成输出数据。它的作用就像是将原始数据加上权重和调整，帮助神经网络理解并做出预测。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2025/07/16/z.nn.Embedding/</url>
+    <content><![CDATA[<h3 id="什么是-nn-Embedding？"><a href="#什么是-nn-Embedding？" class="headerlink" title="什么是 nn.Embedding？"></a>什么是 <code>nn.Embedding</code>？</h3><p><code>nn.Embedding</code> 就像一个“词典”或者“查找表”，它把一些数字（比如，单词的编号）转换成一个个有意义的“向量”（向量就是一串数字，代表某个东西的特征）。</p>
+<h3 id="为什么要用它？"><a href="#为什么要用它？" class="headerlink" title="为什么要用它？"></a>为什么要用它？</h3><p>假设你有一个句子，比如：“我 喜欢 学习”。在计算机的眼里，计算机并不理解“我”这个字，或者“喜欢”这个字，它只能看到数字。为了让计算机能够理解这些词语，我们需要把每个词语转换成一个“数字编号”。但是，单纯的数字编号其实并不能告诉计算机这些词语的意思。</p>
+<p>这时候，<code>nn.Embedding</code> 就来了。它会把每个编号的单词转换成一个“有意义”的数字序列（这个序列我们叫它“向量”）。这些“向量”能够包含关于这个词的更多信息，比如它和其他词的关系。</p>
+<h3 id="举个简单的例子"><a href="#举个简单的例子" class="headerlink" title="举个简单的例子"></a>举个简单的例子</h3><p>假设我们有三个单词：<strong>“苹果”</strong>, <strong>“香蕉”</strong>, <strong>“橙子”</strong>，我们给每个词一个编号：</p>
+<ul>
+<li>苹果：0</li>
+<li>香蕉：1</li>
+<li>橙子：2</li>
+</ul>
+<p>我们用 <code>nn.Embedding</code> 创建一个“查找表”，它把这些数字编号转换成一组数字。比如：</p>
+<ul>
+<li>苹果（编号 0）变成 [0.2, 0.5, -0.3]</li>
+<li>香蕉（编号 1）变成 [0.1, -0.4, 0.7]</li>
+<li>橙子（编号 2）变成 [-0.2, 0.6, 0.9]</li>
+</ul>
+<p>这些数字就是“向量”，它们能帮助计算机更好地理解这些单词。虽然我们现在看的这些向量数字看起来有点复杂，但它们可以让计算机知道“苹果”和“香蕉”之间有什么关系，或者“苹果”和“橙子”有什么相似之处。</p>
+<h3 id="什么时候用到？"><a href="#什么时候用到？" class="headerlink" title="什么时候用到？"></a>什么时候用到？</h3><p>比如，在做 <strong>自然语言处理</strong>（NLP）时，计算机要处理文本、分析句子里的单词、理解意思。这时候就可以用 <code>nn.Embedding</code> 来把单词转换成向量。这样，计算机就可以通过这些向量“比较”单词之间的关系，做一些像翻译、语法分析、情感分析等任务。</p>
+<h3 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a>总结一下</h3><p><code>nn.Embedding</code> 就是一个帮助计算机把离散的东西（比如单词的编号）转换成一个“向量”的工具，这样计算机就能更好地理解这些东西之间的关系。简单来说，它就是把“编号”变成了“有意思的数字”，让计算机能够做更多的聪明的事情。</p>
 ]]></content>
   </entry>
   <entry>
@@ -236,6 +236,60 @@
 <li><strong>提高区分度</strong>：它通过指数函数放大高得分和低得分之间的差异，这让高分的类别更明显，低分的类别被抑制。</li>
 </ol>
 <h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>Softmax 就是一个将得分转换为概率的函数，它帮助我们做出更准确的分类判断，特别是在多类别分类任务中。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2025/07/16/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%94%A8Python%E6%90%AD%E5%BB%BALLMCreate%20a%20LLM%20/</url>
+    <content><![CDATA[<h1 id="从零开始用Python搭建LLM-Create-a-LLM"><a href="#从零开始用Python搭建LLM-Create-a-LLM" class="headerlink" title="从零开始用Python搭建LLM|Create a LLM"></a>从零开始用Python搭建LLM|Create a LLM</h1><h2 id="一、配置anaconda"><a href="#一、配置anaconda" class="headerlink" title="一、配置anaconda"></a>一、配置anaconda</h2><p><a href="https://blog.csdn.net/qq_44000789/article/details/142214660">最新版最详细Anaconda新手安装+配置+环境创建教程-CSDN博客</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 添加清华源</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/</span><br><span class="line"> </span><br><span class="line"># 添加阿里云镜像源</span><br><span class="line">conda config --add channels https://mirrors.aliyun.com/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.aliyun.com/anaconda/pkgs/main/</span><br><span class="line"> </span><br><span class="line"># 添加中科大源</span><br><span class="line">conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/main/</span><br><span class="line">conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/</span><br><span class="line">conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/msys2/</span><br><span class="line">conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/bioconda/</span><br><span class="line">conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/menpo/</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"># （可选）设置搜索时显示通道地址</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">channels:</span><br><span class="line">  - defaults</span><br><span class="line">  - https://repo.anaconda.com/pkgs/main</span><br><span class="line">  - https://repo.anaconda.com/pkgs/r</span><br><span class="line">  - https://repo.anaconda.com/pkgs/msys2</span><br><span class="line">show_channel_urls: true</span><br></pre></td></tr></table></figure>
+<h2 id="二、环境"><a href="#二、环境" class="headerlink" title="二、环境"></a>二、环境</h2><ol>
+<li><p>安装库</p>
+<ul>
+<li>matplotlib</li>
+<li>numpy</li>
+<li>jupyter</li>
+<li>pylzma</li>
+<li>ipykernel：将实际的jupyternotebooke能够和虚拟环境引入笔记本</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">记一次报错：下载时出现ModuleNotFoundError: No module named &#x27;distutils.msvccompiler</span><br><span class="line">解决方案：pip install setuptools==58.0.0 wheel==0.36.2（降级建造工具即可）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Pylzma 构造工具</p>
+</li>
+<li><p>Jupyter Notebook</p>
+</li>
+</ol>
+<h2 id="三、学会使用Pytorch"><a href="#三、学会使用Pytorch" class="headerlink" title="三、学会使用Pytorch"></a>三、学会使用Pytorch</h2><ol>
+<li><p>使用GTP学习</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.询问特定名字含义（如nn.Embedding是什么意思）</span><br><span class="line">2.限定讲解对象（如向初二同学解释）</span><br></pre></td></tr></table></figure>
+<p>eg.  <a href="nn.Embedding.md">nn.Embedding.md</a> </p>
+</li>
+<li><p>学习知识点</p>
+<ul>
+<li>software</li>
+<li>点积</li>
+<li>神经学网络</li>
+<li>优化器</li>
+<li>标准差</li>
+</ul>
+</li>
+</ol>
+<h2 id="四、self-attention"><a href="#四、self-attention" class="headerlink" title="四、self-attention"></a>四、self-attention</h2><ol>
+<li><p>令牌</p>
+<ul>
+<li><p>K（key）：为每个单词生成一个不同的小张量，表示包含的内容</p>
+</li>
+<li><p>Q（query）：表示所在寻找的东西</p>
+</li>
+<li><p>V：</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Dot Product(K, Q)</strong></p>
+</li>
+<li>Sac</li>
+</ol>
 ]]></content>
   </entry>
   <entry>
@@ -315,60 +369,6 @@
 <li>创建聊天助手（注意prompt 和 tokens 的配置）</li>
 <li>开始对话</li>
 </ul>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2025/07/16/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%94%A8Python%E6%90%AD%E5%BB%BALLMCreate%20a%20LLM%20/</url>
-    <content><![CDATA[<h1 id="从零开始用Python搭建LLM-Create-a-LLM"><a href="#从零开始用Python搭建LLM-Create-a-LLM" class="headerlink" title="从零开始用Python搭建LLM|Create a LLM"></a>从零开始用Python搭建LLM|Create a LLM</h1><h2 id="一、配置anaconda"><a href="#一、配置anaconda" class="headerlink" title="一、配置anaconda"></a>一、配置anaconda</h2><p><a href="https://blog.csdn.net/qq_44000789/article/details/142214660">最新版最详细Anaconda新手安装+配置+环境创建教程-CSDN博客</a></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 添加清华源</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/</span><br><span class="line"> </span><br><span class="line"># 添加阿里云镜像源</span><br><span class="line">conda config --add channels https://mirrors.aliyun.com/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.aliyun.com/anaconda/pkgs/main/</span><br><span class="line"> </span><br><span class="line"># 添加中科大源</span><br><span class="line">conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/main/</span><br><span class="line">conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/</span><br><span class="line">conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/msys2/</span><br><span class="line">conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/bioconda/</span><br><span class="line">conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/menpo/</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"># （可选）设置搜索时显示通道地址</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">channels:</span><br><span class="line">  - defaults</span><br><span class="line">  - https://repo.anaconda.com/pkgs/main</span><br><span class="line">  - https://repo.anaconda.com/pkgs/r</span><br><span class="line">  - https://repo.anaconda.com/pkgs/msys2</span><br><span class="line">show_channel_urls: true</span><br></pre></td></tr></table></figure>
-<h2 id="二、环境"><a href="#二、环境" class="headerlink" title="二、环境"></a>二、环境</h2><ol>
-<li><p>安装库</p>
-<ul>
-<li>matplotlib</li>
-<li>numpy</li>
-<li>jupyter</li>
-<li>pylzma</li>
-<li>ipykernel：将实际的jupyternotebooke能够和虚拟环境引入笔记本</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">记一次报错：下载时出现ModuleNotFoundError: No module named &#x27;distutils.msvccompiler</span><br><span class="line">解决方案：pip install setuptools==58.0.0 wheel==0.36.2（降级建造工具即可）</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Pylzma 构造工具</p>
-</li>
-<li><p>Jupyter Notebook</p>
-</li>
-</ol>
-<h2 id="三、学会使用Pytorch"><a href="#三、学会使用Pytorch" class="headerlink" title="三、学会使用Pytorch"></a>三、学会使用Pytorch</h2><ol>
-<li><p>使用GTP学习</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.询问特定名字含义（如nn.Embedding是什么意思）</span><br><span class="line">2.限定讲解对象（如向初二同学解释）</span><br></pre></td></tr></table></figure>
-<p>eg.  <a href="nn.Embedding.md">nn.Embedding.md</a> </p>
-</li>
-<li><p>学习知识点</p>
-<ul>
-<li>software</li>
-<li>点积</li>
-<li>神经学网络</li>
-<li>优化器</li>
-<li>标准差</li>
-</ul>
-</li>
-</ol>
-<h2 id="四、self-attention"><a href="#四、self-attention" class="headerlink" title="四、self-attention"></a>四、self-attention</h2><ol>
-<li><p>令牌</p>
-<ul>
-<li><p>K（key）：为每个单词生成一个不同的小张量，表示包含的内容</p>
-</li>
-<li><p>Q（query）：表示所在寻找的东西</p>
-</li>
-<li><p>V：</p>
-</li>
-</ul>
-</li>
-<li><p><strong>Dot Product(K, Q)</strong></p>
-</li>
-<li>Sac</li>
-</ol>
 ]]></content>
   </entry>
   <entry>
