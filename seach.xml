@@ -220,116 +220,105 @@
       </tags>
   </entry>
   <entry>
-    <title>Week4</title>
-    <url>/2025/08/10/Week4/</url>
-    <content><![CDATA[<h1 id="Opencv（二）"><a href="#Opencv（二）" class="headerlink" title="Opencv（二）"></a>Opencv（二）</h1><h2 id="一、图像基础知识复习"><a href="#一、图像基础知识复习" class="headerlink" title="一、图像基础知识复习"></a>一、图像基础知识复习</h2><ol>
-<li><p>图像是由像素构成的</p>
-<p>像素点的多少决定了图片的质量（相同图片大小，像素点越多，单个像素点越小，图片质量越好）</p>
-<p><img src="image-20250810124134321.png" alt="image-20250810124134321"></p>
+    <title>Week2</title>
+    <url>/2025/07/27/Week2/</url>
+    <content><![CDATA[<h1 id="Opencv"><a href="#Opencv" class="headerlink" title="Opencv"></a>Opencv</h1><h3 id="一、常见的图片格式及图片类型"><a href="#一、常见的图片格式及图片类型" class="headerlink" title="一、常见的图片格式及图片类型"></a>一、常见的图片格式及图片类型</h3><ul>
+<li><p>图片格式</p>
+<ol>
+<li><p>bmp：比较老的格式|不常见|无损-&gt;基本上无压缩|体积大|被淘汰</p>
 </li>
-<li><p>图像的分类</p>
-<p><img src="image-20250810124203155.png" alt="image-20250810124203155"></p>
-<ul>
-<li><p>二值图像：像素点非0即1</p>
-<p><img src="image-20250810124322219.png" alt="image-20250810124322219"></p>
+<li><p>jpg（jpeg）：用<strong>最少的磁盘空间</strong>得到<strong>较好的图片质量</strong></p>
 </li>
-<li><p>灰度图像：像素点有256个结果</p>
-<p><img src="image-20250810124332896.png" alt="image-20250810124332896"></p>
-</li>
-<li><p>彩色图像：由三通道（三原色RGB）进行叠加的图像</p>
-<p><img src="image-20250810124404611.png" alt="image-20250810124404611"></p>
-</li>
-</ul>
-</li>
-<li><p>Opencv读取彩色图像的特点</p>
-<ul>
-<li><p>读取结果：BGR（注意顺序）</p>
-</li>
-<li><p>每个像素点由BGR三个分量构成</p>
-<p>例：（245，168，200）-&gt; B：245 、G：168、R：200</p>
-</li>
-</ul>
+<li><p>png：无损压缩的位图片形格式（首选）</p>
 </li>
 </ol>
-<h2 id="二、灰度图片像素的选取与修改"><a href="#二、灰度图片像素的选取与修改" class="headerlink" title="二、灰度图片像素的选取与修改"></a>二、灰度图片像素的选取与修改</h2><ul>
-<li><p>源码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line">gray_img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 0)</span><br><span class="line">cv2.imshow(&#x27;gray_img&#x27;, gray_img)</span><br><span class="line"></span><br><span class="line"># 选取灰度图像的某个像素点【矩阵-numpy中的数组】</span><br><span class="line">gray_img[100,100]</span><br><span class="line">gray_img[100,200]</span><br><span class="line"></span><br><span class="line"># 选取某些像素点</span><br><span class="line">gray_img[100:200,100:200]</span><br><span class="line"></span><br><span class="line"># 修改像素点[0~255]</span><br><span class="line">gray_img1 = gray_img.copy() # 拷贝</span><br><span class="line">gray_img1[100:200,100:200] = 0</span><br><span class="line"># gray_img1[100:200,100:200] = 100</span><br><span class="line"># gray_img1[100:200,100:200] = 255</span><br><span class="line">cv2.imshow(&#x27;gray_img1&#x27;, gray_img1)</span><br><span class="line"></span><br><span class="line"># 0：表示任意键关闭; 具体数字，表示毫秒</span><br><span class="line">cv2.waitKey() </span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>效果</p>
-<p><img src="%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-10%20130828.png" alt="屏幕截图 2025-08-10 130828"></p>
+<li><p>图片类型：[ 黑白 ]  [ 彩色 ]</p>
 </li>
 </ul>
-<h2 id="三、显示图片的一些问题"><a href="#三、显示图片的一些问题" class="headerlink" title="三、显示图片的一些问题"></a>三、显示图片的一些问题</h2><ol>
-<li>显示图片时候的“备注“（即<code>cv2.imshow(&#39;gray_img1&#39;, gray_img1</code>中‘ ’内部的内容)作为图片的区分不一致时才可以同时显示多张图片</li>
-<li><code>cv2.waitKey()</code>和<code>cv2.destroyAllWindows()</code>必须同时存在</li>
-</ol>
-<h2 id="四、彩色图片像素的选取与修改"><a href="#四、彩色图片像素的选取与修改" class="headerlink" title="四、彩色图片像素的选取与修改"></a>四、彩色图片像素的选取与修改</h2><ul>
-<li><p>源码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line"></span><br><span class="line"># 选取彩色图片某个像素点</span><br><span class="line"># BGR -&gt; 指对应的(100,100)的坐标</span><br><span class="line">print(img[100, 100])</span><br><span class="line">print(img[100, 100, 0])</span><br><span class="line">print(img[100, 100, 1])</span><br><span class="line">print(img[100, 100, 2])</span><br><span class="line"></span><br><span class="line"># 选择某些像素点</span><br><span class="line">print(img[100:200,100:200,0])</span><br><span class="line">print(img[100:200,100:200,1])</span><br><span class="line">print(img[100:200,100:200])</span><br><span class="line"></span><br><span class="line"># 修改某个像素点</span><br><span class="line">img1 = img.copy()</span><br><span class="line">img1[100,100,0] = 0</span><br><span class="line">print(img[100,100])</span><br><span class="line">print(img1[100,100])</span><br><span class="line"></span><br><span class="line"># 修改某些像素点</span><br><span class="line">img1[100:200, 100:200,0] = 0</span><br><span class="line">print(img[100:200, 100:200])</span><br><span class="line">print(img1[100:200, 100:200])</span><br><span class="line">img1[100:200, 100:200,1] = 0</span><br><span class="line">print(img[100:200, 100:200])</span><br><span class="line">print(img1[100:200, 100:200])</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line"></span><br><span class="line">cv2.waitKey() </span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>效果</p>
-<p><img src="image-20250810132859092.png" alt="image-20250810132859092"></p>
-</li>
-</ul>
-<h2 id="五、获取图像的基本属性"><a href="#五、获取图像的基本属性" class="headerlink" title="五、获取图像的基本属性"></a>五、获取图像的基本属性</h2><ul>
-<li><p>源码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line"></span><br><span class="line"># 灰度图像</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 0)</span><br><span class="line"># cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line"></span><br><span class="line"># 获取灰度图像的形状[二维的元组]</span><br><span class="line">print(img.shape)</span><br><span class="line"># 获取灰度图像的大小[指行*列(像素点的个数)]</span><br><span class="line">print(img.size)</span><br><span class="line"># 图像的数据类型&lt;class &#x27;numpy.ndarray&#x27;&gt;</span><br><span class="line">print(type(img))</span><br><span class="line"># 获取像素点的数据类型 uint8</span><br><span class="line">print(img.dtype)</span><br><span class="line"></span><br><span class="line"># 彩色图片</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line"># cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line"></span><br><span class="line"># 获取彩色图像的形状[三维的元组]</span><br><span class="line">print(img.shape)</span><br><span class="line"># 获取彩色图像的大小[指行*列*通道数(3)]</span><br><span class="line">print(img.size)</span><br><span class="line"># 图像的数据类型&lt;class &#x27;numpy.ndarray&#x27;&gt;</span><br><span class="line">print(type(img))</span><br><span class="line"># 获取像素点的数据类型 uint8</span><br><span class="line">print(img.dtype)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="六、提取感兴趣的ROI区域"><a href="#六、提取感兴趣的ROI区域" class="headerlink" title="六、提取感兴趣的ROI区域"></a>六、提取感兴趣的ROI区域</h2><ul>
-<li><p>源码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># ROI区域</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;,img)</span><br><span class="line"></span><br><span class="line"># 知道图片的shape[(1333, 750, 3)]</span><br><span class="line">print(img.shape)</span><br><span class="line"></span><br><span class="line"># new_img = img[300:800, 100:360]</span><br><span class="line">new_img = img[415:525, 200:300]</span><br><span class="line">cv2.imshow(&#x27;after&#x27;,new_img)</span><br><span class="line"></span><br><span class="line"># 写出新图片</span><br><span class="line">cv2.imwrite(r&#x27;/home/jiax/workspace/Python Learning/Opencv-course/after.jpg&#x27;, new_img)</span><br><span class="line"></span><br><span class="line">img[:110,:100] = new_img</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, img)</span><br><span class="line"></span><br><span class="line">img1 = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 1)</span><br><span class="line">img1[:110,:100] = new_img</span><br><span class="line">cv2.imshow(&#x27;new_img1&#x27;, img1)</span><br><span class="line"></span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>ROI区域效果图：</p>
-<p><img src="image-20250810135256764.png" alt="image-20250810135256764"></p>
-<p><img src="image-20250810135806330.png" alt="image-20250810135806330"></p>
-</li>
-</ul>
-<h2 id="七、图像的加法"><a href="#七、图像的加法" class="headerlink" title="七、图像的加法"></a>七、图像的加法</h2><ul>
-<li><p>源码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像的加法 -&gt;矩阵</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">img1 = img.copy()</span><br><span class="line"></span><br><span class="line"># 加法【前提：必须是一样大的矩阵；对应元素求和】</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">像素点：[0,255]超过255怎么办【取余】</span><br><span class="line">150 + 150 = 300</span><br><span class="line">300 % 255 = 45</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">result1 = img + img1</span><br><span class="line">cv2.imshow(&#x27;result1&#x27;, result1)</span><br><span class="line"></span><br><span class="line"># opencv 提供给了add()函数</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">像素点：[0,255]超过255怎么办【按255算】</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">result2 = cv2.add(img, img1)</span><br><span class="line">cv2.imshow(&#x27;result2&#x27;, result2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>演示效果</p>
-<p><img src="image-20250810193716787.png" alt="image-20250810193716787"></p>
-</li>
-</ul>
-<h2 id="八、图片融合"><a href="#八、图片融合" class="headerlink" title="八、图片融合"></a>八、图片融合</h2><blockquote>
-<p>注意：图片相加不是图片融合</p>
-</blockquote>
+<p>​    【gif(动图) -&gt; 一帧一帧拿出来】</p>
 <ul>
-<li><p>源码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图片融合：将两张图片放在一张上</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">前提：图片的shape一样</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img1 = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/1.jpg&quot;, 1)</span><br><span class="line">img2 = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2.jpg&quot;, 1)</span><br><span class="line"></span><br><span class="line"># 前提：图片的shape一样</span><br><span class="line">print(img1.shape)</span><br><span class="line">print(img2.shape)</span><br><span class="line"></span><br><span class="line"># 图片融合</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">addWeighted(src1, alpha,src2,beta,gamma)</span><br><span class="line">src1\src2：第一张和第二张图片</span><br><span class="line">alpha\beta：第一张图片的权重、第二张图片的权重</span><br><span class="line">gamma：亮度的调节</span><br><span class="line"># </span><br><span class="line">0.8*img1 + 0.2*img2 + gamma</span><br><span class="line">[0, 255]：超过255仍按照255算，即亮度非常大时，图片所有像素点权全为255（全白）</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">result = cv2.addWeighted(img1, 0.8, img2, 0.2, 100)</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line">cv2.imshow(&#x27;img2&#x27;, img2)</span><br><span class="line">cv2.imshow(&#x27;result&#x27;, result)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>效果：</p>
-<p><img src="image-20250810195225642.png" alt="image-20250810195225642"></p>
-<p><img src="image-20250810195658468.png" alt="image-20250810195658468"></p>
-</li>
+<li>图片的本质：由像素点组成的一个矩阵，每个元素（像素点）都是在 [0,255] 之间</li>
 </ul>
-<h2 id="九、-图像的类型转换"><a href="#九、-图像的类型转换" class="headerlink" title="九、 图像的类型转换"></a>九、 图像的类型转换</h2><ul>
-<li><p>源码:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像的类型转换</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cv2里面的图像类型转换远远不止介绍的这些，共由两百多个</span><br><span class="line">需要学会自己去查自己想要的转化方式</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line"></span><br><span class="line"># 原始图片：BGR-&gt;RGB (本质即为0和2列进行了对调)</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cvtColor(img,way)</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)</span><br><span class="line">cv2.imshow(&#x27;img_rgb&#x27;, img_rgb)</span><br><span class="line"></span><br><span class="line">img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line">cv2.imshow(&#x27;img_gray&#x27;, img_gray)</span><br><span class="line"></span><br><span class="line"># 读取灰度图片</span><br><span class="line">img1 = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line">img_rgb = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line">b, g, r = cv2.split(img1)</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line">cv2.imshow(&#x27;b&#x27;,b)</span><br><span class="line">cv2.imshow(&#x27;g&#x27;,g)</span><br><span class="line">cv2.imshow(&#x27;r&#x27;,r)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>效果：</p>
-<p><img src="image-20250810201809881.png" alt="image-20250810201809881"></p>
-<p><img src="image-20250810201859638.png" alt="image-20250810201859638"></p>
-</li>
+<h3 id="二、读取第一张黑白图片"><a href="#二、读取第一张黑白图片" class="headerlink" title="二、读取第一张黑白图片"></a>二、读取第一张黑白图片</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line">import numpy as np</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>读取和展示</p>
+<ul>
+<li>path：路径 0：代表灰度图 1：彩色图</li>
 </ul>
-<h2 id="十、图像的缩放"><a href="#十、图像的缩放" class="headerlink" title="十、图像的缩放"></a>十、图像的缩放</h2><ul>
-<li><p>源码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像的缩放</span><br><span class="line"># 本质：矩阵的变换</span><br><span class="line"></span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cv2.resize(src, dsize, fx, fy)</span><br><span class="line">src：源图片【需要被缩放的照片img(100*100)】</span><br><span class="line">dsize：缩放到的大小(200*200)[列(W) * 行(H)]</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">size = (1000,500)</span><br><span class="line">new_img = cv2.resize(img, size)</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line"></span><br><span class="line"># 指定列、行的缩放大小</span><br><span class="line">h, w, ch = img.shape</span><br><span class="line">size = (int(0.5*w), int(1.5*h))</span><br><span class="line">new_img1 = cv2.resize(img, size)</span><br><span class="line">cv2.imshow(&#x27;new_img1&#x27;, new_img1)</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cv2.resize(src, dsize, fx, fy)</span><br><span class="line">src：原图片【需要被缩放的照片img(100*100)】</span><br><span class="line">dsize：None</span><br><span class="line">fx：x方向上的比例</span><br><span class="line">fy：y方向上的比例</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">new_img2 = cv2.resize(img, None, fx=0.5, fy=0.5)</span><br><span class="line">cv2.imshow(&#x27;new_img2&#x27;, new_img2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>效果：</p>
-<p><img src="image-20250810203427079.png" alt="image-20250810203427079"></p>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;./R-C.jpg&quot;</span><br><span class="line">img = cv2.imread(path,0)</span><br><span class="line">print(type(img))</span><br><span class="line">print(img.shape)</span><br><span class="line">print(img)</span><br><span class="line">cv2.imshow(&#x27;image&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>需要注意的是这里的<code>cv2.imshow(&#39;image&#39;, img)</code>因为我这次编写代码是在实验的服务器上运行的，远程连接ssh服务器需要额外使用X - Service（这个玩意浪费了我四天的时间，不过解决了这个问题后面的学习就流畅多了） ——附教程</li>
 </ul>
-<h2 id="十一、图像的翻转"><a href="#十一、图像的翻转" class="headerlink" title="十一、图像的翻转"></a>十一、图像的翻转</h2><ul>
-<li><p>源码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像的翻转</span><br><span class="line"># 本质：矩阵的翻转</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">1. 沿着x轴进行翻转</span><br><span class="line">2. 沿着y轴进行翻转</span><br><span class="line">3. 同时沿着x轴和y轴进行翻转</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/1.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cv2.flip(src, flipCode)</span><br><span class="line">src：源图像</span><br><span class="line">flipCode：翻转形式</span><br><span class="line">    0：沿着x轴进行翻转</span><br><span class="line">    1(大于等于1)：沿着y轴进行翻转</span><br><span class="line">    -1(小于等于-1)：同时沿着x轴和y轴进行翻转</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">new_img1 = cv2.flip(img, 0)</span><br><span class="line">cv2.imshow(&#x27;new_img1&#x27;, new_img1)</span><br><span class="line">new_img2= cv2.flip(img, 1)</span><br><span class="line"># new_img2= cv2.flip(img, 10)</span><br><span class="line">cv2.imshow(&#x27;new_img2&#x27;, new_img2)</span><br><span class="line">new_img3 = cv2.flip(img, -1)</span><br><span class="line"># new_img3 = cv2.flip(img, -10)</span><br><span class="line">cv2.imshow(&#x27;new_img3&#x27;, new_img3)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>效果：</p>
-<p><img src="image-20250810205116045.png" alt="image-20250810205116045"></p>
-</li>
+<li><p>图片的裁剪</p>
+<ul>
+<li>简单图片的裁剪和展示</li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;</span><br><span class="line"># path:路径 0：代表灰度图 1：彩色图</span><br><span class="line">img = cv2.imread(path,0)</span><br><span class="line"># 本质：数组、矩阵</span><br><span class="line">img1 = img[:500, :500]</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Numpy 黑白颜色图片的叠加，即拼接</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/black.jpg&quot;</span><br><span class="line">img1 = cv2.imread(path,0)</span><br><span class="line">print(img1.shape)</span><br><span class="line"></span><br><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/white.jpg&quot;</span><br><span class="line">img2 = cv2.imread(path,0)</span><br><span class="line">print(img2.shape)</span><br><span class="line"></span><br><span class="line">new_img1 = img1[:100,:300]</span><br><span class="line">new_img2 = img2[:100,:300]</span><br><span class="line"></span><br><span class="line"># 垂直拼接 列数相等</span><br><span class="line">new_img = np.vstack((new_img1, new_img2))</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># 水平拼接 行数相等</span><br><span class="line">new_img = np.hstack((new_img1, new_img2))</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>图片的保存（<code>imwrite(path, target)</code>）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/black.jpg&quot;</span><br><span class="line">img1 = cv2.imread(path,0)</span><br><span class="line">print(img1.shape)</span><br><span class="line"></span><br><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/white.jpg&quot;</span><br><span class="line">img2 = cv2.imread(path,0)</span><br><span class="line">print(img2.shape)</span><br><span class="line"></span><br><span class="line">new_img1 = img1[:100,:300]</span><br><span class="line">new_img2 = img2[:100,:300]</span><br><span class="line"></span><br><span class="line">new_img = np.vstack((new_img1, new_img2))</span><br><span class="line"></span><br><span class="line"># png 类型所占的空间更大</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/new_img.jpg&quot;, new_img)</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/new_img.png&quot;, new_img)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将numpy所生成的图片转换为cv所能识别的矩阵形式=&gt;将生成的数组转为图片</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像一定是三维的，黑白图片(h,w,1)，彩色(h,w,3)</span><br><span class="line">array1 = np.random.randint(0,255,(700,500,1), dtype=&#x27;uint8&#x27;) # 将numpy所生成的图片转换为cv所能识别的矩阵形式=&gt;将生成的数组转为图片</span><br><span class="line">print(type(array1))</span><br><span class="line">array2 = np.random.randint(0,255,(700,500,1))</span><br><span class="line">print(type(array2))</span><br><span class="line"></span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, array2)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="三、读取第一张彩色图片"><a href="#三、读取第一张彩色图片" class="headerlink" title="三、读取第一张彩色图片"></a>三、读取第一张彩色图片</h3>   <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line">import numpy as np</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>彩色图片的读取</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 彩色图片读取方式为1</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line"></span><br><span class="line"># 检查彩色图片是否array形式[&lt;class &#x27;numpy.ndarray&#x27;&gt;]</span><br><span class="line">print(type(img))</span><br><span class="line"></span><br><span class="line"># 注意需要传递图片名以及图片矩阵</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># 彩色图片的形状 [(1333, 750, 3)]</span><br><span class="line">print(img.shape)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>研究三通道：[Opencv中以三个二维矩阵进行存储，即三维矩阵：[H-W*3] ]</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 创建一个二维数组</span><br><span class="line">print(np.array([[1,2]]).shape)</span><br><span class="line">print(np.array([[1,2],[1,2]]).shape)</span><br><span class="line"># 创建一个三维数组</span><br><span class="line">print(np.array([[[1,2],[1,2]]]).shape)</span><br><span class="line">print(np.array([ [[1,2],[1,2]],</span><br><span class="line">                [[1,2],[1,2]] ]).shape)</span><br><span class="line">print(np.array([ [[1,2],[1,2]],</span><br><span class="line">                [[1,2],[1,2]],</span><br><span class="line">                [[1,2],[1,2]] ]).shape)</span><br><span class="line"></span><br><span class="line">彩色图片 -&gt; 三张图片(RGB) Opencv 中以BGR形式存储</span><br><span class="line">尝试拆分一张彩色图片</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">img0 = img[:,:,0] #B</span><br><span class="line">cv2.imshow(&#x27;img0&#x27;, img0)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2_b.jpg&quot;,img0)</span><br><span class="line">img1 = img[:,:,1] #G</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2_g.jpg&quot;,img1)</span><br><span class="line">img2 = img[:,:,2] #R</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2_r.jpg&quot;,img2)</span><br><span class="line"></span><br><span class="line"># split() 拆分，类似以上效果</span><br><span class="line">b,g,r = cv2.split(img)</span><br><span class="line"></span><br><span class="line"># 合并拆分结果</span><br><span class="line"># img = cv2.merge([b,g,r]) 正常显示</span><br><span class="line"># img = cv2.merge([b,g]) 无法显示</span><br><span class="line">img = cv2.merge([r,g,b]) # 可进行图片的重生成</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>剪裁</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">img0 = img[:,:,0] #B</span><br><span class="line">img1 = img[:,:,0] #B</span><br><span class="line">img2 = img[:,:,0] #B</span><br><span class="line">print(img.shape)</span><br><span class="line">new_img0 = img0[:100,:100]</span><br><span class="line">new_img1 = img1[:100,100:200]</span><br><span class="line">new_img2 = img2[:100,200:300]</span><br><span class="line">new_img = np.hstack((new_img0, new_img1, new_img2))</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用opencv转换图片的色彩空间</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 1. 色彩空间：[BGR]</span><br><span class="line"># (1) HSV：更类似于人类感觉颜色的方式。H：色相(Hue) S：饱和度(Saturation) V：亮度(Value)</span><br><span class="line"># (2) YUV：Y：亮度信号 U\V：两个色彩信号-&gt;色彩的饱和度</span><br><span class="line"># (3) Lab：由国际照明委员会建立。L：整张图的明亮度 a\b：负责颜色的多少</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># HSV</span><br><span class="line">hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)</span><br><span class="line">cv2.imshow(&#x27;hsv&#x27;, hsv)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># YUV</span><br><span class="line">yuv = cv2.cvtColor(img, cv2.COLOR_BGR2YUV)</span><br><span class="line">cv2.imshow(&#x27;yuv&#x27;, yuv)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># Lab</span><br><span class="line">lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)</span><br><span class="line">cv2.imshow(&#x27;lab&#x27;, lab)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"># 还有其他的色彩空间</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="四、统计一张图片的像素点个数"><a href="#四、统计一张图片的像素点个数" class="headerlink" title="四、统计一张图片的像素点个数"></a>四、统计一张图片的像素点个数</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import cv2</span><br></pre></td></tr></table></figure>
+<ol>
+<li>图片的读取</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 0)</span><br><span class="line"></span><br><span class="line">h,w = np.shape(img)</span><br><span class="line">hest = np.zeros([256], dtype=np.int32) # 创建256个全为0零的一维矩阵</span><br></pre></td></tr></table></figure>
+<ol>
+<li>遍历图片矩阵</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for row in range(h):</span><br><span class="line">    for col in range(w):</span><br><span class="line">        pv = img[row,col]</span><br><span class="line">        hest[pv] += 1</span><br></pre></td></tr></table></figure>
+<ol>
+<li>绘图的操作</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">plt.plot(hest, color=&#x27;r&#x27;)</span><br><span class="line">plt.xlim([0,256])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="image-20250727200339645.png" alt="image-20250727200339645"></p>
+<h3 id="五、彩色图片像素点的统计"><a href="#五、彩色图片像素点的统计" class="headerlink" title="五、彩色图片像素点的统计"></a>五、彩色图片像素点的统计</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import cv2</span><br></pre></td></tr></table></figure>
+<ol>
+<li>图片的读取</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>分离颜色通道</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">b,g,r = cv2.split(img)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>行列遍历</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">h, w = np.shape(b)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>建立空白数组</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hest = np.zeros([256],dtype=np.int32)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>遍历图片</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for i in [b,g,r]:</span><br><span class="line">    for row in range(h):</span><br><span class="line">        for col in range(w):</span><br><span class="line">            pv = i[row,col]</span><br><span class="line">            hest[pv] += 1</span><br><span class="line"></span><br><span class="line">plt.plot(hest, color=&#x27;r&#x27;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="image-20250727200527018.png" alt="image-20250727200527018"></p>
 ]]></content>
       <categories>
         <category>504医学AI</category>
@@ -465,105 +454,525 @@
       </tags>
   </entry>
   <entry>
-    <title>Week2</title>
-    <url>/2025/07/27/Week2/</url>
-    <content><![CDATA[<h1 id="Opencv"><a href="#Opencv" class="headerlink" title="Opencv"></a>Opencv</h1><h3 id="一、常见的图片格式及图片类型"><a href="#一、常见的图片格式及图片类型" class="headerlink" title="一、常见的图片格式及图片类型"></a>一、常见的图片格式及图片类型</h3><ul>
-<li><p>图片格式</p>
-<ol>
-<li><p>bmp：比较老的格式|不常见|无损-&gt;基本上无压缩|体积大|被淘汰</p>
+    <title>Week4</title>
+    <url>/2025/08/10/Week4/</url>
+    <content><![CDATA[<h1 id="Opencv（二）"><a href="#Opencv（二）" class="headerlink" title="Opencv（二）"></a>Opencv（二）</h1><h2 id="一、图像基础知识复习"><a href="#一、图像基础知识复习" class="headerlink" title="一、图像基础知识复习"></a>一、图像基础知识复习</h2><ol>
+<li><p>图像是由像素构成的</p>
+<p>像素点的多少决定了图片的质量（相同图片大小，像素点越多，单个像素点越小，图片质量越好）</p>
+<p><img src="image-20250810124134321.png" alt="image-20250810124134321"></p>
 </li>
-<li><p>jpg（jpeg）：用<strong>最少的磁盘空间</strong>得到<strong>较好的图片质量</strong></p>
-</li>
-<li><p>png：无损压缩的位图片形格式（首选）</p>
-</li>
-</ol>
-</li>
-<li><p>图片类型：[ 黑白 ]  [ 彩色 ]</p>
-</li>
-</ul>
-<p>​    【gif(动图) -&gt; 一帧一帧拿出来】</p>
+<li><p>图像的分类</p>
+<p><img src="image-20250810124203155.png" alt="image-20250810124203155"></p>
 <ul>
-<li>图片的本质：由像素点组成的一个矩阵，每个元素（像素点）都是在 [0,255] 之间</li>
+<li><p>二值图像：像素点非0即1</p>
+<p><img src="image-20250810124322219.png" alt="image-20250810124322219"></p>
+</li>
+<li><p>灰度图像：像素点有256个结果</p>
+<p><img src="image-20250810124332896.png" alt="image-20250810124332896"></p>
+</li>
+<li><p>彩色图像：由三通道（三原色RGB）进行叠加的图像</p>
+<p><img src="image-20250810124404611.png" alt="image-20250810124404611"></p>
+</li>
 </ul>
-<h3 id="二、读取第一张黑白图片"><a href="#二、读取第一张黑白图片" class="headerlink" title="二、读取第一张黑白图片"></a>二、读取第一张黑白图片</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line">import numpy as np</span><br></pre></td></tr></table></figure>
-<ol>
-<li><p>读取和展示</p>
+</li>
+<li><p>Opencv读取彩色图像的特点</p>
 <ul>
-<li>path：路径 0：代表灰度图 1：彩色图</li>
+<li><p>读取结果：BGR（注意顺序）</p>
+</li>
+<li><p>每个像素点由BGR三个分量构成</p>
+<p>例：（245，168，200）-&gt; B：245 、G：168、R：200</p>
+</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;./R-C.jpg&quot;</span><br><span class="line">img = cv2.imread(path,0)</span><br><span class="line">print(type(img))</span><br><span class="line">print(img.shape)</span><br><span class="line">print(img)</span><br><span class="line">cv2.imshow(&#x27;image&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="二、灰度图片像素的选取与修改"><a href="#二、灰度图片像素的选取与修改" class="headerlink" title="二、灰度图片像素的选取与修改"></a>二、灰度图片像素的选取与修改</h2><ul>
+<li><p>源码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line">gray_img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 0)</span><br><span class="line">cv2.imshow(&#x27;gray_img&#x27;, gray_img)</span><br><span class="line"></span><br><span class="line"># 选取灰度图像的某个像素点【矩阵-numpy中的数组】</span><br><span class="line">gray_img[100,100]</span><br><span class="line">gray_img[100,200]</span><br><span class="line"></span><br><span class="line"># 选取某些像素点</span><br><span class="line">gray_img[100:200,100:200]</span><br><span class="line"></span><br><span class="line"># 修改像素点[0~255]</span><br><span class="line">gray_img1 = gray_img.copy() # 拷贝</span><br><span class="line">gray_img1[100:200,100:200] = 0</span><br><span class="line"># gray_img1[100:200,100:200] = 100</span><br><span class="line"># gray_img1[100:200,100:200] = 255</span><br><span class="line">cv2.imshow(&#x27;gray_img1&#x27;, gray_img1)</span><br><span class="line"></span><br><span class="line"># 0：表示任意键关闭; 具体数字，表示毫秒</span><br><span class="line">cv2.waitKey() </span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果</p>
+<p><img src="%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-10%20130828.png" alt="屏幕截图 2025-08-10 130828"></p>
+</li>
+</ul>
+<h2 id="三、显示图片的一些问题"><a href="#三、显示图片的一些问题" class="headerlink" title="三、显示图片的一些问题"></a>三、显示图片的一些问题</h2><ol>
+<li>显示图片时候的“备注“（即<code>cv2.imshow(&#39;gray_img1&#39;, gray_img1</code>中‘ ’内部的内容)作为图片的区分不一致时才可以同时显示多张图片</li>
+<li><code>cv2.waitKey()</code>和<code>cv2.destroyAllWindows()</code>必须同时存在</li>
+</ol>
+<h2 id="四、彩色图片像素的选取与修改"><a href="#四、彩色图片像素的选取与修改" class="headerlink" title="四、彩色图片像素的选取与修改"></a>四、彩色图片像素的选取与修改</h2><ul>
+<li><p>源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line"></span><br><span class="line"># 选取彩色图片某个像素点</span><br><span class="line"># BGR -&gt; 指对应的(100,100)的坐标</span><br><span class="line">print(img[100, 100])</span><br><span class="line">print(img[100, 100, 0])</span><br><span class="line">print(img[100, 100, 1])</span><br><span class="line">print(img[100, 100, 2])</span><br><span class="line"></span><br><span class="line"># 选择某些像素点</span><br><span class="line">print(img[100:200,100:200,0])</span><br><span class="line">print(img[100:200,100:200,1])</span><br><span class="line">print(img[100:200,100:200])</span><br><span class="line"></span><br><span class="line"># 修改某个像素点</span><br><span class="line">img1 = img.copy()</span><br><span class="line">img1[100,100,0] = 0</span><br><span class="line">print(img[100,100])</span><br><span class="line">print(img1[100,100])</span><br><span class="line"></span><br><span class="line"># 修改某些像素点</span><br><span class="line">img1[100:200, 100:200,0] = 0</span><br><span class="line">print(img[100:200, 100:200])</span><br><span class="line">print(img1[100:200, 100:200])</span><br><span class="line">img1[100:200, 100:200,1] = 0</span><br><span class="line">print(img[100:200, 100:200])</span><br><span class="line">print(img1[100:200, 100:200])</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line"></span><br><span class="line">cv2.waitKey() </span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果</p>
+<p><img src="image-20250810132859092.png" alt="image-20250810132859092"></p>
+</li>
+</ul>
+<h2 id="五、获取图像的基本属性"><a href="#五、获取图像的基本属性" class="headerlink" title="五、获取图像的基本属性"></a>五、获取图像的基本属性</h2><ul>
+<li><p>源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line"></span><br><span class="line"># 灰度图像</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 0)</span><br><span class="line"># cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line"></span><br><span class="line"># 获取灰度图像的形状[二维的元组]</span><br><span class="line">print(img.shape)</span><br><span class="line"># 获取灰度图像的大小[指行*列(像素点的个数)]</span><br><span class="line">print(img.size)</span><br><span class="line"># 图像的数据类型&lt;class &#x27;numpy.ndarray&#x27;&gt;</span><br><span class="line">print(type(img))</span><br><span class="line"># 获取像素点的数据类型 uint8</span><br><span class="line">print(img.dtype)</span><br><span class="line"></span><br><span class="line"># 彩色图片</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line"># cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line"></span><br><span class="line"># 获取彩色图像的形状[三维的元组]</span><br><span class="line">print(img.shape)</span><br><span class="line"># 获取彩色图像的大小[指行*列*通道数(3)]</span><br><span class="line">print(img.size)</span><br><span class="line"># 图像的数据类型&lt;class &#x27;numpy.ndarray&#x27;&gt;</span><br><span class="line">print(type(img))</span><br><span class="line"># 获取像素点的数据类型 uint8</span><br><span class="line">print(img.dtype)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="六、提取感兴趣的ROI区域"><a href="#六、提取感兴趣的ROI区域" class="headerlink" title="六、提取感兴趣的ROI区域"></a>六、提取感兴趣的ROI区域</h2><ul>
+<li><p>源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># ROI区域</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;,img)</span><br><span class="line"></span><br><span class="line"># 知道图片的shape[(1333, 750, 3)]</span><br><span class="line">print(img.shape)</span><br><span class="line"></span><br><span class="line"># new_img = img[300:800, 100:360]</span><br><span class="line">new_img = img[415:525, 200:300]</span><br><span class="line">cv2.imshow(&#x27;after&#x27;,new_img)</span><br><span class="line"></span><br><span class="line"># 写出新图片</span><br><span class="line">cv2.imwrite(r&#x27;/home/jiax/workspace/Python Learning/Opencv-course/after.jpg&#x27;, new_img)</span><br><span class="line"></span><br><span class="line">img[:110,:100] = new_img</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, img)</span><br><span class="line"></span><br><span class="line">img1 = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 1)</span><br><span class="line">img1[:110,:100] = new_img</span><br><span class="line">cv2.imshow(&#x27;new_img1&#x27;, img1)</span><br><span class="line"></span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ROI区域效果图：</p>
+<p><img src="image-20250810135256764.png" alt="image-20250810135256764"></p>
+<p><img src="image-20250810135806330.png" alt="image-20250810135806330"></p>
+</li>
+</ul>
+<h2 id="七、图像的加法"><a href="#七、图像的加法" class="headerlink" title="七、图像的加法"></a>七、图像的加法</h2><ul>
+<li><p>源码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像的加法 -&gt;矩阵</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">img1 = img.copy()</span><br><span class="line"></span><br><span class="line"># 加法【前提：必须是一样大的矩阵；对应元素求和】</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">像素点：[0,255]超过255怎么办【取余】</span><br><span class="line">150 + 150 = 300</span><br><span class="line">300 % 255 = 45</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">result1 = img + img1</span><br><span class="line">cv2.imshow(&#x27;result1&#x27;, result1)</span><br><span class="line"></span><br><span class="line"># opencv 提供给了add()函数</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">像素点：[0,255]超过255怎么办【按255算】</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">result2 = cv2.add(img, img1)</span><br><span class="line">cv2.imshow(&#x27;result2&#x27;, result2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>演示效果</p>
+<p><img src="image-20250810193716787.png" alt="image-20250810193716787"></p>
+</li>
+</ul>
+<h2 id="八、图片融合"><a href="#八、图片融合" class="headerlink" title="八、图片融合"></a>八、图片融合</h2><blockquote>
+<p>注意：图片相加不是图片融合</p>
+</blockquote>
 <ul>
-<li>需要注意的是这里的<code>cv2.imshow(&#39;image&#39;, img)</code>因为我这次编写代码是在实验的服务器上运行的，远程连接ssh服务器需要额外使用X - Service（这个玩意浪费了我四天的时间，不过解决了这个问题后面的学习就流畅多了） ——附教程</li>
-</ul>
+<li><p>源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图片融合：将两张图片放在一张上</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">前提：图片的shape一样</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img1 = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/1.jpg&quot;, 1)</span><br><span class="line">img2 = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2.jpg&quot;, 1)</span><br><span class="line"></span><br><span class="line"># 前提：图片的shape一样</span><br><span class="line">print(img1.shape)</span><br><span class="line">print(img2.shape)</span><br><span class="line"></span><br><span class="line"># 图片融合</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">addWeighted(src1, alpha,src2,beta,gamma)</span><br><span class="line">src1\src2：第一张和第二张图片</span><br><span class="line">alpha\beta：第一张图片的权重、第二张图片的权重</span><br><span class="line">gamma：亮度的调节</span><br><span class="line"># </span><br><span class="line">0.8*img1 + 0.2*img2 + gamma</span><br><span class="line">[0, 255]：超过255仍按照255算，即亮度非常大时，图片所有像素点权全为255（全白）</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">result = cv2.addWeighted(img1, 0.8, img2, 0.2, 100)</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line">cv2.imshow(&#x27;img2&#x27;, img2)</span><br><span class="line">cv2.imshow(&#x27;result&#x27;, result)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>图片的裁剪</p>
+<li><p>效果：</p>
+<p><img src="image-20250810195225642.png" alt="image-20250810195225642"></p>
+<p><img src="image-20250810195658468.png" alt="image-20250810195658468"></p>
+</li>
+</ul>
+<h2 id="九、-图像的类型转换"><a href="#九、-图像的类型转换" class="headerlink" title="九、 图像的类型转换"></a>九、 图像的类型转换</h2><ul>
+<li><p>源码:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像的类型转换</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cv2里面的图像类型转换远远不止介绍的这些，共由两百多个</span><br><span class="line">需要学会自己去查自己想要的转化方式</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line"></span><br><span class="line"># 原始图片：BGR-&gt;RGB (本质即为0和2列进行了对调)</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cvtColor(img,way)</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)</span><br><span class="line">cv2.imshow(&#x27;img_rgb&#x27;, img_rgb)</span><br><span class="line"></span><br><span class="line">img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line">cv2.imshow(&#x27;img_gray&#x27;, img_gray)</span><br><span class="line"></span><br><span class="line"># 读取灰度图片</span><br><span class="line">img1 = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line">img_rgb = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line">b, g, r = cv2.split(img1)</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line">cv2.imshow(&#x27;b&#x27;,b)</span><br><span class="line">cv2.imshow(&#x27;g&#x27;,g)</span><br><span class="line">cv2.imshow(&#x27;r&#x27;,r)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果：</p>
+<p><img src="image-20250810201809881.png" alt="image-20250810201809881"></p>
+<p><img src="image-20250810201859638.png" alt="image-20250810201859638"></p>
+</li>
+</ul>
+<h2 id="十、图像的缩放"><a href="#十、图像的缩放" class="headerlink" title="十、图像的缩放"></a>十、图像的缩放</h2><ul>
+<li><p>源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像的缩放</span><br><span class="line"># 本质：矩阵的变换</span><br><span class="line"></span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cv2.resize(src, dsize, fx, fy)</span><br><span class="line">src：源图片【需要被缩放的照片img(100*100)】</span><br><span class="line">dsize：缩放到的大小(200*200)[列(W) * 行(H)]</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">size = (1000,500)</span><br><span class="line">new_img = cv2.resize(img, size)</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line"></span><br><span class="line"># 指定列、行的缩放大小</span><br><span class="line">h, w, ch = img.shape</span><br><span class="line">size = (int(0.5*w), int(1.5*h))</span><br><span class="line">new_img1 = cv2.resize(img, size)</span><br><span class="line">cv2.imshow(&#x27;new_img1&#x27;, new_img1)</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cv2.resize(src, dsize, fx, fy)</span><br><span class="line">src：原图片【需要被缩放的照片img(100*100)】</span><br><span class="line">dsize：None</span><br><span class="line">fx：x方向上的比例</span><br><span class="line">fy：y方向上的比例</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">new_img2 = cv2.resize(img, None, fx=0.5, fy=0.5)</span><br><span class="line">cv2.imshow(&#x27;new_img2&#x27;, new_img2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果：</p>
+<p><img src="image-20250810203427079.png" alt="image-20250810203427079"></p>
+</li>
+</ul>
+<h2 id="十一、图像的翻转"><a href="#十一、图像的翻转" class="headerlink" title="十一、图像的翻转"></a>十一、图像的翻转</h2><ul>
+<li><p>源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像的翻转</span><br><span class="line"># 本质：矩阵的翻转</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">1. 沿着x轴进行翻转</span><br><span class="line">2. 沿着y轴进行翻转</span><br><span class="line">3. 同时沿着x轴和y轴进行翻转</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/1.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cv2.flip(src, flipCode)</span><br><span class="line">src：源图像</span><br><span class="line">flipCode：翻转形式</span><br><span class="line">    0：沿着x轴进行翻转</span><br><span class="line">    1(大于等于1)：沿着y轴进行翻转</span><br><span class="line">    -1(小于等于-1)：同时沿着x轴和y轴进行翻转</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">new_img1 = cv2.flip(img, 0)</span><br><span class="line">cv2.imshow(&#x27;new_img1&#x27;, new_img1)</span><br><span class="line">new_img2= cv2.flip(img, 1)</span><br><span class="line"># new_img2= cv2.flip(img, 10)</span><br><span class="line">cv2.imshow(&#x27;new_img2&#x27;, new_img2)</span><br><span class="line">new_img3 = cv2.flip(img, -1)</span><br><span class="line"># new_img3 = cv2.flip(img, -10)</span><br><span class="line">cv2.imshow(&#x27;new_img3&#x27;, new_img3)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果：</p>
+<p><img src="image-20250810205116045.png" alt="image-20250810205116045"></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>504医学AI</category>
+      </categories>
+      <tags>
+        <tag>504医学AI入门</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2025/08/22/%E8%86%A8%E8%83%80%E4%B8%8E%E8%85%90%E8%9A%80/</url>
+    <content><![CDATA[<h1 id="OpenCV-图像处理之膨胀与腐蚀"><a href="#OpenCV-图像处理之膨胀与腐蚀" class="headerlink" title="OpenCV 图像处理之膨胀与腐蚀"></a>OpenCV 图像处理之膨胀与腐蚀</h1><blockquote>
+<p>参考文献：<a href="https://zhuanlan.zhihu.com/p/110330329#:~:text=膨胀与腐蚀属于形态学范围，具体的含义根据字面意思来理解即可。但是更形象的话就是“增肥”与“减肥”。">OpenCV 图像处理之膨胀与腐蚀 - 知乎</a></p>
+</blockquote>
+<h2 id="1、什么是膨胀与腐蚀"><a href="#1、什么是膨胀与腐蚀" class="headerlink" title="1、什么是膨胀与腐蚀"></a>1、什么是膨胀与腐蚀</h2><p>膨胀与腐蚀属于形态学范围，具体的含义根据字面意思来理解即可。但是更形象的话就是“增肥”与“减肥”。</p>
+<p>它们的用途就是用来处理图形问题上。总结性的来说：膨胀用来<strong>处理缺陷</strong>问题；腐蚀用来<strong>处理毛刺</strong>问题。</p>
+<p>膨胀就是把缺陷给填补了，腐蚀就是把毛刺给腐蚀掉了。这里其实说的并不严谨，也是为了大家理解方便。下面我们就用实例来进行演示。</p>
+<h2 id="2、形态学处理——膨胀"><a href="#2、形态学处理——膨胀" class="headerlink" title="2、形态学处理——膨胀"></a>2、形态学处理——膨胀</h2><p>我们先引入一张图片进行分析。 <strong>程序实现：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(<span class="string">&#x27;Pic/corrode.png&#x27;</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cv_show</span>(<span class="params">img</span>):</span><br><span class="line">    cv2.imshow(<span class="string">&#x27;&#x27;</span>, img)</span><br><span class="line">    cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">    cv2.destroyAllWindows()</span><br><span class="line">cv_show(img)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-8441976eeed9d6e731620cbe2d7400a9_1440w.jpg" alt="img"></p>
+<p>图中我们可以看到，这张图片是一个二值图片（只有黑白），而且还增加了一些<strong>毛刺</strong>。而且还包含字体中还包含一些小的<strong>间隙</strong>（缺陷）。</p>
+<p>下面我们对这张图片进行膨胀处理。膨胀是如何处理的呢？对于一个像素点，我们需要先指定对每个像素点膨胀的范围。</p>
+<p><img src="v2-e5428bbb4a1a35009b7bbd297373996d_1440w.png" alt="img"></p>
+<p>这里我们指定范围为3 <em> 3的矩阵，kernel（卷积核核）指定为全为1的3 </em> 3矩阵，卷积计算后，该像素点的值等于以该像素点为中心的3 * 3范围内的最大值。由于我们是二值图像，所以只要包含周围白的部分，就变为白的。</p>
+<p><strong>总结：</strong> 只要原图片3 <em> 3范围内有白的，该像素点就是白的。 <em>*程序实现：</em></em></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kernel = np.ones((<span class="number">3</span>, <span class="number">3</span>), dtype=np.uint8)</span><br><span class="line">dilate = cv2.dilate(img, kernel, <span class="number">1</span>) <span class="comment"># 1:迭代次数，也就是执行几次膨胀操作</span></span><br><span class="line">cv_show(dilate)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-50b146692ac76bf6543086a544b7d231_1440w.jpg" alt="img"></p>
+<p><strong>分析：</strong> 上图我们可以看出毛刺部分变粗，与此同时字体中的间隙也变小，补了缺陷部分。</p>
+<h3 id="2-1-更改卷积核大小"><a href="#2-1-更改卷积核大小" class="headerlink" title="2.1 更改卷积核大小"></a>2.1 更改卷积核大小</h3><p>如果我们<strong>更改核的大小</strong>（4 <em> 4），也就改变了膨胀的程度。 只要4 </em> 4范围内有白的就变成白的。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kernel_2 = np.ones((<span class="number">4</span>, <span class="number">4</span>), dtype=np.uint8) <span class="comment"># 卷积核变为4*4</span></span><br><span class="line">dilate = cv2.dilate(img, kernel_2, <span class="number">1</span>)</span><br><span class="line">cv_show(dilate)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-56322fcf1eaf37473273ac595d0d444d_1440w.jpg" alt="img"></p>
+<h3 id="2-2、更改迭代次数"><a href="#2-2、更改迭代次数" class="headerlink" title="2.2、更改迭代次数"></a>2.2、更改迭代次数</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kernel = np.ones((<span class="number">3</span>, <span class="number">3</span>), dtype=np.uint8)</span><br><span class="line">dilate = cv2.dilate(img, kernel, <span class="number">2</span>) <span class="comment"># 更改迭代次数为2</span></span><br><span class="line">ss = np.hstack((img, dilate))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-ba19339b6368d200959f2929518c864a_1440w.jpg" alt="img"></p>
+<p><strong>分析：</strong> 更改迭代次数将为2，将对图片进行2次的膨胀操作</p>
+<h2 id="3、形态学处理——腐蚀操作"><a href="#3、形态学处理——腐蚀操作" class="headerlink" title="3、形态学处理——腐蚀操作"></a>3、形态学处理——腐蚀操作</h2><p>腐蚀操作和膨胀操作相反，也就是将毛刺消除，判断方法为：在卷积核大小中对图片进行卷积。取图像中（3 <em> 3）区域内的最小值。由于我们是二值图像，也就是取0（黑色）。 <strong>总结：</strong> 只要原图片3 </em> 3范围内有黑的，该像素点就是黑的。</p>
+<p><strong>程序实现：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kernel = np.ones((<span class="number">3</span>, <span class="number">3</span>), dtype=np.uint8)</span><br><span class="line">erosion = cv2.erode(img, kernel, iterations=<span class="number">1</span>)</span><br><span class="line">ss = np.hstack((img, erosion))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-1be5ef6d3ce04c2d15d70cd47c41913c_1440w.jpg" alt="img"></p>
+<p><strong>分析：</strong> 可以看出来，毛刺部分被清除掉，但与此同时，字体边缘部分也向里凹陷了一部分。</p>
+<h3 id="3-1、更改卷积核大小"><a href="#3-1、更改卷积核大小" class="headerlink" title="3.1、更改卷积核大小"></a>3.1、更改卷积核大小</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kernel_2 = np.ones((<span class="number">4</span>, <span class="number">4</span>), dtype=np.uint8)</span><br><span class="line">erosion = cv2.erode(img, kernel_2, iterations=<span class="number">1</span>)</span><br><span class="line">ss = np.hstack((img, erosion))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-31befc3f8eeaafdaac01e6d2a5057fa1_1440w.jpg" alt="img"></p>
+<p><strong>分析：</strong> 卷积核变大后，我们发现他已经腐蚀的部分有点多了，字体原来的部分也被清除。</p>
+<h3 id="3-2、更改迭代次数"><a href="#3-2、更改迭代次数" class="headerlink" title="3.2、更改迭代次数"></a>3.2、更改迭代次数</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kernel = np.ones((<span class="number">3</span>, <span class="number">3</span>), dtype=np.uint8)</span><br><span class="line">erosion = cv2.erode(img, kernel, iterations=<span class="number">2</span>)</span><br><span class="line">ss = np.hstack((img, erosion))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-25cd42fc1dd475828244718b776bf384_1440w.jpg" alt="img"></p>
+<p><strong>分析：</strong> 增加迭代次数后，腐蚀变得更加厉害，所以应该选择合适的迭代次数。</p>
+<h2 id="4、开运算和并运算"><a href="#4、开运算和并运算" class="headerlink" title="4、开运算和并运算"></a>4、开运算和并运算</h2><blockquote>
+<p>开运算：先腐蚀，在膨胀 闭运算：先膨胀，在腐蚀</p>
+</blockquote>
+<p>我们在上面的膨胀和腐蚀的图片中可以看到，图片大小程度上都受到了损失，字体信息缺失或者变粗等等。如果我们不想更改原有信息，即字体粗细。那么我们可以使用上面的两种运算。例如开运算，先对字体进行变细，在对字体进行变粗，整体上字体粗细不会发生变化。毛刺信息在腐蚀的时候就已经消除了，膨胀也不会膨胀出多余信息。</p>
+<h3 id="4-1、开运算"><a href="#4-1、开运算" class="headerlink" title="4.1、开运算"></a>4.1、开运算</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">opening = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel, <span class="number">1</span>)</span><br><span class="line">ss = np.hstack((img, opening))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-5dba8d78ff5de91c24f5a3bcf5d8bcd2_1440w.jpg" alt="img"></p>
+<p><strong>分析：</strong> 我们发现大部分毛刺已经消除，而且字体信息也没有发生变化，这也就是我们想要的效果。虽然仍然有一部信息没有被清除，我们只需要调整卷积核的大小就可以实现。</p>
+<h3 id="4-2、闭运算"><a href="#4-2、闭运算" class="headerlink" title="4.2、闭运算"></a>4.2、闭运算</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">closing = cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel)  <span class="comment">## 有缺陷，填补缺陷</span></span><br><span class="line">ss = np.hstack((img, closing))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-9731e001feabeb34f519fe37a134cc8f_1440w.jpg" alt="img"></p>
+<p><strong>分析：</strong> 字体不改变的前提下，我们把字体缺陷信息补全。</p>
+<h2 id="5、梯度计算"><a href="#5、梯度计算" class="headerlink" title="5、梯度计算"></a>5、<a href="https://zhida.zhihu.com/search?content_id=112648299&amp;content_type=Article&amp;match_order=1&amp;q=梯度计算&amp;zhida_source=entity">梯度计算</a></h2><p>梯度计算主要显示的是边缘信息。计算的方法：</p>
+<blockquote>
+<p>膨胀的图像 - 腐蚀的图像</p>
+</blockquote>
+<p>我们明显的看出，用大一圈的图像减去小一圈的图像正好就是边缘的信息。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gradient = cv2.morphologyEx(img, cv2.MORPH_GRADIENT, kernel)</span><br><span class="line">cv_show(gradient)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-cd3d9881414f19c0ae5555ddc28791b6_1440w.jpg" alt="img"></p>
+<p><strong>分析：</strong> 我们可以看出来，我们形成了一个空心的字体样式</p>
+<h2 id="6、高帽和黑帽"><a href="#6、高帽和黑帽" class="headerlink" title="6、高帽和黑帽"></a>6、高帽和黑帽</h2><blockquote>
+<p>高帽计算：原始图像 - 开运算结果 黑帽计算：闭运算结果 - 原始图像</p>
+</blockquote>
+<h3 id="6-1、高帽计算"><a href="#6-1、高帽计算" class="headerlink" title="6.1、高帽计算"></a>6.1、高帽计算</h3><p>我们知道开运算的结果就是去除毛刺，我们原始图像减去开运算结果就是我们要消除的毛刺信息。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">top_hat = cv2.morphologyEx(img, cv2.MORPH_TOPHAT, kernel)</span><br><span class="line">ss = np.hstack((img, top_hat))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-49f926bc181d7c73fa6bf96fc384b20a_1440w.jpg" alt="img"></p>
+<p><strong>分析：</strong> 可以看出来，所有的毛刺信息我们全部提取了出来。</p>
+<h3 id="6-2、黑帽操作"><a href="#6-2、黑帽操作" class="headerlink" title="6.2、黑帽操作"></a>6.2、黑帽操作</h3><p>高帽操作<strong>显示毛刺</strong>，那么黑帽就是<strong>显示缺陷</strong>。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">black_hat = cv2.morphologyEx(img, cv2.MORPH_BLACKHAT, kernel)</span><br><span class="line">ss = np.hstack((img, black_hat))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-98040e57b398cf5903ae52b77891bb74_1440w.jpg" alt="img"></p>
+<p><strong>分析：</strong> 这里我们看的不是很明显，我们只需要只要黑帽所处理的问题是什么。针对不同的场景应用不用的方法。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Week5</title>
+    <url>/2025/08/17/Week5/</url>
+    <content><![CDATA[<h1 id="图像处理方法"><a href="#图像处理方法" class="headerlink" title="图像处理方法"></a>图像处理方法</h1><h2 id="一、Sobel算子"><a href="#一、Sobel算子" class="headerlink" title="一、Sobel算子"></a>一、Sobel算子</h2><ul>
+<li><a href="膨胀与腐蚀.md">OpenCV 图像处理之膨胀与腐蚀</a></li>
+</ul>
+<h3 id="（一）什么是Sobel算子？"><a href="#（一）什么是Sobel算子？" class="headerlink" title="（一）什么是Sobel算子？"></a>（一）什么是Sobel算子？</h3><blockquote>
+<p>Sobel 算子是图像一种图像边缘</p>
+</blockquote>
+<ol>
+<li><p>图像<strong>边缘检测</strong>重要算子之一</p>
+</li>
+<li><p>与<strong>梯度</strong>密度密不可分 -&gt; 目的：图像边缘检测的方法，本质是==梯度运算==</p>
+</li>
+</ol>
+<h3 id="（二）什么情况下会产生梯度？"><a href="#（二）什么情况下会产生梯度？" class="headerlink" title="（二）什么情况下会产生梯度？"></a>（二）什么情况下会产生梯度？</h3><p>利用 3 * 3 的卷积核放在二值图像中有三种位置关系，如下</p>
+<p><img src="image-20250812210603222.png" alt="image-20250812210603222"></p>
 <ul>
-<li>简单图片的裁剪和展示</li>
+<li><p>全黑全白的像素值是相同的，只有在边缘部位时会有梯度产生。所有，梯度是进行边缘你检测的一个核心(边缘的梯度：255 - 0 = 255)</p>
+<p><img src="image-20250812210754025.png" alt="image-20250812210754025"></p>
+</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;</span><br><span class="line"># path:路径 0：代表灰度图 1：彩色图</span><br><span class="line">img = cv2.imread(path,0)</span><br><span class="line"># 本质：数组、矩阵</span><br><span class="line">img1 = img[:500, :500]</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<h3 id="（三）Sobel-算子原理"><a href="#（三）Sobel-算子原理" class="headerlink" title="（三）Sobel 算子原理"></a>（三）Sobel 算子原理</h3><ol>
+<li><p>遍历过程</p>
 <ul>
-<li>Numpy 黑白颜色图片的叠加，即拼接</li>
+<li>卷积核顺序放到原图上</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/black.jpg&quot;</span><br><span class="line">img1 = cv2.imread(path,0)</span><br><span class="line">print(img1.shape)</span><br><span class="line"></span><br><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/white.jpg&quot;</span><br><span class="line">img2 = cv2.imread(path,0)</span><br><span class="line">print(img2.shape)</span><br><span class="line"></span><br><span class="line">new_img1 = img1[:100,:300]</span><br><span class="line">new_img2 = img2[:100,:300]</span><br><span class="line"></span><br><span class="line"># 垂直拼接 列数相等</span><br><span class="line">new_img = np.vstack((new_img1, new_img2))</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># 水平拼接 行数相等</span><br><span class="line">new_img = np.hstack((new_img1, new_img2))</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<p><img src="image-20250812211458650.png" alt="image-20250812211458650"></p>
+<ul>
+<li><p>卷积核固定（中间列都是0）</p>
 </li>
-<li><p>图片的保存（<code>imwrite(path, target)</code>）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/black.jpg&quot;</span><br><span class="line">img1 = cv2.imread(path,0)</span><br><span class="line">print(img1.shape)</span><br><span class="line"></span><br><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/white.jpg&quot;</span><br><span class="line">img2 = cv2.imread(path,0)</span><br><span class="line">print(img2.shape)</span><br><span class="line"></span><br><span class="line">new_img1 = img1[:100,:300]</span><br><span class="line">new_img2 = img2[:100,:300]</span><br><span class="line"></span><br><span class="line">new_img = np.vstack((new_img1, new_img2))</span><br><span class="line"></span><br><span class="line"># png 类型所占的空间更大</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/new_img.jpg&quot;, new_img)</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/new_img.png&quot;, new_img)</span><br></pre></td></tr></table></figure>
+<li><p>卷积核中心位置在中间4x3区域内（对于边缘位置，卷积核暂时无法顾及到）</p>
 </li>
-<li><p>将numpy所生成的图片转换为cv所能识别的矩阵形式=&gt;将生成的数组转为图片</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像一定是三维的，黑白图片(h,w,1)，彩色(h,w,3)</span><br><span class="line">array1 = np.random.randint(0,255,(700,500,1), dtype=&#x27;uint8&#x27;) # 将numpy所生成的图片转换为cv所能识别的矩阵形式=&gt;将生成的数组转为图片</span><br><span class="line">print(type(array1))</span><br><span class="line">array2 = np.random.randint(0,255,(700,500,1))</span><br><span class="line">print(type(array2))</span><br><span class="line"></span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, array2)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<li><p>但是卷积核的核心无法顾及到原图像的边缘，如下</p>
+<p><img src="image-20250812211643071.png" alt="image-20250812211643071"></p>
+</li>
+<li><p>解决方法：</p>
+<ul>
+<li><p>法一：边缘列（行）取均值或均值</p>
+</li>
+<li><p>法二（官方给的理论可能性）：<strong>paddng</strong>（边缘加一行 ”补0” ）</p>
+<p><img src="image-20250812212018427.png" alt="image-20250812212018427"></p>
+<blockquote>
+<p>padding为0不改变原图像，此法可以顾及到每一个像素点</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>梯度计算</p>
+<ul>
+<li><p>利用3 <em> 3 的卷积核与原图上顺序遍历的3 </em> 3矩阵（9个像素点）进行梯度计算，得到卷积核中心的梯度（包括 x 方向和 y 方向）</p>
+</li>
+<li><p>Sobel 算子本质上就是一个<strong>权值</strong>矩阵分布：越近的像素权值越高，类似<a href="https://zhuanlan.zhihu.com/p/355263110">高斯滤波</a></p>
+</li>
+<li><p><strong>x 方向</strong>上的梯度</p>
+<ul>
+<li><p>计算结果相当于<code>右边的 * 对应权值 - 左边的 * 对应权值</code></p>
+<p><img src="image-20250813140734644.png" alt="image-20250813140734644"></p>
+</li>
+<li><p>梯度的本质</p>
+<p><img src="image-20250813140951912.png" alt="image-20250813140951912"></p>
+</li>
+<li><p>x 方向上梯度应该考虑的问题：</p>
+<ol>
+<li><p>目标像素点求得的值小于0或者大于255怎么办？</p>
+<p>Opencv默认的是<strong>截断</strong>的操作，即小于0按0算，大于255按255算</p>
+</li>
+<li><p>截断操作合适吗？</p>
+<p>不合适，效果与实际差很大（eg.-200-1 &lt; 0，结果取0）</p>
+</li>
+<li><p>应该如何操作？</p>
+<p>对于小于0的取绝对值，大于255的可按255算（最大的极差了）</p>
 </li>
 </ol>
-<h3 id="三、读取第一张彩色图片"><a href="#三、读取第一张彩色图片" class="headerlink" title="三、读取第一张彩色图片"></a>三、读取第一张彩色图片</h3>   <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line">import numpy as np</span><br></pre></td></tr></table></figure>
-<ol>
-<li><p>彩色图片的读取</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 彩色图片读取方式为1</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line"></span><br><span class="line"># 检查彩色图片是否array形式[&lt;class &#x27;numpy.ndarray&#x27;&gt;]</span><br><span class="line">print(type(img))</span><br><span class="line"></span><br><span class="line"># 注意需要传递图片名以及图片矩阵</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># 彩色图片的形状 [(1333, 750, 3)]</span><br><span class="line">print(img.shape)</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>研究三通道：[Opencv中以三个二维矩阵进行存储，即三维矩阵：[H-W*3] ]</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 创建一个二维数组</span><br><span class="line">print(np.array([[1,2]]).shape)</span><br><span class="line">print(np.array([[1,2],[1,2]]).shape)</span><br><span class="line"># 创建一个三维数组</span><br><span class="line">print(np.array([[[1,2],[1,2]]]).shape)</span><br><span class="line">print(np.array([ [[1,2],[1,2]],</span><br><span class="line">                [[1,2],[1,2]] ]).shape)</span><br><span class="line">print(np.array([ [[1,2],[1,2]],</span><br><span class="line">                [[1,2],[1,2]],</span><br><span class="line">                [[1,2],[1,2]] ]).shape)</span><br><span class="line"></span><br><span class="line">彩色图片 -&gt; 三张图片(RGB) Opencv 中以BGR形式存储</span><br><span class="line">尝试拆分一张彩色图片</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">img0 = img[:,:,0] #B</span><br><span class="line">cv2.imshow(&#x27;img0&#x27;, img0)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2_b.jpg&quot;,img0)</span><br><span class="line">img1 = img[:,:,1] #G</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2_g.jpg&quot;,img1)</span><br><span class="line">img2 = img[:,:,2] #R</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2_r.jpg&quot;,img2)</span><br><span class="line"></span><br><span class="line"># split() 拆分，类似以上效果</span><br><span class="line">b,g,r = cv2.split(img)</span><br><span class="line"></span><br><span class="line"># 合并拆分结果</span><br><span class="line"># img = cv2.merge([b,g,r]) 正常显示</span><br><span class="line"># img = cv2.merge([b,g]) 无法显示</span><br><span class="line">img = cv2.merge([r,g,b]) # 可进行图片的重生成</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</ul>
 </li>
-<li><p>剪裁</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">img0 = img[:,:,0] #B</span><br><span class="line">img1 = img[:,:,0] #B</span><br><span class="line">img2 = img[:,:,0] #B</span><br><span class="line">print(img.shape)</span><br><span class="line">new_img0 = img0[:100,:100]</span><br><span class="line">new_img1 = img1[:100,100:200]</span><br><span class="line">new_img2 = img2[:100,200:300]</span><br><span class="line">new_img = np.hstack((new_img0, new_img1, new_img2))</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<li><p><strong>y 方向</strong>上的梯度计算</p>
+<ul>
+<li><p>卷积核进行转置（3 * 3）</p>
 </li>
-<li><p>使用opencv转换图片的色彩空间</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 1. 色彩空间：[BGR]</span><br><span class="line"># (1) HSV：更类似于人类感觉颜色的方式。H：色相(Hue) S：饱和度(Saturation) V：亮度(Value)</span><br><span class="line"># (2) YUV：Y：亮度信号 U\V：两个色彩信号-&gt;色彩的饱和度</span><br><span class="line"># (3) Lab：由国际照明委员会建立。L：整张图的明亮度 a\b：负责颜色的多少</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># HSV</span><br><span class="line">hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)</span><br><span class="line">cv2.imshow(&#x27;hsv&#x27;, hsv)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># YUV</span><br><span class="line">yuv = cv2.cvtColor(img, cv2.COLOR_BGR2YUV)</span><br><span class="line">cv2.imshow(&#x27;yuv&#x27;, yuv)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># Lab</span><br><span class="line">lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)</span><br><span class="line">cv2.imshow(&#x27;lab&#x27;, lab)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"># 还有其他的色彩空间</span><br></pre></td></tr></table></figure>
+<li><p>计算结果相当于<code>下边的 * 对应权值 - 上边的 * 对应权值</code></p>
+<p><img src="image-20250813141954017.png" alt="image-20250813141954017"></p>
+</li>
+</ul>
+</li>
+<li><p>总梯度 及 简化梯度</p>
+<p><img src="image-20250813142101411.png" alt="image-20250813142101411"></p>
+</li>
+</ul>
 </li>
 </ol>
-<h3 id="四、统计一张图片的像素点个数"><a href="#四、统计一张图片的像素点个数" class="headerlink" title="四、统计一张图片的像素点个数"></a>四、统计一张图片的像素点个数</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import cv2</span><br></pre></td></tr></table></figure>
+<h2 id="二、x和y方向梯度计算及融合"><a href="#二、x和y方向梯度计算及融合" class="headerlink" title="二、x和y方向梯度计算及融合"></a>二、x和y方向梯度计算及融合</h2><h3 id="（一）sobel-函数"><a href="#（一）sobel-函数" class="headerlink" title="（一）sobel 函数"></a>（一）sobel 函数</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cv2.Sobel(src,depth,dx,du,ksize)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>src: 源图像</li>
+<li>depth: 图像的深度【-1表示与源图像深度一致[表示截断]】[0, 255]</li>
+<li>[cv2.CV_64F: 保留负数部分]</li>
+<li>dx\du: x 和 y 方向的梯度 </li>
+<li>ksize: 卷积核的大小【3, 5】</li>
+</ul>
+<h3 id="（二）depth-1"><a href="#（二）depth-1" class="headerlink" title="（二）depth = -1"></a>（二）depth = -1</h3><ul>
+<li><p>源码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sobelx = cv2.Sobel(img,-1,1,0,ksize=3)</span><br><span class="line">sobely = cv2.Sobel(img,-1,0,1,ksize=3)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.imshow(&#x27;sobelx&#x27;, sobelx)</span><br><span class="line">cv2.imshow(&#x27;sobely&#x27;, sobely)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果图（边界）</p>
+<p><img src="image-20250814171814827.png" alt="image-20250814171814827"></p>
+<p>sobelx 的结果为<code>右 - 左</code>，即255 - 0 = 255（左边边界部分为白色，但是右边边界为0 - 255 &lt; 0，根据深度设定为-1自动截断变为0，即黑色），同理，sobely为<code>下 - 上</code>，结果显示上半边界圆</p>
+</li>
+</ul>
+<h3 id="（三）depth-cv2-CV-64F"><a href="#（三）depth-cv2-CV-64F" class="headerlink" title="（三）depth = cv2.CV_64F"></a>（三）depth = cv2.CV_64F</h3><ul>
+<li><p>源码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sobelx = cv2.Sobel(img,cv2.CV_64F,1,0,ksize=3)</span><br><span class="line"># 将负数转化为整数【绝对值函数】</span><br><span class="line">sobelx = cv2.convertScaleAbs(sobelx)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.imshow(&#x27;sobelx&#x27;, sobelx)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果</p>
+<p><img src="%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-14%20173217.png" alt="屏幕截图 2025-08-14 173217"></p>
+</li>
+<li><p>注意：如果没有将负数转化为整数【绝对值函数】（即代码中没有<code>sobelx = cv2.convertScaleAbs(sobelx)</code>)，会造成以下<strong>后果</strong></p>
 <ol>
-<li>图片的读取</li>
+<li><p><strong>毛刺</strong>：错误的数值映射会导致某些边缘区域出现随机亮斑或暗斑（看起来像噪声）。</p>
+</li>
+<li><p><strong>边缘断裂</strong>：负梯度信息丢失，导致边缘不连续。</p>
+</li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 0)</span><br><span class="line"></span><br><span class="line">h,w = np.shape(img)</span><br><span class="line">hest = np.zeros([256], dtype=np.int32) # 创建256个全为0零的一维矩阵</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>表现</strong>如下：</p>
+<p><img src="image-20250814200003511.png" alt="image-20250814200003511"></p>
+</li>
+<li><p><strong>原因</strong></p>
 <ol>
-<li>遍历图片矩阵</li>
+<li><p>Sobel 计算的是图像的梯度（导数），结果可能是 <strong>正数或负数</strong>：</p>
+<ul>
+<li><p><strong>正梯度</strong>：像素从左到右由暗变亮（如 <code>[0, 0, 255]</code>）。</p>
+</li>
+<li><p><strong>负梯度</strong>：像素从左到右由亮变暗（如 <code>[255, 0, 0]</code>）。</p>
+</li>
+</ul>
+</li>
+<li><p>如果直接显示包含负数的 <code>sobelx</code>（<code>cv2.CV_64F</code> 类型），OpenCV 的 <code>imshow()</code> 会尝试将数据强制转换为 <code>uint8</code>（0-255），但负数会被错误处理：</p>
+<ul>
+<li><strong>负值被截断为 0 或溢出</strong>（例如 <code>-100</code> 可能变成 <code>156</code>），导致像素值异常。</li>
+</ul>
+</li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for row in range(h):</span><br><span class="line">    for col in range(w):</span><br><span class="line">        pv = img[row,col]</span><br><span class="line">        hest[pv] += 1</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="（四）梯度融合"><a href="#（四）梯度融合" class="headerlink" title="（四）梯度融合"></a>（四）梯度融合</h3><ul>
+<li><p>源码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sobelx = cv2.Sobel(img,cv2.CV_64F,1,0,ksize=3)</span><br><span class="line"># 将负数转化为整数【绝对值函数】</span><br><span class="line">sobelx = cv2.convertScaleAbs(sobelx)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.imshow(&#x27;sobelx&#x27;, sobelx)</span><br><span class="line"></span><br><span class="line"># 计算y方向的梯度</span><br><span class="line">sobely = cv2.Sobel(img,cv2.CV_64F,0,1,ksize=3)</span><br><span class="line"># 将负数转化为整数【绝对值函数】</span><br><span class="line">sobely = cv2.convertScaleAbs(sobely)</span><br><span class="line">cv2.imshow(&#x27;sobely&#x27;, sobely)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># addWeighted()</span><br><span class="line">new_img = cv2.addWeighted(sobelx,0.5,sobely,0.5,0)</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果</p>
+<blockquote>
+<p>最接近原图的边界</p>
+</blockquote>
+<p><img src="image-20250814201243648.png" alt="image-20250814201243648"></p>
+</li>
+</ul>
+<h2 id="三、Sobel使用建议及实例"><a href="#三、Sobel使用建议及实例" class="headerlink" title="三、Sobel使用建议及实例"></a>三、Sobel使用建议及实例</h2><h3 id="（一）建议"><a href="#（一）建议" class="headerlink" title="（一）建议"></a>（一）建议</h3><ul>
+<li><p>源码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/梯度运算/1.png&quot;, 0)</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cv2.Sobel(src,depth,dx,du,ksize)</span><br><span class="line">src: 源图像</span><br><span class="line">depth: 图像的深度【-1表示与源图像深度一致[表示截断]】[0, 255]</span><br><span class="line">[cv2.CV_64F: 保留负数部分]</span><br><span class="line">dx\du: x 和 y 方向的梯度 </span><br><span class="line">ksize: 卷积核的大小【3, 5】</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">sobelx = cv2.Sobel(img,-1,1,0,ksize=3)</span><br><span class="line">sobely = cv2.Sobel(img,-1,0,1,ksize=3)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.imshow(&#x27;sobelx&#x27;, sobelx)</span><br><span class="line">cv2.imshow(&#x27;sobely&#x27;, sobely)</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"># 计算x方向的梯度</span><br><span class="line">sobelx = cv2.Sobel(img,cv2.CV_64F,1,0,ksize=3)</span><br><span class="line"># 将负数转化为整数【绝对值函数】</span><br><span class="line">sobelx = cv2.convertScaleAbs(sobelx)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.imshow(&#x27;sobelx&#x27;, sobelx)</span><br><span class="line"></span><br><span class="line"># 计算y方向的梯度</span><br><span class="line">sobely = cv2.Sobel(img,cv2.CV_64F,0,1,ksize=3)</span><br><span class="line"># 将负数转化为整数【绝对值函数】</span><br><span class="line">sobely = cv2.convertScaleAbs(sobely)</span><br><span class="line">cv2.imshow(&#x27;sobely&#x27;, sobely)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># addWeighted()</span><br><span class="line">new_img = cv2.addWeighted(sobelx,0.5,sobely,0.5,0)</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">直接计算融合的x和y的梯度</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">sobelxy = cv2.Sobel(img, cv2.CV_64F,1,1,ksize=3)</span><br><span class="line">sobelxy = cv2.convertScaleAbs(sobelxy)</span><br><span class="line">cv2.imshow(&#x27;sobelxy&#x27;,sobelxy)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果（直接计算融合的x和y的梯度，但是效果不如分开计算后再融合）</p>
 <ol>
-<li>绘图的操作</li>
+<li><p><strong>没取</strong>绝对值</p>
+<p><img src="image-20250814201953431.png" alt="image-20250814201953431"></p>
+</li>
+<li><p><strong>取</strong>绝对值</p>
+<p><img src="image-20250814201906062.png" alt="image-20250814201906062"></p>
+</li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">plt.plot(hest, color=&#x27;r&#x27;)</span><br><span class="line">plt.xlim([0,256])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="image-20250727200339645.png" alt="image-20250727200339645"></p>
-<h3 id="五、彩色图片像素点的统计"><a href="#五、彩色图片像素点的统计" class="headerlink" title="五、彩色图片像素点的统计"></a>五、彩色图片像素点的统计</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import cv2</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="（二）实例——轮廓检测"><a href="#（二）实例——轮廓检测" class="headerlink" title="（二）实例——轮廓检测"></a>（二）实例——轮廓检测</h3><ul>
+<li><p>代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 0)</span><br><span class="line"></span><br><span class="line"># 计算x方向的梯度</span><br><span class="line">sobelx = cv2.Sobel(img,cv2.CV_64F,1,0,ksize=3)</span><br><span class="line">sobelx = cv2.convertScaleAbs(sobelx)</span><br><span class="line"># 计算y方向的梯度</span><br><span class="line">sobely = cv2.Sobel(img,cv2.CV_64F,0,1,ksize=3)</span><br><span class="line">sobely = cv2.convertScaleAbs(sobely)</span><br><span class="line"># addWeighted()</span><br><span class="line">new_img = cv2.addWeighted(sobelx,0.5,sobely,0.5,0)</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果</p>
+<p><img src="317cfa878911bf8442642b3300dcb13e.png" alt="317cfa878911bf8442642b3300dcb13e"></p>
+</li>
+</ul>
+<h2 id="四、拉普拉斯算子（Laplacian算子）"><a href="#四、拉普拉斯算子（Laplacian算子）" class="headerlink" title="四、拉普拉斯算子（Laplacian算子）"></a>四、拉普拉斯算子（Laplacian算子）</h2><h3 id="（一）拉普拉斯算子原理"><a href="#（一）拉普拉斯算子原理" class="headerlink" title="（一）拉普拉斯算子原理"></a>（一）拉普拉斯算子原理</h3><ul>
+<li><p>是轮廓检测，也是梯度运算的算子之一</p>
+</li>
+<li><p>是 Sobel 算子的<strong>二阶导</strong>，卷积核和Sobel 算子不一样</p>
+</li>
+<li><p>能够检测 Sobel 算子无法检测到的非常细节的轮廓</p>
+</li>
+<li><p>但是同样能够检测噪声，即对噪声比较敏感，所以一般不会单独使用Laplacian算子</p>
+</li>
+<li><p>直接计算P5点（核心点）的梯度，没必要再计算x方向和y方向的梯度再进行融合</p>
+<p><img src="image-20250815155924679.png" alt="image-20250815155924679"></p>
+</li>
+</ul>
+<h3 id="（二）代码演示"><a href="#（二）代码演示" class="headerlink" title="（二）代码演示"></a>（二）代码演示</h3><ul>
+<li><p>源码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">拉普拉斯算子:</span><br><span class="line">问题: 对噪音比较敏感, 一般不单独使用</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line"># img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/梯度运算/1.png&quot;, 0)</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 0)</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cv2.Laplacian(src,depth):</span><br><span class="line">src: 源图像</span><br><span class="line">depth:图像深度【-1表示与源图像深度一致】</span><br><span class="line">cv2.CV_64F: 表示保留负值部分</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">new_img = cv2.Laplacian(img,cv2.CV_64F)</span><br><span class="line">new_img = cv2.convertScaleAbs(new_img)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果</p>
+<p><img src="image-20250815161126620.png" alt="image-20250815161126620"></p>
+<p><img src="image-20250815161454855.png" alt="image-20250815161454855"></p>
+<ul>
+<li>像素点对于噪音非常敏感，故而得到的结果整体上来看缺失很多</li>
+</ul>
+</li>
+</ul>
+<h2 id="五、算子总结"><a href="#五、算子总结" class="headerlink" title="五、算子总结"></a>五、算子总结</h2><ul>
+<li><p>Sobel 算子和 Scharr 算子需要算分别 x 和 y ，它们的本质差别在于中心像素点附近的权值不一样，导致Scarr算子能够得到细微的轮廓</p>
+</li>
+<li><p>拉普拉斯算子不需要算 x 和 y 因为太精细了，甚至于会将噪声当作轮廓提前，所以一般不使用它</p>
+</li>
+<li><p>三个算子的本质区别就是卷积核不一样</p>
+<p><img src="image-20250815162626923-1755246387930-2.png" alt="image-20250815162626923"></p>
+</li>
+</ul>
+<h2 id="六、Canny边缘检测原理"><a href="#六、Canny边缘检测原理" class="headerlink" title="六、Canny边缘检测原理"></a>六、Canny边缘检测原理</h2><h3 id="（一）边缘检测步骤"><a href="#（一）边缘检测步骤" class="headerlink" title="（一）边缘检测步骤"></a>（一）边缘检测步骤</h3><ol>
+<li><p>应用<strong>高斯滤波器</strong>，以平滑图像，滤除噪声。【降噪】</p>
+<p><img src="image-20250816200502523.png" alt="image-20250816200502523"></p>
+</li>
+<li><p>计算图像中每个像素点的<strong>梯度</strong>大小（各种算子）和方向。【梯度】</p>
+<p><img src="image-20250816200605157.png" alt="image-20250816200605157"></p>
+<p><img src="image-20250816200743108.png" alt="image-20250816200743108"></p>
+</li>
+<li><p>使用非极大值抑制，消除和边缘检测带来的不利影响（滤除干扰）。【非极大值检测】</p>
+<p><img src="image-20250816201545678.png" alt="image-20250816201545678"></p>
+</li>
+<li><p>应用双阈值检测确定真实和潜在的边缘（消除假边缘）。【双阈值检测】</p>
+<p><img src="image-20250816201907951.png" alt="image-20250816201907951"></p>
+</li>
+<li><p>通过抑制孤立的弱边缘（假边缘）完成边缘检测。【完成检测】</p>
+<p><img src="image-20250816201959960.png" alt="image-20250816201959960"></p>
+</li>
+</ol>
+<h3 id="（二）完成Canny边缘检测"><a href="#（二）完成Canny边缘检测" class="headerlink" title="（二）完成Canny边缘检测"></a>（二）完成Canny边缘检测</h3><ul>
+<li><p>代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&#x27;/home/jiax/workspace/Python Learning/Opencv-course/gray.jpg&#x27;, 0)</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cv.Canny(src,min,max) 双阈值检测</span><br><span class="line">src: 源图像</span><br><span class="line">min: 最小阈值</span><br><span class="line">max: 最大阈值</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">new_img = cv2.Canny(img,100,200)</span><br><span class="line">new_img1 = cv2.Canny(img,80,200)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line">cv2.imshow(&#x27;new_img1&#x27;, new_img1)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果</p>
+<p><img src="image-20250816195146823.png" alt="image-20250816195146823"></p>
+</li>
+<li><p>关键在于阈值的确定，可以根据阈值的确定来指定需要的边界</p>
+</li>
+</ul>
+<h2 id="七、图像金字塔原理解析"><a href="#七、图像金字塔原理解析" class="headerlink" title="七、图像金字塔原理解析"></a>七、图像金字塔原理解析</h2><h3 id="（一）什么是图像金字塔"><a href="#（一）什么是图像金字塔" class="headerlink" title="（一）什么是图像金字塔"></a>（一）什么是图像金字塔</h3><p><img src="image-20250816203016996.png" alt="image-20250816203016996"></p>
+<ul>
+<li>level0：原始图片</li>
+</ul>
+<h3 id="（二）图像金字塔的目的"><a href="#（二）图像金字塔的目的" class="headerlink" title="（二）图像金字塔的目的"></a>（二）图像金字塔的目的</h3><p><img src="image-20250816203110845.png" alt="image-20250816203110845"></p>
+<h3 id="（三）高斯金字塔"><a href="#（三）高斯金字塔" class="headerlink" title="（三）高斯金字塔"></a>（三）高斯金字塔</h3><ul>
+<li><p>沿着箭头方向图像做如下操作，依次得到每层图像</p>
+</li>
+<li><p>向下采样（必然有信息的丢失）</p>
+<p><img src="image-20250816204829487.png" alt="image-20250816204829487"></p>
+<p><img src="image-20250816205438313.png" alt="image-20250816205438313"></p>
+</li>
+<li><p>向上采样</p>
+<p><img src="image-20250816205303298.png" alt="image-20250816205303298"></p>
+<p><img src="image-20250816205455408.png" alt="image-20250816205455408"></p>
+</li>
+</ul>
+<h2 id="八、拉普拉斯金字塔"><a href="#八、拉普拉斯金字塔" class="headerlink" title="八、拉普拉斯金字塔"></a>八、拉普拉斯金字塔</h2><ul>
+<li><p>由高斯金字塔变换得到的</p>
+</li>
+<li><p>图像先缩小，再放大，再相减，循环操作一次得到各个层图像</p>
+<p><img src="image-20250816210330080.png" alt="image-20250816210330080"></p>
+</li>
+</ul>
+<h2 id="九、图像轮廓检测"><a href="#九、图像轮廓检测" class="headerlink" title="九、图像轮廓检测"></a>九、图像轮廓检测</h2><h3 id="（一）边缘和轮廓辨析"><a href="#（一）边缘和轮廓辨析" class="headerlink" title="（一）边缘和轮廓辨析"></a>（一）边缘和轮廓辨析</h3><ol>
+<li>边缘检测能够检测出边缘，但是<strong>边缘是不连续</strong>的。</li>
+<li>将边缘连接成一个整体，构成轮廓。</li>
+</ol>
+<h3 id="（二）图像轮廓检测中注意的问题"><a href="#（二）图像轮廓检测中注意的问题" class="headerlink" title="（二）图像轮廓检测中注意的问题"></a>（二）图像轮廓检测中注意的问题</h3><ol>
+<li><p>对象是<strong>二值图像</strong>，所以需要进行<strong>阈值分割</strong>。</p>
+</li>
+<li><p>在Opencv中，<strong>背景必须是黑色的</strong>，对象必须是白色的。</p>
+<p>因为自动从黑色背景中找白色的轮廓。</p>
+</li>
+</ol>
+<h3 id="（三）查找图像轮廓函数"><a href="#（三）查找图像轮廓函数" class="headerlink" title="（三）查找图像轮廓函数"></a>（三）查找图像轮廓函数</h3><ol>
+<li><p>函数主体</p>
+<p><img src="image-20250817210830663.png" alt="image-20250817210830663"></p>
+<p><img src="image-20250817211655029.png" alt="image-20250817211655029"></p>
+</li>
+<li><p>函数返回值（三个）</p>
+<p><img src="image-20250817211953894.png" alt="image-20250817211953894"></p>
+</li>
+</ol>
+<h3 id="（四）轮廓绘制函数"><a href="#（四）轮廓绘制函数" class="headerlink" title="（四）轮廓绘制函数"></a>（四）轮廓绘制函数</h3><p><img src="image-20250817211942081.png" alt="image-20250817211942081"></p>
+<h2 id="十、使用Python完成轮廓检测"><a href="#十、使用Python完成轮廓检测" class="headerlink" title="十、使用Python完成轮廓检测"></a>十、使用Python完成轮廓检测</h2><ul>
+<li><p>代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line"></span><br><span class="line"># 读取彩色图片</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/梯度运算/color.png&quot;,1)</span><br><span class="line"># 将彩色图片转化为灰度图</span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line"># 将灰度图转化为二值图</span><br><span class="line">ret,binary = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)</span><br><span class="line"></span><br><span class="line"># 寻找图像的轮廓</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">由于opencv版本的原因:</span><br><span class="line">2 -&gt; cv2.findContours 两个返回值(contours,hie)</span><br><span class="line">3 -&gt; cv2.findContours 三个返回值(img,contours,hie)</span><br><span class="line">4 -&gt; cv2.findContours 两个返回值(contours,hie)</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">contours,hie = \</span><br><span class="line">cv2.findContours(binary,cv2.RETR_TREE,cv2.CHAIN_APPROX_NONE)</span><br><span class="line"></span><br><span class="line"># 对原始图像进行复制</span><br><span class="line">draw_img = img.copy()</span><br><span class="line"># 绘制轮廓</span><br><span class="line">new_img = cv2.drawContours(draw_img, contours, -1, (0,0,255), 2)</span><br><span class="line"></span><br><span class="line">cv2.imshow(&quot;img&quot;, img)</span><br><span class="line">cv2.imshow(&quot;new_img&quot;, new_img)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果</p>
+<p><img src="image-20250817221548172.png" alt="image-20250817221548172"></p>
+</li>
+<li><p>注意点：</p>
 <ol>
-<li>图片的读取</li>
+<li><p>为什么要将彩色图片先转化成灰度图，如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 读取彩色图片</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/梯度运算/color.png&quot;,1)</span><br><span class="line"># 将彩色图片转化为灰度图</span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line"># 将灰度图转化为二值图</span><br><span class="line">ret,binary = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)</span><br></pre></td></tr></table></figure>
+<p>答：在二维的灰度图（new_img 是 灰度图 img 的副本）上绘制BGR三通道的彩色轮廓是不可能的。如果是灰度图的话需要用彩色图片的读取方式（1）读取，然后依次转化</p>
+</li>
+<li><p>由于opencv版本的原因:</p>
+<p><code>2</code> -&gt; <code>cv2.findContours</code> 两个返回值(contours,hie)</p>
+<p><code>3</code> -&gt;<code>cv2.findContours</code> 三个返回值(img,contours,hie)</p>
+<p><code>4</code>-&gt; <code>cv2.findContours</code> 两个返回值(contours,hie)</p>
+</li>
+<li><p>为什么要对 img 进行复制</p>
+<p><code>new_img = cv2.drawContours(draw_img, contours, -1, (0,0,255), 2)</code>会对传入的 <code>src</code> 同时进行修改，改变原始图像，而此刻的img需要呈现出来与结果对比，不可改变</p>
+</li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br></pre></td></tr></table></figure>
-<ol>
-<li>分离颜色通道</li>
+</li>
+</ul>
+<h2 id="十一、图像均衡化原理"><a href="#十一、图像均衡化原理" class="headerlink" title="十一、图像均衡化原理"></a>十一、图像均衡化原理</h2><h3 id="（一）直方图"><a href="#（一）直方图" class="headerlink" title="（一）直方图"></a>（一）直方图</h3><ol>
+<li><p>直方图做了什么事情 ？</p>
+<p>直方图进行了像素点个数的统计</p>
+</li>
+<li><p>绘制直方图的目的是什么？</p>
+<p><strong>图像的均衡化处理</strong></p>
+<p><img src="image-20250822113352136.png" alt="image-20250822113352136"></p>
+</li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">b,g,r = cv2.split(img)</span><br></pre></td></tr></table></figure>
-<ol>
-<li>行列遍历</li>
+<h3 id="（二）什么是均衡化？"><a href="#（二）什么是均衡化？" class="headerlink" title="（二）什么是均衡化？"></a>（二）什么是均衡化？</h3><ul>
+<li>将尖瘦的直方图平均一些，变为宽胖的直方图</li>
+<li><strong>本质</strong>：平衡图像矩阵内的元素</li>
+</ul>
+<h3 id="（三）如何均衡化？"><a href="#（三）如何均衡化？" class="headerlink" title="（三）如何均衡化？"></a>（三）如何均衡化？</h3><ol>
+<li>统计灰度图原始像素点各灰度值个数并分别计算比例</li>
+<li>根据<strong>累计</strong>比例（从前往后加）调整灰度值（累计比例 * 255 并取整）</li>
+<li>最后将处理后的灰度值回填到相应像素点</li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">h, w = np.shape(b)</span><br></pre></td></tr></table></figure>
-<ol>
-<li>建立空白数组</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hest = np.zeros([256],dtype=np.int32)</span><br></pre></td></tr></table></figure>
-<ol>
-<li>遍历图片</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for i in [b,g,r]:</span><br><span class="line">    for row in range(h):</span><br><span class="line">        for col in range(w):</span><br><span class="line">            pv = i[row,col]</span><br><span class="line">            hest[pv] += 1</span><br><span class="line"></span><br><span class="line">plt.plot(hest, color=&#x27;r&#x27;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="image-20250727200527018.png" alt="image-20250727200527018"></p>
+<p><img src="image-20250822114143384.png" alt="image-20250822114143384"></p>
 ]]></content>
       <categories>
         <category>504医学AI</category>
