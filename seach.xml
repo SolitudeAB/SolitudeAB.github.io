@@ -573,8 +573,8 @@
       </tags>
   </entry>
   <entry>
-    <title></title>
-    <url>/2025/08/22/%E8%86%A8%E8%83%80%E4%B8%8E%E8%85%90%E8%9A%80/</url>
+    <title>OpenCV 图像处理之膨胀与腐蚀</title>
+    <url>/2025/08/17/%E8%86%A8%E8%83%80%E4%B8%8E%E8%85%90%E8%9A%80/</url>
     <content><![CDATA[<h1 id="OpenCV-图像处理之膨胀与腐蚀"><a href="#OpenCV-图像处理之膨胀与腐蚀" class="headerlink" title="OpenCV 图像处理之膨胀与腐蚀"></a>OpenCV 图像处理之膨胀与腐蚀</h1><blockquote>
 <p>参考文献：<a href="https://zhuanlan.zhihu.com/p/110330329#:~:text=膨胀与腐蚀属于形态学范围，具体的含义根据字面意思来理解即可。但是更形象的话就是“增肥”与“减肥”。">OpenCV 图像处理之膨胀与腐蚀 - 知乎</a></p>
 </blockquote>
@@ -639,6 +639,12 @@
 <p><img src="v2-98040e57b398cf5903ae52b77891bb74_1440w.jpg" alt="img"></p>
 <p><strong>分析：</strong> 这里我们看的不是很明显，我们只需要只要黑帽所处理的问题是什么。针对不同的场景应用不用的方法。</p>
 ]]></content>
+      <categories>
+        <category>504医学AI</category>
+      </categories>
+      <tags>
+        <tag>504医学AI入门</tag>
+      </tags>
   </entry>
   <entry>
     <title>Week5</title>
