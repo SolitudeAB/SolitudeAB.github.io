@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
+    <title>卷积神经网络（CNN）</title>
     <url>/2025/08/24/CNN/</url>
     <content><![CDATA[<h1 id="卷积神经网络（CNN）的原理"><a href="#卷积神经网络（CNN）的原理" class="headerlink" title="卷积神经网络（CNN）的原理"></a>卷积神经网络（CNN）的原理</h1><h2 id="引言："><a href="#引言：" class="headerlink" title="引言："></a>引言：</h2><blockquote>
 <p>可查看前篇文章——神经网络：构建人工智能的基石</p>
@@ -74,108 +74,6 @@
 
 <h2 id="五、图片经过卷积后的样子"><a href="#五、图片经过卷积后的样子" class="headerlink" title="五、图片经过卷积后的样子"></a>五、图片经过卷积后的样子</h2><p>与人眼观看事物原理相似，卷积神经网络可以看到事物的轮廓</p>
 <p><img src="34501738b7bedc58964269aef8305ee3.png" alt="img"></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Week2</title>
-    <url>/2025/07/27/Week2/</url>
-    <content><![CDATA[<h1 id="Opencv"><a href="#Opencv" class="headerlink" title="Opencv"></a>Opencv</h1><h3 id="一、常见的图片格式及图片类型"><a href="#一、常见的图片格式及图片类型" class="headerlink" title="一、常见的图片格式及图片类型"></a>一、常见的图片格式及图片类型</h3><ul>
-<li><p>图片格式</p>
-<ol>
-<li><p>bmp：比较老的格式|不常见|无损-&gt;基本上无压缩|体积大|被淘汰</p>
-</li>
-<li><p>jpg（jpeg）：用<strong>最少的磁盘空间</strong>得到<strong>较好的图片质量</strong></p>
-</li>
-<li><p>png：无损压缩的位图片形格式（首选）</p>
-</li>
-</ol>
-</li>
-<li><p>图片类型：[ 黑白 ]  [ 彩色 ]</p>
-</li>
-</ul>
-<p>​    【gif(动图) -&gt; 一帧一帧拿出来】</p>
-<ul>
-<li>图片的本质：由像素点组成的一个矩阵，每个元素（像素点）都是在 [0,255] 之间</li>
-</ul>
-<h3 id="二、读取第一张黑白图片"><a href="#二、读取第一张黑白图片" class="headerlink" title="二、读取第一张黑白图片"></a>二、读取第一张黑白图片</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line">import numpy as np</span><br></pre></td></tr></table></figure>
-<ol>
-<li><p>读取和展示</p>
-<ul>
-<li>path：路径 0：代表灰度图 1：彩色图</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;./R-C.jpg&quot;</span><br><span class="line">img = cv2.imread(path,0)</span><br><span class="line">print(type(img))</span><br><span class="line">print(img.shape)</span><br><span class="line">print(img)</span><br><span class="line">cv2.imshow(&#x27;image&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<ul>
-<li>需要注意的是这里的<code>cv2.imshow(&#39;image&#39;, img)</code>因为我这次编写代码是在实验的服务器上运行的，远程连接ssh服务器需要额外使用X - Service（这个玩意浪费了我四天的时间，不过解决了这个问题后面的学习就流畅多了） ——附教程</li>
-</ul>
-</li>
-<li><p>图片的裁剪</p>
-<ul>
-<li>简单图片的裁剪和展示</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;</span><br><span class="line"># path:路径 0：代表灰度图 1：彩色图</span><br><span class="line">img = cv2.imread(path,0)</span><br><span class="line"># 本质：数组、矩阵</span><br><span class="line">img1 = img[:500, :500]</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Numpy 黑白颜色图片的叠加，即拼接</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/black.jpg&quot;</span><br><span class="line">img1 = cv2.imread(path,0)</span><br><span class="line">print(img1.shape)</span><br><span class="line"></span><br><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/white.jpg&quot;</span><br><span class="line">img2 = cv2.imread(path,0)</span><br><span class="line">print(img2.shape)</span><br><span class="line"></span><br><span class="line">new_img1 = img1[:100,:300]</span><br><span class="line">new_img2 = img2[:100,:300]</span><br><span class="line"></span><br><span class="line"># 垂直拼接 列数相等</span><br><span class="line">new_img = np.vstack((new_img1, new_img2))</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># 水平拼接 行数相等</span><br><span class="line">new_img = np.hstack((new_img1, new_img2))</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>图片的保存（<code>imwrite(path, target)</code>）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/black.jpg&quot;</span><br><span class="line">img1 = cv2.imread(path,0)</span><br><span class="line">print(img1.shape)</span><br><span class="line"></span><br><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/white.jpg&quot;</span><br><span class="line">img2 = cv2.imread(path,0)</span><br><span class="line">print(img2.shape)</span><br><span class="line"></span><br><span class="line">new_img1 = img1[:100,:300]</span><br><span class="line">new_img2 = img2[:100,:300]</span><br><span class="line"></span><br><span class="line">new_img = np.vstack((new_img1, new_img2))</span><br><span class="line"></span><br><span class="line"># png 类型所占的空间更大</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/new_img.jpg&quot;, new_img)</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/new_img.png&quot;, new_img)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将numpy所生成的图片转换为cv所能识别的矩阵形式=&gt;将生成的数组转为图片</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像一定是三维的，黑白图片(h,w,1)，彩色(h,w,3)</span><br><span class="line">array1 = np.random.randint(0,255,(700,500,1), dtype=&#x27;uint8&#x27;) # 将numpy所生成的图片转换为cv所能识别的矩阵形式=&gt;将生成的数组转为图片</span><br><span class="line">print(type(array1))</span><br><span class="line">array2 = np.random.randint(0,255,(700,500,1))</span><br><span class="line">print(type(array2))</span><br><span class="line"></span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, array2)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="三、读取第一张彩色图片"><a href="#三、读取第一张彩色图片" class="headerlink" title="三、读取第一张彩色图片"></a>三、读取第一张彩色图片</h3>   <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line">import numpy as np</span><br></pre></td></tr></table></figure>
-<ol>
-<li><p>彩色图片的读取</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 彩色图片读取方式为1</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line"></span><br><span class="line"># 检查彩色图片是否array形式[&lt;class &#x27;numpy.ndarray&#x27;&gt;]</span><br><span class="line">print(type(img))</span><br><span class="line"></span><br><span class="line"># 注意需要传递图片名以及图片矩阵</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># 彩色图片的形状 [(1333, 750, 3)]</span><br><span class="line">print(img.shape)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>研究三通道：[Opencv中以三个二维矩阵进行存储，即三维矩阵：[H-W*3] ]</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 创建一个二维数组</span><br><span class="line">print(np.array([[1,2]]).shape)</span><br><span class="line">print(np.array([[1,2],[1,2]]).shape)</span><br><span class="line"># 创建一个三维数组</span><br><span class="line">print(np.array([[[1,2],[1,2]]]).shape)</span><br><span class="line">print(np.array([ [[1,2],[1,2]],</span><br><span class="line">                [[1,2],[1,2]] ]).shape)</span><br><span class="line">print(np.array([ [[1,2],[1,2]],</span><br><span class="line">                [[1,2],[1,2]],</span><br><span class="line">                [[1,2],[1,2]] ]).shape)</span><br><span class="line"></span><br><span class="line">彩色图片 -&gt; 三张图片(RGB) Opencv 中以BGR形式存储</span><br><span class="line">尝试拆分一张彩色图片</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">img0 = img[:,:,0] #B</span><br><span class="line">cv2.imshow(&#x27;img0&#x27;, img0)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2_b.jpg&quot;,img0)</span><br><span class="line">img1 = img[:,:,1] #G</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2_g.jpg&quot;,img1)</span><br><span class="line">img2 = img[:,:,2] #R</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2_r.jpg&quot;,img2)</span><br><span class="line"></span><br><span class="line"># split() 拆分，类似以上效果</span><br><span class="line">b,g,r = cv2.split(img)</span><br><span class="line"></span><br><span class="line"># 合并拆分结果</span><br><span class="line"># img = cv2.merge([b,g,r]) 正常显示</span><br><span class="line"># img = cv2.merge([b,g]) 无法显示</span><br><span class="line">img = cv2.merge([r,g,b]) # 可进行图片的重生成</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>剪裁</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">img0 = img[:,:,0] #B</span><br><span class="line">img1 = img[:,:,0] #B</span><br><span class="line">img2 = img[:,:,0] #B</span><br><span class="line">print(img.shape)</span><br><span class="line">new_img0 = img0[:100,:100]</span><br><span class="line">new_img1 = img1[:100,100:200]</span><br><span class="line">new_img2 = img2[:100,200:300]</span><br><span class="line">new_img = np.hstack((new_img0, new_img1, new_img2))</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用opencv转换图片的色彩空间</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 1. 色彩空间：[BGR]</span><br><span class="line"># (1) HSV：更类似于人类感觉颜色的方式。H：色相(Hue) S：饱和度(Saturation) V：亮度(Value)</span><br><span class="line"># (2) YUV：Y：亮度信号 U\V：两个色彩信号-&gt;色彩的饱和度</span><br><span class="line"># (3) Lab：由国际照明委员会建立。L：整张图的明亮度 a\b：负责颜色的多少</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># HSV</span><br><span class="line">hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)</span><br><span class="line">cv2.imshow(&#x27;hsv&#x27;, hsv)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># YUV</span><br><span class="line">yuv = cv2.cvtColor(img, cv2.COLOR_BGR2YUV)</span><br><span class="line">cv2.imshow(&#x27;yuv&#x27;, yuv)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># Lab</span><br><span class="line">lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)</span><br><span class="line">cv2.imshow(&#x27;lab&#x27;, lab)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"># 还有其他的色彩空间</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="四、统计一张图片的像素点个数"><a href="#四、统计一张图片的像素点个数" class="headerlink" title="四、统计一张图片的像素点个数"></a>四、统计一张图片的像素点个数</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import cv2</span><br></pre></td></tr></table></figure>
-<ol>
-<li>图片的读取</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 0)</span><br><span class="line"></span><br><span class="line">h,w = np.shape(img)</span><br><span class="line">hest = np.zeros([256], dtype=np.int32) # 创建256个全为0零的一维矩阵</span><br></pre></td></tr></table></figure>
-<ol>
-<li>遍历图片矩阵</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for row in range(h):</span><br><span class="line">    for col in range(w):</span><br><span class="line">        pv = img[row,col]</span><br><span class="line">        hest[pv] += 1</span><br></pre></td></tr></table></figure>
-<ol>
-<li>绘图的操作</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">plt.plot(hest, color=&#x27;r&#x27;)</span><br><span class="line">plt.xlim([0,256])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="image-20250727200339645.png" alt="image-20250727200339645"></p>
-<h3 id="五、彩色图片像素点的统计"><a href="#五、彩色图片像素点的统计" class="headerlink" title="五、彩色图片像素点的统计"></a>五、彩色图片像素点的统计</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import cv2</span><br></pre></td></tr></table></figure>
-<ol>
-<li>图片的读取</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br></pre></td></tr></table></figure>
-<ol>
-<li>分离颜色通道</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">b,g,r = cv2.split(img)</span><br></pre></td></tr></table></figure>
-<ol>
-<li>行列遍历</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">h, w = np.shape(b)</span><br></pre></td></tr></table></figure>
-<ol>
-<li>建立空白数组</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hest = np.zeros([256],dtype=np.int32)</span><br></pre></td></tr></table></figure>
-<ol>
-<li>遍历图片</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for i in [b,g,r]:</span><br><span class="line">    for row in range(h):</span><br><span class="line">        for col in range(w):</span><br><span class="line">            pv = i[row,col]</span><br><span class="line">            hest[pv] += 1</span><br><span class="line"></span><br><span class="line">plt.plot(hest, color=&#x27;r&#x27;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="image-20250727200527018.png" alt="image-20250727200527018"></p>
 ]]></content>
       <categories>
         <category>504医学AI</category>
@@ -395,6 +293,114 @@
 <li>为解决。目前知道的原因是实验室Linux服务器上无图形界面，运行cv2.imshow需要图形显示(GUI)的程序无法正常进程。现解决方向：配置X11转发，但一直卡在服务器无法ping通本地，无法转发到本地ip：0.0</li>
 </ol>
 </blockquote>
+]]></content>
+      <categories>
+        <category>504医学AI</category>
+      </categories>
+      <tags>
+        <tag>504医学AI入门</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Week2</title>
+    <url>/2025/07/27/Week2/</url>
+    <content><![CDATA[<h1 id="Opencv"><a href="#Opencv" class="headerlink" title="Opencv"></a>Opencv</h1><h3 id="一、常见的图片格式及图片类型"><a href="#一、常见的图片格式及图片类型" class="headerlink" title="一、常见的图片格式及图片类型"></a>一、常见的图片格式及图片类型</h3><ul>
+<li><p>图片格式</p>
+<ol>
+<li><p>bmp：比较老的格式|不常见|无损-&gt;基本上无压缩|体积大|被淘汰</p>
+</li>
+<li><p>jpg（jpeg）：用<strong>最少的磁盘空间</strong>得到<strong>较好的图片质量</strong></p>
+</li>
+<li><p>png：无损压缩的位图片形格式（首选）</p>
+</li>
+</ol>
+</li>
+<li><p>图片类型：[ 黑白 ]  [ 彩色 ]</p>
+</li>
+</ul>
+<p>​    【gif(动图) -&gt; 一帧一帧拿出来】</p>
+<ul>
+<li>图片的本质：由像素点组成的一个矩阵，每个元素（像素点）都是在 [0,255] 之间</li>
+</ul>
+<h3 id="二、读取第一张黑白图片"><a href="#二、读取第一张黑白图片" class="headerlink" title="二、读取第一张黑白图片"></a>二、读取第一张黑白图片</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line">import numpy as np</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>读取和展示</p>
+<ul>
+<li>path：路径 0：代表灰度图 1：彩色图</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;./R-C.jpg&quot;</span><br><span class="line">img = cv2.imread(path,0)</span><br><span class="line">print(type(img))</span><br><span class="line">print(img.shape)</span><br><span class="line">print(img)</span><br><span class="line">cv2.imshow(&#x27;image&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>需要注意的是这里的<code>cv2.imshow(&#39;image&#39;, img)</code>因为我这次编写代码是在实验的服务器上运行的，远程连接ssh服务器需要额外使用X - Service（这个玩意浪费了我四天的时间，不过解决了这个问题后面的学习就流畅多了） ——附教程</li>
+</ul>
+</li>
+<li><p>图片的裁剪</p>
+<ul>
+<li>简单图片的裁剪和展示</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;</span><br><span class="line"># path:路径 0：代表灰度图 1：彩色图</span><br><span class="line">img = cv2.imread(path,0)</span><br><span class="line"># 本质：数组、矩阵</span><br><span class="line">img1 = img[:500, :500]</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Numpy 黑白颜色图片的叠加，即拼接</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/black.jpg&quot;</span><br><span class="line">img1 = cv2.imread(path,0)</span><br><span class="line">print(img1.shape)</span><br><span class="line"></span><br><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/white.jpg&quot;</span><br><span class="line">img2 = cv2.imread(path,0)</span><br><span class="line">print(img2.shape)</span><br><span class="line"></span><br><span class="line">new_img1 = img1[:100,:300]</span><br><span class="line">new_img2 = img2[:100,:300]</span><br><span class="line"></span><br><span class="line"># 垂直拼接 列数相等</span><br><span class="line">new_img = np.vstack((new_img1, new_img2))</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># 水平拼接 行数相等</span><br><span class="line">new_img = np.hstack((new_img1, new_img2))</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>图片的保存（<code>imwrite(path, target)</code>）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/black.jpg&quot;</span><br><span class="line">img1 = cv2.imread(path,0)</span><br><span class="line">print(img1.shape)</span><br><span class="line"></span><br><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/white.jpg&quot;</span><br><span class="line">img2 = cv2.imread(path,0)</span><br><span class="line">print(img2.shape)</span><br><span class="line"></span><br><span class="line">new_img1 = img1[:100,:300]</span><br><span class="line">new_img2 = img2[:100,:300]</span><br><span class="line"></span><br><span class="line">new_img = np.vstack((new_img1, new_img2))</span><br><span class="line"></span><br><span class="line"># png 类型所占的空间更大</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/new_img.jpg&quot;, new_img)</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/new_img.png&quot;, new_img)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将numpy所生成的图片转换为cv所能识别的矩阵形式=&gt;将生成的数组转为图片</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像一定是三维的，黑白图片(h,w,1)，彩色(h,w,3)</span><br><span class="line">array1 = np.random.randint(0,255,(700,500,1), dtype=&#x27;uint8&#x27;) # 将numpy所生成的图片转换为cv所能识别的矩阵形式=&gt;将生成的数组转为图片</span><br><span class="line">print(type(array1))</span><br><span class="line">array2 = np.random.randint(0,255,(700,500,1))</span><br><span class="line">print(type(array2))</span><br><span class="line"></span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, array2)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="三、读取第一张彩色图片"><a href="#三、读取第一张彩色图片" class="headerlink" title="三、读取第一张彩色图片"></a>三、读取第一张彩色图片</h3>   <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line">import numpy as np</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>彩色图片的读取</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 彩色图片读取方式为1</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line"></span><br><span class="line"># 检查彩色图片是否array形式[&lt;class &#x27;numpy.ndarray&#x27;&gt;]</span><br><span class="line">print(type(img))</span><br><span class="line"></span><br><span class="line"># 注意需要传递图片名以及图片矩阵</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># 彩色图片的形状 [(1333, 750, 3)]</span><br><span class="line">print(img.shape)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>研究三通道：[Opencv中以三个二维矩阵进行存储，即三维矩阵：[H-W*3] ]</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 创建一个二维数组</span><br><span class="line">print(np.array([[1,2]]).shape)</span><br><span class="line">print(np.array([[1,2],[1,2]]).shape)</span><br><span class="line"># 创建一个三维数组</span><br><span class="line">print(np.array([[[1,2],[1,2]]]).shape)</span><br><span class="line">print(np.array([ [[1,2],[1,2]],</span><br><span class="line">                [[1,2],[1,2]] ]).shape)</span><br><span class="line">print(np.array([ [[1,2],[1,2]],</span><br><span class="line">                [[1,2],[1,2]],</span><br><span class="line">                [[1,2],[1,2]] ]).shape)</span><br><span class="line"></span><br><span class="line">彩色图片 -&gt; 三张图片(RGB) Opencv 中以BGR形式存储</span><br><span class="line">尝试拆分一张彩色图片</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">img0 = img[:,:,0] #B</span><br><span class="line">cv2.imshow(&#x27;img0&#x27;, img0)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2_b.jpg&quot;,img0)</span><br><span class="line">img1 = img[:,:,1] #G</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2_g.jpg&quot;,img1)</span><br><span class="line">img2 = img[:,:,2] #R</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2_r.jpg&quot;,img2)</span><br><span class="line"></span><br><span class="line"># split() 拆分，类似以上效果</span><br><span class="line">b,g,r = cv2.split(img)</span><br><span class="line"></span><br><span class="line"># 合并拆分结果</span><br><span class="line"># img = cv2.merge([b,g,r]) 正常显示</span><br><span class="line"># img = cv2.merge([b,g]) 无法显示</span><br><span class="line">img = cv2.merge([r,g,b]) # 可进行图片的重生成</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>剪裁</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">img0 = img[:,:,0] #B</span><br><span class="line">img1 = img[:,:,0] #B</span><br><span class="line">img2 = img[:,:,0] #B</span><br><span class="line">print(img.shape)</span><br><span class="line">new_img0 = img0[:100,:100]</span><br><span class="line">new_img1 = img1[:100,100:200]</span><br><span class="line">new_img2 = img2[:100,200:300]</span><br><span class="line">new_img = np.hstack((new_img0, new_img1, new_img2))</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用opencv转换图片的色彩空间</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 1. 色彩空间：[BGR]</span><br><span class="line"># (1) HSV：更类似于人类感觉颜色的方式。H：色相(Hue) S：饱和度(Saturation) V：亮度(Value)</span><br><span class="line"># (2) YUV：Y：亮度信号 U\V：两个色彩信号-&gt;色彩的饱和度</span><br><span class="line"># (3) Lab：由国际照明委员会建立。L：整张图的明亮度 a\b：负责颜色的多少</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># HSV</span><br><span class="line">hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)</span><br><span class="line">cv2.imshow(&#x27;hsv&#x27;, hsv)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># YUV</span><br><span class="line">yuv = cv2.cvtColor(img, cv2.COLOR_BGR2YUV)</span><br><span class="line">cv2.imshow(&#x27;yuv&#x27;, yuv)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># Lab</span><br><span class="line">lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)</span><br><span class="line">cv2.imshow(&#x27;lab&#x27;, lab)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"># 还有其他的色彩空间</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="四、统计一张图片的像素点个数"><a href="#四、统计一张图片的像素点个数" class="headerlink" title="四、统计一张图片的像素点个数"></a>四、统计一张图片的像素点个数</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import cv2</span><br></pre></td></tr></table></figure>
+<ol>
+<li>图片的读取</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 0)</span><br><span class="line"></span><br><span class="line">h,w = np.shape(img)</span><br><span class="line">hest = np.zeros([256], dtype=np.int32) # 创建256个全为0零的一维矩阵</span><br></pre></td></tr></table></figure>
+<ol>
+<li>遍历图片矩阵</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for row in range(h):</span><br><span class="line">    for col in range(w):</span><br><span class="line">        pv = img[row,col]</span><br><span class="line">        hest[pv] += 1</span><br></pre></td></tr></table></figure>
+<ol>
+<li>绘图的操作</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">plt.plot(hest, color=&#x27;r&#x27;)</span><br><span class="line">plt.xlim([0,256])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="image-20250727200339645.png" alt="image-20250727200339645"></p>
+<h3 id="五、彩色图片像素点的统计"><a href="#五、彩色图片像素点的统计" class="headerlink" title="五、彩色图片像素点的统计"></a>五、彩色图片像素点的统计</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import cv2</span><br></pre></td></tr></table></figure>
+<ol>
+<li>图片的读取</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>分离颜色通道</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">b,g,r = cv2.split(img)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>行列遍历</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">h, w = np.shape(b)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>建立空白数组</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hest = np.zeros([256],dtype=np.int32)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>遍历图片</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for i in [b,g,r]:</span><br><span class="line">    for row in range(h):</span><br><span class="line">        for col in range(w):</span><br><span class="line">            pv = i[row,col]</span><br><span class="line">            hest[pv] += 1</span><br><span class="line"></span><br><span class="line">plt.plot(hest, color=&#x27;r&#x27;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="image-20250727200527018.png" alt="image-20250727200527018"></p>
 ]]></content>
       <categories>
         <category>504医学AI</category>
@@ -901,128 +907,6 @@ k′=k+(k−1)(r−1)</script><script type="math/tex; mode=display">k′$$表示
       </tags>
   </entry>
   <entry>
-    <title>OpenCV 图像处理之膨胀与腐蚀</title>
-    <url>/2025/08/17/%E8%86%A8%E8%83%80%E4%B8%8E%E8%85%90%E8%9A%80/</url>
-    <content><![CDATA[<h1 id="OpenCV-图像处理之膨胀与腐蚀"><a href="#OpenCV-图像处理之膨胀与腐蚀" class="headerlink" title="OpenCV 图像处理之膨胀与腐蚀"></a>OpenCV 图像处理之膨胀与腐蚀</h1><blockquote>
-<p>参考文献：<a href="https://zhuanlan.zhihu.com/p/110330329#:~:text=膨胀与腐蚀属于形态学范围，具体的含义根据字面意思来理解即可。但是更形象的话就是“增肥”与“减肥”。">OpenCV 图像处理之膨胀与腐蚀 - 知乎</a></p>
-</blockquote>
-<h2 id="1、什么是膨胀与腐蚀"><a href="#1、什么是膨胀与腐蚀" class="headerlink" title="1、什么是膨胀与腐蚀"></a>1、什么是膨胀与腐蚀</h2><p>膨胀与腐蚀属于形态学范围，具体的含义根据字面意思来理解即可。但是更形象的话就是“增肥”与“减肥”。</p>
-<p>它们的用途就是用来处理图形问题上。总结性的来说：膨胀用来<strong>处理缺陷</strong>问题；腐蚀用来<strong>处理毛刺</strong>问题。</p>
-<p>膨胀就是把缺陷给填补了，腐蚀就是把毛刺给腐蚀掉了。这里其实说的并不严谨，也是为了大家理解方便。下面我们就用实例来进行演示。</p>
-<h2 id="2、形态学处理——膨胀"><a href="#2、形态学处理——膨胀" class="headerlink" title="2、形态学处理——膨胀"></a>2、形态学处理——膨胀</h2><p>我们先引入一张图片进行分析。 <strong>程序实现：</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(<span class="string">&#x27;Pic/corrode.png&#x27;</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cv_show</span>(<span class="params">img</span>):</span><br><span class="line">    cv2.imshow(<span class="string">&#x27;&#x27;</span>, img)</span><br><span class="line">    cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">    cv2.destroyAllWindows()</span><br><span class="line">cv_show(img)</span><br></pre></td></tr></table></figure>
-<p><img src="v2-8441976eeed9d6e731620cbe2d7400a9_1440w.jpg" alt="img"></p>
-<p>图中我们可以看到，这张图片是一个二值图片（只有黑白），而且还增加了一些<strong>毛刺</strong>。而且还包含字体中还包含一些小的<strong>间隙</strong>（缺陷）。</p>
-<p>下面我们对这张图片进行膨胀处理。膨胀是如何处理的呢？对于一个像素点，我们需要先指定对每个像素点膨胀的范围。</p>
-<p><img src="v2-e5428bbb4a1a35009b7bbd297373996d_1440w.png" alt="img"></p>
-<p>这里我们指定范围为3 <em> 3的矩阵，kernel（卷积核核）指定为全为1的3 </em> 3矩阵，卷积计算后，该像素点的值等于以该像素点为中心的3 * 3范围内的最大值。由于我们是二值图像，所以只要包含周围白的部分，就变为白的。</p>
-<p><strong>总结：</strong> 只要原图片3 <em> 3范围内有白的，该像素点就是白的。 <em>*程序实现：</em></em></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kernel = np.ones((<span class="number">3</span>, <span class="number">3</span>), dtype=np.uint8)</span><br><span class="line">dilate = cv2.dilate(img, kernel, <span class="number">1</span>) <span class="comment"># 1:迭代次数，也就是执行几次膨胀操作</span></span><br><span class="line">cv_show(dilate)</span><br></pre></td></tr></table></figure>
-<p><img src="v2-50b146692ac76bf6543086a544b7d231_1440w.jpg" alt="img"></p>
-<p><strong>分析：</strong> 上图我们可以看出毛刺部分变粗，与此同时字体中的间隙也变小，补了缺陷部分。</p>
-<h3 id="2-1-更改卷积核大小"><a href="#2-1-更改卷积核大小" class="headerlink" title="2.1 更改卷积核大小"></a>2.1 更改卷积核大小</h3><p>如果我们<strong>更改核的大小</strong>（4 <em> 4），也就改变了膨胀的程度。 只要4 </em> 4范围内有白的就变成白的。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kernel_2 = np.ones((<span class="number">4</span>, <span class="number">4</span>), dtype=np.uint8) <span class="comment"># 卷积核变为4*4</span></span><br><span class="line">dilate = cv2.dilate(img, kernel_2, <span class="number">1</span>)</span><br><span class="line">cv_show(dilate)</span><br></pre></td></tr></table></figure>
-<p><img src="v2-56322fcf1eaf37473273ac595d0d444d_1440w.jpg" alt="img"></p>
-<h3 id="2-2、更改迭代次数"><a href="#2-2、更改迭代次数" class="headerlink" title="2.2、更改迭代次数"></a>2.2、更改迭代次数</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kernel = np.ones((<span class="number">3</span>, <span class="number">3</span>), dtype=np.uint8)</span><br><span class="line">dilate = cv2.dilate(img, kernel, <span class="number">2</span>) <span class="comment"># 更改迭代次数为2</span></span><br><span class="line">ss = np.hstack((img, dilate))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
-<p><img src="v2-ba19339b6368d200959f2929518c864a_1440w.jpg" alt="img"></p>
-<p><strong>分析：</strong> 更改迭代次数将为2，将对图片进行2次的膨胀操作</p>
-<h2 id="3、形态学处理——腐蚀操作"><a href="#3、形态学处理——腐蚀操作" class="headerlink" title="3、形态学处理——腐蚀操作"></a>3、形态学处理——腐蚀操作</h2><p>腐蚀操作和膨胀操作相反，也就是将毛刺消除，判断方法为：在卷积核大小中对图片进行卷积。取图像中（3 <em> 3）区域内的最小值。由于我们是二值图像，也就是取0（黑色）。 <strong>总结：</strong> 只要原图片3 </em> 3范围内有黑的，该像素点就是黑的。</p>
-<p><strong>程序实现：</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kernel = np.ones((<span class="number">3</span>, <span class="number">3</span>), dtype=np.uint8)</span><br><span class="line">erosion = cv2.erode(img, kernel, iterations=<span class="number">1</span>)</span><br><span class="line">ss = np.hstack((img, erosion))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
-<p><img src="v2-1be5ef6d3ce04c2d15d70cd47c41913c_1440w.jpg" alt="img"></p>
-<p><strong>分析：</strong> 可以看出来，毛刺部分被清除掉，但与此同时，字体边缘部分也向里凹陷了一部分。</p>
-<h3 id="3-1、更改卷积核大小"><a href="#3-1、更改卷积核大小" class="headerlink" title="3.1、更改卷积核大小"></a>3.1、更改卷积核大小</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kernel_2 = np.ones((<span class="number">4</span>, <span class="number">4</span>), dtype=np.uint8)</span><br><span class="line">erosion = cv2.erode(img, kernel_2, iterations=<span class="number">1</span>)</span><br><span class="line">ss = np.hstack((img, erosion))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
-<p><img src="v2-31befc3f8eeaafdaac01e6d2a5057fa1_1440w.jpg" alt="img"></p>
-<p><strong>分析：</strong> 卷积核变大后，我们发现他已经腐蚀的部分有点多了，字体原来的部分也被清除。</p>
-<h3 id="3-2、更改迭代次数"><a href="#3-2、更改迭代次数" class="headerlink" title="3.2、更改迭代次数"></a>3.2、更改迭代次数</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kernel = np.ones((<span class="number">3</span>, <span class="number">3</span>), dtype=np.uint8)</span><br><span class="line">erosion = cv2.erode(img, kernel, iterations=<span class="number">2</span>)</span><br><span class="line">ss = np.hstack((img, erosion))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
-<p><img src="v2-25cd42fc1dd475828244718b776bf384_1440w.jpg" alt="img"></p>
-<p><strong>分析：</strong> 增加迭代次数后，腐蚀变得更加厉害，所以应该选择合适的迭代次数。</p>
-<h2 id="4、开运算和并运算"><a href="#4、开运算和并运算" class="headerlink" title="4、开运算和并运算"></a>4、开运算和并运算</h2><blockquote>
-<p>开运算：先腐蚀，在膨胀 闭运算：先膨胀，在腐蚀</p>
-</blockquote>
-<p>我们在上面的膨胀和腐蚀的图片中可以看到，图片大小程度上都受到了损失，字体信息缺失或者变粗等等。如果我们不想更改原有信息，即字体粗细。那么我们可以使用上面的两种运算。例如开运算，先对字体进行变细，在对字体进行变粗，整体上字体粗细不会发生变化。毛刺信息在腐蚀的时候就已经消除了，膨胀也不会膨胀出多余信息。</p>
-<h3 id="4-1、开运算"><a href="#4-1、开运算" class="headerlink" title="4.1、开运算"></a>4.1、开运算</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">opening = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel, <span class="number">1</span>)</span><br><span class="line">ss = np.hstack((img, opening))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
-<p><img src="v2-5dba8d78ff5de91c24f5a3bcf5d8bcd2_1440w.jpg" alt="img"></p>
-<p><strong>分析：</strong> 我们发现大部分毛刺已经消除，而且字体信息也没有发生变化，这也就是我们想要的效果。虽然仍然有一部信息没有被清除，我们只需要调整卷积核的大小就可以实现。</p>
-<h3 id="4-2、闭运算"><a href="#4-2、闭运算" class="headerlink" title="4.2、闭运算"></a>4.2、闭运算</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">closing = cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel)  <span class="comment">## 有缺陷，填补缺陷</span></span><br><span class="line">ss = np.hstack((img, closing))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
-<p><img src="v2-9731e001feabeb34f519fe37a134cc8f_1440w.jpg" alt="img"></p>
-<p><strong>分析：</strong> 字体不改变的前提下，我们把字体缺陷信息补全。</p>
-<h2 id="5、梯度计算"><a href="#5、梯度计算" class="headerlink" title="5、梯度计算"></a>5、<a href="https://zhida.zhihu.com/search?content_id=112648299&amp;content_type=Article&amp;match_order=1&amp;q=梯度计算&amp;zhida_source=entity">梯度计算</a></h2><p>梯度计算主要显示的是边缘信息。计算的方法：</p>
-<blockquote>
-<p>膨胀的图像 - 腐蚀的图像</p>
-</blockquote>
-<p>我们明显的看出，用大一圈的图像减去小一圈的图像正好就是边缘的信息。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gradient = cv2.morphologyEx(img, cv2.MORPH_GRADIENT, kernel)</span><br><span class="line">cv_show(gradient)</span><br></pre></td></tr></table></figure>
-<p><img src="v2-cd3d9881414f19c0ae5555ddc28791b6_1440w.jpg" alt="img"></p>
-<p><strong>分析：</strong> 我们可以看出来，我们形成了一个空心的字体样式</p>
-<h2 id="6、高帽和黑帽"><a href="#6、高帽和黑帽" class="headerlink" title="6、高帽和黑帽"></a>6、高帽和黑帽</h2><blockquote>
-<p>高帽计算：原始图像 - 开运算结果 黑帽计算：闭运算结果 - 原始图像</p>
-</blockquote>
-<h3 id="6-1、高帽计算"><a href="#6-1、高帽计算" class="headerlink" title="6.1、高帽计算"></a>6.1、高帽计算</h3><p>我们知道开运算的结果就是去除毛刺，我们原始图像减去开运算结果就是我们要消除的毛刺信息。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">top_hat = cv2.morphologyEx(img, cv2.MORPH_TOPHAT, kernel)</span><br><span class="line">ss = np.hstack((img, top_hat))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
-<p><img src="v2-49f926bc181d7c73fa6bf96fc384b20a_1440w.jpg" alt="img"></p>
-<p><strong>分析：</strong> 可以看出来，所有的毛刺信息我们全部提取了出来。</p>
-<h3 id="6-2、黑帽操作"><a href="#6-2、黑帽操作" class="headerlink" title="6.2、黑帽操作"></a>6.2、黑帽操作</h3><p>高帽操作<strong>显示毛刺</strong>，那么黑帽就是<strong>显示缺陷</strong>。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">black_hat = cv2.morphologyEx(img, cv2.MORPH_BLACKHAT, kernel)</span><br><span class="line">ss = np.hstack((img, black_hat))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
-<p><img src="v2-98040e57b398cf5903ae52b77891bb74_1440w.jpg" alt="img"></p>
-<p><strong>分析：</strong> 这里我们看的不是很明显，我们只需要只要黑帽所处理的问题是什么。针对不同的场景应用不用的方法。</p>
-]]></content>
-      <categories>
-        <category>504医学AI</category>
-      </categories>
-      <tags>
-        <tag>504医学AI入门</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2025/08/24/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</url>
-    <content><![CDATA[<h1 id="神经网络：构建人工智能的基石"><a href="#神经网络：构建人工智能的基石" class="headerlink" title="神经网络：构建人工智能的基石"></a>神经网络：构建人工智能的基石</h1><h2 id="引言："><a href="#引言：" class="headerlink" title="引言："></a>引言：</h2><p>神经网络是一种受到生物神经系统启发的人工智能模型，它重现了大脑中神经元之间相互连接的方式。神经网络在诸多领域中取得了显著成就，如图像识别、自然语言处理和语音识别等。这篇博客将为您解释神经网络的构造，让您能够理解这个令人着迷的领域的基本工作原理。</p>
-<h2 id="第一部分：神经元-生物的灵感"><a href="#第一部分：神经元-生物的灵感" class="headerlink" title="第一部分：神经元 - 生物的灵感"></a>第一部分：神经元 - 生物的灵感</h2><p>在理解神经网络之前，我们首先需要了解神经元，这是神经网络的基本构建块。神经元是生物神经系统的工作单位，也是人工神经网络的灵感来源。</p>
-<ol>
-<li><strong>神经元的结构</strong>：每个神经元都由细胞体、树突和轴突组成。细胞体包含核心部分，树突接收来自其他神经元的信号，而轴突将信号传递给其他神经元。</li>
-</ol>
-<p><img src="433a95388fe6d77be007a09297c55689.png" alt="img"></p>
-<ol>
-<li><strong>信号传递</strong>：神经元之间的通信是通过电化学信号完成的。当信号通过树突传递到细胞体时，如果达到一定阈值，神经元就会触发并将信号传递给下一个神经元。</li>
-</ol>
-<h2 id="第二部分：人工神经元-数学的力量"><a href="#第二部分：人工神经元-数学的力量" class="headerlink" title="第二部分：人工神经元 - 数学的力量"></a>第二部分：人工神经元 - 数学的力量</h2><p>现在，让我们将生物神经元的概念转化为数学模型，即人工神经元。人工神经元是神经网络的基本构建块，负责对输入进行处理和传递信号。输入可以类比为神经元的树突，而输出可以类比为神经元的轴突，计算则可以类比为细胞核。</p>
-<p><strong>输入和权重</strong>：人工神经元接收多个输入，每个输入都有一个相关联的权重，这相当于人工神经网络的记忆。这些权重决定了每个输入对神经元的影响程度。</p>
-<p><img src="c93d132a57bb9b8c00efeb7722306eef.png" alt="img"></p>
-<p><strong>激活函数</strong>：在人工神经元中，激活函数决定了神经元是否激活（发送信号）。常见的激活函数包括Sigmoid、ReLU和Tanh。</p>
-<p><img src="image-20250824204023063.png" alt="image-20250824204023063"></p>
-<p><strong>神经网络</strong>：是由大量的节点（或称“神经元”）和之间相互的联接构成。而由两层神经元组成的神经网络称之为—“感知器”（Perceptron）,感知器只能线性划分数据。在输入和权值的线性加权和叠加了一个<strong>函数g（激活函数），</strong>加权计算公式为：</p>
-<script type="math/tex; mode=display">
-g(W * x) = z</script><h2 id="第三部分：神经网络-层层堆叠"><a href="#第三部分：神经网络-层层堆叠" class="headerlink" title="第三部分：神经网络 - 层层堆叠"></a>第三部分：神经网络 - 层层堆叠</h2><p>现在我们可以将多个人工神经元组合在一起，形成神经网络。神经网络由多个层组成，包括输入层、隐藏层和输出层，也称为<strong>多层感知器</strong>。</p>
-<p>在神经网络中需要默认增加偏置神经元（节点），这些节点是默认存在的。它本质上是一个只含有存储功能，且存储值永远为1的单元。在神经网络的每个层次中，除了输出层以外，都会含有这样一个<strong>偏置单元</strong>。（如下图）</p>
-<p><img src="image-20250824204143959.png" alt="image-20250824204143959"></p>
-<p><strong>输入层</strong>：接收原始数据的输入，例如图像像素或文本单词。</p>
-<p><strong>隐藏层</strong>：这是神经网络的核心部分，包含多个层次的神经元。隐藏层负责从输入中学习特征并生成有用的表示。</p>
-<p><strong>输出层</strong>：根据学到的特征生成最终的输出，可以是分类标签、数值或其他任务相关的结果。</p>
-<p><strong>如何设计</strong>：</p>
-<p>输入层的节点数：与特征的维度匹配</p>
-<p>输出层的节点数：与目标的维度匹配。</p>
-<p>中间层的节点数：目前业界没有完善的理论来指导这个决策。一般是根据经验来设置。较好的方法就是预先设定几个可选值，通过切换这几个值来看整个模型的预测效果，选择效果最好的值作为最终选择。</p>
-<p><strong>注意事项：</strong></p>
-<ol>
-<li><p>设计一个神经网络时，输入层与输出层的节点数往往是固定的，中间层则可以自由指定；</p>
-</li>
-<li><p>神经网络结构图中的拓扑与箭头代表着预测过程时数据的流向，跟训练时的数据流有一定的区别；</p>
-</li>
-<li><p>结构图里的关键不是圆圈（代表“神经元”），而是连接线（代表“神经元”之间的连接）。每个连接线对应一个不同的权重（其值称为权值），这是需要训练得到的。</p>
-</li>
-</ol>
-<h2 id="第四部分：训练神经网络-损失函数和反向传播算法"><a href="#第四部分：训练神经网络-损失函数和反向传播算法" class="headerlink" title="第四部分：训练神经网络 - 损失函数和反向传播算法"></a>第四部分：训练神经网络 - 损失函数和反向传播算法</h2><p>神经网络的关键部分之一是训练过程。在训练中，神经网络通过与真实数据进行比较来调整权重，以使其能够做出准确的预测。</p>
-<ol>
-<li><p><strong>反向传播算法</strong>：是训练神经网络的核心算法。它通过计算误差并反向传播，以更新每个神经元的权重和偏差，从而减小预测误差。具体过程如何实现，可以看我的这篇博客：（了解BP神经网络：从原理到应用-CSDN博客）</p>
-</li>
-<li><p><strong>损失函数</strong>：损失函数用于度量预测和实际值之间的差异。训练的目标是最小化损失函数。具体过程如何实现，可以看我的这篇博客：（交叉熵损失函数）</p>
-</li>
-</ol>
-<h2 id="结论："><a href="#结论：" class="headerlink" title="结论："></a>结论：</h2><p>神经网络是人工智能领域的关键技术，它们的构造基于神经元的灵感，并结合了数学、统计和机器学习的原理。通过构建和训练神经网络，我们能够解决各种各样的问题，从图像识别到自然语言处理。希望这篇博客能够帮助您更好地理解神经网络的构造和工作原理。</p>
-]]></content>
-  </entry>
-  <entry>
     <title>Week5</title>
     <url>/2025/08/17/Week5/</url>
     <content><![CDATA[<h1 id="图像处理方法"><a href="#图像处理方法" class="headerlink" title="图像处理方法"></a>图像处理方法</h1><h2 id="一、Sobel算子"><a href="#一、Sobel算子" class="headerlink" title="一、Sobel算子"></a>一、Sobel算子</h2><ul>
@@ -1355,6 +1239,134 @@ g(W * x) = z</script><h2 id="第三部分：神经网络-层层堆叠"><a href="
 <li>最后将处理后的灰度值回填到相应像素点</li>
 </ol>
 <p><img src="image-20250822114143384.png" alt="image-20250822114143384"></p>
+]]></content>
+      <categories>
+        <category>504医学AI</category>
+      </categories>
+      <tags>
+        <tag>504医学AI入门</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>神经网络</title>
+    <url>/2025/08/24/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</url>
+    <content><![CDATA[<h1 id="神经网络：构建人工智能的基石"><a href="#神经网络：构建人工智能的基石" class="headerlink" title="神经网络：构建人工智能的基石"></a>神经网络：构建人工智能的基石</h1><h2 id="引言："><a href="#引言：" class="headerlink" title="引言："></a>引言：</h2><p>神经网络是一种受到生物神经系统启发的人工智能模型，它重现了大脑中神经元之间相互连接的方式。神经网络在诸多领域中取得了显著成就，如图像识别、自然语言处理和语音识别等。这篇博客将为您解释神经网络的构造，让您能够理解这个令人着迷的领域的基本工作原理。</p>
+<h2 id="第一部分：神经元-生物的灵感"><a href="#第一部分：神经元-生物的灵感" class="headerlink" title="第一部分：神经元 - 生物的灵感"></a>第一部分：神经元 - 生物的灵感</h2><p>在理解神经网络之前，我们首先需要了解神经元，这是神经网络的基本构建块。神经元是生物神经系统的工作单位，也是人工神经网络的灵感来源。</p>
+<ol>
+<li><strong>神经元的结构</strong>：每个神经元都由细胞体、树突和轴突组成。细胞体包含核心部分，树突接收来自其他神经元的信号，而轴突将信号传递给其他神经元。</li>
+</ol>
+<p><img src="433a95388fe6d77be007a09297c55689.png" alt="img"></p>
+<ol>
+<li><strong>信号传递</strong>：神经元之间的通信是通过电化学信号完成的。当信号通过树突传递到细胞体时，如果达到一定阈值，神经元就会触发并将信号传递给下一个神经元。</li>
+</ol>
+<h2 id="第二部分：人工神经元-数学的力量"><a href="#第二部分：人工神经元-数学的力量" class="headerlink" title="第二部分：人工神经元 - 数学的力量"></a>第二部分：人工神经元 - 数学的力量</h2><p>现在，让我们将生物神经元的概念转化为数学模型，即人工神经元。人工神经元是神经网络的基本构建块，负责对输入进行处理和传递信号。输入可以类比为神经元的树突，而输出可以类比为神经元的轴突，计算则可以类比为细胞核。</p>
+<p><strong>输入和权重</strong>：人工神经元接收多个输入，每个输入都有一个相关联的权重，这相当于人工神经网络的记忆。这些权重决定了每个输入对神经元的影响程度。</p>
+<p><img src="c93d132a57bb9b8c00efeb7722306eef.png" alt="img"></p>
+<p><strong>激活函数</strong>：在人工神经元中，激活函数决定了神经元是否激活（发送信号）。常见的激活函数包括Sigmoid、ReLU和Tanh。</p>
+<p><img src="image-20250824204023063.png" alt="image-20250824204023063"></p>
+<p><strong>神经网络</strong>：是由大量的节点（或称“神经元”）和之间相互的联接构成。而由两层神经元组成的神经网络称之为—“感知器”（Perceptron）,感知器只能线性划分数据。在输入和权值的线性加权和叠加了一个<strong>函数g（激活函数），</strong>加权计算公式为：</p>
+<script type="math/tex; mode=display">
+g(W * x) = z</script><h2 id="第三部分：神经网络-层层堆叠"><a href="#第三部分：神经网络-层层堆叠" class="headerlink" title="第三部分：神经网络 - 层层堆叠"></a>第三部分：神经网络 - 层层堆叠</h2><p>现在我们可以将多个人工神经元组合在一起，形成神经网络。神经网络由多个层组成，包括输入层、隐藏层和输出层，也称为<strong>多层感知器</strong>。</p>
+<p>在神经网络中需要默认增加偏置神经元（节点），这些节点是默认存在的。它本质上是一个只含有存储功能，且存储值永远为1的单元。在神经网络的每个层次中，除了输出层以外，都会含有这样一个<strong>偏置单元</strong>。（如下图）</p>
+<p><img src="image-20250824204143959.png" alt="image-20250824204143959"></p>
+<p><strong>输入层</strong>：接收原始数据的输入，例如图像像素或文本单词。</p>
+<p><strong>隐藏层</strong>：这是神经网络的核心部分，包含多个层次的神经元。隐藏层负责从输入中学习特征并生成有用的表示。</p>
+<p><strong>输出层</strong>：根据学到的特征生成最终的输出，可以是分类标签、数值或其他任务相关的结果。</p>
+<p><strong>如何设计</strong>：</p>
+<p>输入层的节点数：与特征的维度匹配</p>
+<p>输出层的节点数：与目标的维度匹配。</p>
+<p>中间层的节点数：目前业界没有完善的理论来指导这个决策。一般是根据经验来设置。较好的方法就是预先设定几个可选值，通过切换这几个值来看整个模型的预测效果，选择效果最好的值作为最终选择。</p>
+<p><strong>注意事项：</strong></p>
+<ol>
+<li><p>设计一个神经网络时，输入层与输出层的节点数往往是固定的，中间层则可以自由指定；</p>
+</li>
+<li><p>神经网络结构图中的拓扑与箭头代表着预测过程时数据的流向，跟训练时的数据流有一定的区别；</p>
+</li>
+<li><p>结构图里的关键不是圆圈（代表“神经元”），而是连接线（代表“神经元”之间的连接）。每个连接线对应一个不同的权重（其值称为权值），这是需要训练得到的。</p>
+</li>
+</ol>
+<h2 id="第四部分：训练神经网络-损失函数和反向传播算法"><a href="#第四部分：训练神经网络-损失函数和反向传播算法" class="headerlink" title="第四部分：训练神经网络 - 损失函数和反向传播算法"></a>第四部分：训练神经网络 - 损失函数和反向传播算法</h2><p>神经网络的关键部分之一是训练过程。在训练中，神经网络通过与真实数据进行比较来调整权重，以使其能够做出准确的预测。</p>
+<ol>
+<li><p><strong>反向传播算法</strong>：是训练神经网络的核心算法。它通过计算误差并反向传播，以更新每个神经元的权重和偏差，从而减小预测误差。具体过程如何实现，可以看我的这篇博客：（了解BP神经网络：从原理到应用-CSDN博客）</p>
+</li>
+<li><p><strong>损失函数</strong>：损失函数用于度量预测和实际值之间的差异。训练的目标是最小化损失函数。具体过程如何实现，可以看我的这篇博客：（交叉熵损失函数）</p>
+</li>
+</ol>
+<h2 id="结论："><a href="#结论：" class="headerlink" title="结论："></a>结论：</h2><p>神经网络是人工智能领域的关键技术，它们的构造基于神经元的灵感，并结合了数学、统计和机器学习的原理。通过构建和训练神经网络，我们能够解决各种各样的问题，从图像识别到自然语言处理。希望这篇博客能够帮助您更好地理解神经网络的构造和工作原理。</p>
+]]></content>
+      <categories>
+        <category>504医学AI</category>
+      </categories>
+      <tags>
+        <tag>504医学AI入门</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenCV 图像处理之膨胀与腐蚀</title>
+    <url>/2025/08/17/%E8%86%A8%E8%83%80%E4%B8%8E%E8%85%90%E8%9A%80/</url>
+    <content><![CDATA[<h1 id="OpenCV-图像处理之膨胀与腐蚀"><a href="#OpenCV-图像处理之膨胀与腐蚀" class="headerlink" title="OpenCV 图像处理之膨胀与腐蚀"></a>OpenCV 图像处理之膨胀与腐蚀</h1><blockquote>
+<p>参考文献：<a href="https://zhuanlan.zhihu.com/p/110330329#:~:text=膨胀与腐蚀属于形态学范围，具体的含义根据字面意思来理解即可。但是更形象的话就是“增肥”与“减肥”。">OpenCV 图像处理之膨胀与腐蚀 - 知乎</a></p>
+</blockquote>
+<h2 id="1、什么是膨胀与腐蚀"><a href="#1、什么是膨胀与腐蚀" class="headerlink" title="1、什么是膨胀与腐蚀"></a>1、什么是膨胀与腐蚀</h2><p>膨胀与腐蚀属于形态学范围，具体的含义根据字面意思来理解即可。但是更形象的话就是“增肥”与“减肥”。</p>
+<p>它们的用途就是用来处理图形问题上。总结性的来说：膨胀用来<strong>处理缺陷</strong>问题；腐蚀用来<strong>处理毛刺</strong>问题。</p>
+<p>膨胀就是把缺陷给填补了，腐蚀就是把毛刺给腐蚀掉了。这里其实说的并不严谨，也是为了大家理解方便。下面我们就用实例来进行演示。</p>
+<h2 id="2、形态学处理——膨胀"><a href="#2、形态学处理——膨胀" class="headerlink" title="2、形态学处理——膨胀"></a>2、形态学处理——膨胀</h2><p>我们先引入一张图片进行分析。 <strong>程序实现：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(<span class="string">&#x27;Pic/corrode.png&#x27;</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cv_show</span>(<span class="params">img</span>):</span><br><span class="line">    cv2.imshow(<span class="string">&#x27;&#x27;</span>, img)</span><br><span class="line">    cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">    cv2.destroyAllWindows()</span><br><span class="line">cv_show(img)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-8441976eeed9d6e731620cbe2d7400a9_1440w.jpg" alt="img"></p>
+<p>图中我们可以看到，这张图片是一个二值图片（只有黑白），而且还增加了一些<strong>毛刺</strong>。而且还包含字体中还包含一些小的<strong>间隙</strong>（缺陷）。</p>
+<p>下面我们对这张图片进行膨胀处理。膨胀是如何处理的呢？对于一个像素点，我们需要先指定对每个像素点膨胀的范围。</p>
+<p><img src="v2-e5428bbb4a1a35009b7bbd297373996d_1440w.png" alt="img"></p>
+<p>这里我们指定范围为3 <em> 3的矩阵，kernel（卷积核核）指定为全为1的3 </em> 3矩阵，卷积计算后，该像素点的值等于以该像素点为中心的3 * 3范围内的最大值。由于我们是二值图像，所以只要包含周围白的部分，就变为白的。</p>
+<p><strong>总结：</strong> 只要原图片3 <em> 3范围内有白的，该像素点就是白的。 <em>*程序实现：</em></em></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kernel = np.ones((<span class="number">3</span>, <span class="number">3</span>), dtype=np.uint8)</span><br><span class="line">dilate = cv2.dilate(img, kernel, <span class="number">1</span>) <span class="comment"># 1:迭代次数，也就是执行几次膨胀操作</span></span><br><span class="line">cv_show(dilate)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-50b146692ac76bf6543086a544b7d231_1440w.jpg" alt="img"></p>
+<p><strong>分析：</strong> 上图我们可以看出毛刺部分变粗，与此同时字体中的间隙也变小，补了缺陷部分。</p>
+<h3 id="2-1-更改卷积核大小"><a href="#2-1-更改卷积核大小" class="headerlink" title="2.1 更改卷积核大小"></a>2.1 更改卷积核大小</h3><p>如果我们<strong>更改核的大小</strong>（4 <em> 4），也就改变了膨胀的程度。 只要4 </em> 4范围内有白的就变成白的。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kernel_2 = np.ones((<span class="number">4</span>, <span class="number">4</span>), dtype=np.uint8) <span class="comment"># 卷积核变为4*4</span></span><br><span class="line">dilate = cv2.dilate(img, kernel_2, <span class="number">1</span>)</span><br><span class="line">cv_show(dilate)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-56322fcf1eaf37473273ac595d0d444d_1440w.jpg" alt="img"></p>
+<h3 id="2-2、更改迭代次数"><a href="#2-2、更改迭代次数" class="headerlink" title="2.2、更改迭代次数"></a>2.2、更改迭代次数</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kernel = np.ones((<span class="number">3</span>, <span class="number">3</span>), dtype=np.uint8)</span><br><span class="line">dilate = cv2.dilate(img, kernel, <span class="number">2</span>) <span class="comment"># 更改迭代次数为2</span></span><br><span class="line">ss = np.hstack((img, dilate))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-ba19339b6368d200959f2929518c864a_1440w.jpg" alt="img"></p>
+<p><strong>分析：</strong> 更改迭代次数将为2，将对图片进行2次的膨胀操作</p>
+<h2 id="3、形态学处理——腐蚀操作"><a href="#3、形态学处理——腐蚀操作" class="headerlink" title="3、形态学处理——腐蚀操作"></a>3、形态学处理——腐蚀操作</h2><p>腐蚀操作和膨胀操作相反，也就是将毛刺消除，判断方法为：在卷积核大小中对图片进行卷积。取图像中（3 <em> 3）区域内的最小值。由于我们是二值图像，也就是取0（黑色）。 <strong>总结：</strong> 只要原图片3 </em> 3范围内有黑的，该像素点就是黑的。</p>
+<p><strong>程序实现：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kernel = np.ones((<span class="number">3</span>, <span class="number">3</span>), dtype=np.uint8)</span><br><span class="line">erosion = cv2.erode(img, kernel, iterations=<span class="number">1</span>)</span><br><span class="line">ss = np.hstack((img, erosion))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-1be5ef6d3ce04c2d15d70cd47c41913c_1440w.jpg" alt="img"></p>
+<p><strong>分析：</strong> 可以看出来，毛刺部分被清除掉，但与此同时，字体边缘部分也向里凹陷了一部分。</p>
+<h3 id="3-1、更改卷积核大小"><a href="#3-1、更改卷积核大小" class="headerlink" title="3.1、更改卷积核大小"></a>3.1、更改卷积核大小</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kernel_2 = np.ones((<span class="number">4</span>, <span class="number">4</span>), dtype=np.uint8)</span><br><span class="line">erosion = cv2.erode(img, kernel_2, iterations=<span class="number">1</span>)</span><br><span class="line">ss = np.hstack((img, erosion))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-31befc3f8eeaafdaac01e6d2a5057fa1_1440w.jpg" alt="img"></p>
+<p><strong>分析：</strong> 卷积核变大后，我们发现他已经腐蚀的部分有点多了，字体原来的部分也被清除。</p>
+<h3 id="3-2、更改迭代次数"><a href="#3-2、更改迭代次数" class="headerlink" title="3.2、更改迭代次数"></a>3.2、更改迭代次数</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kernel = np.ones((<span class="number">3</span>, <span class="number">3</span>), dtype=np.uint8)</span><br><span class="line">erosion = cv2.erode(img, kernel, iterations=<span class="number">2</span>)</span><br><span class="line">ss = np.hstack((img, erosion))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-25cd42fc1dd475828244718b776bf384_1440w.jpg" alt="img"></p>
+<p><strong>分析：</strong> 增加迭代次数后，腐蚀变得更加厉害，所以应该选择合适的迭代次数。</p>
+<h2 id="4、开运算和并运算"><a href="#4、开运算和并运算" class="headerlink" title="4、开运算和并运算"></a>4、开运算和并运算</h2><blockquote>
+<p>开运算：先腐蚀，在膨胀 闭运算：先膨胀，在腐蚀</p>
+</blockquote>
+<p>我们在上面的膨胀和腐蚀的图片中可以看到，图片大小程度上都受到了损失，字体信息缺失或者变粗等等。如果我们不想更改原有信息，即字体粗细。那么我们可以使用上面的两种运算。例如开运算，先对字体进行变细，在对字体进行变粗，整体上字体粗细不会发生变化。毛刺信息在腐蚀的时候就已经消除了，膨胀也不会膨胀出多余信息。</p>
+<h3 id="4-1、开运算"><a href="#4-1、开运算" class="headerlink" title="4.1、开运算"></a>4.1、开运算</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">opening = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel, <span class="number">1</span>)</span><br><span class="line">ss = np.hstack((img, opening))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-5dba8d78ff5de91c24f5a3bcf5d8bcd2_1440w.jpg" alt="img"></p>
+<p><strong>分析：</strong> 我们发现大部分毛刺已经消除，而且字体信息也没有发生变化，这也就是我们想要的效果。虽然仍然有一部信息没有被清除，我们只需要调整卷积核的大小就可以实现。</p>
+<h3 id="4-2、闭运算"><a href="#4-2、闭运算" class="headerlink" title="4.2、闭运算"></a>4.2、闭运算</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">closing = cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel)  <span class="comment">## 有缺陷，填补缺陷</span></span><br><span class="line">ss = np.hstack((img, closing))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-9731e001feabeb34f519fe37a134cc8f_1440w.jpg" alt="img"></p>
+<p><strong>分析：</strong> 字体不改变的前提下，我们把字体缺陷信息补全。</p>
+<h2 id="5、梯度计算"><a href="#5、梯度计算" class="headerlink" title="5、梯度计算"></a>5、<a href="https://zhida.zhihu.com/search?content_id=112648299&amp;content_type=Article&amp;match_order=1&amp;q=梯度计算&amp;zhida_source=entity">梯度计算</a></h2><p>梯度计算主要显示的是边缘信息。计算的方法：</p>
+<blockquote>
+<p>膨胀的图像 - 腐蚀的图像</p>
+</blockquote>
+<p>我们明显的看出，用大一圈的图像减去小一圈的图像正好就是边缘的信息。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gradient = cv2.morphologyEx(img, cv2.MORPH_GRADIENT, kernel)</span><br><span class="line">cv_show(gradient)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-cd3d9881414f19c0ae5555ddc28791b6_1440w.jpg" alt="img"></p>
+<p><strong>分析：</strong> 我们可以看出来，我们形成了一个空心的字体样式</p>
+<h2 id="6、高帽和黑帽"><a href="#6、高帽和黑帽" class="headerlink" title="6、高帽和黑帽"></a>6、高帽和黑帽</h2><blockquote>
+<p>高帽计算：原始图像 - 开运算结果 黑帽计算：闭运算结果 - 原始图像</p>
+</blockquote>
+<h3 id="6-1、高帽计算"><a href="#6-1、高帽计算" class="headerlink" title="6.1、高帽计算"></a>6.1、高帽计算</h3><p>我们知道开运算的结果就是去除毛刺，我们原始图像减去开运算结果就是我们要消除的毛刺信息。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">top_hat = cv2.morphologyEx(img, cv2.MORPH_TOPHAT, kernel)</span><br><span class="line">ss = np.hstack((img, top_hat))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-49f926bc181d7c73fa6bf96fc384b20a_1440w.jpg" alt="img"></p>
+<p><strong>分析：</strong> 可以看出来，所有的毛刺信息我们全部提取了出来。</p>
+<h3 id="6-2、黑帽操作"><a href="#6-2、黑帽操作" class="headerlink" title="6.2、黑帽操作"></a>6.2、黑帽操作</h3><p>高帽操作<strong>显示毛刺</strong>，那么黑帽就是<strong>显示缺陷</strong>。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">black_hat = cv2.morphologyEx(img, cv2.MORPH_BLACKHAT, kernel)</span><br><span class="line">ss = np.hstack((img, black_hat))</span><br><span class="line">cv_show(ss)</span><br></pre></td></tr></table></figure>
+<p><img src="v2-98040e57b398cf5903ae52b77891bb74_1440w.jpg" alt="img"></p>
+<p><strong>分析：</strong> 这里我们看的不是很明显，我们只需要只要黑帽所处理的问题是什么。针对不同的场景应用不用的方法。</p>
 ]]></content>
       <categories>
         <category>504医学AI</category>
