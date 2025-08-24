@@ -109,6 +109,207 @@
       </tags>
   </entry>
   <entry>
+    <title>卷积神经网络（CNN）</title>
+    <url>/2025/08/24/CNN/</url>
+    <content><![CDATA[<h1 id="卷积神经网络（CNN）的原理"><a href="#卷积神经网络（CNN）的原理" class="headerlink" title="卷积神经网络（CNN）的原理"></a>卷积神经网络（CNN）的原理</h1><h2 id="引言："><a href="#引言：" class="headerlink" title="引言："></a>引言：</h2><blockquote>
+<p>可查看前篇文章——神经网络：构建人工智能的基石</p>
+</blockquote>
+<p>卷积神经网络（Convolutional Neural Network，CNN）是一种在计算机视觉领域取得了巨大成功的深度学习模型。它们的设计灵感来自于生物学中的视觉系统，旨在模拟人类视觉处理的方式。在过去的几年中，CNN已经在图像识别、目标检测、图像生成和许多其他领域取得了显著的进展，成为了计算机视觉和深度学习研究的重要组成部分。</p>
+<h2 id="一、图像原理"><a href="#一、图像原理" class="headerlink" title="一、图像原理"></a>一、图像原理</h2><p>在了解卷积神经网络前，我们先来看看图像的原理：</p>
+<p>图像在计算机中是一堆按顺序排列的数字，<strong>数值为0到255</strong>。0表示最暗，255表示最亮。 如下图：</p>
+<p><img src="287528d32ff227a9af61142bafa481a3.gif" alt="img"></p>
+<p>上图是只有黑白颜色的灰度图，而更普遍的图片表达方式是RGB颜色模型，即红、绿、蓝三原色的色光以不同的比例相加，以产生多种多样的色光。RGB颜色模型中，单个矩阵就扩展成了有序排列的三个矩阵，也可以用三维张量去理解。</p>
+<p>其中的<strong>每一个矩阵</strong>又叫这个图片的一个<strong>channel（通道），宽, 高, 深</strong>来描述。</p>
+<p><img src="3ee4d843020005e6c6eca4a7fa1ae539.png" alt="img"></p>
+<h2 id="二、为什么要学习卷积神经网络？"><a href="#二、为什么要学习卷积神经网络？" class="headerlink" title="二、为什么要学习卷积神经网络？"></a>二、为什么要学习卷积神经网络？</h2><p>在传统神经网络中，我们要识别下<strong>图红色框中</strong>的图像时，我们很可能识别不出来，因为这六张图的<img src="d871cc8ec807852aab00f6e1595dbdd2.png" alt="img">位置都不同，计算机<strong>无法分辨出</strong>他们其实是一种形状或物体。</p>
+<p><img src="4328b16077353c4f549246917d140cac.png" alt="img"></p>
+<p> <strong>传统神经网络</strong>原理如下图：</p>
+<p><img src="8cbc62e0ef1552e85c47a13cbbe57f08.png" alt="img"></p>
+<p>我们希望一个物体不管在画面左侧还是右侧，都会被识别为同一物体，这一特点就是<strong>不变性</strong>。为了实现平移不变性，<strong>卷积神经网络</strong>（CNN）等深度学习模型<strong>在卷积层中使用了卷积操作</strong>，这个操作可以捕捉到图像中的局部特征而不受其位置的影响。</p>
+<p><img src="6e3f9cbdf2b3caa4ca3e9b2ade9856bf.png" alt="img"></p>
+<h2 id="三、什么是卷积？"><a href="#三、什么是卷积？" class="headerlink" title="三、什么是卷积？"></a>三、什么是卷积？</h2><p>在卷积神经网络中，卷积操作是指将一个<strong>可移动的小窗口</strong>（称为数据窗口，如下图绿色矩形）与图像进行<strong>逐元素相乘然后相加</strong>的操作。这个小窗口其实是<strong>一组固定的权重</strong>，它可以被看作是一个特定的<strong>滤波器</strong>（filter）或<strong>卷积核</strong>。这个操作的名称“卷积”，源自于这种元素级相乘和求和的过程。这一操作是卷积神经网络名字的来源。</p>
+<p><img src="7e9292ea51a94bae998fc2a3239eedfc.png" alt="img"></p>
+<p>上图这个绿色小窗就是数据窗口。简而言之，<strong>卷积操作就是用一个可移动的小窗口来提取图像中的特征</strong>，这个小窗口包含了一组特定的权重，通过与图像的不同位置进行卷积操作，网络能够学习并捕捉到不同特征的信息。文字解释可能太难懂，下面直接上动图：</p>
+<p><img src="d0172774f7e42ae2f6310b63e59b4906.gif" alt="img"></p>
+<p>这张图中<strong>蓝色的框</strong>就是指一个数据窗口，红色框为卷积核（滤波器），最后得到的绿色方形就是卷积的结果（数据窗口中的数据与卷积核逐个元素相乘再求和）</p>
+<h4 id="一张图带你了解卷积计算过程："><a href="#一张图带你了解卷积计算过程：" class="headerlink" title="一张图带你了解卷积计算过程："></a>一张图带你了解卷积计算过程：</h4><p><img src="7b8af7c9507e7652df6ff7e3c14f8a1f.png" alt="img"></p>
+<h4 id="卷积需要注意哪些问题？"><a href="#卷积需要注意哪些问题？" class="headerlink" title="卷积需要注意哪些问题？"></a>卷积需要注意哪些问题？</h4><p>a. <strong>步长stride</strong>：每次滑动的位置步长。</p>
+<p>b. <strong>卷积核的个数</strong>：决定输出的depth厚度。同时代表卷积核的个数。</p>
+<p>c. <strong>填充值zero-padding</strong>：在外围边缘补充若干圈0，方便从初始位置以步长为单位可以刚好滑倒末尾位置，通俗地讲就是为了总长能被步长整除。</p>
+<p>以上图为例，那么：</p>
+<ul>
+<li>数据窗口每次移动两个步长取 3*3 的局部数据，即 stride=2 。</li>
+<li>两个神经元，即 depth=2 ，意味着有两个滤波</li>
+<li>zero-padding=1 。</li>
+</ul>
+<h4 id="为什么要进行数据填充："><a href="#为什么要进行数据填充：" class="headerlink" title="为什么要进行数据填充："></a>为什么要进行数据填充：</h4><p>假设有一个大小为 4x4 的输入图像：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[[1,  2,  3,  4 ],</span><br><span class="line"> [5,  6,  7,  8 ], </span><br><span class="line"> [9,  10, 11, 12], </span><br><span class="line"> [13, 14, 15, 16]]</span><br></pre></td></tr></table></figure>
+<p>现在，我们要应用一个 3x3 的卷积核进行卷积操作，步幅（stride）为 1，且要使用填充（padding）为 1。如果不使用填充，<strong>卷积核的中心将无法对齐到输入图像的边缘</strong>，导致输出特征图尺寸变小。假设我们使用步幅（stride）为 1 进行卷积，那么在不使用填充的情况下，输出特征图的尺寸将是 2x2。</p>
+<p>所以我们要在它的周围填充一圈0，填充为 1 意味着在输入图像的周围添加一圈零值。添加填充后的图像：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[[0, 0,  0,  0,  0,  0], </span><br><span class="line"> [0, 1,  2,  3,  4,  0], </span><br><span class="line"> [0, 5,  6,  7,  8,  0], </span><br><span class="line"> [0, 9,  10, 11, 12, 0], </span><br><span class="line"> [0, 13, 14, 15, 16, 0], </span><br><span class="line"> [0, 0,  0,  0,  0,  0]]</span><br></pre></td></tr></table></figure>
+<p>现在，我们将 3x3 的卷积核应用于这个填充后的输入图像，计算卷积结果，得到大小不变的特征图。</p>
+<p>数据填充的主要目的是<strong>确保卷积核能够覆盖输入图像的边缘区域，同时保持输出特征图的大小</strong>。这对于在CNN中保留空间信息和有效处理图像边缘信息非常重要。</p>
+<h4 id="卷积神经网络的模型是什么样的？"><a href="#卷积神经网络的模型是什么样的？" class="headerlink" title="卷积神经网络的模型是什么样的？"></a>卷积神经网络的模型是什么样的？</h4><p><img src="e76acb80eeb8bff2a722727bcc090336.png" alt="img"></p>
+<p>上面红框框起来的部分便可以<strong>理解为一个滤波器</strong>，即带着<strong>一组固定权重的神经元</strong>。<strong>多个滤波器叠加便成了卷积层</strong>。</p>
+<h2 id="四、卷积神经网络的构造"><a href="#四、卷积神经网络的构造" class="headerlink" title="四、卷积神经网络的构造"></a>四、卷积神经网络的构造</h2><p><img src="3c266da23107494b04b09683b8427f0e.png" alt="img"></p>
+<ol>
+<li><p><strong>输入层</strong><br>输入层接收原始图像数据。图像通常由三个颜色通道（红、绿、蓝）组成，形成一个二维矩阵，表示像素的强度值。</p>
+</li>
+<li><p><strong>卷积和激活</strong><br>卷积层将输入图像与卷积核进行卷积操作。然后，通过应用激活函数（如ReLU）来引入非线性。这一步使网络能够学习复杂的特征。</p>
+</li>
+<li><p><strong>池化层</strong><br>池化层通过减小特征图的大小来减少计算复杂性。它通过选择池化窗口内的最大值或平均值来实现。这有助于提取最重要的特征。</p>
+</li>
+<li><p><strong>多层堆叠</strong><br>CNN通常由多个卷积和池化层的堆叠组成，以逐渐提取更高级别的特征。深层次的特征可以表示更复杂的模式。</p>
+</li>
+<li><p><strong>全连接和输出</strong><br>最后，全连接层将提取的特征映射转化为网络的最终输出。这可以是一个分类标签、回归值或其他任务的结果。</p>
+</li>
+</ol>
+<p>形象的过程如下图：</p>
+<div><table frame="void">    <!--用了<div>进行封装-->
+    <tr>
+        <td><div><center>    <!--每个格子内是图片加标题-->
+            <img src="487282ce8ead390f92a390a1471bb65b-1756040177840-66.gif" alt height="300">    <!--高度设置-->
+            <br>    <!--换行-->
+            展开形式    <!--标题1-->
+        </center></div></td>    
+         <td><div><center>    <!--第二张图片-->
+            <img src="22ee60a67e1fad3d7dba9cbef60c9c11.png" alt="Typora-Logo" height="300">    
+            <br>
+            未展开形式
+        </center></div></td>
+    </tr>
+</table></div>
+
+<h2 id="五、图片经过卷积后的样子"><a href="#五、图片经过卷积后的样子" class="headerlink" title="五、图片经过卷积后的样子"></a>五、图片经过卷积后的样子</h2><p>与人眼观看事物原理相似，卷积神经网络可以看到事物的轮廓</p>
+<p><img src="34501738b7bedc58964269aef8305ee3.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>504医学AI</category>
+      </categories>
+      <tags>
+        <tag>504医学AI入门</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Week4</title>
+    <url>/2025/08/10/Week4/</url>
+    <content><![CDATA[<h1 id="Opencv（二）"><a href="#Opencv（二）" class="headerlink" title="Opencv（二）"></a>Opencv（二）</h1><h2 id="一、图像基础知识复习"><a href="#一、图像基础知识复习" class="headerlink" title="一、图像基础知识复习"></a>一、图像基础知识复习</h2><ol>
+<li><p>图像是由像素构成的</p>
+<p>像素点的多少决定了图片的质量（相同图片大小，像素点越多，单个像素点越小，图片质量越好）</p>
+<p><img src="image-20250810124134321.png" alt="image-20250810124134321"></p>
+</li>
+<li><p>图像的分类</p>
+<p><img src="image-20250810124203155.png" alt="image-20250810124203155"></p>
+<ul>
+<li><p>二值图像：像素点非0即1</p>
+<p><img src="image-20250810124322219.png" alt="image-20250810124322219"></p>
+</li>
+<li><p>灰度图像：像素点有256个结果</p>
+<p><img src="image-20250810124332896.png" alt="image-20250810124332896"></p>
+</li>
+<li><p>彩色图像：由三通道（三原色RGB）进行叠加的图像</p>
+<p><img src="image-20250810124404611.png" alt="image-20250810124404611"></p>
+</li>
+</ul>
+</li>
+<li><p>Opencv读取彩色图像的特点</p>
+<ul>
+<li><p>读取结果：BGR（注意顺序）</p>
+</li>
+<li><p>每个像素点由BGR三个分量构成</p>
+<p>例：（245，168，200）-&gt; B：245 、G：168、R：200</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="二、灰度图片像素的选取与修改"><a href="#二、灰度图片像素的选取与修改" class="headerlink" title="二、灰度图片像素的选取与修改"></a>二、灰度图片像素的选取与修改</h2><ul>
+<li><p>源码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line">gray_img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 0)</span><br><span class="line">cv2.imshow(&#x27;gray_img&#x27;, gray_img)</span><br><span class="line"></span><br><span class="line"># 选取灰度图像的某个像素点【矩阵-numpy中的数组】</span><br><span class="line">gray_img[100,100]</span><br><span class="line">gray_img[100,200]</span><br><span class="line"></span><br><span class="line"># 选取某些像素点</span><br><span class="line">gray_img[100:200,100:200]</span><br><span class="line"></span><br><span class="line"># 修改像素点[0~255]</span><br><span class="line">gray_img1 = gray_img.copy() # 拷贝</span><br><span class="line">gray_img1[100:200,100:200] = 0</span><br><span class="line"># gray_img1[100:200,100:200] = 100</span><br><span class="line"># gray_img1[100:200,100:200] = 255</span><br><span class="line">cv2.imshow(&#x27;gray_img1&#x27;, gray_img1)</span><br><span class="line"></span><br><span class="line"># 0：表示任意键关闭; 具体数字，表示毫秒</span><br><span class="line">cv2.waitKey() </span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果</p>
+<p><img src="%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-10%20130828.png" alt="屏幕截图 2025-08-10 130828"></p>
+</li>
+</ul>
+<h2 id="三、显示图片的一些问题"><a href="#三、显示图片的一些问题" class="headerlink" title="三、显示图片的一些问题"></a>三、显示图片的一些问题</h2><ol>
+<li>显示图片时候的“备注“（即<code>cv2.imshow(&#39;gray_img1&#39;, gray_img1</code>中‘ ’内部的内容)作为图片的区分不一致时才可以同时显示多张图片</li>
+<li><code>cv2.waitKey()</code>和<code>cv2.destroyAllWindows()</code>必须同时存在</li>
+</ol>
+<h2 id="四、彩色图片像素的选取与修改"><a href="#四、彩色图片像素的选取与修改" class="headerlink" title="四、彩色图片像素的选取与修改"></a>四、彩色图片像素的选取与修改</h2><ul>
+<li><p>源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line"></span><br><span class="line"># 选取彩色图片某个像素点</span><br><span class="line"># BGR -&gt; 指对应的(100,100)的坐标</span><br><span class="line">print(img[100, 100])</span><br><span class="line">print(img[100, 100, 0])</span><br><span class="line">print(img[100, 100, 1])</span><br><span class="line">print(img[100, 100, 2])</span><br><span class="line"></span><br><span class="line"># 选择某些像素点</span><br><span class="line">print(img[100:200,100:200,0])</span><br><span class="line">print(img[100:200,100:200,1])</span><br><span class="line">print(img[100:200,100:200])</span><br><span class="line"></span><br><span class="line"># 修改某个像素点</span><br><span class="line">img1 = img.copy()</span><br><span class="line">img1[100,100,0] = 0</span><br><span class="line">print(img[100,100])</span><br><span class="line">print(img1[100,100])</span><br><span class="line"></span><br><span class="line"># 修改某些像素点</span><br><span class="line">img1[100:200, 100:200,0] = 0</span><br><span class="line">print(img[100:200, 100:200])</span><br><span class="line">print(img1[100:200, 100:200])</span><br><span class="line">img1[100:200, 100:200,1] = 0</span><br><span class="line">print(img[100:200, 100:200])</span><br><span class="line">print(img1[100:200, 100:200])</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line"></span><br><span class="line">cv2.waitKey() </span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果</p>
+<p><img src="image-20250810132859092.png" alt="image-20250810132859092"></p>
+</li>
+</ul>
+<h2 id="五、获取图像的基本属性"><a href="#五、获取图像的基本属性" class="headerlink" title="五、获取图像的基本属性"></a>五、获取图像的基本属性</h2><ul>
+<li><p>源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line"></span><br><span class="line"># 灰度图像</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 0)</span><br><span class="line"># cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line"></span><br><span class="line"># 获取灰度图像的形状[二维的元组]</span><br><span class="line">print(img.shape)</span><br><span class="line"># 获取灰度图像的大小[指行*列(像素点的个数)]</span><br><span class="line">print(img.size)</span><br><span class="line"># 图像的数据类型&lt;class &#x27;numpy.ndarray&#x27;&gt;</span><br><span class="line">print(type(img))</span><br><span class="line"># 获取像素点的数据类型 uint8</span><br><span class="line">print(img.dtype)</span><br><span class="line"></span><br><span class="line"># 彩色图片</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line"># cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line"></span><br><span class="line"># 获取彩色图像的形状[三维的元组]</span><br><span class="line">print(img.shape)</span><br><span class="line"># 获取彩色图像的大小[指行*列*通道数(3)]</span><br><span class="line">print(img.size)</span><br><span class="line"># 图像的数据类型&lt;class &#x27;numpy.ndarray&#x27;&gt;</span><br><span class="line">print(type(img))</span><br><span class="line"># 获取像素点的数据类型 uint8</span><br><span class="line">print(img.dtype)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="六、提取感兴趣的ROI区域"><a href="#六、提取感兴趣的ROI区域" class="headerlink" title="六、提取感兴趣的ROI区域"></a>六、提取感兴趣的ROI区域</h2><ul>
+<li><p>源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># ROI区域</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;,img)</span><br><span class="line"></span><br><span class="line"># 知道图片的shape[(1333, 750, 3)]</span><br><span class="line">print(img.shape)</span><br><span class="line"></span><br><span class="line"># new_img = img[300:800, 100:360]</span><br><span class="line">new_img = img[415:525, 200:300]</span><br><span class="line">cv2.imshow(&#x27;after&#x27;,new_img)</span><br><span class="line"></span><br><span class="line"># 写出新图片</span><br><span class="line">cv2.imwrite(r&#x27;/home/jiax/workspace/Python Learning/Opencv-course/after.jpg&#x27;, new_img)</span><br><span class="line"></span><br><span class="line">img[:110,:100] = new_img</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, img)</span><br><span class="line"></span><br><span class="line">img1 = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 1)</span><br><span class="line">img1[:110,:100] = new_img</span><br><span class="line">cv2.imshow(&#x27;new_img1&#x27;, img1)</span><br><span class="line"></span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ROI区域效果图：</p>
+<p><img src="image-20250810135256764.png" alt="image-20250810135256764"></p>
+<p><img src="image-20250810135806330.png" alt="image-20250810135806330"></p>
+</li>
+</ul>
+<h2 id="七、图像的加法"><a href="#七、图像的加法" class="headerlink" title="七、图像的加法"></a>七、图像的加法</h2><ul>
+<li><p>源码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像的加法 -&gt;矩阵</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">img1 = img.copy()</span><br><span class="line"></span><br><span class="line"># 加法【前提：必须是一样大的矩阵；对应元素求和】</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">像素点：[0,255]超过255怎么办【取余】</span><br><span class="line">150 + 150 = 300</span><br><span class="line">300 % 255 = 45</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">result1 = img + img1</span><br><span class="line">cv2.imshow(&#x27;result1&#x27;, result1)</span><br><span class="line"></span><br><span class="line"># opencv 提供给了add()函数</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">像素点：[0,255]超过255怎么办【按255算】</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">result2 = cv2.add(img, img1)</span><br><span class="line">cv2.imshow(&#x27;result2&#x27;, result2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>演示效果</p>
+<p><img src="image-20250810193716787.png" alt="image-20250810193716787"></p>
+</li>
+</ul>
+<h2 id="八、图片融合"><a href="#八、图片融合" class="headerlink" title="八、图片融合"></a>八、图片融合</h2><blockquote>
+<p>注意：图片相加不是图片融合</p>
+</blockquote>
+<ul>
+<li><p>源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图片融合：将两张图片放在一张上</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">前提：图片的shape一样</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img1 = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/1.jpg&quot;, 1)</span><br><span class="line">img2 = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2.jpg&quot;, 1)</span><br><span class="line"></span><br><span class="line"># 前提：图片的shape一样</span><br><span class="line">print(img1.shape)</span><br><span class="line">print(img2.shape)</span><br><span class="line"></span><br><span class="line"># 图片融合</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">addWeighted(src1, alpha,src2,beta,gamma)</span><br><span class="line">src1\src2：第一张和第二张图片</span><br><span class="line">alpha\beta：第一张图片的权重、第二张图片的权重</span><br><span class="line">gamma：亮度的调节</span><br><span class="line"># </span><br><span class="line">0.8*img1 + 0.2*img2 + gamma</span><br><span class="line">[0, 255]：超过255仍按照255算，即亮度非常大时，图片所有像素点权全为255（全白）</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">result = cv2.addWeighted(img1, 0.8, img2, 0.2, 100)</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line">cv2.imshow(&#x27;img2&#x27;, img2)</span><br><span class="line">cv2.imshow(&#x27;result&#x27;, result)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果：</p>
+<p><img src="image-20250810195225642.png" alt="image-20250810195225642"></p>
+<p><img src="image-20250810195658468.png" alt="image-20250810195658468"></p>
+</li>
+</ul>
+<h2 id="九、-图像的类型转换"><a href="#九、-图像的类型转换" class="headerlink" title="九、 图像的类型转换"></a>九、 图像的类型转换</h2><ul>
+<li><p>源码:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像的类型转换</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cv2里面的图像类型转换远远不止介绍的这些，共由两百多个</span><br><span class="line">需要学会自己去查自己想要的转化方式</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line"></span><br><span class="line"># 原始图片：BGR-&gt;RGB (本质即为0和2列进行了对调)</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cvtColor(img,way)</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)</span><br><span class="line">cv2.imshow(&#x27;img_rgb&#x27;, img_rgb)</span><br><span class="line"></span><br><span class="line">img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line">cv2.imshow(&#x27;img_gray&#x27;, img_gray)</span><br><span class="line"></span><br><span class="line"># 读取灰度图片</span><br><span class="line">img1 = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line">img_rgb = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line">b, g, r = cv2.split(img1)</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line">cv2.imshow(&#x27;b&#x27;,b)</span><br><span class="line">cv2.imshow(&#x27;g&#x27;,g)</span><br><span class="line">cv2.imshow(&#x27;r&#x27;,r)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果：</p>
+<p><img src="image-20250810201809881.png" alt="image-20250810201809881"></p>
+<p><img src="image-20250810201859638.png" alt="image-20250810201859638"></p>
+</li>
+</ul>
+<h2 id="十、图像的缩放"><a href="#十、图像的缩放" class="headerlink" title="十、图像的缩放"></a>十、图像的缩放</h2><ul>
+<li><p>源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像的缩放</span><br><span class="line"># 本质：矩阵的变换</span><br><span class="line"></span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cv2.resize(src, dsize, fx, fy)</span><br><span class="line">src：源图片【需要被缩放的照片img(100*100)】</span><br><span class="line">dsize：缩放到的大小(200*200)[列(W) * 行(H)]</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">size = (1000,500)</span><br><span class="line">new_img = cv2.resize(img, size)</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line"></span><br><span class="line"># 指定列、行的缩放大小</span><br><span class="line">h, w, ch = img.shape</span><br><span class="line">size = (int(0.5*w), int(1.5*h))</span><br><span class="line">new_img1 = cv2.resize(img, size)</span><br><span class="line">cv2.imshow(&#x27;new_img1&#x27;, new_img1)</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cv2.resize(src, dsize, fx, fy)</span><br><span class="line">src：原图片【需要被缩放的照片img(100*100)】</span><br><span class="line">dsize：None</span><br><span class="line">fx：x方向上的比例</span><br><span class="line">fy：y方向上的比例</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">new_img2 = cv2.resize(img, None, fx=0.5, fy=0.5)</span><br><span class="line">cv2.imshow(&#x27;new_img2&#x27;, new_img2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果：</p>
+<p><img src="image-20250810203427079.png" alt="image-20250810203427079"></p>
+</li>
+</ul>
+<h2 id="十一、图像的翻转"><a href="#十一、图像的翻转" class="headerlink" title="十一、图像的翻转"></a>十一、图像的翻转</h2><ul>
+<li><p>源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像的翻转</span><br><span class="line"># 本质：矩阵的翻转</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">1. 沿着x轴进行翻转</span><br><span class="line">2. 沿着y轴进行翻转</span><br><span class="line">3. 同时沿着x轴和y轴进行翻转</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/1.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cv2.flip(src, flipCode)</span><br><span class="line">src：源图像</span><br><span class="line">flipCode：翻转形式</span><br><span class="line">    0：沿着x轴进行翻转</span><br><span class="line">    1(大于等于1)：沿着y轴进行翻转</span><br><span class="line">    -1(小于等于-1)：同时沿着x轴和y轴进行翻转</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">new_img1 = cv2.flip(img, 0)</span><br><span class="line">cv2.imshow(&#x27;new_img1&#x27;, new_img1)</span><br><span class="line">new_img2= cv2.flip(img, 1)</span><br><span class="line"># new_img2= cv2.flip(img, 10)</span><br><span class="line">cv2.imshow(&#x27;new_img2&#x27;, new_img2)</span><br><span class="line">new_img3 = cv2.flip(img, -1)</span><br><span class="line"># new_img3 = cv2.flip(img, -10)</span><br><span class="line">cv2.imshow(&#x27;new_img3&#x27;, new_img3)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果：</p>
+<p><img src="image-20250810205116045.png" alt="image-20250810205116045"></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>504医学AI</category>
+      </categories>
+      <tags>
+        <tag>504医学AI入门</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Week1</title>
     <url>/2025/07/20/Week1/</url>
     <content><![CDATA[<h1 id="语义分割"><a href="#语义分割" class="headerlink" title="语义分割"></a>语义分割</h1><blockquote>
@@ -328,207 +529,6 @@
       </tags>
   </entry>
   <entry>
-    <title>卷积神经网络（CNN）</title>
-    <url>/2025/08/24/CNN/</url>
-    <content><![CDATA[<h1 id="卷积神经网络（CNN）的原理"><a href="#卷积神经网络（CNN）的原理" class="headerlink" title="卷积神经网络（CNN）的原理"></a>卷积神经网络（CNN）的原理</h1><h2 id="引言："><a href="#引言：" class="headerlink" title="引言："></a>引言：</h2><blockquote>
-<p>可查看前篇文章——神经网络：构建人工智能的基石</p>
-</blockquote>
-<p>卷积神经网络（Convolutional Neural Network，CNN）是一种在计算机视觉领域取得了巨大成功的深度学习模型。它们的设计灵感来自于生物学中的视觉系统，旨在模拟人类视觉处理的方式。在过去的几年中，CNN已经在图像识别、目标检测、图像生成和许多其他领域取得了显著的进展，成为了计算机视觉和深度学习研究的重要组成部分。</p>
-<h2 id="一、图像原理"><a href="#一、图像原理" class="headerlink" title="一、图像原理"></a>一、图像原理</h2><p>在了解卷积神经网络前，我们先来看看图像的原理：</p>
-<p>图像在计算机中是一堆按顺序排列的数字，<strong>数值为0到255</strong>。0表示最暗，255表示最亮。 如下图：</p>
-<p><img src="287528d32ff227a9af61142bafa481a3.gif" alt="img"></p>
-<p>上图是只有黑白颜色的灰度图，而更普遍的图片表达方式是RGB颜色模型，即红、绿、蓝三原色的色光以不同的比例相加，以产生多种多样的色光。RGB颜色模型中，单个矩阵就扩展成了有序排列的三个矩阵，也可以用三维张量去理解。</p>
-<p>其中的<strong>每一个矩阵</strong>又叫这个图片的一个<strong>channel（通道），宽, 高, 深</strong>来描述。</p>
-<p><img src="3ee4d843020005e6c6eca4a7fa1ae539.png" alt="img"></p>
-<h2 id="二、为什么要学习卷积神经网络？"><a href="#二、为什么要学习卷积神经网络？" class="headerlink" title="二、为什么要学习卷积神经网络？"></a>二、为什么要学习卷积神经网络？</h2><p>在传统神经网络中，我们要识别下<strong>图红色框中</strong>的图像时，我们很可能识别不出来，因为这六张图的<img src="d871cc8ec807852aab00f6e1595dbdd2.png" alt="img">位置都不同，计算机<strong>无法分辨出</strong>他们其实是一种形状或物体。</p>
-<p><img src="4328b16077353c4f549246917d140cac.png" alt="img"></p>
-<p> <strong>传统神经网络</strong>原理如下图：</p>
-<p><img src="8cbc62e0ef1552e85c47a13cbbe57f08.png" alt="img"></p>
-<p>我们希望一个物体不管在画面左侧还是右侧，都会被识别为同一物体，这一特点就是<strong>不变性</strong>。为了实现平移不变性，<strong>卷积神经网络</strong>（CNN）等深度学习模型<strong>在卷积层中使用了卷积操作</strong>，这个操作可以捕捉到图像中的局部特征而不受其位置的影响。</p>
-<p><img src="6e3f9cbdf2b3caa4ca3e9b2ade9856bf.png" alt="img"></p>
-<h2 id="三、什么是卷积？"><a href="#三、什么是卷积？" class="headerlink" title="三、什么是卷积？"></a>三、什么是卷积？</h2><p>在卷积神经网络中，卷积操作是指将一个<strong>可移动的小窗口</strong>（称为数据窗口，如下图绿色矩形）与图像进行<strong>逐元素相乘然后相加</strong>的操作。这个小窗口其实是<strong>一组固定的权重</strong>，它可以被看作是一个特定的<strong>滤波器</strong>（filter）或<strong>卷积核</strong>。这个操作的名称“卷积”，源自于这种元素级相乘和求和的过程。这一操作是卷积神经网络名字的来源。</p>
-<p><img src="7e9292ea51a94bae998fc2a3239eedfc.png" alt="img"></p>
-<p>上图这个绿色小窗就是数据窗口。简而言之，<strong>卷积操作就是用一个可移动的小窗口来提取图像中的特征</strong>，这个小窗口包含了一组特定的权重，通过与图像的不同位置进行卷积操作，网络能够学习并捕捉到不同特征的信息。文字解释可能太难懂，下面直接上动图：</p>
-<p><img src="d0172774f7e42ae2f6310b63e59b4906.gif" alt="img"></p>
-<p>这张图中<strong>蓝色的框</strong>就是指一个数据窗口，红色框为卷积核（滤波器），最后得到的绿色方形就是卷积的结果（数据窗口中的数据与卷积核逐个元素相乘再求和）</p>
-<h4 id="一张图带你了解卷积计算过程："><a href="#一张图带你了解卷积计算过程：" class="headerlink" title="一张图带你了解卷积计算过程："></a>一张图带你了解卷积计算过程：</h4><p><img src="7b8af7c9507e7652df6ff7e3c14f8a1f.png" alt="img"></p>
-<h4 id="卷积需要注意哪些问题？"><a href="#卷积需要注意哪些问题？" class="headerlink" title="卷积需要注意哪些问题？"></a>卷积需要注意哪些问题？</h4><p>a. <strong>步长stride</strong>：每次滑动的位置步长。</p>
-<p>b. <strong>卷积核的个数</strong>：决定输出的depth厚度。同时代表卷积核的个数。</p>
-<p>c. <strong>填充值zero-padding</strong>：在外围边缘补充若干圈0，方便从初始位置以步长为单位可以刚好滑倒末尾位置，通俗地讲就是为了总长能被步长整除。</p>
-<p>以上图为例，那么：</p>
-<ul>
-<li>数据窗口每次移动两个步长取 3*3 的局部数据，即 stride=2 。</li>
-<li>两个神经元，即 depth=2 ，意味着有两个滤波</li>
-<li>zero-padding=1 。</li>
-</ul>
-<h4 id="为什么要进行数据填充："><a href="#为什么要进行数据填充：" class="headerlink" title="为什么要进行数据填充："></a>为什么要进行数据填充：</h4><p>假设有一个大小为 4x4 的输入图像：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[[1,  2,  3,  4 ],</span><br><span class="line"> [5,  6,  7,  8 ], </span><br><span class="line"> [9,  10, 11, 12], </span><br><span class="line"> [13, 14, 15, 16]]</span><br></pre></td></tr></table></figure>
-<p>现在，我们要应用一个 3x3 的卷积核进行卷积操作，步幅（stride）为 1，且要使用填充（padding）为 1。如果不使用填充，<strong>卷积核的中心将无法对齐到输入图像的边缘</strong>，导致输出特征图尺寸变小。假设我们使用步幅（stride）为 1 进行卷积，那么在不使用填充的情况下，输出特征图的尺寸将是 2x2。</p>
-<p>所以我们要在它的周围填充一圈0，填充为 1 意味着在输入图像的周围添加一圈零值。添加填充后的图像：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[[0, 0,  0,  0,  0,  0], </span><br><span class="line"> [0, 1,  2,  3,  4,  0], </span><br><span class="line"> [0, 5,  6,  7,  8,  0], </span><br><span class="line"> [0, 9,  10, 11, 12, 0], </span><br><span class="line"> [0, 13, 14, 15, 16, 0], </span><br><span class="line"> [0, 0,  0,  0,  0,  0]]</span><br></pre></td></tr></table></figure>
-<p>现在，我们将 3x3 的卷积核应用于这个填充后的输入图像，计算卷积结果，得到大小不变的特征图。</p>
-<p>数据填充的主要目的是<strong>确保卷积核能够覆盖输入图像的边缘区域，同时保持输出特征图的大小</strong>。这对于在CNN中保留空间信息和有效处理图像边缘信息非常重要。</p>
-<h4 id="卷积神经网络的模型是什么样的？"><a href="#卷积神经网络的模型是什么样的？" class="headerlink" title="卷积神经网络的模型是什么样的？"></a>卷积神经网络的模型是什么样的？</h4><p><img src="e76acb80eeb8bff2a722727bcc090336.png" alt="img"></p>
-<p>上面红框框起来的部分便可以<strong>理解为一个滤波器</strong>，即带着<strong>一组固定权重的神经元</strong>。<strong>多个滤波器叠加便成了卷积层</strong>。</p>
-<h2 id="四、卷积神经网络的构造"><a href="#四、卷积神经网络的构造" class="headerlink" title="四、卷积神经网络的构造"></a>四、卷积神经网络的构造</h2><p><img src="3c266da23107494b04b09683b8427f0e.png" alt="img"></p>
-<ol>
-<li><p><strong>输入层</strong><br>输入层接收原始图像数据。图像通常由三个颜色通道（红、绿、蓝）组成，形成一个二维矩阵，表示像素的强度值。</p>
-</li>
-<li><p><strong>卷积和激活</strong><br>卷积层将输入图像与卷积核进行卷积操作。然后，通过应用激活函数（如ReLU）来引入非线性。这一步使网络能够学习复杂的特征。</p>
-</li>
-<li><p><strong>池化层</strong><br>池化层通过减小特征图的大小来减少计算复杂性。它通过选择池化窗口内的最大值或平均值来实现。这有助于提取最重要的特征。</p>
-</li>
-<li><p><strong>多层堆叠</strong><br>CNN通常由多个卷积和池化层的堆叠组成，以逐渐提取更高级别的特征。深层次的特征可以表示更复杂的模式。</p>
-</li>
-<li><p><strong>全连接和输出</strong><br>最后，全连接层将提取的特征映射转化为网络的最终输出。这可以是一个分类标签、回归值或其他任务的结果。</p>
-</li>
-</ol>
-<p>形象的过程如下图：</p>
-<div><table frame="void">    <!--用了<div>进行封装-->
-    <tr>
-        <td><div><center>    <!--每个格子内是图片加标题-->
-            <img src="487282ce8ead390f92a390a1471bb65b-1756040177840-66.gif" alt height="300">    <!--高度设置-->
-            <br>    <!--换行-->
-            展开形式    <!--标题1-->
-        </center></div></td>    
-         <td><div><center>    <!--第二张图片-->
-            <img src="22ee60a67e1fad3d7dba9cbef60c9c11.png" alt="Typora-Logo" height="300">    
-            <br>
-            未展开形式
-        </center></div></td>
-    </tr>
-</table></div>
-
-<h2 id="五、图片经过卷积后的样子"><a href="#五、图片经过卷积后的样子" class="headerlink" title="五、图片经过卷积后的样子"></a>五、图片经过卷积后的样子</h2><p>与人眼观看事物原理相似，卷积神经网络可以看到事物的轮廓</p>
-<p><img src="34501738b7bedc58964269aef8305ee3.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>504医学AI</category>
-      </categories>
-      <tags>
-        <tag>504医学AI入门</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Week4</title>
-    <url>/2025/08/10/Week4/</url>
-    <content><![CDATA[<h1 id="Opencv（二）"><a href="#Opencv（二）" class="headerlink" title="Opencv（二）"></a>Opencv（二）</h1><h2 id="一、图像基础知识复习"><a href="#一、图像基础知识复习" class="headerlink" title="一、图像基础知识复习"></a>一、图像基础知识复习</h2><ol>
-<li><p>图像是由像素构成的</p>
-<p>像素点的多少决定了图片的质量（相同图片大小，像素点越多，单个像素点越小，图片质量越好）</p>
-<p><img src="image-20250810124134321.png" alt="image-20250810124134321"></p>
-</li>
-<li><p>图像的分类</p>
-<p><img src="image-20250810124203155.png" alt="image-20250810124203155"></p>
-<ul>
-<li><p>二值图像：像素点非0即1</p>
-<p><img src="image-20250810124322219.png" alt="image-20250810124322219"></p>
-</li>
-<li><p>灰度图像：像素点有256个结果</p>
-<p><img src="image-20250810124332896.png" alt="image-20250810124332896"></p>
-</li>
-<li><p>彩色图像：由三通道（三原色RGB）进行叠加的图像</p>
-<p><img src="image-20250810124404611.png" alt="image-20250810124404611"></p>
-</li>
-</ul>
-</li>
-<li><p>Opencv读取彩色图像的特点</p>
-<ul>
-<li><p>读取结果：BGR（注意顺序）</p>
-</li>
-<li><p>每个像素点由BGR三个分量构成</p>
-<p>例：（245，168，200）-&gt; B：245 、G：168、R：200</p>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="二、灰度图片像素的选取与修改"><a href="#二、灰度图片像素的选取与修改" class="headerlink" title="二、灰度图片像素的选取与修改"></a>二、灰度图片像素的选取与修改</h2><ul>
-<li><p>源码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line">gray_img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 0)</span><br><span class="line">cv2.imshow(&#x27;gray_img&#x27;, gray_img)</span><br><span class="line"></span><br><span class="line"># 选取灰度图像的某个像素点【矩阵-numpy中的数组】</span><br><span class="line">gray_img[100,100]</span><br><span class="line">gray_img[100,200]</span><br><span class="line"></span><br><span class="line"># 选取某些像素点</span><br><span class="line">gray_img[100:200,100:200]</span><br><span class="line"></span><br><span class="line"># 修改像素点[0~255]</span><br><span class="line">gray_img1 = gray_img.copy() # 拷贝</span><br><span class="line">gray_img1[100:200,100:200] = 0</span><br><span class="line"># gray_img1[100:200,100:200] = 100</span><br><span class="line"># gray_img1[100:200,100:200] = 255</span><br><span class="line">cv2.imshow(&#x27;gray_img1&#x27;, gray_img1)</span><br><span class="line"></span><br><span class="line"># 0：表示任意键关闭; 具体数字，表示毫秒</span><br><span class="line">cv2.waitKey() </span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>效果</p>
-<p><img src="%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-10%20130828.png" alt="屏幕截图 2025-08-10 130828"></p>
-</li>
-</ul>
-<h2 id="三、显示图片的一些问题"><a href="#三、显示图片的一些问题" class="headerlink" title="三、显示图片的一些问题"></a>三、显示图片的一些问题</h2><ol>
-<li>显示图片时候的“备注“（即<code>cv2.imshow(&#39;gray_img1&#39;, gray_img1</code>中‘ ’内部的内容)作为图片的区分不一致时才可以同时显示多张图片</li>
-<li><code>cv2.waitKey()</code>和<code>cv2.destroyAllWindows()</code>必须同时存在</li>
-</ol>
-<h2 id="四、彩色图片像素的选取与修改"><a href="#四、彩色图片像素的选取与修改" class="headerlink" title="四、彩色图片像素的选取与修改"></a>四、彩色图片像素的选取与修改</h2><ul>
-<li><p>源码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line"></span><br><span class="line"># 选取彩色图片某个像素点</span><br><span class="line"># BGR -&gt; 指对应的(100,100)的坐标</span><br><span class="line">print(img[100, 100])</span><br><span class="line">print(img[100, 100, 0])</span><br><span class="line">print(img[100, 100, 1])</span><br><span class="line">print(img[100, 100, 2])</span><br><span class="line"></span><br><span class="line"># 选择某些像素点</span><br><span class="line">print(img[100:200,100:200,0])</span><br><span class="line">print(img[100:200,100:200,1])</span><br><span class="line">print(img[100:200,100:200])</span><br><span class="line"></span><br><span class="line"># 修改某个像素点</span><br><span class="line">img1 = img.copy()</span><br><span class="line">img1[100,100,0] = 0</span><br><span class="line">print(img[100,100])</span><br><span class="line">print(img1[100,100])</span><br><span class="line"></span><br><span class="line"># 修改某些像素点</span><br><span class="line">img1[100:200, 100:200,0] = 0</span><br><span class="line">print(img[100:200, 100:200])</span><br><span class="line">print(img1[100:200, 100:200])</span><br><span class="line">img1[100:200, 100:200,1] = 0</span><br><span class="line">print(img[100:200, 100:200])</span><br><span class="line">print(img1[100:200, 100:200])</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line"></span><br><span class="line">cv2.waitKey() </span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>效果</p>
-<p><img src="image-20250810132859092.png" alt="image-20250810132859092"></p>
-</li>
-</ul>
-<h2 id="五、获取图像的基本属性"><a href="#五、获取图像的基本属性" class="headerlink" title="五、获取图像的基本属性"></a>五、获取图像的基本属性</h2><ul>
-<li><p>源码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line"></span><br><span class="line"># 灰度图像</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 0)</span><br><span class="line"># cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line"></span><br><span class="line"># 获取灰度图像的形状[二维的元组]</span><br><span class="line">print(img.shape)</span><br><span class="line"># 获取灰度图像的大小[指行*列(像素点的个数)]</span><br><span class="line">print(img.size)</span><br><span class="line"># 图像的数据类型&lt;class &#x27;numpy.ndarray&#x27;&gt;</span><br><span class="line">print(type(img))</span><br><span class="line"># 获取像素点的数据类型 uint8</span><br><span class="line">print(img.dtype)</span><br><span class="line"></span><br><span class="line"># 彩色图片</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line"># cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line"></span><br><span class="line"># 获取彩色图像的形状[三维的元组]</span><br><span class="line">print(img.shape)</span><br><span class="line"># 获取彩色图像的大小[指行*列*通道数(3)]</span><br><span class="line">print(img.size)</span><br><span class="line"># 图像的数据类型&lt;class &#x27;numpy.ndarray&#x27;&gt;</span><br><span class="line">print(type(img))</span><br><span class="line"># 获取像素点的数据类型 uint8</span><br><span class="line">print(img.dtype)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="六、提取感兴趣的ROI区域"><a href="#六、提取感兴趣的ROI区域" class="headerlink" title="六、提取感兴趣的ROI区域"></a>六、提取感兴趣的ROI区域</h2><ul>
-<li><p>源码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># ROI区域</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;,img)</span><br><span class="line"></span><br><span class="line"># 知道图片的shape[(1333, 750, 3)]</span><br><span class="line">print(img.shape)</span><br><span class="line"></span><br><span class="line"># new_img = img[300:800, 100:360]</span><br><span class="line">new_img = img[415:525, 200:300]</span><br><span class="line">cv2.imshow(&#x27;after&#x27;,new_img)</span><br><span class="line"></span><br><span class="line"># 写出新图片</span><br><span class="line">cv2.imwrite(r&#x27;/home/jiax/workspace/Python Learning/Opencv-course/after.jpg&#x27;, new_img)</span><br><span class="line"></span><br><span class="line">img[:110,:100] = new_img</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, img)</span><br><span class="line"></span><br><span class="line">img1 = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 1)</span><br><span class="line">img1[:110,:100] = new_img</span><br><span class="line">cv2.imshow(&#x27;new_img1&#x27;, img1)</span><br><span class="line"></span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>ROI区域效果图：</p>
-<p><img src="image-20250810135256764.png" alt="image-20250810135256764"></p>
-<p><img src="image-20250810135806330.png" alt="image-20250810135806330"></p>
-</li>
-</ul>
-<h2 id="七、图像的加法"><a href="#七、图像的加法" class="headerlink" title="七、图像的加法"></a>七、图像的加法</h2><ul>
-<li><p>源码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像的加法 -&gt;矩阵</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">img1 = img.copy()</span><br><span class="line"></span><br><span class="line"># 加法【前提：必须是一样大的矩阵；对应元素求和】</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">像素点：[0,255]超过255怎么办【取余】</span><br><span class="line">150 + 150 = 300</span><br><span class="line">300 % 255 = 45</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">result1 = img + img1</span><br><span class="line">cv2.imshow(&#x27;result1&#x27;, result1)</span><br><span class="line"></span><br><span class="line"># opencv 提供给了add()函数</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">像素点：[0,255]超过255怎么办【按255算】</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">result2 = cv2.add(img, img1)</span><br><span class="line">cv2.imshow(&#x27;result2&#x27;, result2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>演示效果</p>
-<p><img src="image-20250810193716787.png" alt="image-20250810193716787"></p>
-</li>
-</ul>
-<h2 id="八、图片融合"><a href="#八、图片融合" class="headerlink" title="八、图片融合"></a>八、图片融合</h2><blockquote>
-<p>注意：图片相加不是图片融合</p>
-</blockquote>
-<ul>
-<li><p>源码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图片融合：将两张图片放在一张上</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">前提：图片的shape一样</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img1 = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/1.jpg&quot;, 1)</span><br><span class="line">img2 = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2.jpg&quot;, 1)</span><br><span class="line"></span><br><span class="line"># 前提：图片的shape一样</span><br><span class="line">print(img1.shape)</span><br><span class="line">print(img2.shape)</span><br><span class="line"></span><br><span class="line"># 图片融合</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">addWeighted(src1, alpha,src2,beta,gamma)</span><br><span class="line">src1\src2：第一张和第二张图片</span><br><span class="line">alpha\beta：第一张图片的权重、第二张图片的权重</span><br><span class="line">gamma：亮度的调节</span><br><span class="line"># </span><br><span class="line">0.8*img1 + 0.2*img2 + gamma</span><br><span class="line">[0, 255]：超过255仍按照255算，即亮度非常大时，图片所有像素点权全为255（全白）</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">result = cv2.addWeighted(img1, 0.8, img2, 0.2, 100)</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line">cv2.imshow(&#x27;img2&#x27;, img2)</span><br><span class="line">cv2.imshow(&#x27;result&#x27;, result)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>效果：</p>
-<p><img src="image-20250810195225642.png" alt="image-20250810195225642"></p>
-<p><img src="image-20250810195658468.png" alt="image-20250810195658468"></p>
-</li>
-</ul>
-<h2 id="九、-图像的类型转换"><a href="#九、-图像的类型转换" class="headerlink" title="九、 图像的类型转换"></a>九、 图像的类型转换</h2><ul>
-<li><p>源码:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像的类型转换</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cv2里面的图像类型转换远远不止介绍的这些，共由两百多个</span><br><span class="line">需要学会自己去查自己想要的转化方式</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line"></span><br><span class="line"># 原始图片：BGR-&gt;RGB (本质即为0和2列进行了对调)</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cvtColor(img,way)</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)</span><br><span class="line">cv2.imshow(&#x27;img_rgb&#x27;, img_rgb)</span><br><span class="line"></span><br><span class="line">img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line">cv2.imshow(&#x27;img_gray&#x27;, img_gray)</span><br><span class="line"></span><br><span class="line"># 读取灰度图片</span><br><span class="line">img1 = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line">img_rgb = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line">b, g, r = cv2.split(img1)</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line">cv2.imshow(&#x27;b&#x27;,b)</span><br><span class="line">cv2.imshow(&#x27;g&#x27;,g)</span><br><span class="line">cv2.imshow(&#x27;r&#x27;,r)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>效果：</p>
-<p><img src="image-20250810201809881.png" alt="image-20250810201809881"></p>
-<p><img src="image-20250810201859638.png" alt="image-20250810201859638"></p>
-</li>
-</ul>
-<h2 id="十、图像的缩放"><a href="#十、图像的缩放" class="headerlink" title="十、图像的缩放"></a>十、图像的缩放</h2><ul>
-<li><p>源码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像的缩放</span><br><span class="line"># 本质：矩阵的变换</span><br><span class="line"></span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cv2.resize(src, dsize, fx, fy)</span><br><span class="line">src：源图片【需要被缩放的照片img(100*100)】</span><br><span class="line">dsize：缩放到的大小(200*200)[列(W) * 行(H)]</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">size = (1000,500)</span><br><span class="line">new_img = cv2.resize(img, size)</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line"></span><br><span class="line"># 指定列、行的缩放大小</span><br><span class="line">h, w, ch = img.shape</span><br><span class="line">size = (int(0.5*w), int(1.5*h))</span><br><span class="line">new_img1 = cv2.resize(img, size)</span><br><span class="line">cv2.imshow(&#x27;new_img1&#x27;, new_img1)</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cv2.resize(src, dsize, fx, fy)</span><br><span class="line">src：原图片【需要被缩放的照片img(100*100)】</span><br><span class="line">dsize：None</span><br><span class="line">fx：x方向上的比例</span><br><span class="line">fy：y方向上的比例</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">new_img2 = cv2.resize(img, None, fx=0.5, fy=0.5)</span><br><span class="line">cv2.imshow(&#x27;new_img2&#x27;, new_img2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>效果：</p>
-<p><img src="image-20250810203427079.png" alt="image-20250810203427079"></p>
-</li>
-</ul>
-<h2 id="十一、图像的翻转"><a href="#十一、图像的翻转" class="headerlink" title="十一、图像的翻转"></a>十一、图像的翻转</h2><ul>
-<li><p>源码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像的翻转</span><br><span class="line"># 本质：矩阵的翻转</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">1. 沿着x轴进行翻转</span><br><span class="line">2. 沿着y轴进行翻转</span><br><span class="line">3. 同时沿着x轴和y轴进行翻转</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/1.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">cv2.flip(src, flipCode)</span><br><span class="line">src：源图像</span><br><span class="line">flipCode：翻转形式</span><br><span class="line">    0：沿着x轴进行翻转</span><br><span class="line">    1(大于等于1)：沿着y轴进行翻转</span><br><span class="line">    -1(小于等于-1)：同时沿着x轴和y轴进行翻转</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">new_img1 = cv2.flip(img, 0)</span><br><span class="line">cv2.imshow(&#x27;new_img1&#x27;, new_img1)</span><br><span class="line">new_img2= cv2.flip(img, 1)</span><br><span class="line"># new_img2= cv2.flip(img, 10)</span><br><span class="line">cv2.imshow(&#x27;new_img2&#x27;, new_img2)</span><br><span class="line">new_img3 = cv2.flip(img, -1)</span><br><span class="line"># new_img3 = cv2.flip(img, -10)</span><br><span class="line">cv2.imshow(&#x27;new_img3&#x27;, new_img3)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>效果：</p>
-<p><img src="image-20250810205116045.png" alt="image-20250810205116045"></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>504医学AI</category>
-      </categories>
-      <tags>
-        <tag>504医学AI入门</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Week3</title>
     <url>/2025/08/03/Week3/</url>
     <content><![CDATA[<h1 id="Opencv（二）"><a href="#Opencv（二）" class="headerlink" title="Opencv（二）"></a>Opencv（二）</h1><ul>
@@ -646,60 +646,6 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 以1（彩色图像）的方式打开灰度图像</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img_color = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 1)</span><br><span class="line">print(img_color.shape)</span><br><span class="line"># cv2.imshow(&#x27;img_color&#x27;, img_color)</span><br><span class="line"></span><br><span class="line"># Opencv 内部如何将灰度图像转化为彩色图像？</span><br><span class="line">&quot;&quot;&quot;&quot;</span><br><span class="line">官方的填充方式：以初始的灰度二维矩阵进行RGB通道的填充</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">img_gray = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 0)</span><br><span class="line">print(img_gray.shape)</span><br><span class="line"></span><br><span class="line">new_img = cv2.merge([img_gray, img_gray, img_gray])</span><br><span class="line">print(new_img.shape)</span><br><span class="line"></span><br><span class="line"># 一定要检查这个新图像的dtype (uint8)</span><br><span class="line">print(new_img.dtype)</span><br><span class="line"># cv2.imshow(&#x27;img_color&#x27;, img_color)</span><br><span class="line"></span><br><span class="line"># 选取部分元素-&gt;验证官方填充方式对于灰度图像转化为彩色图像的正确性</span><br><span class="line">img_color[100,200]</span><br><span class="line">new_img[100,200]</span><br><span class="line"></span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-]]></content>
-      <categories>
-        <category>504医学AI</category>
-      </categories>
-      <tags>
-        <tag>504医学AI入门</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>神经网络</title>
-    <url>/2025/08/24/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</url>
-    <content><![CDATA[<h1 id="神经网络：构建人工智能的基石"><a href="#神经网络：构建人工智能的基石" class="headerlink" title="神经网络：构建人工智能的基石"></a>神经网络：构建人工智能的基石</h1><h2 id="引言："><a href="#引言：" class="headerlink" title="引言："></a>引言：</h2><p>神经网络是一种受到生物神经系统启发的人工智能模型，它重现了大脑中神经元之间相互连接的方式。神经网络在诸多领域中取得了显著成就，如图像识别、自然语言处理和语音识别等。这篇博客将为您解释神经网络的构造，让您能够理解这个令人着迷的领域的基本工作原理。</p>
-<h2 id="第一部分：神经元-生物的灵感"><a href="#第一部分：神经元-生物的灵感" class="headerlink" title="第一部分：神经元 - 生物的灵感"></a>第一部分：神经元 - 生物的灵感</h2><p>在理解神经网络之前，我们首先需要了解神经元，这是神经网络的基本构建块。神经元是生物神经系统的工作单位，也是人工神经网络的灵感来源。</p>
-<ol>
-<li><strong>神经元的结构</strong>：每个神经元都由细胞体、树突和轴突组成。细胞体包含核心部分，树突接收来自其他神经元的信号，而轴突将信号传递给其他神经元。</li>
-</ol>
-<p><img src="433a95388fe6d77be007a09297c55689.png" alt="img"></p>
-<ol>
-<li><strong>信号传递</strong>：神经元之间的通信是通过电化学信号完成的。当信号通过树突传递到细胞体时，如果达到一定阈值，神经元就会触发并将信号传递给下一个神经元。</li>
-</ol>
-<h2 id="第二部分：人工神经元-数学的力量"><a href="#第二部分：人工神经元-数学的力量" class="headerlink" title="第二部分：人工神经元 - 数学的力量"></a>第二部分：人工神经元 - 数学的力量</h2><p>现在，让我们将生物神经元的概念转化为数学模型，即人工神经元。人工神经元是神经网络的基本构建块，负责对输入进行处理和传递信号。输入可以类比为神经元的树突，而输出可以类比为神经元的轴突，计算则可以类比为细胞核。</p>
-<p><strong>输入和权重</strong>：人工神经元接收多个输入，每个输入都有一个相关联的权重，这相当于人工神经网络的记忆。这些权重决定了每个输入对神经元的影响程度。</p>
-<p><img src="c93d132a57bb9b8c00efeb7722306eef.png" alt="img"></p>
-<p><strong>激活函数</strong>：在人工神经元中，激活函数决定了神经元是否激活（发送信号）。常见的激活函数包括Sigmoid、ReLU和Tanh。</p>
-<p><img src="image-20250824204023063.png" alt="image-20250824204023063"></p>
-<p><strong>神经网络</strong>：是由大量的节点（或称“神经元”）和之间相互的联接构成。而由两层神经元组成的神经网络称之为—“感知器”（Perceptron）,感知器只能线性划分数据。在输入和权值的线性加权和叠加了一个<strong>函数g（激活函数），</strong>加权计算公式为：</p>
-<script type="math/tex; mode=display">
-g(W * x) = z</script><h2 id="第三部分：神经网络-层层堆叠"><a href="#第三部分：神经网络-层层堆叠" class="headerlink" title="第三部分：神经网络 - 层层堆叠"></a>第三部分：神经网络 - 层层堆叠</h2><p>现在我们可以将多个人工神经元组合在一起，形成神经网络。神经网络由多个层组成，包括输入层、隐藏层和输出层，也称为<strong>多层感知器</strong>。</p>
-<p>在神经网络中需要默认增加偏置神经元（节点），这些节点是默认存在的。它本质上是一个只含有存储功能，且存储值永远为1的单元。在神经网络的每个层次中，除了输出层以外，都会含有这样一个<strong>偏置单元</strong>。（如下图）</p>
-<p><img src="image-20250824204143959.png" alt="image-20250824204143959"></p>
-<p><strong>输入层</strong>：接收原始数据的输入，例如图像像素或文本单词。</p>
-<p><strong>隐藏层</strong>：这是神经网络的核心部分，包含多个层次的神经元。隐藏层负责从输入中学习特征并生成有用的表示。</p>
-<p><strong>输出层</strong>：根据学到的特征生成最终的输出，可以是分类标签、数值或其他任务相关的结果。</p>
-<p><strong>如何设计</strong>：</p>
-<p>输入层的节点数：与特征的维度匹配</p>
-<p>输出层的节点数：与目标的维度匹配。</p>
-<p>中间层的节点数：目前业界没有完善的理论来指导这个决策。一般是根据经验来设置。较好的方法就是预先设定几个可选值，通过切换这几个值来看整个模型的预测效果，选择效果最好的值作为最终选择。</p>
-<p><strong>注意事项：</strong></p>
-<ol>
-<li><p>设计一个神经网络时，输入层与输出层的节点数往往是固定的，中间层则可以自由指定；</p>
-</li>
-<li><p>神经网络结构图中的拓扑与箭头代表着预测过程时数据的流向，跟训练时的数据流有一定的区别；</p>
-</li>
-<li><p>结构图里的关键不是圆圈（代表“神经元”），而是连接线（代表“神经元”之间的连接）。每个连接线对应一个不同的权重（其值称为权值），这是需要训练得到的。</p>
-</li>
-</ol>
-<h2 id="第四部分：训练神经网络-损失函数和反向传播算法"><a href="#第四部分：训练神经网络-损失函数和反向传播算法" class="headerlink" title="第四部分：训练神经网络 - 损失函数和反向传播算法"></a>第四部分：训练神经网络 - 损失函数和反向传播算法</h2><p>神经网络的关键部分之一是训练过程。在训练中，神经网络通过与真实数据进行比较来调整权重，以使其能够做出准确的预测。</p>
-<ol>
-<li><p><strong>反向传播算法</strong>：是训练神经网络的核心算法。它通过计算误差并反向传播，以更新每个神经元的权重和偏差，从而减小预测误差。具体过程如何实现，可以看我的这篇博客：（了解BP神经网络：从原理到应用-CSDN博客）</p>
-</li>
-<li><p><strong>损失函数</strong>：损失函数用于度量预测和实际值之间的差异。训练的目标是最小化损失函数。具体过程如何实现，可以看我的这篇博客：（交叉熵损失函数）</p>
-</li>
-</ol>
-<h2 id="结论："><a href="#结论：" class="headerlink" title="结论："></a>结论：</h2><p>神经网络是人工智能领域的关键技术，它们的构造基于神经元的灵感，并结合了数学、统计和机器学习的原理。通过构建和训练神经网络，我们能够解决各种各样的问题，从图像识别到自然语言处理。希望这篇博客能够帮助您更好地理解神经网络的构造和工作原理。</p>
 ]]></content>
       <categories>
         <category>504医学AI</category>
@@ -1041,6 +987,60 @@ g(W * x) = z</script><h2 id="第三部分：神经网络-层层堆叠"><a href="
 <li>最后将处理后的灰度值回填到相应像素点</li>
 </ol>
 <p><img src="image-20250822114143384.png" alt="image-20250822114143384"></p>
+]]></content>
+      <categories>
+        <category>504医学AI</category>
+      </categories>
+      <tags>
+        <tag>504医学AI入门</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>神经网络</title>
+    <url>/2025/08/24/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</url>
+    <content><![CDATA[<h1 id="神经网络：构建人工智能的基石"><a href="#神经网络：构建人工智能的基石" class="headerlink" title="神经网络：构建人工智能的基石"></a>神经网络：构建人工智能的基石</h1><h2 id="引言："><a href="#引言：" class="headerlink" title="引言："></a>引言：</h2><p>神经网络是一种受到生物神经系统启发的人工智能模型，它重现了大脑中神经元之间相互连接的方式。神经网络在诸多领域中取得了显著成就，如图像识别、自然语言处理和语音识别等。这篇博客将为您解释神经网络的构造，让您能够理解这个令人着迷的领域的基本工作原理。</p>
+<h2 id="第一部分：神经元-生物的灵感"><a href="#第一部分：神经元-生物的灵感" class="headerlink" title="第一部分：神经元 - 生物的灵感"></a>第一部分：神经元 - 生物的灵感</h2><p>在理解神经网络之前，我们首先需要了解神经元，这是神经网络的基本构建块。神经元是生物神经系统的工作单位，也是人工神经网络的灵感来源。</p>
+<ol>
+<li><strong>神经元的结构</strong>：每个神经元都由细胞体、树突和轴突组成。细胞体包含核心部分，树突接收来自其他神经元的信号，而轴突将信号传递给其他神经元。</li>
+</ol>
+<p><img src="433a95388fe6d77be007a09297c55689.png" alt="img"></p>
+<ol>
+<li><strong>信号传递</strong>：神经元之间的通信是通过电化学信号完成的。当信号通过树突传递到细胞体时，如果达到一定阈值，神经元就会触发并将信号传递给下一个神经元。</li>
+</ol>
+<h2 id="第二部分：人工神经元-数学的力量"><a href="#第二部分：人工神经元-数学的力量" class="headerlink" title="第二部分：人工神经元 - 数学的力量"></a>第二部分：人工神经元 - 数学的力量</h2><p>现在，让我们将生物神经元的概念转化为数学模型，即人工神经元。人工神经元是神经网络的基本构建块，负责对输入进行处理和传递信号。输入可以类比为神经元的树突，而输出可以类比为神经元的轴突，计算则可以类比为细胞核。</p>
+<p><strong>输入和权重</strong>：人工神经元接收多个输入，每个输入都有一个相关联的权重，这相当于人工神经网络的记忆。这些权重决定了每个输入对神经元的影响程度。</p>
+<p><img src="c93d132a57bb9b8c00efeb7722306eef.png" alt="img"></p>
+<p><strong>激活函数</strong>：在人工神经元中，激活函数决定了神经元是否激活（发送信号）。常见的激活函数包括Sigmoid、ReLU和Tanh。</p>
+<p><img src="image-20250824204023063.png" alt="image-20250824204023063"></p>
+<p><strong>神经网络</strong>：是由大量的节点（或称“神经元”）和之间相互的联接构成。而由两层神经元组成的神经网络称之为—“感知器”（Perceptron）,感知器只能线性划分数据。在输入和权值的线性加权和叠加了一个<strong>函数g（激活函数），</strong>加权计算公式为：</p>
+<script type="math/tex; mode=display">
+g(W * x) = z</script><h2 id="第三部分：神经网络-层层堆叠"><a href="#第三部分：神经网络-层层堆叠" class="headerlink" title="第三部分：神经网络 - 层层堆叠"></a>第三部分：神经网络 - 层层堆叠</h2><p>现在我们可以将多个人工神经元组合在一起，形成神经网络。神经网络由多个层组成，包括输入层、隐藏层和输出层，也称为<strong>多层感知器</strong>。</p>
+<p>在神经网络中需要默认增加偏置神经元（节点），这些节点是默认存在的。它本质上是一个只含有存储功能，且存储值永远为1的单元。在神经网络的每个层次中，除了输出层以外，都会含有这样一个<strong>偏置单元</strong>。（如下图）</p>
+<p><img src="image-20250824204143959.png" alt="image-20250824204143959"></p>
+<p><strong>输入层</strong>：接收原始数据的输入，例如图像像素或文本单词。</p>
+<p><strong>隐藏层</strong>：这是神经网络的核心部分，包含多个层次的神经元。隐藏层负责从输入中学习特征并生成有用的表示。</p>
+<p><strong>输出层</strong>：根据学到的特征生成最终的输出，可以是分类标签、数值或其他任务相关的结果。</p>
+<p><strong>如何设计</strong>：</p>
+<p>输入层的节点数：与特征的维度匹配</p>
+<p>输出层的节点数：与目标的维度匹配。</p>
+<p>中间层的节点数：目前业界没有完善的理论来指导这个决策。一般是根据经验来设置。较好的方法就是预先设定几个可选值，通过切换这几个值来看整个模型的预测效果，选择效果最好的值作为最终选择。</p>
+<p><strong>注意事项：</strong></p>
+<ol>
+<li><p>设计一个神经网络时，输入层与输出层的节点数往往是固定的，中间层则可以自由指定；</p>
+</li>
+<li><p>神经网络结构图中的拓扑与箭头代表着预测过程时数据的流向，跟训练时的数据流有一定的区别；</p>
+</li>
+<li><p>结构图里的关键不是圆圈（代表“神经元”），而是连接线（代表“神经元”之间的连接）。每个连接线对应一个不同的权重（其值称为权值），这是需要训练得到的。</p>
+</li>
+</ol>
+<h2 id="第四部分：训练神经网络-损失函数和反向传播算法"><a href="#第四部分：训练神经网络-损失函数和反向传播算法" class="headerlink" title="第四部分：训练神经网络 - 损失函数和反向传播算法"></a>第四部分：训练神经网络 - 损失函数和反向传播算法</h2><p>神经网络的关键部分之一是训练过程。在训练中，神经网络通过与真实数据进行比较来调整权重，以使其能够做出准确的预测。</p>
+<ol>
+<li><p><strong>反向传播算法</strong>：是训练神经网络的核心算法。它通过计算误差并反向传播，以更新每个神经元的权重和偏差，从而减小预测误差。具体过程如何实现，可以看我的这篇博客：（了解BP神经网络：从原理到应用-CSDN博客）</p>
+</li>
+<li><p><strong>损失函数</strong>：损失函数用于度量预测和实际值之间的差异。训练的目标是最小化损失函数。具体过程如何实现，可以看我的这篇博客：（交叉熵损失函数）</p>
+</li>
+</ol>
+<h2 id="结论："><a href="#结论：" class="headerlink" title="结论："></a>结论：</h2><p>神经网络是人工智能领域的关键技术，它们的构造基于神经元的灵感，并结合了数学、统计和机器学习的原理。通过构建和训练神经网络，我们能够解决各种各样的问题，从图像识别到自然语言处理。希望这篇博客能够帮助您更好地理解神经网络的构造和工作原理。</p>
 ]]></content>
       <categories>
         <category>504医学AI</category>
