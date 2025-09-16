@@ -1,0 +1,255 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>卷积 | SolitudeAB</title><meta name="author" content="SolitudeAB"><meta name="copyright" content="SolitudeAB"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、线性滤波与卷积的基本概念">
+<meta property="og:type" content="article">
+<meta property="og:title" content="卷积">
+<meta property="og:url" content="http://example.com/2025/09/16/BasicKnowledge/%E5%8D%B7%E7%A7%AF/index.html">
+<meta property="og:site_name" content="SolitudeAB">
+<meta property="og:description" content="一、线性滤波与卷积的基本概念">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/avatar.jpg">
+<meta property="article:published_time" content="2025-09-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-16T08:43:10.192Z">
+<meta property="article:author" content="SolitudeAB">
+<meta property="article:tag" content="神经网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/avatar.jpg"><link rel="shortcut icon" href="/img/avatar.jpg"><link rel="canonical" href="http://example.com/2025/09/16/BasicKnowledge/%E5%8D%B7%E7%A7%AF/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/seach.xml","preload":false,"top_n_per_article":3,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '卷积',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><link rel="stylesheet" href="/css/transpancy.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="SolitudeAB" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="web_bg" style="background:url(/img/background1.jpg);background-attachment: local;background-position: center;background-size: cover;background-repeat: no-repeat;"></div><div id="web_bg" style="background-image: url(url(/img/background1.jpg));"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/avatar.jpg" alt="Logo"><span class="site-name">SolitudeAB</span></a><a class="nav-page-title" href="/"><span class="site-name">卷积</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">卷积</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-09-15T16:00:00.000Z" title="发表于 2025-09-16 00:00:00">2025-09-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-16T08:43:10.192Z" title="更新于 2025-09-16 16:43:10">2025-09-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="一、线性滤波与卷积的基本概念"><a href="#一、线性滤波与卷积的基本概念" class="headerlink" title="一、线性滤波与卷积的基本概念"></a>一、线性滤波与卷积的基本概念</h2><p><strong>线性滤波</strong>可以说是图像处理最基本的方法，它可以允许我们对图像进行处理，产生很多不同的效果。做法很简单：</p>
+<p>首先，我们有一个二维的<strong>滤波器矩阵</strong>（有个高大上的名字叫<strong>卷积核</strong>）和一个要处理的二维图像。然后，对于图像的每一个像素点，计算它的邻域像素和<strong>滤波器矩阵</strong>的<strong>对应元素的乘积</strong>，然后加起来，作为该像素位置的值。这样就完成了滤波过程。</p>
+<p><img src="Center.png" alt="img"></p>
+<p>对图像和滤波矩阵进行逐个元素相乘再求和的操作就相当于将一个二维的函数移动到另一个二维函数的所有位置，这个操作就叫<strong>卷积</strong>或者<strong>协相关</strong>。卷积和协相关的<strong>差别</strong>是，<strong>卷积需要先对滤波矩阵进行180的翻转</strong>，但如果矩阵是对称的，那么两者就没有什么差别了。</p>
+<p>Correlation（协相关）和 Convolution（卷积）可以说是图像处理最基本的操作，但却非常有用。这两个操作有两个非常关键的特点：它们是线性的，而且具有平移不变性shift-invariant。平移不变性指我们在图像的每个位置都执行相同的操作。线性指这个操作是线性的，也就是我们用每个像素的邻域的线性组合来代替这个像素。这两个属性使得这个操作非常简单，因为线性操作是最简单的，然后在所有地方都做同样的操作就更简单了。</p>
+<p>实际上，在信号处理领域，卷积有广泛的意义，而且有其严格的数学定义，但在这里不关注这个。</p>
+<p>2D卷积需要4个嵌套循环4-double loop，所以它并不快，除非我们使用很小的卷积核。这里一般使用3x3或者5x5。而且，对于滤波器，也有一定的规则要求：</p>
+<ol>
+<li><p>滤波器的大小应该是奇数，这样它才有一个中心，例如3x3，5x5或者7x7。有中心了，也有了半径的称呼，例如5x5大小的核的半径就是2。</p>
+</li>
+<li><p>滤波器矩阵所有的元素之和应该要等于1，这是为了保证滤波前后图像的亮度保持不变。当然了，这不是硬性要求了。</p>
+</li>
+<li><p>如果滤波器矩阵所有元素之和大于1，那么滤波后的图像就会比原图像更亮，反之，如果小于1，那么得到的图像就会变暗。如果和为0，图像不会变黑，但也会非常暗。</p>
+</li>
+<li><p>对于滤波后的结构，可能会出现负数或者大于255的数值。对这种情况，我们将他们直接截断到0和255之间即可。对于负数，也可以取绝对值。</p>
+</li>
+</ol>
+<h2 id="二、神奇的卷积核"><a href="#二、神奇的卷积核" class="headerlink" title="二、神奇的卷积核"></a>二、神奇的卷积核</h2><p>   上面说到，对图像的滤波处理就是对图像应用一个小小的卷积核，那这个小小的卷积核到底有哪些魔法，能让一个图像从惨不忍睹变得秀色可餐。下面我们一起来领略下一些简单但不简单的卷积核的魔法。</p>
+<h3 id="2-1、啥也不做"><a href="#2-1、啥也不做" class="headerlink" title="2.1、啥也不做"></a>2.1、啥也不做</h3><p>哈哈，大家可以看到啥了吗？这个滤波器啥也没有做，得到的图像和原图是一样的。因为只有中心点的值是1。邻域点的权值都是0，对滤波后的取值没有任何影响。</p>
+<p><img src="Center-1756040571420-75.png" alt="img"></p>
+<p>   下面我们动点真格的。</p>
+<h3 id="2-2、图像锐化滤波器Sharpness-Filter"><a href="#2-2、图像锐化滤波器Sharpness-Filter" class="headerlink" title="2.2、图像锐化滤波器Sharpness Filter"></a>2.2、图像锐化滤波器Sharpness Filter</h3><p>图像的锐化和边缘检测很像，首先找到边缘，然后把边缘加到原来的图像上面，这样就强化了图像的边缘，使图像看起来更加锐利了。这两者操作统一起来就是锐化滤波器了，也就是在边缘检测滤波器的基础上，再在中心的位置加1，这样滤波后的图像就会和原始的图像具有同样的亮度了，但是会更加锐利。</p>
+<p><img src="Center-1756040571420-76.png" alt="img"></p>
+<p>我们把核加大，就可以得到更加精细的锐化效果</p>
+<p><img src="Center-1756040571420-77.png" alt="img"></p>
+<p>另外，下面的滤波器会更强调边缘：</p>
+<p><img src="Center-1756040571421-78.png" alt="img"></p>
+<p>主要是强调图像的细节。最简单的3x3的锐化滤波器如下：</p>
+<p><img src="Center-1756040571421-79.png" alt="img"></p>
+<p>实际上是计算当前点和周围点的差别，然后将这个差别加到原来的位置上。另外，中间点的权值要比所有的权值和大于1，意味着这个像素要保持原来的值。</p>
+<h3 id="2-3、边缘检测Edge-Detection"><a href="#2-3、边缘检测Edge-Detection" class="headerlink" title="2.3、边缘检测Edge Detection"></a>2.3、边缘检测Edge Detection</h3><p>我们要找水平的边缘：需要注意的是，这里矩阵的元素和是0，所以滤波后的图像会很暗，只有边缘的地方是有亮度的。</p>
+<p><img src="Center-1756040571421-80.png" alt="img">为什么这个滤波器可以寻找到水平边缘呢？因为用这个滤波器卷积相当于求导的离散版本：你将当前的像素值减去前一个像素值，这样你就可以得到这个函数在这两个位置的差别或者斜率。下面的滤波器可以找到垂直方向的边缘，这里像素上和下的像素值都使用：</p>
+<p><img src="Center-1756040571421-81.png" alt="img"></p>
+<p>再下面这个滤波器可以找到45度的边缘：取-2不为了什么，只是为了让矩阵的元素和为0而已。</p>
+<p><img src="Center-1756040571421-82.png" alt="img"></p>
+<p>那下面这个滤波器就可以检测所有方向的边缘:</p>
+<p><img src="Center-1756040571421-83.png" alt="img"></p>
+<p>为了检测边缘，我们需要在图像对应的方向计算梯度。用下面的卷积核来卷积图像，就可以了。但在实际中，这种简单的方法会把噪声也放大了。另外，需要注意的是，矩阵所有的值加起来要是0.</p>
+<p><img src="Center-1756040571421-84.png" alt="img"></p>
+<h3 id="2-4、浮雕Embossing-Filter"><a href="#2-4、浮雕Embossing-Filter" class="headerlink" title="2.4、浮雕Embossing Filter"></a>2.4、浮雕Embossing Filter</h3><p>浮雕滤波器可以给图像一种3D阴影的效果。只要将中心一边的像素减去另一边的像素就可以了。这时候，像素值有可能是负数，我们将负数当成阴影，将正数当成光，然后我们对结果图像加上128的偏移。这时候，图像大部分就变成灰色了。</p>
+<p>下面是45度的浮雕滤波器</p>
+<p><img src="Center-1756040571421-85.png" alt="img"></p>
+<p>我们只要加大滤波器，就可以得到更加夸张的效果了</p>
+<p><img src="Center-1756040571421-86.png" alt="img"></p>
+<p>这种效果非常的漂亮，就像是将一副图像雕刻在一块石头上面一样，然后从一个方向照亮它。它和前面的滤波器不同，它是非对称的。另外，它会产生负数值，所以我们需要将结果偏移，以得到图像灰度的范围。</p>
+<p><img src="Center-1756040571421-87.png" alt="img"></p>
+<p><img src="Center-1756040571421-88.png" alt="img"></p>
+<blockquote>
+<p>A：原图像。B：锐化。C：边缘检测。D：浮雕</p>
+</blockquote>
+<h3 id="2-5、均值模糊Box-Filter-Averaging"><a href="#2-5、均值模糊Box-Filter-Averaging" class="headerlink" title="2.5、均值模糊Box Filter (Averaging)"></a>2.5、均值模糊Box Filter (Averaging)</h3><p>我们可以将当前像素和它的四邻域的像素一起取平均，然后再除以5，或者直接在滤波器的5个地方取0.2的值即可，如下图：</p>
+<p><img src="Center-1756040571421-89.png" alt="img"></p>
+<p>可以看到，这个模糊还是比较温柔的，我们可以把滤波器变大，这样就会变得粗暴了：注意要将和再除以13.</p>
+<p><img src="Center-1756040571421-90.png" alt="img"></p>
+<p>所以，如果你想要更模糊的效果，加大滤波器的大小即可。或者对图像应用多次模糊也可以。</p>
+<p><img src="Center-1756040571421-91.png" alt="img"></p>
+<p><img src="Center-1756040571421-92.png" alt="img"></p>
+<h3 id="2-6、高斯模糊"><a href="#2-6、高斯模糊" class="headerlink" title="2.6、高斯模糊"></a>2.6、高斯模糊</h3><p>均值模糊很简单，但不是很平滑。高斯模糊就有这个优点，所以被广泛用在图像降噪上。特别是在边缘检测之前，都会用来移除细节。高斯滤波器是一个低通滤波器。</p>
+<p><img src="Center-1756040571421-93.png" alt="img"></p>
+<p><img src="Center-1756040571421-94.png" alt="img"></p>
+<h3 id="2-7、运动模糊Motion-Blur"><a href="#2-7、运动模糊Motion-Blur" class="headerlink" title="2.7、运动模糊Motion Blur"></a>2.7、运动模糊Motion Blur</h3><p>运动模糊可以通过只在一个方向模糊达到，例如下面9x9的运动模糊滤波器。注意，求和结果要除以9。</p>
+<p><img src="Center-1756040571421-95.png" alt="img"></p>
+<p>这个效果就好像，摄像机是从左上角移动的右下角。</p>
+<h2 id="三、卷积的计算"><a href="#三、卷积的计算" class="headerlink" title="三、卷积的计算"></a>三、卷积的计算</h2><p>对图像处理而言，存在两大类的方法：空域处理和频域处理！空域处理是指直接对原始的像素空间进行计算，频率处理是指先对图像变换到频域，再做滤波等处理。</p>
+<h3 id="3-1、空域计算-直接2D卷积"><a href="#3-1、空域计算-直接2D卷积" class="headerlink" title="3.1、空域计算-直接2D卷积"></a>3.1、空域计算-直接2D卷积</h3><h4 id="3-1-1、2D卷积"><a href="#3-1-1、2D卷积" class="headerlink" title="3.1.1、2D卷积"></a>3.1.1、2D卷积</h4><p>直接2D卷积就是一开始说的那样，对于图像的每一个像素点，计算它的邻域像素和滤波器矩阵的对应元素的乘积，然后加起来，作为该像素位置的值。</p>
+<p><img src="Center-1756040571421-96.png" alt="img"></p>
+<p>直接的实现也称为暴力实现brute force，因为它严格按照定义来实现，没有任何优化。当然了，在并行实现里面，它也是比较灵活的。另外，也存在一个优化版本，如果我们的kernel是separable可分的，那么就可以得到一个快5倍左右的卷积方法。</p>
+<h4 id="3-1-2、边界处理"><a href="#3-1-2、边界处理" class="headerlink" title="3.1.2、边界处理"></a>3.1.2、边界处理</h4><p>那卷积核遇到图像边缘怎么办？例如图像顶部的像素，它的上面已经没有像素了，那么它的值如何计算？目前有四种主流的处理方法，我们用一维卷积和均值滤波来说明下。</p>
+<p>我们在1D图像中，用每个像素和它的二邻域的平均值来取代它的值。假设我们有个1D的图像I是这样的：</p>
+<p><img src="Center-1756040571421-97.png" alt="img"></p>
+<p>对非图像边界的像素的操作比较简单。假设我们对I的第四个像素3做局部平均。也就是我们用2,3和7做平均，来取代这个位置的像素值。也就是，平均会产生一副新的图像J，这个图像在相同位置<script type="math/tex">J (4) = (I(3)+I(4)+I(5))/3 = (2+3+7)/3 = 4</script>。同样，我们可以得到<script type="math/tex">J(3) = (I(2)+I(3)+I(4))/3 =(4+2+3)/3 = 3</script>。需要注意的是，新图像的每个像素都取决于旧的图像，在计算<script type="math/tex">J (4)</script>的时候用<script type="math/tex">J (3)</script>是不对的，而是用<script type="math/tex">I(3)</script>，<script type="math/tex">I(4)</script>和<script type="math/tex">I(5)</script>。所以每个像素都是它和它邻域两个像素的平均。平均是线性的操作，因为每个新的像素都是旧像素的线性组合。</p>
+<p><img src="Center-1756040571421-98.png" alt="img"></p>
+<p>对卷积，也有必须要考虑的情况是，在图像边界的时候，怎么办？<script type="math/tex">J(1)</script>的值应该是什么？它取决于I(0)，<script type="math/tex">I(1)</script>和<script type="math/tex">I(2)</script>。但是我们没有 <script type="math/tex">I(0)</script>呀！图像左边没有值了。有四种方式来处理这个问题：</p>
+<ol>
+<li><p>第一种就是想象<script type="math/tex">I</script>是无限长的图像的一部分，除了我们给定值的部分，其他部分的像素值都是0。在这种情况下，<script type="math/tex">I(0)=0</script>。所以<script type="math/tex">J(1) = (I(0) + I(1) + I(2))/3 = (0 + 5 + 4)/3= 3</script>。同样，<script type="math/tex">J(10) = (I(9)+I(10)+I(11))/3 = (3+ 6 + 0)/3 = 3</script>。</p>
+<p><img src="Center-1756040571421-99.png" alt="img"></p>
+</li>
+<li><p>第二种方法也是想象I是无限图像的一部分。但没有指定的部分是用图像边界的值进行拓展。在我们的例子中，因为图像I最左边的值I(1)=5，所以它左边的所有值，我们都认为是5 。而图像右边的所有的值，我们都认为和右边界的值I(10)一样，都是6。这时候<script type="math/tex">J(1) = (I(0) + I(1) + I(2))/3 = (5 + 5 + 4)/3= 14/3</script>. 而<script type="math/tex">J(10) = (I(9)+I(10)+I(11))/3 = (3 + 6 + 6)/3 = 5</script>。</p>
+<p><img src="Center-1756040571421-100.png" alt="img"></p>
+</li>
+<li><p>第三种情况就是认为图像是周期性的。也就是I不断的重复。周期就是I的长度。在我们这里，I(0)和<script type="math/tex">I(10)</script>的值就是一样的，<script type="math/tex">I(11)</script>的值和<script type="math/tex">I(1)</script>的值也是一样的。所以<script type="math/tex">J(1) = (I(0) + I(1) + I(2))/3= (I(10) + I(1)+ I(2))/3 = (6 + 5 + 4)/3 = 5</script>。</p>
+<p><img src="Center-1756040571421-101.png" alt="img"></p>
+</li>
+<li><p>最后一种情况就是不管其他地方了。我们觉得I之外的情况是没有定义的，所以没办法使用这些没有定义的值，所以要使用图像I没有定义的值的像素都没办法计算。在这里，<script type="math/tex">J(1)</script>和<script type="math/tex">J(10)</script>都没办法计算，所以输出J会比原图像<script type="math/tex">I</script>要小。</p>
+<p>这四种方法有各自的优缺点。如果我们想象我们使用的图像只是世界的一个小窗口，然后我们需要使用窗口边界外的值，那么一般来说，外面的值和边界上的值是几乎相似的，所以第二种方法可能更说得过去。</p>
+</li>
+</ol>
+<h3 id="2-2、频域计算-快速傅里叶变换FFT卷积"><a href="#2-2、频域计算-快速傅里叶变换FFT卷积" class="headerlink" title="2.2、频域计算-快速傅里叶变换FFT卷积"></a>2.2、频域计算-快速傅里叶变换FFT卷积</h3><p>这个快速实现得益于卷积定理：时域上的卷积等于频域上的乘积。所以将我们的图像和滤波器通过算法变换到频域后，直接将他们相乘，然后再变换回时域（也就是图像的空域）就可以了。</p>
+<p><img src="Center-1756040571421-102.png" alt="img"></p>
+<p>o表示矩阵逐元素相乘。那用什么方法将空域的图像和滤波器变换到频域了。那就是鼎鼎大名的Fast Fourier Transformation 快速傅里叶变换FFT（其实，在CUDA里面，已经实现了FFT了）。</p>
+<p>要在频域中对一副图像进行滤波，滤波器的大小和图像的大小必须要匹配，这样两者的相乘才容易。因为一般滤波器的大小比图像要小，所以我们需要拓展我们的kernel，让它和图像的大小一致。</p>
+<p><img src="Center-1756040571421-103.png" alt="img"></p>
+<p>因为CUDA中的FFT实现是周期的，所以kernel的值也要安排成这样，以支持这种周期性。</p>
+<p>为了保证图像边界的像素也可以得到响应输出，我们也需要拓展我们的输入图像。同时，拓展的方式也要支持周期表达。</p>
+<p><img src="Center-1756040571421-104.png" alt="img"></p>
+<p>如果只是使用卷积定理，没有对输入进行任何修改的话，那么我们得到的是周期卷积的结果。但这可能不是我们要的，因为周期卷积会对输入数据进行周期填补，引入一些artifacts。</p>
+<p>给定N长度的I和K，为了得到线性卷积，我们需要对I和K进行zero padding。为什么要补0，因为DFT假定了输入是无限和周期的，周期是N。　</p>
+<p><img src="Center-1756040571422-105.png" alt="img"></p>
+<p>如上图，对于I和K，如果没有padding的话，隐含着会假定I和K是周期的，以他们的长度N为周期。图中本来N长度的I和K都是黑色虚线的部分，然后如果没有padding，隐含着就会在N之外，加上同样的无数个I，如红色虚线部分，加上了一个周期。对K也是这样。如果是zero padding的话，在黑色虚线的其他地方都全是0了，如图中蓝色部分。将I和K卷积，如果没有padding，如黑色虚线，会有红色那部分的artifact。如果有padding，就是蓝色实线。</p>
+<p> <strong>四、实验代码</strong></p>
+<p>   这是第二部分的Matlab实验代码：</p>
+<p><strong>五、参考文献</strong></p>
+<p>[1] Correlation and Convolution.pdf</p>
+<p>[2] <a target="_blank" rel="noopener" href="http://lodev.org/cgtutor/filtering.html">Lode’s Computer GraphicsTutorial Image Filtering</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">SolitudeAB</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/09/16/BasicKnowledge/%E5%8D%B7%E7%A7%AF/">http://example.com/2025/09/16/BasicKnowledge/%E5%8D%B7%E7%A7%AF/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">SolitudeAB</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">神经网络</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer=""></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/09/16/BasicKnowledge/BN/" title="BN（Batch Normalization）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">BN（Batch Normalization）</div></div><div class="info-2"><div class="info-item-1">一、什么是BN？Batch Normalization是2015年一篇论文中提出的数据归一化方法，往往用在深度神经网络中激活层之前。其作用可以加快模型训练时的收敛速度，使得模型训练过程更加稳定，避免梯度爆炸或者梯度消失。并且起到一定的正则化作用，几乎代替了Dropout。 二、BN核心公式是什么？如下：  Input:B=\{x_{1...m}\};\gamma ,\beta (parameters\ to\ be\ learned)\\ Output:\{y_i=BN_{\gamma ,\beta}(x_i)\}\\ u_{B} \leftarrow\frac{1}{m}\sum_{i=1}^{m}{x_i}\\ \sigma_{B}^2\leftarrow\frac{1}{m}\sum_{i=1}^m(x_i-\mu_B)^2\\ \tilde{x}_i\leftarrow\frac{x_i-\mu_B}{\sqrt{\sigma_B^2+\epsilon}}\\...</div></div></div></a><a class="pagination-related" href="/2025/09/16/BasicKnowledge/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" title="卷积神经网络基础"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">卷积神经网络基础</div></div><div class="info-2"><div class="info-item-1">目录 卷积神经网络 全连接层 卷积层 池化层  一、卷积神经网络（一）CNN（Convolutional Neural NetWork）卷积神经网络：所有包含了卷积层的网络   雏形：LeCun 的 LeNet（1998）的网络结构（卷积神经网络发展史中的第一个卷积神经网络）  （二）卷积神经网络（CNN）的发展史 （三）卷积神经网络（CNN）的应用 图像分类 图像检索 目标检测 图像分割 无人驾驶 图像描述 图像风格迁移       二、全连接层（一）BP（back propagation）算法 BP（back...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/08/24/BasicKnowledge/CNN/" title="卷积神经网络（CNN）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-24</div><div class="info-item-2">卷积神经网络（CNN）</div></div><div class="info-2"><div class="info-item-1">卷积神经网络（CNN）的原理引言： 可查看前篇文章——神经网络：构建人工智能的基石  卷积神经网络（Convolutional Neural Network，CNN）是一种在计算机视觉领域取得了巨大成功的深度学习模型。它们的设计灵感来自于生物学中的视觉系统，旨在模拟人类视觉处理的方式。在过去的几年中，CNN已经在图像识别、目标检测、图像生成和许多其他领域取得了显著的进展，成为了计算机视觉和深度学习研究的重要组成部分。 一、图像原理在了解卷积神经网络前，我们先来看看图像的原理： 图像在计算机中是一堆按顺序排列的数字，数值为0到255。0表示最暗，255表示最亮。 如下图：  上图是只有黑白颜色的灰度图，而更普遍的图片表达方式是RGB颜色模型，即红、绿、蓝三原色的色光以不同的比例相加，以产生多种多样的色光。RGB颜色模型中，单个矩阵就扩展成了有序排列的三个矩阵，也可以用三维张量去理解。 其中的每一个矩阵又叫这个图片的一个channel（通道），宽, 高,...</div></div></div></a><a class="pagination-related" href="/2025/09/16/BasicKnowledge/BN/" title="BN（Batch Normalization）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-16</div><div class="info-item-2">BN（Batch Normalization）</div></div><div class="info-2"><div class="info-item-1">一、什么是BN？Batch Normalization是2015年一篇论文中提出的数据归一化方法，往往用在深度神经网络中激活层之前。其作用可以加快模型训练时的收敛速度，使得模型训练过程更加稳定，避免梯度爆炸或者梯度消失。并且起到一定的正则化作用，几乎代替了Dropout。 二、BN核心公式是什么？如下：  Input:B=\{x_{1...m}\};\gamma ,\beta (parameters\ to\ be\ learned)\\ Output:\{y_i=BN_{\gamma ,\beta}(x_i)\}\\ u_{B} \leftarrow\frac{1}{m}\sum_{i=1}^{m}{x_i}\\ \sigma_{B}^2\leftarrow\frac{1}{m}\sum_{i=1}^m(x_i-\mu_B)^2\\ \tilde{x}_i\leftarrow\frac{x_i-\mu_B}{\sqrt{\sigma_B^2+\epsilon}}\\...</div></div></div></a><a class="pagination-related" href="/2025/09/16/BasicKnowledge/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" title="卷积神经网络基础"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-16</div><div class="info-item-2">卷积神经网络基础</div></div><div class="info-2"><div class="info-item-1">目录 卷积神经网络 全连接层 卷积层 池化层  一、卷积神经网络（一）CNN（Convolutional Neural NetWork）卷积神经网络：所有包含了卷积层的网络   雏形：LeCun 的 LeNet（1998）的网络结构（卷积神经网络发展史中的第一个卷积神经网络）  （二）卷积神经网络（CNN）的发展史 （三）卷积神经网络（CNN）的应用 图像分类 图像检索 目标检测 图像分割 无人驾驶 图像描述 图像风格迁移       二、全连接层（一）BP（back propagation）算法 BP（back...</div></div></div></a><a class="pagination-related" href="/2025/09/16/BasicKnowledge/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%85%85/" title="卷积神经网络基础补充"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-16</div><div class="info-item-2">卷积神经网络基础补充</div></div><div class="info-2"><div class="info-item-1">一、误差的计算（一）图示各个符号的含义 $x$：输入 $σ$：隐层 $w_{ij}^{(k)}$：$i$表示上一层的第$i$的节点，$j$表示本层中第$j$个节点，$k$表示该节点位于第$k$层 （二）计算1、第一层节点的输出，即$w_{ij}^{(1)}$权值对应的输出 2、最后一层节点的输入，即$w_{ij}^{(2)}$权值对应的输出（$y_1$、$y_2$）  注意，最后一层的计算中并没有使用激活函数，因为在计算多位损失的过程中，一般最后一层的激活函数统一使用 softmax 函数  3、Softmax 函数的计算过程 前面计算得到的$y_1$、$y_2$并不符合任一分布，而我们的目的是为了得到一个概率分布，所以我们需要对输出的结果进行Softmax 处理   （三）Cross Entropy Loss 交叉熵损失 针对多分类问题（Softmax 输出，所有输出概率和为1）   针对二分类问题（Sigmoid 输出，每个输出节点之间互不相干）  sigmoid...</div></div></div></a><a class="pagination-related" href="/2025/09/16/BasicKnowledge/%E6%B1%A0%E5%8C%96(pooling)/" title="池化（pooling）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-16</div><div class="info-item-2">池化（pooling）</div></div><div class="info-2"><div class="info-item-1">池化（pooling） 意即“缩并”  池化过程在一般卷积过程后。池化（pooling） 的本质，其实就是采样。Pooling 对于输入的 Feature Map，选择某种方式对其进行降维压缩，以加快运算速度。 采用较多的一种池化过程叫最大池化（Max Pooling），其具体操作过程如下： /v2-2ce695fbd365c2be94521992d52ccefd_1440w.jpg) 池化过程类似于卷积过程，如上图所示，表示的就是对一个 feature map邻域内的值，用一个 的filter，步长为2进行‘扫描’，选择最大值输出到下一层，这叫做 Max Pooling。 max pooling常用的 ， 的效果：特征图高度、宽度减半，通道数不变。 还有一种叫平均池化（Average Pooling）,就是从以上取某个区域的最大值改为求这个区域的平均值，其具体操作过程如下： /v2-a47095dd0902990d387e21ae24e6f0b9_1440w.jpg) 如上图所示，表示的就是对一个 feature map邻域内的值，用一个...</div></div></div></a><a class="pagination-related" href="/2025/08/24/BasicKnowledge/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" title="神经网络"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-24</div><div class="info-item-2">神经网络</div></div><div class="info-2"><div class="info-item-1">神经网络：构建人工智能的基石引言：神经网络是一种受到生物神经系统启发的人工智能模型，它重现了大脑中神经元之间相互连接的方式。神经网络在诸多领域中取得了显著成就，如图像识别、自然语言处理和语音识别等。这篇博客将为您解释神经网络的构造，让您能够理解这个令人着迷的领域的基本工作原理。 第一部分：神经元 - 生物的灵感在理解神经网络之前，我们首先需要了解神经元，这是神经网络的基本构建块。神经元是生物神经系统的工作单位，也是人工神经网络的灵感来源。  神经元的结构：每个神经元都由细胞体、树突和轴突组成。细胞体包含核心部分，树突接收来自其他神经元的信号，而轴突将信号传递给其他神经元。    信号传递：神经元之间的通信是通过电化学信号完成的。当信号通过树突传递到细胞体时，如果达到一定阈值，神经元就会触发并将信号传递给下一个神经元。  第二部分：人工神经元 -...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info-name">SolitudeAB</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SolitudeAB"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%BA%BF%E6%80%A7%E6%BB%A4%E6%B3%A2%E4%B8%8E%E5%8D%B7%E7%A7%AF%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">一、线性滤波与卷积的基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%A5%9E%E5%A5%87%E7%9A%84%E5%8D%B7%E7%A7%AF%E6%A0%B8"><span class="toc-number">2.</span> <span class="toc-text">二、神奇的卷积核</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E3%80%81%E5%95%A5%E4%B9%9F%E4%B8%8D%E5%81%9A"><span class="toc-number">2.1.</span> <span class="toc-text">2.1、啥也不做</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2%E3%80%81%E5%9B%BE%E5%83%8F%E9%94%90%E5%8C%96%E6%BB%A4%E6%B3%A2%E5%99%A8Sharpness-Filter"><span class="toc-number">2.2.</span> <span class="toc-text">2.2、图像锐化滤波器Sharpness Filter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3%E3%80%81%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8BEdge-Detection"><span class="toc-number">2.3.</span> <span class="toc-text">2.3、边缘检测Edge Detection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4%E3%80%81%E6%B5%AE%E9%9B%95Embossing-Filter"><span class="toc-number">2.4.</span> <span class="toc-text">2.4、浮雕Embossing Filter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5%E3%80%81%E5%9D%87%E5%80%BC%E6%A8%A1%E7%B3%8ABox-Filter-Averaging"><span class="toc-number">2.5.</span> <span class="toc-text">2.5、均值模糊Box Filter (Averaging)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6%E3%80%81%E9%AB%98%E6%96%AF%E6%A8%A1%E7%B3%8A"><span class="toc-number">2.6.</span> <span class="toc-text">2.6、高斯模糊</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7%E3%80%81%E8%BF%90%E5%8A%A8%E6%A8%A1%E7%B3%8AMotion-Blur"><span class="toc-number">2.7.</span> <span class="toc-text">2.7、运动模糊Motion Blur</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8D%B7%E7%A7%AF%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-number">3.</span> <span class="toc-text">三、卷积的计算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1%E3%80%81%E7%A9%BA%E5%9F%9F%E8%AE%A1%E7%AE%97-%E7%9B%B4%E6%8E%A52D%E5%8D%B7%E7%A7%AF"><span class="toc-number">3.1.</span> <span class="toc-text">3.1、空域计算-直接2D卷积</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-1%E3%80%812D%E5%8D%B7%E7%A7%AF"><span class="toc-number">3.1.1.</span> <span class="toc-text">3.1.1、2D卷积</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-2%E3%80%81%E8%BE%B9%E7%95%8C%E5%A4%84%E7%90%86"><span class="toc-number">3.1.2.</span> <span class="toc-text">3.1.2、边界处理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2%E3%80%81%E9%A2%91%E5%9F%9F%E8%AE%A1%E7%AE%97-%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2FFT%E5%8D%B7%E7%A7%AF"><span class="toc-number">3.2.</span> <span class="toc-text">2.2、频域计算-快速傅里叶变换FFT卷积</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/16/LearningSchedule/Week7/" title="Week7">Week7</a><time datetime="2025-09-15T16:00:00.000Z" title="发表于 2025-09-16 00:00:00">2025-09-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/16/BasicKnowledge/BN/" title="BN（Batch Normalization）">BN（Batch Normalization）</a><time datetime="2025-09-15T16:00:00.000Z" title="发表于 2025-09-16 00:00:00">2025-09-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/16/BasicKnowledge/%E5%8D%B7%E7%A7%AF/" title="卷积">卷积</a><time datetime="2025-09-15T16:00:00.000Z" title="发表于 2025-09-16 00:00:00">2025-09-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/16/BasicKnowledge/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" title="卷积神经网络基础">卷积神经网络基础</a><time datetime="2025-09-15T16:00:00.000Z" title="发表于 2025-09-16 00:00:00">2025-09-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/16/BasicKnowledge/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%85%85/" title="卷积神经网络基础补充">卷积神经网络基础补充</a><time datetime="2025-09-15T16:00:00.000Z" title="发表于 2025-09-16 00:00:00">2025-09-16</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">©2024 - 2025 By SolitudeAB</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><div class="js-pjax"></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

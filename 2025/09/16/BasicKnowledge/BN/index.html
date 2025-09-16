@@ -1,0 +1,194 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>BN（Batch Normalization） | SolitudeAB</title><meta name="author" content="SolitudeAB"><meta name="copyright" content="SolitudeAB"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、什么是BN？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BN（Batch Normalization）">
+<meta property="og:url" content="http://example.com/2025/09/16/BasicKnowledge/BN/index.html">
+<meta property="og:site_name" content="SolitudeAB">
+<meta property="og:description" content="一、什么是BN？">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/avatar.jpg">
+<meta property="article:published_time" content="2025-09-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-16T08:45:30.324Z">
+<meta property="article:author" content="SolitudeAB">
+<meta property="article:tag" content="神经网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/avatar.jpg"><link rel="shortcut icon" href="/img/avatar.jpg"><link rel="canonical" href="http://example.com/2025/09/16/BasicKnowledge/BN/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/seach.xml","preload":false,"top_n_per_article":3,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'BN（Batch Normalization）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><link rel="stylesheet" href="/css/transpancy.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="SolitudeAB" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="web_bg" style="background:url(/img/background1.jpg);background-attachment: local;background-position: center;background-size: cover;background-repeat: no-repeat;"></div><div id="web_bg" style="background-image: url(url(/img/background1.jpg));"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/avatar.jpg" alt="Logo"><span class="site-name">SolitudeAB</span></a><a class="nav-page-title" href="/"><span class="site-name">BN（Batch Normalization）</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">BN（Batch Normalization）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-09-15T16:00:00.000Z" title="发表于 2025-09-16 00:00:00">2025-09-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-16T08:45:30.324Z" title="更新于 2025-09-16 16:45:30">2025-09-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="一、什么是BN？"><a href="#一、什么是BN？" class="headerlink" title="一、什么是BN？"></a>一、什么是BN？</h2><p>Batch Normalization是2015年一篇论文中提出的数据归一化方法，往往用在<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=108939343&amp;content_type=Article&amp;match_order=1&amp;q=深度神经网络&amp;zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NTY4MTg4OTYsInEiOiLmt7HluqbnpZ7nu4_nvZHnu5wiLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDg5MzkzNDMsImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.M-vLAfUYEdeMRe-teHbY0cZxEn-nNIE13uAQl97QVaQ&amp;zhida_source=entity">深度神经网络</a>中激活层之前。其作用可以加快模型训练时的收敛速度，使得模型训练过程更加稳定，避免<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=108939343&amp;content_type=Article&amp;match_order=1&amp;q=梯度爆炸&amp;zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NTY4MTg4OTYsInEiOiLmoq_luqbniIbngrgiLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDg5MzkzNDMsImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.LKgbtq6WIz8X1FEIaEZLQBtZ0UxDEbeD73aX8nyxz6o&amp;zhida_source=entity">梯度爆炸</a>或者<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=108939343&amp;content_type=Article&amp;match_order=1&amp;q=梯度消失&amp;zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NTY4MTg4OTYsInEiOiLmoq_luqbmtojlpLEiLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDg5MzkzNDMsImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.hGcsgcZH-nro-FgPqHGgdqccFF-eMb0VqzUz12BWYEY&amp;zhida_source=entity">梯度消失</a>。并且起到一定的正则化作用，几乎代替了Dropout。</p>
+<h2 id="二、BN核心公式是什么？"><a href="#二、BN核心公式是什么？" class="headerlink" title="二、BN核心公式是什么？"></a>二、BN核心公式是什么？</h2><p>如下：</p>
+<script type="math/tex; mode=display">
+Input:B=\{x_{1...m}\};\gamma ,\beta (parameters\ to\ be\ learned)\\
+Output:\{y_i=BN_{\gamma ,\beta}(x_i)\}\\
+u_{B} \leftarrow\frac{1}{m}\sum_{i=1}^{m}{x_i}\\ \sigma_{B}^2\leftarrow\frac{1}{m}\sum_{i=1}^m(x_i-\mu_B)^2\\ \tilde{x}_i\leftarrow\frac{x_i-\mu_B}{\sqrt{\sigma_B^2+\epsilon}}\\ y_i\leftarrow\gamma\tilde{x}_i+\beta\\</script><p>解释一下上述公式：</p>
+<ol>
+<li>输入为数值集合（ $B$ ），可训练参数 $\gamma$、$\beta$ ；</li>
+<li>BN的具体操作为：先计算 $B$ 的<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=108939343&amp;content_type=Article&amp;match_order=1&amp;q=均值&amp;zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NTY4MTg4OTYsInEiOiLlnYflgLwiLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDg5MzkzNDMsImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.XdidcCMBb-J_HSIUeWNBTk0edzr527AA6yH-zeFLI8I&amp;zhida_source=entity">均值</a>和<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=108939343&amp;content_type=Article&amp;match_order=1&amp;q=方差&amp;zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NTY4MTg4OTYsInEiOiLmlrnlt64iLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDg5MzkzNDMsImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.eJy_gJpaZbBpuXV4ZjmFXJp0NoiDEu70WNtM9EHlyFc&amp;zhida_source=entity">方差</a>，之后将 $B$ 集合的均值、方差变换为0、1（对应上式中 ）$\tilde{x}_i\leftarrow\frac{x_i-\mu_B}{\sqrt{\sigma_B^2+\epsilon}}$，最后将 $B$  中每个元素乘以 $\gamma$ 再加 $\beta$，输出。 $\gamma$、$\beta$ 是可训练参数，参与整个网络的BP；</li>
+<li>归一化的目的：将数据规整到统一区间，减少数据的发散程度，降低网络的学习难度。BN的精髓在于归一之后，使用 、 作为还原参数，在一定程度上保留原数据的分布。</li>
+</ol>
+<h2 id="三、BN中均值、方差通过哪些维度计算得到？"><a href="#三、BN中均值、方差通过哪些维度计算得到？" class="headerlink" title="三、BN中均值、方差通过哪些维度计算得到？"></a>三、BN中均值、方差通过哪些维度计算得到？</h2><p>神经网络中传递的张量数据，其维度通常记为[N, H, W, C]，其中N是batch_size，H、W是行、列，C是通道数。那么上式中BN的输入集合 就是下图中蓝色的部分。</p>
+<p><img src="v2-73b3fe43dd4bc9e917ecc7d6cc7b5374_1440w-1756646213000-7.jpg" alt="img"></p>
+<p>图一 BN输入维度示意图</p>
+<p>均值的计算，就是在一个批次内，将每个通道中的数字单独加起来，再除以 。举个例子：该批次内有10张图片，每张图片有三个通道RBG，每张图片的高、宽是H、W，那么均值就是计算<strong>10张图片R通道的像素数值总和</strong>除以 ，再计算B通道全部像素值总和除以，最后计算G通道的像素值总和除以。方差的计算类似。</p>
+<p>可训练参数 、 的维度等于<strong>张量的通道数</strong>，在上述例子中，RBG三个通道分别需要一个 和一个 ，所以 、 的维度等于3。</p>
+<h2 id="四、训练与推理时BN中的均值、方差分别是什么？"><a href="#四、训练与推理时BN中的均值、方差分别是什么？" class="headerlink" title="四、训练与推理时BN中的均值、方差分别是什么？"></a>四、训练与推理时BN中的均值、方差分别是什么？</h2><p>此问题是BN争议最大之处，正确答案是：</p>
+<p><strong>训练</strong>时，均值、方差分别是<strong>该批次</strong>内数据相应维度的均值与方差；</p>
+<p><strong>推理</strong>时，均值、方差是<strong>基于所有批次</strong>的期望计算所得，公式如下：</p>
+<p>其中 表示 x 的期望。</p>
+<p>为了证明正确性，贴上原论文中的公式：</p>
+<p><img src="v2-a0006ca492615897231c878770b9416a_1440w-1756646213000-9.jpg" alt="img"></p>
+<p>图二 BN在训练与推理中的详细计算步骤</p>
+<h2 id="五、在tensorflow中如何实现BN？"><a href="#五、在tensorflow中如何实现BN？" class="headerlink" title="五、在tensorflow中如何实现BN？"></a>五、在tensorflow中如何实现BN？</h2><p>如果使用tensorflow的slim框架，BN就已经集成在内了，直接打开相应的参数即可。如果调用tf.nn.batch_normalization这个接口，那么需要自己在外部做一些事。</p>
+<p>下述代码是基于tf.nn.batch_normalization封装好的BN函数：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">from tensorflow.python.training import moving_averages</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def batch_normalization(input, is_training, name="BN", </span><br><span class="line">                        moving_decay=0.999, eps=1e-5):</span><br><span class="line">    input_shape = input.get_shape()</span><br><span class="line">    params_shape = input_shape[-1]</span><br><span class="line">    axis = list(range(len(input_shape) - 1))</span><br><span class="line">    with tf.variable_scope(name, reuse=tf.AUTO_REUSE) as scope:</span><br><span class="line">        beta = tf.get_variable('beta',</span><br><span class="line">                               params_shape,</span><br><span class="line">                               initializer=tf.zeros_initializer)</span><br><span class="line">        gamma = tf.get_variable('gamma',</span><br><span class="line">                                params_shape,</span><br><span class="line">                                initializer=tf.ones_initializer)</span><br><span class="line">        moving_mean = tf.get_variable('moving_mean',</span><br><span class="line">                                      params_shape,</span><br><span class="line">                                      initializer=tf.zeros_initializer,</span><br><span class="line">                                      trainable=False</span><br><span class="line">                                      )</span><br><span class="line">        moving_var = tf.get_variable('moving_var',</span><br><span class="line">                                     params_shape,</span><br><span class="line">                                     initializer=tf.ones_initializer,</span><br><span class="line">                                     trainable=False</span><br><span class="line">                                     )</span><br><span class="line">        def train():</span><br><span class="line">            # These ops will only be preformed when training.</span><br><span class="line">            mean, var = tf.nn.moments(input, axis)</span><br><span class="line">            update_moving_mean = moving_averages.assign_moving_average(moving_mean,</span><br><span class="line">                                                                       mean, </span><br><span class="line">                                                                       moving_decay)</span><br><span class="line">            update_moving_var = moving_averages.assign_moving_average(</span><br><span class="line">                moving_var, var, moving_decay)</span><br><span class="line">            return tf.identity(mean), tf.identity(var)</span><br><span class="line"></span><br><span class="line">        mean, var = tf.cond(tf.equal(is_training, True), train,</span><br><span class="line">                                 lambda: (moving_mean, moving_var))</span><br><span class="line"></span><br><span class="line">        return tf.nn.batch_normalization(input, mean, var, beta, gamma, eps)</span><br></pre></td></tr></tbody></table></figure>
+<p>在代码实现中有一个技巧，如果训练几百万个Batch，那么是不是要将其均值方差全部储存，最后再计算推理时所用的均值和方差？这样显然太过笨拙，占用内存随着训练次数不断上升。为了避免该问题，上述代码使用了<strong><a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=108939343&amp;content_type=Article&amp;match_order=1&amp;q=滑动平均&amp;zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NTY4MTg4OTYsInEiOiLmu5HliqjlubPlnYciLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDg5MzkzNDMsImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.QSTMRXJkRRMENClrEOZfgqQLYtH9aA8ie4iNbf5iRI0&amp;zhida_source=entity">滑动平均</a></strong>，储存固定个数Batch的均值和方差，不断迭代更新推理时需要的 与 。</p>
+<p>注意到代码中：</p>
+<ol>
+<li>beta、gamma在训练状态下，是<strong>可训练参数</strong>，在推理状态下，直接加载训练好的数值。</li>
+<li>moving_mean、moving_var在训练、推理中都是<strong>不可训练参数</strong>，只根据滑动平均计算公式更新数值，不会随着网络的训练BP而改变数值；在推理时，直接加载储存计算好的滑动平均之后的数值，作为推理时的均值和方差。</li>
+</ol>
+<h2 id="六、在网络中使用了BN，效果如何？"><a href="#六、在网络中使用了BN，效果如何？" class="headerlink" title="六、在网络中使用了BN，效果如何？"></a>六、在网络中使用了BN，效果如何？</h2><p>BN目前仍然是一个黑盒，论文中有一定的理论推导，但是普遍还是通过对比提升来验证BN的效果。原作者给出的效果如下图：</p>
+<p><img src="v2-0a9861c516dbb2fe19d48ca8b2bb87ee_1440w-1756646213000-11.jpg" alt="img"></p>
+<p>图三 正确率（纵坐标）与训练步数（横坐标）</p>
+<p>上图可见BN的两大收益：</p>
+<ul>
+<li>收敛速率增加</li>
+<li>可以达到更好的精度</li>
+</ul>
+<p>在目标检测算法中，BN已经成为了标配。比如<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=108939343&amp;content_type=Article&amp;match_order=1&amp;q=Yolov3&amp;zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NTY4MTg4OTYsInEiOiJZb2xvdjMiLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDg5MzkzNDMsImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.hByX6q7IbxFogowlsv9yMDennoZ10s6QADHUrspsbvk&amp;zhida_source=entity">Yolov3</a>引入了BN后，mAP提升了两个百分点。在更多实验中可以看到，BN同时起到了正则化作用，防止模型在训练集上过拟合，通常有BN的网络不再需要Dropout层。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>论文链接：<a href="https://link.zhihu.com/?target=https%3A//arxiv.org/abs/1502.03167">Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift</a></p>
+<p>更多归一化方法：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/72589565">BN、LN、IN、GN</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">SolitudeAB</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/09/16/BasicKnowledge/BN/">http://example.com/2025/09/16/BasicKnowledge/BN/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">SolitudeAB</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">神经网络</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer=""></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/09/16/LearningSchedule/Week7/" title="Week7"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Week7</div></div><div class="info-2"><div class="info-item-1">三、Dilated Convolution膨胀卷积（空洞卷积）（一）膨胀卷积和一般卷积的区别 r是普通卷积和空洞卷积的差别所在，我们称之为膨胀因子。当r=1时，表示卷积核各元素之前没有空隙，即相邻两个元素间位置相差1，此时其实就是我们正常的卷积，所以广义上说，普通的卷积是一种特殊的空洞卷积；当r=2时，表示卷积核各元素之前有一个空隙，即相邻两个元素间位置相差2，此时就是我们上图中的卷积核，为方便大家理解，我把上图r=2时的卷积核提取出来，如下图所示：  当然了当r=3、r=4都是同样的道理，这里就不过多叙述了。 （二）为什么使用膨胀卷积？在语言分割任务当中，通常会使用分类网络作为网络的 backbone1 。 首先，通过backbone，将我们的图片进行一系列的下采样，然后再通过一系列的上采样还原我们原图的大小。平常在使用图像分类网络中，我们一般会将我们的高度和宽度下采样32倍。由于后续我们需要通过上采用还原回原图的尺寸，所以如果我们将特征图的高宽下采样倍率调的太大的话，对我们还原原因的影响是很大的。比如...</div></div></div></a><a class="pagination-related" href="/2025/09/16/BasicKnowledge/%E5%8D%B7%E7%A7%AF/" title="卷积"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">卷积</div></div><div class="info-2"><div class="info-item-1">一、线性滤波与卷积的基本概念线性滤波可以说是图像处理最基本的方法，它可以允许我们对图像进行处理，产生很多不同的效果。做法很简单： 首先，我们有一个二维的滤波器矩阵（有个高大上的名字叫卷积核）和一个要处理的二维图像。然后，对于图像的每一个像素点，计算它的邻域像素和滤波器矩阵的对应元素的乘积，然后加起来，作为该像素位置的值。这样就完成了滤波过程。  对图像和滤波矩阵进行逐个元素相乘再求和的操作就相当于将一个二维的函数移动到另一个二维函数的所有位置，这个操作就叫卷积或者协相关。卷积和协相关的差别是，卷积需要先对滤波矩阵进行180的翻转，但如果矩阵是对称的，那么两者就没有什么差别了。 Correlation（协相关）和...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/08/24/BasicKnowledge/CNN/" title="卷积神经网络（CNN）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-24</div><div class="info-item-2">卷积神经网络（CNN）</div></div><div class="info-2"><div class="info-item-1">卷积神经网络（CNN）的原理引言： 可查看前篇文章——神经网络：构建人工智能的基石  卷积神经网络（Convolutional Neural Network，CNN）是一种在计算机视觉领域取得了巨大成功的深度学习模型。它们的设计灵感来自于生物学中的视觉系统，旨在模拟人类视觉处理的方式。在过去的几年中，CNN已经在图像识别、目标检测、图像生成和许多其他领域取得了显著的进展，成为了计算机视觉和深度学习研究的重要组成部分。 一、图像原理在了解卷积神经网络前，我们先来看看图像的原理： 图像在计算机中是一堆按顺序排列的数字，数值为0到255。0表示最暗，255表示最亮。 如下图：  上图是只有黑白颜色的灰度图，而更普遍的图片表达方式是RGB颜色模型，即红、绿、蓝三原色的色光以不同的比例相加，以产生多种多样的色光。RGB颜色模型中，单个矩阵就扩展成了有序排列的三个矩阵，也可以用三维张量去理解。 其中的每一个矩阵又叫这个图片的一个channel（通道），宽, 高,...</div></div></div></a><a class="pagination-related" href="/2025/09/16/BasicKnowledge/%E5%8D%B7%E7%A7%AF/" title="卷积"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-16</div><div class="info-item-2">卷积</div></div><div class="info-2"><div class="info-item-1">一、线性滤波与卷积的基本概念线性滤波可以说是图像处理最基本的方法，它可以允许我们对图像进行处理，产生很多不同的效果。做法很简单： 首先，我们有一个二维的滤波器矩阵（有个高大上的名字叫卷积核）和一个要处理的二维图像。然后，对于图像的每一个像素点，计算它的邻域像素和滤波器矩阵的对应元素的乘积，然后加起来，作为该像素位置的值。这样就完成了滤波过程。  对图像和滤波矩阵进行逐个元素相乘再求和的操作就相当于将一个二维的函数移动到另一个二维函数的所有位置，这个操作就叫卷积或者协相关。卷积和协相关的差别是，卷积需要先对滤波矩阵进行180的翻转，但如果矩阵是对称的，那么两者就没有什么差别了。 Correlation（协相关）和...</div></div></div></a><a class="pagination-related" href="/2025/09/16/BasicKnowledge/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" title="卷积神经网络基础"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-16</div><div class="info-item-2">卷积神经网络基础</div></div><div class="info-2"><div class="info-item-1">目录 卷积神经网络 全连接层 卷积层 池化层  一、卷积神经网络（一）CNN（Convolutional Neural NetWork）卷积神经网络：所有包含了卷积层的网络   雏形：LeCun 的 LeNet（1998）的网络结构（卷积神经网络发展史中的第一个卷积神经网络）  （二）卷积神经网络（CNN）的发展史 （三）卷积神经网络（CNN）的应用 图像分类 图像检索 目标检测 图像分割 无人驾驶 图像描述 图像风格迁移       二、全连接层（一）BP（back propagation）算法 BP（back...</div></div></div></a><a class="pagination-related" href="/2025/09/16/BasicKnowledge/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%85%85/" title="卷积神经网络基础补充"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-16</div><div class="info-item-2">卷积神经网络基础补充</div></div><div class="info-2"><div class="info-item-1">一、误差的计算（一）图示各个符号的含义 $x$：输入 $σ$：隐层 $w_{ij}^{(k)}$：$i$表示上一层的第$i$的节点，$j$表示本层中第$j$个节点，$k$表示该节点位于第$k$层 （二）计算1、第一层节点的输出，即$w_{ij}^{(1)}$权值对应的输出 2、最后一层节点的输入，即$w_{ij}^{(2)}$权值对应的输出（$y_1$、$y_2$）  注意，最后一层的计算中并没有使用激活函数，因为在计算多位损失的过程中，一般最后一层的激活函数统一使用 softmax 函数  3、Softmax 函数的计算过程 前面计算得到的$y_1$、$y_2$并不符合任一分布，而我们的目的是为了得到一个概率分布，所以我们需要对输出的结果进行Softmax 处理   （三）Cross Entropy Loss 交叉熵损失 针对多分类问题（Softmax 输出，所有输出概率和为1）   针对二分类问题（Sigmoid 输出，每个输出节点之间互不相干）  sigmoid...</div></div></div></a><a class="pagination-related" href="/2025/09/16/BasicKnowledge/%E6%B1%A0%E5%8C%96(pooling)/" title="池化（pooling）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-16</div><div class="info-item-2">池化（pooling）</div></div><div class="info-2"><div class="info-item-1">池化（pooling） 意即“缩并”  池化过程在一般卷积过程后。池化（pooling） 的本质，其实就是采样。Pooling 对于输入的 Feature Map，选择某种方式对其进行降维压缩，以加快运算速度。 采用较多的一种池化过程叫最大池化（Max Pooling），其具体操作过程如下： /v2-2ce695fbd365c2be94521992d52ccefd_1440w.jpg) 池化过程类似于卷积过程，如上图所示，表示的就是对一个 feature map邻域内的值，用一个 的filter，步长为2进行‘扫描’，选择最大值输出到下一层，这叫做 Max Pooling。 max pooling常用的 ， 的效果：特征图高度、宽度减半，通道数不变。 还有一种叫平均池化（Average Pooling）,就是从以上取某个区域的最大值改为求这个区域的平均值，其具体操作过程如下： /v2-a47095dd0902990d387e21ae24e6f0b9_1440w.jpg) 如上图所示，表示的就是对一个 feature map邻域内的值，用一个...</div></div></div></a><a class="pagination-related" href="/2025/08/24/BasicKnowledge/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" title="神经网络"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-24</div><div class="info-item-2">神经网络</div></div><div class="info-2"><div class="info-item-1">神经网络：构建人工智能的基石引言：神经网络是一种受到生物神经系统启发的人工智能模型，它重现了大脑中神经元之间相互连接的方式。神经网络在诸多领域中取得了显著成就，如图像识别、自然语言处理和语音识别等。这篇博客将为您解释神经网络的构造，让您能够理解这个令人着迷的领域的基本工作原理。 第一部分：神经元 - 生物的灵感在理解神经网络之前，我们首先需要了解神经元，这是神经网络的基本构建块。神经元是生物神经系统的工作单位，也是人工神经网络的灵感来源。  神经元的结构：每个神经元都由细胞体、树突和轴突组成。细胞体包含核心部分，树突接收来自其他神经元的信号，而轴突将信号传递给其他神经元。    信号传递：神经元之间的通信是通过电化学信号完成的。当信号通过树突传递到细胞体时，如果达到一定阈值，神经元就会触发并将信号传递给下一个神经元。  第二部分：人工神经元 -...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info-name">SolitudeAB</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SolitudeAB"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFBN%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">一、什么是BN？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81BN%E6%A0%B8%E5%BF%83%E5%85%AC%E5%BC%8F%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">二、BN核心公式是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81BN%E4%B8%AD%E5%9D%87%E5%80%BC%E3%80%81%E6%96%B9%E5%B7%AE%E9%80%9A%E8%BF%87%E5%93%AA%E4%BA%9B%E7%BB%B4%E5%BA%A6%E8%AE%A1%E7%AE%97%E5%BE%97%E5%88%B0%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">三、BN中均值、方差通过哪些维度计算得到？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8E%A8%E7%90%86%E6%97%B6BN%E4%B8%AD%E7%9A%84%E5%9D%87%E5%80%BC%E3%80%81%E6%96%B9%E5%B7%AE%E5%88%86%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">4.</span> <span class="toc-text">四、训练与推理时BN中的均值、方差分别是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%9C%A8tensorflow%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0BN%EF%BC%9F"><span class="toc-number">5.</span> <span class="toc-text">五、在tensorflow中如何实现BN？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%9C%A8%E7%BD%91%E7%BB%9C%E4%B8%AD%E4%BD%BF%E7%94%A8%E4%BA%86BN%EF%BC%8C%E6%95%88%E6%9E%9C%E5%A6%82%E4%BD%95%EF%BC%9F"><span class="toc-number">6.</span> <span class="toc-text">六、在网络中使用了BN，效果如何？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">7.</span> <span class="toc-text">参考</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/16/LearningSchedule/Week7/" title="Week7">Week7</a><time datetime="2025-09-15T16:00:00.000Z" title="发表于 2025-09-16 00:00:00">2025-09-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/16/BasicKnowledge/BN/" title="BN（Batch Normalization）">BN（Batch Normalization）</a><time datetime="2025-09-15T16:00:00.000Z" title="发表于 2025-09-16 00:00:00">2025-09-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/16/BasicKnowledge/%E5%8D%B7%E7%A7%AF/" title="卷积">卷积</a><time datetime="2025-09-15T16:00:00.000Z" title="发表于 2025-09-16 00:00:00">2025-09-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/16/BasicKnowledge/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" title="卷积神经网络基础">卷积神经网络基础</a><time datetime="2025-09-15T16:00:00.000Z" title="发表于 2025-09-16 00:00:00">2025-09-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/16/BasicKnowledge/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%85%85/" title="卷积神经网络基础补充">卷积神经网络基础补充</a><time datetime="2025-09-15T16:00:00.000Z" title="发表于 2025-09-16 00:00:00">2025-09-16</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">©2024 - 2025 By SolitudeAB</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><div class="js-pjax"></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
