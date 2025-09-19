@@ -1,114 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Week2</title>
-    <url>/2025/07/27/LearningSchedule/Week2/</url>
-    <content><![CDATA[<h1 id="Opencv"><a href="#Opencv" class="headerlink" title="Opencv"></a>Opencv</h1><h3 id="一、常见的图片格式及图片类型"><a href="#一、常见的图片格式及图片类型" class="headerlink" title="一、常见的图片格式及图片类型"></a>一、常见的图片格式及图片类型</h3><ul>
-<li><p>图片格式</p>
-<ol>
-<li><p>bmp：比较老的格式|不常见|无损-&gt;基本上无压缩|体积大|被淘汰</p>
-</li>
-<li><p>jpg（jpeg）：用<strong>最少的磁盘空间</strong>得到<strong>较好的图片质量</strong></p>
-</li>
-<li><p>png：无损压缩的位图片形格式（首选）</p>
-</li>
-</ol>
-</li>
-<li><p>图片类型：[ 黑白 ]  [ 彩色 ]</p>
-</li>
-</ul>
-<p>​    【gif(动图) -&gt; 一帧一帧拿出来】</p>
-<ul>
-<li>图片的本质：由像素点组成的一个矩阵，每个元素（像素点）都是在 [0,255] 之间</li>
-</ul>
-<h3 id="二、读取第一张黑白图片"><a href="#二、读取第一张黑白图片" class="headerlink" title="二、读取第一张黑白图片"></a>二、读取第一张黑白图片</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line">import numpy as np</span><br></pre></td></tr></table></figure>
-<ol>
-<li><p>读取和展示</p>
-<ul>
-<li>path：路径 0：代表灰度图 1：彩色图</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;./R-C.jpg&quot;</span><br><span class="line">img = cv2.imread(path,0)</span><br><span class="line">print(type(img))</span><br><span class="line">print(img.shape)</span><br><span class="line">print(img)</span><br><span class="line">cv2.imshow(&#x27;image&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<ul>
-<li>需要注意的是这里的<code>cv2.imshow(&#39;image&#39;, img)</code>因为我这次编写代码是在实验的服务器上运行的，远程连接ssh服务器需要额外使用X - Service（这个玩意浪费了我四天的时间，不过解决了这个问题后面的学习就流畅多了） ——附教程</li>
-</ul>
-</li>
-<li><p>图片的裁剪</p>
-<ul>
-<li>简单图片的裁剪和展示</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;</span><br><span class="line"># path:路径 0：代表灰度图 1：彩色图</span><br><span class="line">img = cv2.imread(path,0)</span><br><span class="line"># 本质：数组、矩阵</span><br><span class="line">img1 = img[:500, :500]</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Numpy 黑白颜色图片的叠加，即拼接</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/black.jpg&quot;</span><br><span class="line">img1 = cv2.imread(path,0)</span><br><span class="line">print(img1.shape)</span><br><span class="line"></span><br><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/white.jpg&quot;</span><br><span class="line">img2 = cv2.imread(path,0)</span><br><span class="line">print(img2.shape)</span><br><span class="line"></span><br><span class="line">new_img1 = img1[:100,:300]</span><br><span class="line">new_img2 = img2[:100,:300]</span><br><span class="line"></span><br><span class="line"># 垂直拼接 列数相等</span><br><span class="line">new_img = np.vstack((new_img1, new_img2))</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># 水平拼接 行数相等</span><br><span class="line">new_img = np.hstack((new_img1, new_img2))</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>图片的保存（<code>imwrite(path, target)</code>）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/black.jpg&quot;</span><br><span class="line">img1 = cv2.imread(path,0)</span><br><span class="line">print(img1.shape)</span><br><span class="line"></span><br><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/white.jpg&quot;</span><br><span class="line">img2 = cv2.imread(path,0)</span><br><span class="line">print(img2.shape)</span><br><span class="line"></span><br><span class="line">new_img1 = img1[:100,:300]</span><br><span class="line">new_img2 = img2[:100,:300]</span><br><span class="line"></span><br><span class="line">new_img = np.vstack((new_img1, new_img2))</span><br><span class="line"></span><br><span class="line"># png 类型所占的空间更大</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/new_img.jpg&quot;, new_img)</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/new_img.png&quot;, new_img)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将numpy所生成的图片转换为cv所能识别的矩阵形式=&gt;将生成的数组转为图片</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像一定是三维的，黑白图片(h,w,1)，彩色(h,w,3)</span><br><span class="line">array1 = np.random.randint(0,255,(700,500,1), dtype=&#x27;uint8&#x27;) # 将numpy所生成的图片转换为cv所能识别的矩阵形式=&gt;将生成的数组转为图片</span><br><span class="line">print(type(array1))</span><br><span class="line">array2 = np.random.randint(0,255,(700,500,1))</span><br><span class="line">print(type(array2))</span><br><span class="line"></span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, array2)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="三、读取第一张彩色图片"><a href="#三、读取第一张彩色图片" class="headerlink" title="三、读取第一张彩色图片"></a>三、读取第一张彩色图片</h3>   <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line">import numpy as np</span><br></pre></td></tr></table></figure>
-<ol>
-<li><p>彩色图片的读取</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 彩色图片读取方式为1</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line"></span><br><span class="line"># 检查彩色图片是否array形式[&lt;class &#x27;numpy.ndarray&#x27;&gt;]</span><br><span class="line">print(type(img))</span><br><span class="line"></span><br><span class="line"># 注意需要传递图片名以及图片矩阵</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># 彩色图片的形状 [(1333, 750, 3)]</span><br><span class="line">print(img.shape)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>研究三通道：[Opencv中以三个二维矩阵进行存储，即三维矩阵：[H-W*3] ]</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 创建一个二维数组</span><br><span class="line">print(np.array([[1,2]]).shape)</span><br><span class="line">print(np.array([[1,2],[1,2]]).shape)</span><br><span class="line"># 创建一个三维数组</span><br><span class="line">print(np.array([[[1,2],[1,2]]]).shape)</span><br><span class="line">print(np.array([ [[1,2],[1,2]],</span><br><span class="line">                [[1,2],[1,2]] ]).shape)</span><br><span class="line">print(np.array([ [[1,2],[1,2]],</span><br><span class="line">                [[1,2],[1,2]],</span><br><span class="line">                [[1,2],[1,2]] ]).shape)</span><br><span class="line"></span><br><span class="line">彩色图片 -&gt; 三张图片(RGB) Opencv 中以BGR形式存储</span><br><span class="line">尝试拆分一张彩色图片</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">img0 = img[:,:,0] #B</span><br><span class="line">cv2.imshow(&#x27;img0&#x27;, img0)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2_b.jpg&quot;,img0)</span><br><span class="line">img1 = img[:,:,1] #G</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2_g.jpg&quot;,img1)</span><br><span class="line">img2 = img[:,:,2] #R</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2_r.jpg&quot;,img2)</span><br><span class="line"></span><br><span class="line"># split() 拆分，类似以上效果</span><br><span class="line">b,g,r = cv2.split(img)</span><br><span class="line"></span><br><span class="line"># 合并拆分结果</span><br><span class="line"># img = cv2.merge([b,g,r]) 正常显示</span><br><span class="line"># img = cv2.merge([b,g]) 无法显示</span><br><span class="line">img = cv2.merge([r,g,b]) # 可进行图片的重生成</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>剪裁</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">img0 = img[:,:,0] #B</span><br><span class="line">img1 = img[:,:,0] #B</span><br><span class="line">img2 = img[:,:,0] #B</span><br><span class="line">print(img.shape)</span><br><span class="line">new_img0 = img0[:100,:100]</span><br><span class="line">new_img1 = img1[:100,100:200]</span><br><span class="line">new_img2 = img2[:100,200:300]</span><br><span class="line">new_img = np.hstack((new_img0, new_img1, new_img2))</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用opencv转换图片的色彩空间</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 1. 色彩空间：[BGR]</span><br><span class="line"># (1) HSV：更类似于人类感觉颜色的方式。H：色相(Hue) S：饱和度(Saturation) V：亮度(Value)</span><br><span class="line"># (2) YUV：Y：亮度信号 U\V：两个色彩信号-&gt;色彩的饱和度</span><br><span class="line"># (3) Lab：由国际照明委员会建立。L：整张图的明亮度 a\b：负责颜色的多少</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># HSV</span><br><span class="line">hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)</span><br><span class="line">cv2.imshow(&#x27;hsv&#x27;, hsv)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># YUV</span><br><span class="line">yuv = cv2.cvtColor(img, cv2.COLOR_BGR2YUV)</span><br><span class="line">cv2.imshow(&#x27;yuv&#x27;, yuv)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># Lab</span><br><span class="line">lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)</span><br><span class="line">cv2.imshow(&#x27;lab&#x27;, lab)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"># 还有其他的色彩空间</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="四、统计一张图片的像素点个数"><a href="#四、统计一张图片的像素点个数" class="headerlink" title="四、统计一张图片的像素点个数"></a>四、统计一张图片的像素点个数</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import cv2</span><br></pre></td></tr></table></figure>
-<ol>
-<li>图片的读取</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 0)</span><br><span class="line"></span><br><span class="line">h,w = np.shape(img)</span><br><span class="line">hest = np.zeros([256], dtype=np.int32) # 创建256个全为0零的一维矩阵</span><br></pre></td></tr></table></figure>
-<ol>
-<li>遍历图片矩阵</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for row in range(h):</span><br><span class="line">    for col in range(w):</span><br><span class="line">        pv = img[row,col]</span><br><span class="line">        hest[pv] += 1</span><br></pre></td></tr></table></figure>
-<ol>
-<li>绘图的操作</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">plt.plot(hest, color=&#x27;r&#x27;)</span><br><span class="line">plt.xlim([0,256])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="image-20250727200339645.png" alt="image-20250727200339645"></p>
-<h3 id="五、彩色图片像素点的统计"><a href="#五、彩色图片像素点的统计" class="headerlink" title="五、彩色图片像素点的统计"></a>五、彩色图片像素点的统计</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import cv2</span><br></pre></td></tr></table></figure>
-<ol>
-<li>图片的读取</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br></pre></td></tr></table></figure>
-<ol>
-<li>分离颜色通道</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">b,g,r = cv2.split(img)</span><br></pre></td></tr></table></figure>
-<ol>
-<li>行列遍历</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">h, w = np.shape(b)</span><br></pre></td></tr></table></figure>
-<ol>
-<li>建立空白数组</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hest = np.zeros([256],dtype=np.int32)</span><br></pre></td></tr></table></figure>
-<ol>
-<li>遍历图片</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for i in [b,g,r]:</span><br><span class="line">    for row in range(h):</span><br><span class="line">        for col in range(w):</span><br><span class="line">            pv = i[row,col]</span><br><span class="line">            hest[pv] += 1</span><br><span class="line"></span><br><span class="line">plt.plot(hest, color=&#x27;r&#x27;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="image-20250727200527018.png" alt="image-20250727200527018"></p>
-]]></content>
-      <categories>
-        <category>504医学AI</category>
-      </categories>
-      <tags>
-        <tag>504医学AI入门</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Week1</title>
     <url>/2025/07/20/LearningSchedule/Week1/</url>
     <content><![CDATA[<h1 id="语义分割"><a href="#语义分割" class="headerlink" title="语义分割"></a>语义分割</h1><blockquote>
@@ -573,60 +465,6 @@
       </tags>
   </entry>
   <entry>
-    <title>BN（Batch Normalization）</title>
-    <url>/2025/09/16/BasicKnowledge/BN/</url>
-    <content><![CDATA[<h2 id="一、什么是BN？"><a href="#一、什么是BN？" class="headerlink" title="一、什么是BN？"></a>一、什么是BN？</h2><p>Batch Normalization是2015年一篇论文中提出的数据归一化方法，往往用在<a href="https://zhida.zhihu.com/search?content_id=108939343&amp;content_type=Article&amp;match_order=1&amp;q=深度神经网络&amp;zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NTY4MTg4OTYsInEiOiLmt7HluqbnpZ7nu4_nvZHnu5wiLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDg5MzkzNDMsImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.M-vLAfUYEdeMRe-teHbY0cZxEn-nNIE13uAQl97QVaQ&amp;zhida_source=entity">深度神经网络</a>中激活层之前。其作用可以加快模型训练时的收敛速度，使得模型训练过程更加稳定，避免<a href="https://zhida.zhihu.com/search?content_id=108939343&amp;content_type=Article&amp;match_order=1&amp;q=梯度爆炸&amp;zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NTY4MTg4OTYsInEiOiLmoq_luqbniIbngrgiLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDg5MzkzNDMsImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.LKgbtq6WIz8X1FEIaEZLQBtZ0UxDEbeD73aX8nyxz6o&amp;zhida_source=entity">梯度爆炸</a>或者<a href="https://zhida.zhihu.com/search?content_id=108939343&amp;content_type=Article&amp;match_order=1&amp;q=梯度消失&amp;zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NTY4MTg4OTYsInEiOiLmoq_luqbmtojlpLEiLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDg5MzkzNDMsImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.hGcsgcZH-nro-FgPqHGgdqccFF-eMb0VqzUz12BWYEY&amp;zhida_source=entity">梯度消失</a>。并且起到一定的正则化作用，几乎代替了Dropout。</p>
-<h2 id="二、BN核心公式是什么？"><a href="#二、BN核心公式是什么？" class="headerlink" title="二、BN核心公式是什么？"></a>二、BN核心公式是什么？</h2><p>如下：</p>
-<script type="math/tex; mode=display">
-Input:B=\{x_{1...m}\};\gamma ,\beta (parameters\ to\ be\ learned)\\
-Output:\{y_i=BN_{\gamma ,\beta}(x_i)\}\\
-u_{B} \leftarrow\frac{1}{m}\sum_{i=1}^{m}{x_i}\\ \sigma_{B}^2\leftarrow\frac{1}{m}\sum_{i=1}^m(x_i-\mu_B)^2\\ \tilde{x}_i\leftarrow\frac{x_i-\mu_B}{\sqrt{\sigma_B^2+\epsilon}}\\ y_i\leftarrow\gamma\tilde{x}_i+\beta\\</script><p>解释一下上述公式：</p>
-<ol>
-<li>输入为数值集合（ $B$ ），可训练参数 $\gamma$、$\beta$ ；</li>
-<li>BN的具体操作为：先计算 $B$ 的<a href="https://zhida.zhihu.com/search?content_id=108939343&amp;content_type=Article&amp;match_order=1&amp;q=均值&amp;zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NTY4MTg4OTYsInEiOiLlnYflgLwiLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDg5MzkzNDMsImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.XdidcCMBb-J_HSIUeWNBTk0edzr527AA6yH-zeFLI8I&amp;zhida_source=entity">均值</a>和<a href="https://zhida.zhihu.com/search?content_id=108939343&amp;content_type=Article&amp;match_order=1&amp;q=方差&amp;zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NTY4MTg4OTYsInEiOiLmlrnlt64iLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDg5MzkzNDMsImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.eJy_gJpaZbBpuXV4ZjmFXJp0NoiDEu70WNtM9EHlyFc&amp;zhida_source=entity">方差</a>，之后将 $B$ 集合的均值、方差变换为0、1（对应上式中 ）$\tilde{x}_i\leftarrow\frac{x_i-\mu_B}{\sqrt{\sigma_B^2+\epsilon}}$，最后将 $B$  中每个元素乘以 $\gamma$ 再加 $\beta$，输出。 $\gamma$、$\beta$ 是可训练参数，参与整个网络的BP；</li>
-<li>归一化的目的：将数据规整到统一区间，减少数据的发散程度，降低网络的学习难度。BN的精髓在于归一之后，使用 、 作为还原参数，在一定程度上保留原数据的分布。</li>
-</ol>
-<h2 id="三、BN中均值、方差通过哪些维度计算得到？"><a href="#三、BN中均值、方差通过哪些维度计算得到？" class="headerlink" title="三、BN中均值、方差通过哪些维度计算得到？"></a>三、BN中均值、方差通过哪些维度计算得到？</h2><p>神经网络中传递的张量数据，其维度通常记为[N, H, W, C]，其中N是batch_size，H、W是行、列，C是通道数。那么上式中BN的输入集合 就是下图中蓝色的部分。</p>
-<p><img src="v2-73b3fe43dd4bc9e917ecc7d6cc7b5374_1440w-1756646213000-7.jpg" alt="img"></p>
-<p>图一 BN输入维度示意图</p>
-<p>均值的计算，就是在一个批次内，将每个通道中的数字单独加起来，再除以 。举个例子：该批次内有10张图片，每张图片有三个通道RBG，每张图片的高、宽是H、W，那么均值就是计算<strong>10张图片R通道的像素数值总和</strong>除以 ，再计算B通道全部像素值总和除以，最后计算G通道的像素值总和除以。方差的计算类似。</p>
-<p>可训练参数 、 的维度等于<strong>张量的通道数</strong>，在上述例子中，RBG三个通道分别需要一个 和一个 ，所以 、 的维度等于3。</p>
-<h2 id="四、训练与推理时BN中的均值、方差分别是什么？"><a href="#四、训练与推理时BN中的均值、方差分别是什么？" class="headerlink" title="四、训练与推理时BN中的均值、方差分别是什么？"></a>四、训练与推理时BN中的均值、方差分别是什么？</h2><p>此问题是BN争议最大之处，正确答案是：</p>
-<p><strong>训练</strong>时，均值、方差分别是<strong>该批次</strong>内数据相应维度的均值与方差；</p>
-<p><strong>推理</strong>时，均值、方差是<strong>基于所有批次</strong>的期望计算所得，公式如下：</p>
-<p>其中 表示 x 的期望。</p>
-<p>为了证明正确性，贴上原论文中的公式：</p>
-<p><img src="v2-a0006ca492615897231c878770b9416a_1440w-1756646213000-9.jpg" alt="img"></p>
-<p>图二 BN在训练与推理中的详细计算步骤</p>
-<h2 id="五、在tensorflow中如何实现BN？"><a href="#五、在tensorflow中如何实现BN？" class="headerlink" title="五、在tensorflow中如何实现BN？"></a>五、在tensorflow中如何实现BN？</h2><p>如果使用tensorflow的slim框架，BN就已经集成在内了，直接打开相应的参数即可。如果调用tf.nn.batch_normalization这个接口，那么需要自己在外部做一些事。</p>
-<p>下述代码是基于tf.nn.batch_normalization封装好的BN函数：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">from tensorflow.python.training import moving_averages</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def batch_normalization(input, is_training, name=&quot;BN&quot;, </span><br><span class="line">                        moving_decay=0.999, eps=1e-5):</span><br><span class="line">    input_shape = input.get_shape()</span><br><span class="line">    params_shape = input_shape[-1]</span><br><span class="line">    axis = list(range(len(input_shape) - 1))</span><br><span class="line">    with tf.variable_scope(name, reuse=tf.AUTO_REUSE) as scope:</span><br><span class="line">        beta = tf.get_variable(&#x27;beta&#x27;,</span><br><span class="line">                               params_shape,</span><br><span class="line">                               initializer=tf.zeros_initializer)</span><br><span class="line">        gamma = tf.get_variable(&#x27;gamma&#x27;,</span><br><span class="line">                                params_shape,</span><br><span class="line">                                initializer=tf.ones_initializer)</span><br><span class="line">        moving_mean = tf.get_variable(&#x27;moving_mean&#x27;,</span><br><span class="line">                                      params_shape,</span><br><span class="line">                                      initializer=tf.zeros_initializer,</span><br><span class="line">                                      trainable=False</span><br><span class="line">                                      )</span><br><span class="line">        moving_var = tf.get_variable(&#x27;moving_var&#x27;,</span><br><span class="line">                                     params_shape,</span><br><span class="line">                                     initializer=tf.ones_initializer,</span><br><span class="line">                                     trainable=False</span><br><span class="line">                                     )</span><br><span class="line">        def train():</span><br><span class="line">            # These ops will only be preformed when training.</span><br><span class="line">            mean, var = tf.nn.moments(input, axis)</span><br><span class="line">            update_moving_mean = moving_averages.assign_moving_average(moving_mean,</span><br><span class="line">                                                                       mean, </span><br><span class="line">                                                                       moving_decay)</span><br><span class="line">            update_moving_var = moving_averages.assign_moving_average(</span><br><span class="line">                moving_var, var, moving_decay)</span><br><span class="line">            return tf.identity(mean), tf.identity(var)</span><br><span class="line"></span><br><span class="line">        mean, var = tf.cond(tf.equal(is_training, True), train,</span><br><span class="line">                                 lambda: (moving_mean, moving_var))</span><br><span class="line"></span><br><span class="line">        return tf.nn.batch_normalization(input, mean, var, beta, gamma, eps)</span><br></pre></td></tr></table></figure>
-<p>在代码实现中有一个技巧，如果训练几百万个Batch，那么是不是要将其均值方差全部储存，最后再计算推理时所用的均值和方差？这样显然太过笨拙，占用内存随着训练次数不断上升。为了避免该问题，上述代码使用了<strong><a href="https://zhida.zhihu.com/search?content_id=108939343&amp;content_type=Article&amp;match_order=1&amp;q=滑动平均&amp;zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NTY4MTg4OTYsInEiOiLmu5HliqjlubPlnYciLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDg5MzkzNDMsImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.QSTMRXJkRRMENClrEOZfgqQLYtH9aA8ie4iNbf5iRI0&amp;zhida_source=entity">滑动平均</a></strong>，储存固定个数Batch的均值和方差，不断迭代更新推理时需要的 与 。</p>
-<p>注意到代码中：</p>
-<ol>
-<li>beta、gamma在训练状态下，是<strong>可训练参数</strong>，在推理状态下，直接加载训练好的数值。</li>
-<li>moving_mean、moving_var在训练、推理中都是<strong>不可训练参数</strong>，只根据滑动平均计算公式更新数值，不会随着网络的训练BP而改变数值；在推理时，直接加载储存计算好的滑动平均之后的数值，作为推理时的均值和方差。</li>
-</ol>
-<h2 id="六、在网络中使用了BN，效果如何？"><a href="#六、在网络中使用了BN，效果如何？" class="headerlink" title="六、在网络中使用了BN，效果如何？"></a>六、在网络中使用了BN，效果如何？</h2><p>BN目前仍然是一个黑盒，论文中有一定的理论推导，但是普遍还是通过对比提升来验证BN的效果。原作者给出的效果如下图：</p>
-<p><img src="v2-0a9861c516dbb2fe19d48ca8b2bb87ee_1440w-1756646213000-11.jpg" alt="img"></p>
-<p>图三 正确率（纵坐标）与训练步数（横坐标）</p>
-<p>上图可见BN的两大收益：</p>
-<ul>
-<li>收敛速率增加</li>
-<li>可以达到更好的精度</li>
-</ul>
-<p>在目标检测算法中，BN已经成为了标配。比如<a href="https://zhida.zhihu.com/search?content_id=108939343&amp;content_type=Article&amp;match_order=1&amp;q=Yolov3&amp;zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NTY4MTg4OTYsInEiOiJZb2xvdjMiLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDg5MzkzNDMsImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.hByX6q7IbxFogowlsv9yMDennoZ10s6QADHUrspsbvk&amp;zhida_source=entity">Yolov3</a>引入了BN后，mAP提升了两个百分点。在更多实验中可以看到，BN同时起到了正则化作用，防止模型在训练集上过拟合，通常有BN的网络不再需要Dropout层。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>论文链接：<a href="https://link.zhihu.com/?target=https%3A//arxiv.org/abs/1502.03167">Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift</a></p>
-<p>更多归一化方法：<a href="https://zhuanlan.zhihu.com/p/72589565">BN、LN、IN、GN</a></p>
-]]></content>
-      <categories>
-        <category>基础知识</category>
-      </categories>
-      <tags>
-        <tag>神经网络</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Week5</title>
     <url>/2025/08/17/LearningSchedule/Week5/</url>
     <content><![CDATA[<h1 id="图像处理方法"><a href="#图像处理方法" class="headerlink" title="图像处理方法"></a>图像处理方法</h1><h2 id="一、Sobel算子"><a href="#一、Sobel算子" class="headerlink" title="一、Sobel算子"></a>一、Sobel算子</h2><ul>
@@ -968,6 +806,114 @@ u_{B} \leftarrow\frac{1}{m}\sum_{i=1}^{m}{x_i}\\ \sigma_{B}^2\leftarrow\frac{1}{
       </tags>
   </entry>
   <entry>
+    <title>Week2</title>
+    <url>/2025/07/27/LearningSchedule/Week2/</url>
+    <content><![CDATA[<h1 id="Opencv"><a href="#Opencv" class="headerlink" title="Opencv"></a>Opencv</h1><h3 id="一、常见的图片格式及图片类型"><a href="#一、常见的图片格式及图片类型" class="headerlink" title="一、常见的图片格式及图片类型"></a>一、常见的图片格式及图片类型</h3><ul>
+<li><p>图片格式</p>
+<ol>
+<li><p>bmp：比较老的格式|不常见|无损-&gt;基本上无压缩|体积大|被淘汰</p>
+</li>
+<li><p>jpg（jpeg）：用<strong>最少的磁盘空间</strong>得到<strong>较好的图片质量</strong></p>
+</li>
+<li><p>png：无损压缩的位图片形格式（首选）</p>
+</li>
+</ol>
+</li>
+<li><p>图片类型：[ 黑白 ]  [ 彩色 ]</p>
+</li>
+</ul>
+<p>​    【gif(动图) -&gt; 一帧一帧拿出来】</p>
+<ul>
+<li>图片的本质：由像素点组成的一个矩阵，每个元素（像素点）都是在 [0,255] 之间</li>
+</ul>
+<h3 id="二、读取第一张黑白图片"><a href="#二、读取第一张黑白图片" class="headerlink" title="二、读取第一张黑白图片"></a>二、读取第一张黑白图片</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line">import numpy as np</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>读取和展示</p>
+<ul>
+<li>path：路径 0：代表灰度图 1：彩色图</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;./R-C.jpg&quot;</span><br><span class="line">img = cv2.imread(path,0)</span><br><span class="line">print(type(img))</span><br><span class="line">print(img.shape)</span><br><span class="line">print(img)</span><br><span class="line">cv2.imshow(&#x27;image&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>需要注意的是这里的<code>cv2.imshow(&#39;image&#39;, img)</code>因为我这次编写代码是在实验的服务器上运行的，远程连接ssh服务器需要额外使用X - Service（这个玩意浪费了我四天的时间，不过解决了这个问题后面的学习就流畅多了） ——附教程</li>
+</ul>
+</li>
+<li><p>图片的裁剪</p>
+<ul>
+<li>简单图片的裁剪和展示</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;</span><br><span class="line"># path:路径 0：代表灰度图 1：彩色图</span><br><span class="line">img = cv2.imread(path,0)</span><br><span class="line"># 本质：数组、矩阵</span><br><span class="line">img1 = img[:500, :500]</span><br><span class="line">cv2.imshow(&#x27;img1&#x27;, img1)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Numpy 黑白颜色图片的叠加，即拼接</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/black.jpg&quot;</span><br><span class="line">img1 = cv2.imread(path,0)</span><br><span class="line">print(img1.shape)</span><br><span class="line"></span><br><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/white.jpg&quot;</span><br><span class="line">img2 = cv2.imread(path,0)</span><br><span class="line">print(img2.shape)</span><br><span class="line"></span><br><span class="line">new_img1 = img1[:100,:300]</span><br><span class="line">new_img2 = img2[:100,:300]</span><br><span class="line"></span><br><span class="line"># 垂直拼接 列数相等</span><br><span class="line">new_img = np.vstack((new_img1, new_img2))</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># 水平拼接 行数相等</span><br><span class="line">new_img = np.hstack((new_img1, new_img2))</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>图片的保存（<code>imwrite(path, target)</code>）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/black.jpg&quot;</span><br><span class="line">img1 = cv2.imread(path,0)</span><br><span class="line">print(img1.shape)</span><br><span class="line"></span><br><span class="line">path = r&quot;/home/jiax/workspace/Python Learning/Opencv-course/white.jpg&quot;</span><br><span class="line">img2 = cv2.imread(path,0)</span><br><span class="line">print(img2.shape)</span><br><span class="line"></span><br><span class="line">new_img1 = img1[:100,:300]</span><br><span class="line">new_img2 = img2[:100,:300]</span><br><span class="line"></span><br><span class="line">new_img = np.vstack((new_img1, new_img2))</span><br><span class="line"></span><br><span class="line"># png 类型所占的空间更大</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/new_img.jpg&quot;, new_img)</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/new_img.png&quot;, new_img)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将numpy所生成的图片转换为cv所能识别的矩阵形式=&gt;将生成的数组转为图片</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 图像一定是三维的，黑白图片(h,w,1)，彩色(h,w,3)</span><br><span class="line">array1 = np.random.randint(0,255,(700,500,1), dtype=&#x27;uint8&#x27;) # 将numpy所生成的图片转换为cv所能识别的矩阵形式=&gt;将生成的数组转为图片</span><br><span class="line">print(type(array1))</span><br><span class="line">array2 = np.random.randint(0,255,(700,500,1))</span><br><span class="line">print(type(array2))</span><br><span class="line"></span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, array2)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="三、读取第一张彩色图片"><a href="#三、读取第一张彩色图片" class="headerlink" title="三、读取第一张彩色图片"></a>三、读取第一张彩色图片</h3>   <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import cv2</span><br><span class="line">import numpy as np</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>彩色图片的读取</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 彩色图片读取方式为1</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line"></span><br><span class="line"># 检查彩色图片是否array形式[&lt;class &#x27;numpy.ndarray&#x27;&gt;]</span><br><span class="line">print(type(img))</span><br><span class="line"></span><br><span class="line"># 注意需要传递图片名以及图片矩阵</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># 彩色图片的形状 [(1333, 750, 3)]</span><br><span class="line">print(img.shape)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>研究三通道：[Opencv中以三个二维矩阵进行存储，即三维矩阵：[H-W*3] ]</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 创建一个二维数组</span><br><span class="line">print(np.array([[1,2]]).shape)</span><br><span class="line">print(np.array([[1,2],[1,2]]).shape)</span><br><span class="line"># 创建一个三维数组</span><br><span class="line">print(np.array([[[1,2],[1,2]]]).shape)</span><br><span class="line">print(np.array([ [[1,2],[1,2]],</span><br><span class="line">                [[1,2],[1,2]] ]).shape)</span><br><span class="line">print(np.array([ [[1,2],[1,2]],</span><br><span class="line">                [[1,2],[1,2]],</span><br><span class="line">                [[1,2],[1,2]] ]).shape)</span><br><span class="line"></span><br><span class="line">彩色图片 -&gt; 三张图片(RGB) Opencv 中以BGR形式存储</span><br><span class="line">尝试拆分一张彩色图片</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">img0 = img[:,:,0] #B</span><br><span class="line">cv2.imshow(&#x27;img0&#x27;, img0)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2_b.jpg&quot;,img0)</span><br><span class="line">img1 = img[:,:,1] #G</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2_g.jpg&quot;,img1)</span><br><span class="line">img2 = img[:,:,2] #R</span><br><span class="line">cv2.imwrite(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/2_r.jpg&quot;,img2)</span><br><span class="line"></span><br><span class="line"># split() 拆分，类似以上效果</span><br><span class="line">b,g,r = cv2.split(img)</span><br><span class="line"></span><br><span class="line"># 合并拆分结果</span><br><span class="line"># img = cv2.merge([b,g,r]) 正常显示</span><br><span class="line"># img = cv2.merge([b,g]) 无法显示</span><br><span class="line">img = cv2.merge([r,g,b]) # 可进行图片的重生成</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>剪裁</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">img0 = img[:,:,0] #B</span><br><span class="line">img1 = img[:,:,0] #B</span><br><span class="line">img2 = img[:,:,0] #B</span><br><span class="line">print(img.shape)</span><br><span class="line">new_img0 = img0[:100,:100]</span><br><span class="line">new_img1 = img1[:100,100:200]</span><br><span class="line">new_img2 = img2[:100,200:300]</span><br><span class="line">new_img = np.hstack((new_img0, new_img1, new_img2))</span><br><span class="line">cv2.imshow(&#x27;new_img&#x27;, new_img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用opencv转换图片的色彩空间</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 1. 色彩空间：[BGR]</span><br><span class="line"># (1) HSV：更类似于人类感觉颜色的方式。H：色相(Hue) S：饱和度(Saturation) V：亮度(Value)</span><br><span class="line"># (2) YUV：Y：亮度信号 U\V：两个色彩信号-&gt;色彩的饱和度</span><br><span class="line"># (3) Lab：由国际照明委员会建立。L：整张图的明亮度 a\b：负责颜色的多少</span><br><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br><span class="line">cv2.imshow(&#x27;img&#x27;, img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># HSV</span><br><span class="line">hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)</span><br><span class="line">cv2.imshow(&#x27;hsv&#x27;, hsv)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># YUV</span><br><span class="line">yuv = cv2.cvtColor(img, cv2.COLOR_BGR2YUV)</span><br><span class="line">cv2.imshow(&#x27;yuv&#x27;, yuv)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"># Lab</span><br><span class="line">lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)</span><br><span class="line">cv2.imshow(&#x27;lab&#x27;, lab)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"># 还有其他的色彩空间</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="四、统计一张图片的像素点个数"><a href="#四、统计一张图片的像素点个数" class="headerlink" title="四、统计一张图片的像素点个数"></a>四、统计一张图片的像素点个数</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import cv2</span><br></pre></td></tr></table></figure>
+<ol>
+<li>图片的读取</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 0)</span><br><span class="line"></span><br><span class="line">h,w = np.shape(img)</span><br><span class="line">hest = np.zeros([256], dtype=np.int32) # 创建256个全为0零的一维矩阵</span><br></pre></td></tr></table></figure>
+<ol>
+<li>遍历图片矩阵</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for row in range(h):</span><br><span class="line">    for col in range(w):</span><br><span class="line">        pv = img[row,col]</span><br><span class="line">        hest[pv] += 1</span><br></pre></td></tr></table></figure>
+<ol>
+<li>绘图的操作</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">plt.plot(hest, color=&#x27;r&#x27;)</span><br><span class="line">plt.xlim([0,256])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="image-20250727200339645.png" alt="image-20250727200339645"></p>
+<h3 id="五、彩色图片像素点的统计"><a href="#五、彩色图片像素点的统计" class="headerlink" title="五、彩色图片像素点的统计"></a>五、彩色图片像素点的统计</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import cv2</span><br></pre></td></tr></table></figure>
+<ol>
+<li>图片的读取</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/color.jpg&quot;, 1)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>分离颜色通道</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">b,g,r = cv2.split(img)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>行列遍历</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">h, w = np.shape(b)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>建立空白数组</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hest = np.zeros([256],dtype=np.int32)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>遍历图片</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for i in [b,g,r]:</span><br><span class="line">    for row in range(h):</span><br><span class="line">        for col in range(w):</span><br><span class="line">            pv = i[row,col]</span><br><span class="line">            hest[pv] += 1</span><br><span class="line"></span><br><span class="line">plt.plot(hest, color=&#x27;r&#x27;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="image-20250727200527018.png" alt="image-20250727200527018"></p>
+]]></content>
+      <categories>
+        <category>504医学AI</category>
+      </categories>
+      <tags>
+        <tag>504医学AI入门</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Week7</title>
     <url>/2025/09/16/LearningSchedule/Week7/</url>
     <content><![CDATA[<h1 id="三、Dilated-Convolution膨胀卷积（空洞卷积）"><a href="#三、Dilated-Convolution膨胀卷积（空洞卷积）" class="headerlink" title="三、Dilated Convolution膨胀卷积（空洞卷积）"></a>三、Dilated Convolution膨胀卷积（空洞卷积）</h1><h3 id="（一）膨胀卷积和一般卷积的区别"><a href="#（一）膨胀卷积和一般卷积的区别" class="headerlink" title="（一）膨胀卷积和一般卷积的区别"></a>（一）膨胀卷积和一般卷积的区别</h3><p><img src="image-20250828120139433.png" alt="image-20250828120139433"></p>
@@ -1298,7 +1244,7 @@ F_3=(F_2−1)×1 + 3=(3−1)×1+3=5</script><p><strong>【注：对于感受野�
 <p><img src="ef7a19c327e24d2e82597273d48cdcc9tplv-k3u1fbpfcp-zoom-in-crop-mark1512000.webp" alt="img"></p>
 <p>上图表示使用3×3的卷积核进行空洞卷积，r=2，很明显，此时灰色特征层的感受野为5×5。其实呢，计算空洞卷积感受野也有公式，我们这样来思考，上图是3×3的卷积核，r=2，这样构成的一个空洞卷积核（乱起的名字哈，不用在意）的尺寸就相当于是5×5大小了，这时候我们感受野的计算就相当于5×5卷积核的感受野了。既然这样，我们能否找到空洞卷积核大小和原始卷积核大小的关系呢？当然可以啦，如下：</p>
 <script type="math/tex; mode=display">
-k′=k+(k−1)(r−1)</script><script type="math/tex; mode=display">k′$$表示空洞卷积核大小，$$k$$表示原始卷积核大小，$$r$$表示膨胀因子。大家可以试着将这个公式代入进去，验证公式的正确性！！！既然有了$$k'$$，我们就可以利用原来计算感受野的公式得到计算空洞卷积感受野的公式了，如下：</script><p>F<em>i=(F</em>{i-1}-1)×stride + k’=(F_{i-1}-1) × stride + k + (k-1)(r-1)</p>
+k′=k+(k−1)(r−1)</script><script type="math/tex; mode=display">k′$$表示空洞卷积核大小，$$k$$表示原始卷积核大小，$$r$$表示膨胀因子。大家可以试着将这个公式代入进去，验证公式的正确性！！！既然有了$$k'$$，我们就可以利用原来计算感受野的公式得到计算空洞卷积感受野的公式了，如下：</script><p>F_i=(F_{i-1}-1)×stride + k’=(F_{i-1}-1) × stride + k + (k-1)(r-1)</p>
 <p>$$</p>
 <h3 id="（三）空洞卷积存在的缺陷"><a href="#（三）空洞卷积存在的缺陷" class="headerlink" title="（三）空洞卷积存在的缺陷"></a>（三）空洞卷积存在的缺陷</h3><p>上文谈及了空洞卷积可以增大感受野，这是空洞卷积本身的优势。那空洞卷积是否有缺陷呢？关于这点大家可以看看这篇<a href="https://link.juejin.cn?target=https%3A%2F%2Farxiv.org%2Fabs%2F1702.08502">论文</a>，该篇论文就主要介绍了空洞卷积存在的缺陷以及解决方案。</p>
 <p>其实啊，空洞卷积的缺陷主要体现在存在网格效应，我们可以来看一下下图：</p>
@@ -1330,6 +1276,60 @@ k′=k+(k−1)(r−1)</script><script type="math/tex; mode=display">k′$$表示
       </categories>
       <tags>
         <tag>504医学AI入门</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>BN（Batch Normalization）</title>
+    <url>/2025/09/16/BasicKnowledge/BN/</url>
+    <content><![CDATA[<h2 id="一、什么是BN？"><a href="#一、什么是BN？" class="headerlink" title="一、什么是BN？"></a>一、什么是BN？</h2><p>Batch Normalization是2015年一篇论文中提出的数据归一化方法，往往用在<a href="https://zhida.zhihu.com/search?content_id=108939343&amp;content_type=Article&amp;match_order=1&amp;q=深度神经网络&amp;zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NTY4MTg4OTYsInEiOiLmt7HluqbnpZ7nu4_nvZHnu5wiLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDg5MzkzNDMsImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.M-vLAfUYEdeMRe-teHbY0cZxEn-nNIE13uAQl97QVaQ&amp;zhida_source=entity">深度神经网络</a>中激活层之前。其作用可以加快模型训练时的收敛速度，使得模型训练过程更加稳定，避免<a href="https://zhida.zhihu.com/search?content_id=108939343&amp;content_type=Article&amp;match_order=1&amp;q=梯度爆炸&amp;zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NTY4MTg4OTYsInEiOiLmoq_luqbniIbngrgiLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDg5MzkzNDMsImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.LKgbtq6WIz8X1FEIaEZLQBtZ0UxDEbeD73aX8nyxz6o&amp;zhida_source=entity">梯度爆炸</a>或者<a href="https://zhida.zhihu.com/search?content_id=108939343&amp;content_type=Article&amp;match_order=1&amp;q=梯度消失&amp;zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NTY4MTg4OTYsInEiOiLmoq_luqbmtojlpLEiLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDg5MzkzNDMsImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.hGcsgcZH-nro-FgPqHGgdqccFF-eMb0VqzUz12BWYEY&amp;zhida_source=entity">梯度消失</a>。并且起到一定的正则化作用，几乎代替了Dropout。</p>
+<h2 id="二、BN核心公式是什么？"><a href="#二、BN核心公式是什么？" class="headerlink" title="二、BN核心公式是什么？"></a>二、BN核心公式是什么？</h2><p>如下：</p>
+<script type="math/tex; mode=display">
+Input:B=\{x_{1...m}\};\gamma ,\beta (parameters\ to\ be\ learned)\\
+Output:\{y_i=BN_{\gamma ,\beta}(x_i)\}\\
+u_{B} \leftarrow\frac{1}{m}\sum_{i=1}^{m}{x_i}\\ \sigma_{B}^2\leftarrow\frac{1}{m}\sum_{i=1}^m(x_i-\mu_B)^2\\ \tilde{x}_i\leftarrow\frac{x_i-\mu_B}{\sqrt{\sigma_B^2+\epsilon}}\\ y_i\leftarrow\gamma\tilde{x}_i+\beta\\</script><p>解释一下上述公式：</p>
+<ol>
+<li>输入为数值集合（ $B$ ），可训练参数 $\gamma$、$\beta$ ；</li>
+<li>BN的具体操作为：先计算 $B$ 的<a href="https://zhida.zhihu.com/search?content_id=108939343&amp;content_type=Article&amp;match_order=1&amp;q=均值&amp;zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NTY4MTg4OTYsInEiOiLlnYflgLwiLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDg5MzkzNDMsImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.XdidcCMBb-J_HSIUeWNBTk0edzr527AA6yH-zeFLI8I&amp;zhida_source=entity">均值</a>和<a href="https://zhida.zhihu.com/search?content_id=108939343&amp;content_type=Article&amp;match_order=1&amp;q=方差&amp;zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NTY4MTg4OTYsInEiOiLmlrnlt64iLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDg5MzkzNDMsImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.eJy_gJpaZbBpuXV4ZjmFXJp0NoiDEu70WNtM9EHlyFc&amp;zhida_source=entity">方差</a>，之后将 $B$ 集合的均值、方差变换为0、1（对应上式中 ）$\tilde{x}_i\leftarrow\frac{x_i-\mu_B}{\sqrt{\sigma_B^2+\epsilon}}$，最后将 $B$  中每个元素乘以 $\gamma$ 再加 $\beta$，输出。 $\gamma$、$\beta$ 是可训练参数，参与整个网络的BP；</li>
+<li>归一化的目的：将数据规整到统一区间，减少数据的发散程度，降低网络的学习难度。BN的精髓在于归一之后，使用 、 作为还原参数，在一定程度上保留原数据的分布。</li>
+</ol>
+<h2 id="三、BN中均值、方差通过哪些维度计算得到？"><a href="#三、BN中均值、方差通过哪些维度计算得到？" class="headerlink" title="三、BN中均值、方差通过哪些维度计算得到？"></a>三、BN中均值、方差通过哪些维度计算得到？</h2><p>神经网络中传递的张量数据，其维度通常记为[N, H, W, C]，其中N是batch_size，H、W是行、列，C是通道数。那么上式中BN的输入集合 就是下图中蓝色的部分。</p>
+<p><img src="v2-73b3fe43dd4bc9e917ecc7d6cc7b5374_1440w-1756646213000-7.jpg" alt="img"></p>
+<p>图一 BN输入维度示意图</p>
+<p>均值的计算，就是在一个批次内，将每个通道中的数字单独加起来，再除以 。举个例子：该批次内有10张图片，每张图片有三个通道RBG，每张图片的高、宽是H、W，那么均值就是计算<strong>10张图片R通道的像素数值总和</strong>除以 ，再计算B通道全部像素值总和除以，最后计算G通道的像素值总和除以。方差的计算类似。</p>
+<p>可训练参数 、 的维度等于<strong>张量的通道数</strong>，在上述例子中，RBG三个通道分别需要一个 和一个 ，所以 、 的维度等于3。</p>
+<h2 id="四、训练与推理时BN中的均值、方差分别是什么？"><a href="#四、训练与推理时BN中的均值、方差分别是什么？" class="headerlink" title="四、训练与推理时BN中的均值、方差分别是什么？"></a>四、训练与推理时BN中的均值、方差分别是什么？</h2><p>此问题是BN争议最大之处，正确答案是：</p>
+<p><strong>训练</strong>时，均值、方差分别是<strong>该批次</strong>内数据相应维度的均值与方差；</p>
+<p><strong>推理</strong>时，均值、方差是<strong>基于所有批次</strong>的期望计算所得，公式如下：</p>
+<p>其中 表示 x 的期望。</p>
+<p>为了证明正确性，贴上原论文中的公式：</p>
+<p><img src="v2-a0006ca492615897231c878770b9416a_1440w-1756646213000-9.jpg" alt="img"></p>
+<p>图二 BN在训练与推理中的详细计算步骤</p>
+<h2 id="五、在tensorflow中如何实现BN？"><a href="#五、在tensorflow中如何实现BN？" class="headerlink" title="五、在tensorflow中如何实现BN？"></a>五、在tensorflow中如何实现BN？</h2><p>如果使用tensorflow的slim框架，BN就已经集成在内了，直接打开相应的参数即可。如果调用tf.nn.batch_normalization这个接口，那么需要自己在外部做一些事。</p>
+<p>下述代码是基于tf.nn.batch_normalization封装好的BN函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">from tensorflow.python.training import moving_averages</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def batch_normalization(input, is_training, name=&quot;BN&quot;, </span><br><span class="line">                        moving_decay=0.999, eps=1e-5):</span><br><span class="line">    input_shape = input.get_shape()</span><br><span class="line">    params_shape = input_shape[-1]</span><br><span class="line">    axis = list(range(len(input_shape) - 1))</span><br><span class="line">    with tf.variable_scope(name, reuse=tf.AUTO_REUSE) as scope:</span><br><span class="line">        beta = tf.get_variable(&#x27;beta&#x27;,</span><br><span class="line">                               params_shape,</span><br><span class="line">                               initializer=tf.zeros_initializer)</span><br><span class="line">        gamma = tf.get_variable(&#x27;gamma&#x27;,</span><br><span class="line">                                params_shape,</span><br><span class="line">                                initializer=tf.ones_initializer)</span><br><span class="line">        moving_mean = tf.get_variable(&#x27;moving_mean&#x27;,</span><br><span class="line">                                      params_shape,</span><br><span class="line">                                      initializer=tf.zeros_initializer,</span><br><span class="line">                                      trainable=False</span><br><span class="line">                                      )</span><br><span class="line">        moving_var = tf.get_variable(&#x27;moving_var&#x27;,</span><br><span class="line">                                     params_shape,</span><br><span class="line">                                     initializer=tf.ones_initializer,</span><br><span class="line">                                     trainable=False</span><br><span class="line">                                     )</span><br><span class="line">        def train():</span><br><span class="line">            # These ops will only be preformed when training.</span><br><span class="line">            mean, var = tf.nn.moments(input, axis)</span><br><span class="line">            update_moving_mean = moving_averages.assign_moving_average(moving_mean,</span><br><span class="line">                                                                       mean, </span><br><span class="line">                                                                       moving_decay)</span><br><span class="line">            update_moving_var = moving_averages.assign_moving_average(</span><br><span class="line">                moving_var, var, moving_decay)</span><br><span class="line">            return tf.identity(mean), tf.identity(var)</span><br><span class="line"></span><br><span class="line">        mean, var = tf.cond(tf.equal(is_training, True), train,</span><br><span class="line">                                 lambda: (moving_mean, moving_var))</span><br><span class="line"></span><br><span class="line">        return tf.nn.batch_normalization(input, mean, var, beta, gamma, eps)</span><br></pre></td></tr></table></figure>
+<p>在代码实现中有一个技巧，如果训练几百万个Batch，那么是不是要将其均值方差全部储存，最后再计算推理时所用的均值和方差？这样显然太过笨拙，占用内存随着训练次数不断上升。为了避免该问题，上述代码使用了<strong><a href="https://zhida.zhihu.com/search?content_id=108939343&amp;content_type=Article&amp;match_order=1&amp;q=滑动平均&amp;zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NTY4MTg4OTYsInEiOiLmu5HliqjlubPlnYciLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDg5MzkzNDMsImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.QSTMRXJkRRMENClrEOZfgqQLYtH9aA8ie4iNbf5iRI0&amp;zhida_source=entity">滑动平均</a></strong>，储存固定个数Batch的均值和方差，不断迭代更新推理时需要的 与 。</p>
+<p>注意到代码中：</p>
+<ol>
+<li>beta、gamma在训练状态下，是<strong>可训练参数</strong>，在推理状态下，直接加载训练好的数值。</li>
+<li>moving_mean、moving_var在训练、推理中都是<strong>不可训练参数</strong>，只根据滑动平均计算公式更新数值，不会随着网络的训练BP而改变数值；在推理时，直接加载储存计算好的滑动平均之后的数值，作为推理时的均值和方差。</li>
+</ol>
+<h2 id="六、在网络中使用了BN，效果如何？"><a href="#六、在网络中使用了BN，效果如何？" class="headerlink" title="六、在网络中使用了BN，效果如何？"></a>六、在网络中使用了BN，效果如何？</h2><p>BN目前仍然是一个黑盒，论文中有一定的理论推导，但是普遍还是通过对比提升来验证BN的效果。原作者给出的效果如下图：</p>
+<p><img src="v2-0a9861c516dbb2fe19d48ca8b2bb87ee_1440w-1756646213000-11.jpg" alt="img"></p>
+<p>图三 正确率（纵坐标）与训练步数（横坐标）</p>
+<p>上图可见BN的两大收益：</p>
+<ul>
+<li>收敛速率增加</li>
+<li>可以达到更好的精度</li>
+</ul>
+<p>在目标检测算法中，BN已经成为了标配。比如<a href="https://zhida.zhihu.com/search?content_id=108939343&amp;content_type=Article&amp;match_order=1&amp;q=Yolov3&amp;zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3NTY4MTg4OTYsInEiOiJZb2xvdjMiLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDg5MzkzNDMsImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.hByX6q7IbxFogowlsv9yMDennoZ10s6QADHUrspsbvk&amp;zhida_source=entity">Yolov3</a>引入了BN后，mAP提升了两个百分点。在更多实验中可以看到，BN同时起到了正则化作用，防止模型在训练集上过拟合，通常有BN的网络不再需要Dropout层。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>论文链接：<a href="https://link.zhihu.com/?target=https%3A//arxiv.org/abs/1502.03167">Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift</a></p>
+<p>更多归一化方法：<a href="https://zhuanlan.zhihu.com/p/72589565">BN、LN、IN、GN</a></p>
+]]></content>
+      <categories>
+        <category>基础知识</category>
+      </categories>
+      <tags>
+        <tag>神经网络</tag>
       </tags>
   </entry>
   <entry>
