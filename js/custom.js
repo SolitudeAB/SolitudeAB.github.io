@@ -21,7 +21,9 @@ window.addEventListener('load', () => {
             audio: [
                 { name: '鼓楼', artist: '赵雷', url: '/music/song_1.mp3' },
                 { name: '小行迹', artist: '赵雷', url: '/music/song_2.mp3' },
-                { name: '凌晨计程车', artist: '赵雷', url: '/music/song_3.mp3' }
+                { name: '凌晨计程车', artist: '赵雷', url: '/music/song_3.mp3' },
+                { name: '吉姆餐厅', artist: '赵雷', url: '/music/song_4.mp3' },
+                { name: '程艾影', artist: '赵雷', url: '/music/song_5.mp3' }
             ]
         });
     }

@@ -1,7 +1,7 @@
 https://solitudeab.github.io/tags/index.html
 https://solitudeab.github.io/link/index.html
-https://solitudeab.github.io/about/index.html
 https://solitudeab.github.io/categories/index.html
+https://solitudeab.github.io/about/index.html
 https://solitudeab.github.io/2026/05/02/hello-world/
 https://solitudeab.github.io/2026/05/02/%E8%AF%AD%E5%BD%95/
 https://solitudeab.github.io/
