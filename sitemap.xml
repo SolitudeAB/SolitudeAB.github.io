@@ -4,7 +4,7 @@
   <url>
     <loc>https://solitudeab.github.io/tags/index.html</loc>
     
-    <lastmod>2026-05-01</lastmod>
+    <lastmod>2026-05-02</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -13,25 +13,7 @@
   <url>
     <loc>https://solitudeab.github.io/link/index.html</loc>
     
-    <lastmod>2026-05-01</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://solitudeab.github.io/2026/05/01/hello-world/</loc>
-    
-    <lastmod>2026-05-01</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://solitudeab.github.io/categories/index.html</loc>
-    
-    <lastmod>2026-05-01</lastmod>
+    <lastmod>2026-05-02</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -40,7 +22,34 @@
   <url>
     <loc>https://solitudeab.github.io/about/index.html</loc>
     
-    <lastmod>2026-05-01</lastmod>
+    <lastmod>2026-05-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://solitudeab.github.io/categories/index.html</loc>
+    
+    <lastmod>2026-05-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://solitudeab.github.io/2026/05/02/hello-world/</loc>
+    
+    <lastmod>2026-05-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://solitudeab.github.io/2026/05/02/%E8%AF%AD%E5%BD%95/</loc>
+    
+    <lastmod>2026-05-02</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -49,7 +58,7 @@
 
   <url>
     <loc>https://solitudeab.github.io/</loc>
-    <lastmod>2026-05-01</lastmod>
+    <lastmod>2026-05-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
