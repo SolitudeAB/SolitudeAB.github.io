@@ -20,7 +20,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/categories/index.html</loc>
+    <loc>https://solitudeab.github.io/about/index.html</loc>
     
     <lastmod>2026-05-02</lastmod>
     
@@ -29,7 +29,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/about/index.html</loc>
+    <loc>https://solitudeab.github.io/categories/index.html</loc>
     
     <lastmod>2026-05-02</lastmod>
     
@@ -55,6 +55,24 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>https://solitudeab.github.io/2026/05/01/VL/PNSR&SSIM/</loc>
+    
+    <lastmod>2026-05-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://solitudeab.github.io/2026/05/01/%E6%97%A5%E5%BF%97/20260502/</loc>
+    
+    <lastmod>2026-05-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   <url>
     <loc>https://solitudeab.github.io/</loc>
@@ -64,6 +82,27 @@
   </url>
 
   
+  <url>
+    <loc>https://solitudeab.github.io/tags/eye-enhance/</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
+  
+  <url>
+    <loc>https://solitudeab.github.io/categories/VL/</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://solitudeab.github.io/categories/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97/</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
 </urlset>

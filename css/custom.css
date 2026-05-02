@@ -243,6 +243,21 @@ div#post a:not(.headerlink):not(.social-icon):hover {
     background: #DEAC96 !important;
 }
 
+/* 迷你模式音乐图标 */
+.aplayer.aplayer-fixed .aplayer-body .aplayer-pic {
+    background: #DEAC96 !important;
+}
+/* 用 SVG 音符图标替换默认按钮 */
+.aplayer.aplayer-fixed .aplayer-body .aplayer-pic .aplayer-button {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z'/%3E%3C/svg%3E") !important;
+    background-size: 20px 20px !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+.aplayer.aplayer-fixed .aplayer-body .aplayer-pic .aplayer-button svg {
+    display: none;
+}
+
 /* 暗黑模式 */
 [data-theme="dark"] .aplayer.aplayer-fixed {
     background: rgba(30, 30, 35, 0.82) !important;

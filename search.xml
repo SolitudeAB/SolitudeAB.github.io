@@ -28,6 +28,56 @@
     </entry>
     
     
+    
+    <entry>
+      <title>Day1</title>
+      <link href="/2026/05/01/VL/PNSR&amp;SSIM/"/>
+      <url>/2026/05/01/VL/PNSR&amp;SSIM/</url>
+      
+        <content type="html"><![CDATA[<p>在图像处理和计算机视觉领域，PSNR（峰值信噪比）和 SSIM（结构相似性）是衡量图像质量、评估算法（如压缩、超分辨率、去噪）性能最核心的两个指标。</p><p>虽然它们都用于衡量“保真度”，但出发点和结论往往大相径庭。</p><hr><h2 id="1-PSNR-Peak-Signal-to-Noise-Ratio-——-峰值信噪比"><a href="#1-PSNR-Peak-Signal-to-Noise-Ratio-——-峰值信噪比" class="headerlink" title="1. PSNR (Peak Signal-to-Noise Ratio) —— 峰值信噪比"></a>1. PSNR (Peak Signal-to-Noise Ratio) —— 峰值信噪比</h2><p>PSNR 是基于<strong>误差敏感度</strong>的客观评价指标。它本质上是计算两幅图像之间像素点强度的差异。</p><h3 id="核心原理"><a href="#核心原理" class="headerlink" title="核心原理"></a>核心原理</h3><p>PSNR 首先计算<strong>均方误差（MSE）</strong>，即两幅图像对应像素点差值的平方和的平均值：</p><p>$$MSE &#x3D; \frac{1}{mn} \sum_{i&#x3D;0}^{m-1} \sum_{j&#x3D;0}^{n-1} [I(i,j) - K(i,j)]^2$$</p><p>然后将其转化为对数分贝（dB）：</p><p>$$PSNR &#x3D; 10 \cdot \log_{10} \left( \frac{MAX_I^2}{MSE} \right)$$</p><ul><li>$MAX_I$：图像可能的像素最大值（如 8-bit 图像为 255）。</li><li><strong>物理意义</strong>：PSNR 越高，表示图像间的像素差异越小，图像越“接近”原始状态。</li></ul><h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><ul><li><strong>优点</strong>：计算极其简单，数学意义明确，方便作为优化算法的损失函数（如 $L_2$ Loss）。</li><li><strong>缺点</strong>：<strong>不符合人类视觉系统（HVS）</strong>。它认为每个像素的权重是一样的。如果图像只是整体变暗了一点，或者稍微平移了一个像素，PSNR 会大幅下降，但人眼可能觉得图像还是很清晰。</li></ul><hr><h2 id="2-SSIM-Structural-Similarity-Index-——-结构相似性"><a href="#2-SSIM-Structural-Similarity-Index-——-结构相似性" class="headerlink" title="2. SSIM (Structural Similarity Index) —— 结构相似性"></a>2. SSIM (Structural Similarity Index) —— 结构相似性</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> VL </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> eye_enhance </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Day1</title>
+      <link href="/2026/05/01/%E6%97%A5%E5%BF%97/20260502/"/>
+      <url>/2026/05/01/%E6%97%A5%E5%BF%97/20260502/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习日志 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> eye_enhance </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
   
   
 </search>
