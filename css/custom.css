@@ -272,19 +272,33 @@ div#post a:not(.headerlink):not(.social-icon):hover {
     background: #ccc !important;
 }
 
-/* ===== 标签云颜色覆写 ===== */
-#tag .tag-cloud-list a,
-#tag .tag-cloud-tags a {
-    background: rgba(222, 172, 150, 0.78) !important;
-    color: #fff !important;
-}
-#tag .tag-cloud-list a:hover,
-#tag .tag-cloud-tags a:hover {
-    background: #c48a74 !important;
+/* ===== 归档列表项背景 ===== */
+.article-sort-item {
+    background: var(--card-bg, rgba(255, 255, 255, 0.80)) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
 }
 
-[data-theme="dark"] #tag .tag-cloud-list a,
-[data-theme="dark"] #tag .tag-cloud-tags a {
-    background: rgba(222, 172, 150, 0.45) !important;
-    color: #eee !important;
+/* ===== 标签云颜色覆写 ===== */
+.tag-cloud-list a,
+.card-tag-cloud a {
+    background: #DEAC96 !important;
+    color: #fff !important;
+}
+.tag-cloud-list a:hover,
+.card-tag-cloud a:hover {
+    background: #b87a62 !important;
+}
+
+[data-theme="dark"] .tag-cloud-list a,
+[data-theme="dark"] .card-tag-cloud a {
+    background: #c48a74 !important;
+    color: #fff !important;
+}
+[data-theme="dark"] .tag-cloud-list a:hover,
+[data-theme="dark"] .card-tag-cloud a:hover {
+    background: #DEAC96 !important;
 }
