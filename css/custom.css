@@ -283,22 +283,27 @@ div#post a:not(.headerlink):not(.social-icon):hover {
 }
 
 /* ===== 标签云颜色覆写 ===== */
-.tag-cloud-list a,
-.card-tag-cloud a {
+/* 标签页标签云 */
+.tag-cloud-list a {
     background: #DEAC96 !important;
     color: #fff !important;
 }
-.tag-cloud-list a:hover,
-.card-tag-cloud a:hover {
+.tag-cloud-list a:hover {
     background: #b87a62 !important;
 }
 
-[data-theme="dark"] .tag-cloud-list a,
-[data-theme="dark"] .card-tag-cloud a {
+/* 侧栏标签卡片 — 改文字颜色为暖色系 */
+.card-tag-cloud a {
+    color: #c48a74 !important;
+}
+.card-tag-cloud a:hover {
+    color: #DEAC96 !important;
+}
+
+[data-theme="dark"] .tag-cloud-list a {
     background: #c48a74 !important;
     color: #fff !important;
 }
-[data-theme="dark"] .tag-cloud-list a:hover,
-[data-theme="dark"] .card-tag-cloud a:hover {
-    background: #DEAC96 !important;
+[data-theme="dark"] .card-tag-cloud a {
+    color: #DEAC96 !important;
 }
