@@ -271,3 +271,20 @@ div#post a:not(.headerlink):not(.social-icon):hover {
 [data-theme="dark"] .aplayer .aplayer-thumb {
     background: #ccc !important;
 }
+
+/* ===== 标签云颜色覆写 ===== */
+#tag .tag-cloud-list a,
+#tag .tag-cloud-tags a {
+    background: rgba(222, 172, 150, 0.78) !important;
+    color: #fff !important;
+}
+#tag .tag-cloud-list a:hover,
+#tag .tag-cloud-tags a:hover {
+    background: #c48a74 !important;
+}
+
+[data-theme="dark"] #tag .tag-cloud-list a,
+[data-theme="dark"] #tag .tag-cloud-tags a {
+    background: rgba(222, 172, 150, 0.45) !important;
+    color: #eee !important;
+}
