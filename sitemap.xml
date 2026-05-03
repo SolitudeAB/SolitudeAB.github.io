@@ -38,15 +38,6 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2026/05/03/%E8%AF%AD%E5%BD%95/</loc>
-    
-    <lastmod>2026-05-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://solitudeab.github.io/2026/05/03/hello-world/</loc>
     
     <lastmod>2026-05-03</lastmod>
@@ -56,7 +47,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2026/05/01/VL/PNSR&SSIM/</loc>
+    <loc>https://solitudeab.github.io/2026/05/03/%E8%AF%AD%E5%BD%95/</loc>
     
     <lastmod>2026-05-03</lastmod>
     
@@ -66,6 +57,15 @@
   
   <url>
     <loc>https://solitudeab.github.io/2026/05/01/%E6%97%A5%E5%BF%97/20260502/</loc>
+    
+    <lastmod>2026-05-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://solitudeab.github.io/2026/05/01/VL/PNSR&SSIM/</loc>
     
     <lastmod>2026-05-03</lastmod>
     
@@ -92,14 +92,14 @@
 
   
   <url>
-    <loc>https://solitudeab.github.io/categories/VL/</loc>
+    <loc>https://solitudeab.github.io/categories/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97/</loc>
     <lastmod>2026-05-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/categories/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97/</loc>
+    <loc>https://solitudeab.github.io/categories/VL/</loc>
     <lastmod>2026-05-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
