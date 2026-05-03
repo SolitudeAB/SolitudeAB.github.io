@@ -2,11 +2,11 @@ https://solitudeab.github.io/tags/index.html
 https://solitudeab.github.io/link/index.html
 https://solitudeab.github.io/categories/index.html
 https://solitudeab.github.io/about/index.html
-https://solitudeab.github.io/2026/05/02/hello-world/
-https://solitudeab.github.io/2026/05/02/%E8%AF%AD%E5%BD%95/
-https://solitudeab.github.io/2026/05/01/VL/PNSR&SSIM/
+https://solitudeab.github.io/2026/05/03/hello-world/
+https://solitudeab.github.io/2026/05/03/%E8%AF%AD%E5%BD%95/
 https://solitudeab.github.io/2026/05/01/%E6%97%A5%E5%BF%97/20260502/
+https://solitudeab.github.io/2026/05/01/VL/PNSR&SSIM/
 https://solitudeab.github.io/
 https://solitudeab.github.io/tags/eye-enhance/
-https://solitudeab.github.io/categories/VL/
 https://solitudeab.github.io/categories/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97/
+https://solitudeab.github.io/categories/VL/

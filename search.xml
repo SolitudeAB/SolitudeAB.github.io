@@ -5,8 +5,8 @@
     
     <entry>
       <title>Hello World</title>
-      <link href="/2026/05/02/hello-world/"/>
-      <url>/2026/05/02/hello-world/</url>
+      <link href="/2026/05/03/hello-world/"/>
+      <url>/2026/05/03/hello-world/</url>
       
         <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
       
@@ -18,37 +18,12 @@
     
     <entry>
       <title>语录</title>
-      <link href="/2026/05/02/%E8%AF%AD%E5%BD%95/"/>
-      <url>/2026/05/02/%E8%AF%AD%E5%BD%95/</url>
+      <link href="/2026/05/03/%E8%AF%AD%E5%BD%95/"/>
+      <url>/2026/05/03/%E8%AF%AD%E5%BD%95/</url>
       
-        <content type="html"><![CDATA[<ul><li>踩在落叶上的声音，就像踏过初雪，夕阳，是疼痛的解药，把人间的疲倦慢慢消解，你看云朵聚了又散，从不急切，人生本就有高耸的山川和狂阔的原野，那些倒在秋天的花朵，会在春天，更加热烈（《秋天，就是倒着的春天》）</li></ul><p><img src="/%E8%AF%AD%E5%BD%95/%E5%9B%BE2.jpg" alt="图2"></p><ul><li>北风呼啸，雨打寒霜。倦鸟归巢，游子还乡。路迢迢水迢迢，东方欲晓君行早。风萧萧雨潇潇，青山不老红颜老。阿爷谆谆诲，问儿几时回。风瑟瑟，乱云飞，望断长江水。游子泪偷垂，孤鸿声韵悲。寒星坠，客愁堆，归期却问谁。梦醒空床家何在，方知此心最相思。抬眼尽是他乡客，不曾得见故乡人。青灯燃十载，端的是墨香铜臭。黄卷阅千章，终究为道明心澄。可怜寒窗苦读十几载，依旧是空无用处。漂泊客停舟，半世逸尘游。一曲相思上心头，平添几更愁。鸿鹄志难酬，提笔泪先流。梦绕魂牵何时休，霜雪落白头。酒过三巡，难遣寂寞，戎马半生，何时封侯。壮志未歇不敢语，恐惊天上人。家书迟来无言对，羞诉凡尘苦。孤星冷月，角楼残缺，何处相逢又话别。凄风苦雪，音断路绝，更惹情深与意切。举杯停著，恍惚来时路。欲问行人到何处，暮霭停步，争渡—争渡，山水几重悟。是非恩怨转头空，浮生一场黄粱梦。镜花水月难自流，无边世事总随风。楚楚梅花影，吹落雪纷纷。野径寻芳客，翩然醉黄昏。去岁东信至，琼花漫野时。今临数九冽，瑞叶却来迟。想来上天自有安排，一年更有一年好景致。长夜露华浓，辗转无眠意。残烛照孤影，一任到天明。梦里长波未静，念及年岁渐长，学业未精，总不安宁。（《燕子》）</li></ul><p><img src="/%E8%AF%AD%E5%BD%95/%E5%9B%BE1.jpg" alt="图1"></p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>PNSR &amp; SSIM</title>
-      <link href="/2026/05/01/VL/PNSR&amp;SSIM/"/>
-      <url>/2026/05/01/VL/PNSR&amp;SSIM/</url>
-      
-        <content type="html"><![CDATA[<p>在图像处理和计算机视觉领域，PSNR（峰值信噪比）和 SSIM（结构相似性）是衡量图像质量、评估算法（如压缩、超分辨率、去噪）性能最核心的两个指标。</p><p>虽然它们都用于衡量“保真度”，但出发点和结论往往大相径庭。</p><hr><h2 id="1-PSNR-Peak-Signal-to-Noise-Ratio-——-峰值信噪比"><a href="#1-PSNR-Peak-Signal-to-Noise-Ratio-——-峰值信噪比" class="headerlink" title="1. PSNR (Peak Signal-to-Noise Ratio) —— 峰值信噪比"></a>1. PSNR (Peak Signal-to-Noise Ratio) —— 峰值信噪比</h2><p>PSNR 是基于<strong>误差敏感度</strong>的客观评价指标。它本质上是计算两幅图像之间像素点强度的差异。</p><h3 id="核心原理"><a href="#核心原理" class="headerlink" title="核心原理"></a>核心原理</h3><p>PSNR 首先计算<strong>均方误差（MSE）</strong>，即两幅图像对应像素点差值的平方和的平均值：</p><p>$$MSE &#x3D; \frac{1}{mn} \sum_{i&#x3D;0}^{m-1} \sum_{j&#x3D;0}^{n-1} [I(i,j) - K(i,j)]^2$$</p><p>然后将其转化为对数分贝（dB）：</p><p>$$PSNR &#x3D; 10 \cdot \log_{10} \left( \frac{MAX_I^2}{MSE} \right)$$</p><ul><li>$MAX_I$：图像可能的像素最大值（如 8-bit 图像为 255）。</li><li><strong>物理意义</strong>：PSNR 越高，表示图像间的像素差异越小，图像越“接近”原始状态。</li></ul><h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><ul><li><strong>优点</strong>：计算极其简单，数学意义明确，方便作为优化算法的损失函数（如 $L_2$ Loss）。</li><li><strong>缺点</strong>：<strong>不符合人类视觉系统（HVS）</strong>。它认为每个像素的权重是一样的。如果图像只是整体变暗了一点，或者稍微平移了一个像素，PSNR 会大幅下降，但人眼可能觉得图像还是很清晰。</li></ul><hr><h2 id="2-SSIM-Structural-Similarity-Index-——-结构相似性"><a href="#2-SSIM-Structural-Similarity-Index-——-结构相似性" class="headerlink" title="2. SSIM (Structural Similarity Index) —— 结构相似性"></a>2. SSIM (Structural Similarity Index) —— 结构相似性</h2><p>SSIM 的设计理念是：人类视觉系统高度进化，能够从场景中提取<strong>结构信息</strong>。它不再关注单个像素的误差，而是关注图像的属性。</p><h3 id="核心原理-1"><a href="#核心原理-1" class="headerlink" title="核心原理"></a>核心原理</h3><p>SSIM 从三个维度对比两幅图像：</p><ol><li>**亮度 (Luminance)**：通过均值评估。</li><li>**对比度 (Contrast)**：通过方差评估。</li><li>**结构 (Structure)**：通过协方差评估。</li></ol><p>SSIM 的公式通常表示为：</p><p>$$SSIM(x, y) &#x3D; \frac{(2\mu_x\mu_y + c_1)(2\sigma_{xy} + c_2)}{(\mu_x^2 + \mu_y^2 + c_1)(\sigma_x^2 + \sigma_y^2 + c_2)}$$</p><ul><li><strong>数值范围</strong>：0 到 1 之间。越接近 1，表示图像结构越相似。</li></ul><h3 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h3><ul><li><strong>优点</strong>：比 PSNR 更符合人类的直观感受。它对图像的平滑、纹理保存等特征更敏感。</li><li><strong>缺点</strong>：计算复杂度略高于 PSNR；在某些极端失真下（如过饱和），其表现也会失准。</li></ul><hr><h2 id="3-它们与“图像保真度”的关系"><a href="#3-它们与“图像保真度”的关系" class="headerlink" title="3. 它们与“图像保真度”的关系"></a>3. 它们与“图像保真度”的关系</h2><p><strong>保真度（Fidelity）</strong> 指的是重构图像相对于原始图像的真实程度。</p><ul><li><strong>PSNR 衡量的是“物理保真度”</strong>：即在信号层面，能量损失了多少。它是一个纯粹的数学度量，不关心这些能量损失是在天空中还是在人的脸上。</li><li><strong>SSIM 衡量的是“感知保真度”</strong>：即在人的眼中，图像的物体、轮廓和质感保留了多少。</li></ul><blockquote><p><strong>比喻</strong>： 想象你在抄写一篇作文。</p><ul><li><strong>PSNR</strong> 像是一个纠错机器，如果你写错一个字、甚至多打了一个空格，它都会扣分。</li><li><strong>SSIM</strong> 像是一个语文老师，如果你把字写得稍微歪了一点，或者换了一种字体，但只要段落结构和语义没变，它就会给高分。</li></ul></blockquote><hr><h2 id="4-为什么-SSIM-很高，而-PSNR-提升不高？"><a href="#4-为什么-SSIM-很高，而-PSNR-提升不高？" class="headerlink" title="4. 为什么 SSIM 很高，而 PSNR 提升不高？"></a>4. 为什么 SSIM 很高，而 PSNR 提升不高？</h2><p>这是深度学习图像处理（尤其是 SR 超分辨率和 GAN 生成模型）中非常常见的现象。主要原因如下：</p><h3 id="A-对“全局偏差”的敏感度不同"><a href="#A-对“全局偏差”的敏感度不同" class="headerlink" title="A. 对“全局偏差”的敏感度不同"></a>A. 对“全局偏差”的敏感度不同</h3><p>如果一张图像相比原图<strong>整体变暗</strong>或<strong>整体稍微模糊（Low-pass filter）</strong>：</p><ul><li><strong>PSNR</strong>：由于每个像素都有微小的差值，累加起来 MSE 会变大，导致 PSNR 显著下降。</li><li><strong>SSIM</strong>：由于图像的结构（轮廓、相对明暗关系）依然保存完好，SSIM 会维持在一个很高的水平。</li></ul><h3 id="B-平滑效应（Smoothing-Effect）"><a href="#B-平滑效应（Smoothing-Effect）" class="headerlink" title="B. 平滑效应（Smoothing Effect）"></a>B. 平滑效应（Smoothing Effect）</h3><p>许多算法（特别是为了刷榜 SSIM 的算法）会倾向于生成<strong>平滑的图像</strong>。</p><ul><li>平滑的图像虽然丢失了部分高频细节（如头发丝、皮肤毛孔），但由于它消除了噪声（Noise），使得像素间的差值（MSE）波动变小。</li><li>在这种情况下，虽然图像看起来“肉肉的”不够锐利，但 SSIM 会因为结构完整而很高，而 PSNR 却可能因为没有精确对齐原始像素的纹理而停滞不前。</li></ul><h3 id="C-结构相似度-vs-像素精确对齐"><a href="#C-结构相似度-vs-像素精确对齐" class="headerlink" title="C. 结构相似度 vs. 像素精确对齐"></a>C. 结构相似度 vs. 像素精确对齐</h3><p>PSNR 要求像素在<strong>空间位置上绝对对齐</strong>。如果生成的图像稍微产生了一点非线性形变（例如边缘向左偏移了 0.5 个像素）：</p><ul><li>人眼看不出来，结构依然完整（<strong>SSIM 极高</strong>）。</li><li>但每个位置的像素值都对不上了，导致相减后的平方和很大（<strong>PSNR 很低</strong>）。</li></ul><hr><h3 id="总结建议"><a href="#总结建议" class="headerlink" title="总结建议"></a>总结建议</h3><table><thead><tr><th>指标</th><th>关注点</th><th>适用场景</th></tr></thead><tbody><tr><td><strong>PSNR</strong></td><td>信号强度、误差大小</td><td>传统的视频编码、基础图像压缩、衡量信号损耗。</td></tr><tr><td><strong>SSIM</strong></td><td>结构、亮度、对比度</td><td>图像增强、风格迁移、感知质量评估。</td></tr></tbody></table><p>在实际研究中，通常建议<strong>两者结合使用</strong>。如果你发现 PSNR 提升遇到了瓶颈，通常意味着你的模型在追求“感知上的真实感”，此时 SSIM（以及更高级的 LPIPS 感知损失）会是更有参考价值的指标。</p><p>你是在做图像处理相关的算法训练（比如超分辨率或去噪）吗？需要我针对特定场景分析这两者的表现吗？</p>]]></content>
+        <content type="html"><![CDATA[<ul><li>踩在落叶上的声音，就像踏过初雪，夕阳，是疼痛的解药，把人间的疲倦慢慢消解，你看云朵聚了又散，从不急切，人生本就有高耸的山川和狂阔的原野，那些倒在秋天的花朵，会在春天，更加热烈（《秋天，就是倒着的春天》）</li></ul><p><img src="%E8%AF%AD%E5%BD%95/%E5%9B%BE2.jpg" alt="图2"></p><ul><li>北风呼啸，雨打寒霜。倦鸟归巢，游子还乡。路迢迢水迢迢，东方欲晓君行早。风萧萧雨潇潇，青山不老红颜老。阿爷谆谆诲，问儿几时回。风瑟瑟，乱云飞，望断长江水。游子泪偷垂，孤鸿声韵悲。寒星坠，客愁堆，归期却问谁。梦醒空床家何在，方知此心最相思。抬眼尽是他乡客，不曾得见故乡人。青灯燃十载，端的是墨香铜臭。黄卷阅千章，终究为道明心澄。可怜寒窗苦读十几载，依旧是空无用处。漂泊客停舟，半世逸尘游。一曲相思上心头，平添几更愁。鸿鹄志难酬，提笔泪先流。梦绕魂牵何时休，霜雪落白头。酒过三巡，难遣寂寞，戎马半生，何时封侯。壮志未歇不敢语，恐惊天上人。家书迟来无言对，羞诉凡尘苦。孤星冷月，角楼残缺，何处相逢又话别。凄风苦雪，音断路绝，更惹情深与意切。举杯停著，恍惚来时路。欲问行人到何处，暮霭停步，争渡—争渡，山水几重悟。是非恩怨转头空，浮生一场黄粱梦。镜花水月难自流，无边世事总随风。楚楚梅花影，吹落雪纷纷。野径寻芳客，翩然醉黄昏。去岁东信至，琼花漫野时。今临数九冽，瑞叶却来迟。想来上天自有安排，一年更有一年好景致。长夜露华浓，辗转无眠意。残烛照孤影，一任到天明。梦里长波未静，念及年岁渐长，学业未精，总不安宁。（《燕子》）</li></ul><p><img src="%E8%AF%AD%E5%BD%95/%E5%9B%BE1.jpg" alt="图1"></p>]]></content>
       
       
-      <categories>
-          
-          <category> VL </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> eye_enhance </tag>
-            
-        </tags>
       
     </entry>
     
@@ -65,6 +40,31 @@
       <categories>
           
           <category> 学习日志 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> eye_enhance </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>PNSR &amp; SSIM</title>
+      <link href="/2026/05/01/VL/PNSR&amp;SSIM/"/>
+      <url>/2026/05/01/VL/PNSR&amp;SSIM/</url>
+      
+        <content type="html"><![CDATA[<p>在图像处理和计算机视觉领域，PSNR（峰值信噪比）和 SSIM（结构相似性）是衡量图像质量、评估算法（如压缩、超分辨率、去噪）性能最核心的两个指标。</p><p>虽然它们都用于衡量“保真度”，但出发点和结论往往大相径庭。</p><hr><h2 id="1-PSNR-Peak-Signal-to-Noise-Ratio-——-峰值信噪比"><a href="#1-PSNR-Peak-Signal-to-Noise-Ratio-——-峰值信噪比" class="headerlink" title="1. PSNR (Peak Signal-to-Noise Ratio) —— 峰值信噪比"></a>1. PSNR (Peak Signal-to-Noise Ratio) —— 峰值信噪比</h2><p>PSNR 是基于<strong>误差敏感度</strong>的客观评价指标。它本质上是计算两幅图像之间像素点强度的差异。</p><h3 id="核心原理"><a href="#核心原理" class="headerlink" title="核心原理"></a>核心原理</h3><p>PSNR 首先计算<strong>均方误差（MSE）</strong>，即两幅图像对应像素点差值的平方和的平均值：</p><script type="math/tex; mode=display">MSE = \frac{1}{mn} \sum_{i=0}^{m-1} \sum_{j=0}^{n-1} [I(i,j) - K(i,j)]^2</script><p>然后将其转化为对数分贝（dB）：</p><script type="math/tex; mode=display">PSNR = 10 \cdot \log_{10} \left( \frac{MAX_I^2}{MSE} \right)</script><ul><li>$MAX_I$：图像可能的像素最大值（如 8-bit 图像为 255）。</li><li><strong>物理意义</strong>：PSNR 越高，表示图像间的像素差异越小，图像越“接近”原始状态。</li></ul><h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><ul><li><strong>优点</strong>：计算极其简单，数学意义明确，方便作为优化算法的损失函数（如 $L_2$ Loss）。</li><li><strong>缺点</strong>：<strong>不符合人类视觉系统（HVS）</strong>。它认为每个像素的权重是一样的。如果图像只是整体变暗了一点，或者稍微平移了一个像素，PSNR 会大幅下降，但人眼可能觉得图像还是很清晰。</li></ul><hr><h2 id="2-SSIM-Structural-Similarity-Index-——-结构相似性"><a href="#2-SSIM-Structural-Similarity-Index-——-结构相似性" class="headerlink" title="2. SSIM (Structural Similarity Index) —— 结构相似性"></a>2. SSIM (Structural Similarity Index) —— 结构相似性</h2><p>SSIM 的设计理念是：人类视觉系统高度进化，能够从场景中提取<strong>结构信息</strong>。它不再关注单个像素的误差，而是关注图像的属性。</p><h3 id="核心原理-1"><a href="#核心原理-1" class="headerlink" title="核心原理"></a>核心原理</h3><p>SSIM 从三个维度对比两幅图像：</p><ol><li><strong>亮度 (Luminance)</strong>：通过均值评估。</li><li><strong>对比度 (Contrast)</strong>：通过方差评估。</li><li><strong>结构 (Structure)</strong>：通过协方差评估。</li></ol><p>SSIM 的公式通常表示为：</p><script type="math/tex; mode=display">SSIM(x, y) = \frac{(2\mu_x\mu_y + c_1)(2\sigma_{xy} + c_2)}{(\mu_x^2 + \mu_y^2 + c_1)(\sigma_x^2 + \sigma_y^2 + c_2)}</script><ul><li><strong>数值范围</strong>：0 到 1 之间。越接近 1，表示图像结构越相似。</li></ul><h3 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h3><ul><li><strong>优点</strong>：比 PSNR 更符合人类的直观感受。它对图像的平滑、纹理保存等特征更敏感。</li><li><strong>缺点</strong>：计算复杂度略高于 PSNR；在某些极端失真下（如过饱和），其表现也会失准。</li></ul><hr><h2 id="3-它们与“图像保真度”的关系"><a href="#3-它们与“图像保真度”的关系" class="headerlink" title="3. 它们与“图像保真度”的关系"></a>3. 它们与“图像保真度”的关系</h2><p><strong>保真度（Fidelity）</strong> 指的是重构图像相对于原始图像的真实程度。</p><ul><li><strong>PSNR 衡量的是“物理保真度”</strong>：即在信号层面，能量损失了多少。它是一个纯粹的数学度量，不关心这些能量损失是在天空中还是在人的脸上。</li><li><strong>SSIM 衡量的是“感知保真度”</strong>：即在人的眼中，图像的物体、轮廓和质感保留了多少。</li></ul><blockquote><p><strong>比喻</strong>： 想象你在抄写一篇作文。</p><ul><li><strong>PSNR</strong> 像是一个纠错机器，如果你写错一个字、甚至多打了一个空格，它都会扣分。</li><li><strong>SSIM</strong> 像是一个语文老师，如果你把字写得稍微歪了一点，或者换了一种字体，但只要段落结构和语义没变，它就会给高分。</li></ul></blockquote><hr><h2 id="4-为什么-SSIM-很高，而-PSNR-提升不高？"><a href="#4-为什么-SSIM-很高，而-PSNR-提升不高？" class="headerlink" title="4. 为什么 SSIM 很高，而 PSNR 提升不高？"></a>4. 为什么 SSIM 很高，而 PSNR 提升不高？</h2><p>这是深度学习图像处理（尤其是 SR 超分辨率和 GAN 生成模型）中非常常见的现象。主要原因如下：</p><h3 id="A-对“全局偏差”的敏感度不同"><a href="#A-对“全局偏差”的敏感度不同" class="headerlink" title="A. 对“全局偏差”的敏感度不同"></a>A. 对“全局偏差”的敏感度不同</h3><p>如果一张图像相比原图<strong>整体变暗</strong>或<strong>整体稍微模糊（Low-pass filter）</strong>：</p><ul><li><strong>PSNR</strong>：由于每个像素都有微小的差值，累加起来 MSE 会变大，导致 PSNR 显著下降。</li><li><strong>SSIM</strong>：由于图像的结构（轮廓、相对明暗关系）依然保存完好，SSIM 会维持在一个很高的水平。</li></ul><h3 id="B-平滑效应（Smoothing-Effect）"><a href="#B-平滑效应（Smoothing-Effect）" class="headerlink" title="B. 平滑效应（Smoothing Effect）"></a>B. 平滑效应（Smoothing Effect）</h3><p>许多算法（特别是为了刷榜 SSIM 的算法）会倾向于生成<strong>平滑的图像</strong>。</p><ul><li>平滑的图像虽然丢失了部分高频细节（如头发丝、皮肤毛孔），但由于它消除了噪声（Noise），使得像素间的差值（MSE）波动变小。</li><li>在这种情况下，虽然图像看起来“肉肉的”不够锐利，但 SSIM 会因为结构完整而很高，而 PSNR 却可能因为没有精确对齐原始像素的纹理而停滞不前。</li></ul><h3 id="C-结构相似度-vs-像素精确对齐"><a href="#C-结构相似度-vs-像素精确对齐" class="headerlink" title="C. 结构相似度 vs. 像素精确对齐"></a>C. 结构相似度 vs. 像素精确对齐</h3><p>PSNR 要求像素在<strong>空间位置上绝对对齐</strong>。如果生成的图像稍微产生了一点非线性形变（例如边缘向左偏移了 0.5 个像素）：</p><ul><li>人眼看不出来，结构依然完整（<strong>SSIM 极高</strong>）。</li><li>但每个位置的像素值都对不上了，导致相减后的平方和很大（<strong>PSNR 很低</strong>）。</li></ul><hr><h3 id="总结建议"><a href="#总结建议" class="headerlink" title="总结建议"></a>总结建议</h3><div class="table-container"><table><thead><tr><th>指标</th><th>关注点</th><th>适用场景</th></tr></thead><tbody><tr><td><strong>PSNR</strong></td><td>信号强度、误差大小</td><td>传统的视频编码、基础图像压缩、衡量信号损耗。</td></tr><tr><td><strong>SSIM</strong></td><td>结构、亮度、对比度</td><td>图像增强、风格迁移、感知质量评估。</td></tr></tbody></table></div><p>在实际研究中，通常建议<strong>两者结合使用</strong>。如果你发现 PSNR 提升遇到了瓶颈，通常意味着你的模型在追求“感知上的真实感”，此时 SSIM（以及更高级的 LPIPS 感知损失）会是更有参考价值的指标。</p><p>你是在做图像处理相关的算法训练（比如超分辨率或去噪）吗？需要我针对特定场景分析这两者的表现吗？</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> VL </category>
           
       </categories>
       
