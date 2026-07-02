@@ -1,0 +1,523 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Week8 | 我的博客</title><meta name="author" content="SolitudeAB"><meta name="copyright" content="SolitudeAB"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="中间停了几周，因为我发现自己机器学习的基础还是太薄弱了，然后在b站上找了一些机器学习的基础课程（虽然是纯英文的，但就当是学英语了——基础反正也挺薄弱的） 一、监督学习监督学习：学习输入到输出或 $x$ 到 $y$ 映射  垃圾邮件过滤器（spam filtering） 语言识别（speech recognition） 机器翻译（machine translation） 个性化广告（online a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Week8">
+<meta property="og:url" content="https://solitudeab.github.io/2025/10/08/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20251008-Week8/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="中间停了几周，因为我发现自己机器学习的基础还是太薄弱了，然后在b站上找了一些机器学习的基础课程（虽然是纯英文的，但就当是学英语了——基础反正也挺薄弱的） 一、监督学习监督学习：学习输入到输出或 $x$ 到 $y$ 映射  垃圾邮件过滤器（spam filtering） 语言识别（speech recognition） 机器翻译（machine translation） 个性化广告（online a">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://solitudeab.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2025-10-08T06:07:40.000Z">
+<meta property="article:modified_time" content="2026-07-02T12:45:24.709Z">
+<meta property="article:author" content="SolitudeAB">
+<meta property="article:tag" content="医学AI学习">
+<meta property="article:tag" content="周记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://solitudeab.github.io/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Week8",
+  "url": "https://solitudeab.github.io/2025/10/08/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20251008-Week8/",
+  "image": "https://solitudeab.github.io/img/avatar.jpg",
+  "datePublished": "2025-10-08T06:07:40.000Z",
+  "dateModified": "2026-07-02T12:45:24.709Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "SolitudeAB",
+      "url": "https://solitudeab.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://solitudeab.github.io/2025/10/08/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20251008-Week8/index.html"><link rel="preconnect"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css?v=7.1.0"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js?v=4.13.0',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Week8',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="我的博客" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div class="bg-animation" id="web_bg" style="background-image: url(/img/bg.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/SolitudeAB/blog-source/new/main/source/_posts"><i class="fa-fw fas fa-pen"></i><span> 写文章</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">我的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">Week8</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/SolitudeAB/blog-source/new/main/source/_posts"><i class="fa-fw fas fa-pen"></i><span> 写文章</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Week8</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-08T06:07:40.000Z" title="发表于 2025-10-08 14:07:40">2025-10-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-07-02T12:45:24.709Z" title="更新于 2026-07-02 20:45:24">2026-07-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%8C%BB%E5%AD%A6AI%E5%AD%A6%E4%B9%A0/">医学AI学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">4.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>14分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>中间停了几周，因为我发现自己机器学习的基础还是太薄弱了，然后在b站上找了一些机器学习的基础课程（虽然是纯英文的，但就当是学英语了——基础反正也挺薄弱的）</p>
+<h1 id="一、监督学习"><a href="#一、监督学习" class="headerlink" title="一、监督学习"></a>一、监督学习</h1><p>监督学习：学习输入到输出或 $x$ 到 $y$ 映射</p>
+<ul>
+<li>垃圾邮件过滤器（spam filtering）</li>
+<li>语言识别（speech recognition）</li>
+<li>机器翻译（machine translation）</li>
+<li>个性化广告（online advertising）</li>
+<li>自动驾驶（self-driving car）</li>
+<li>目视检查（visual inspection）</li>
+</ul>
+<p>在所有使用这些应用程序重，你将收件是使用输入示例 $x$ 和正确答案（即标签$y$ ）来训练你的模型，在模型从这些输入、输出或 $x$ 和 $y$对中学习之后，它门可以采用一个全新的输入 $x$，这是它以前从未见过的东西，并尝试产生适当的相应输出 $y$.</p>
+<p>以下是监督学习的两个主要类型：</p>
+<h2 id="（一）回归"><a href="#（一）回归" class="headerlink" title="（一）回归"></a>（一）回归</h2><p><img src="20251008-Week8/image-20250914203719435.png" alt="image-20250914203719435"></p>
+<p>这种<strong>房价预测</strong>是一种特殊类型的监督学习，称为——<strong>回归</strong>。我的意思是，通过回归，我们试图从无数可能的数字中预测一个数字</p>
+<p>回归的任务是——<strong>预测数字</strong>，即从从无数可能的输出数字中预测数字</p>
+<h2 id="（二）分类"><a href="#（二）分类" class="headerlink" title="（二）分类"></a>（二）分类</h2><p><img src="20251008-Week8/image-20250914205103565.png" alt="image-20250914205103565"></p>
+<p>做一个机器学习系统，让医生有一个检测乳腺癌的诊断工具，这很重要，因为早期发下可能会挽救病人的生命。利用病人的医疗记录，你的机器学习系统试图<strong>弄清楚一个肿块的肿瘤是否是恶性的</strong>，这意味着肿瘤的危险与否。</p>
+<p>这与回归不同，回归试图预测无限多个可能的数字中任意一个，事实上只有两个可能的输出。</p>
+<p><img src="20251008-Week8/image-20250914205328752.png" alt="image-20250914205328752"></p>
+<p>分类与回归的不同之处在于，分类预测的是一个小的、有限的一套可能的产出类别，比如0，1，2，但不是所有可能的数字之间，比如0.5或者1.7。</p>
+<p><img src="20251008-Week8/image-20250914210218395.png" alt="image-20250914210218395"></p>
+<p>在前面的例子中，我们只有一个输入值——肿瘤的大小，但是你也可以使用多个输入值来预测输出。</p>
+<p>除了得知肿瘤的大小外，假设你也有每个病人的年龄，你的新数据集现在有两个输入——年龄和肿瘤大小。绘制这个新的数据集，我们要用圆圈向病人展示他们的肿瘤是良性的，以及叉叉来显示病人的肿瘤是恶性的。</p>
+<p>基于这样的数据集，学习算法可能要做的事找到一些边界来区分恶性肿瘤和良性肿瘤。因此，学习算法必须决定如何将边界线拟合到这些数据上。而学习算法找到的边界线将帮助医生诊断。</p>
+<p>然而，在其他的机器学习问题中通常需要更多的输入值。</p>
+<p>分类的任务——从一小组可能的输出中<strong>预测一个类别</strong></p>
+<h1 id="二、非监督学习"><a href="#二、非监督学习" class="headerlink" title="二、非监督学习"></a>二、非监督学习</h1><p>监督学习中没有示例都与一个输出标签 $y$ 相关联，例如良性或恶性，用极点和十字表示。</p>
+<p>在无监督学习中，给定的数据与任何输出标签 $y$ 无关，比如给定的肿瘤大小和患者年龄的数据，但不在意肿瘤是良性还是恶性的，所有数据集在右边看起来像这样。我们没有被要求知道诊断肿瘤是良性还是恶性的，因为并没有给我们任何标签。取而代之的，我们的工作是找到一些结构或者模式，或者只是在数据集中找到一些有趣的东西，这就是<strong>非监督算法</strong></p>
+<p><img src="20251008-Week8/image-20250915155058199.png" alt="image-20250915155058199"></p>
+<p>为什么叫非监督学习？因为我们并不试图监督算法对于每一个输入给出正确的答案，相反，我们要求算法自己计算出什么是有趣的，或者在这些数据中可能有什么模式或结构。</p>
+<h2 id="聚类算法（Clustering）"><a href="#聚类算法（Clustering）" class="headerlink" title="聚类算法（Clustering）"></a>聚类算法（Clustering）</h2><p><strong>将未标记的数据放入不同的集群中</strong>（将相似的数据点组合在一起），事实证明，这在许多应用程序都有被用到。</p>
+<p>比如说，<strong>google news</strong>，它的任务是在互联网上查看数十万篇新闻文章，并将相关故事（有相似词的文章）组合在一起。</p>
+<p><img src="20251008-Week8/image-20250915154956608.png" alt="image-20250915154956608"></p>
+<p>对于相关的文章，聚类算法会自行计算出哪些词暗示某些文章属于同一组，然而这个行为不可能为google公司内部任何一个人去监督学习，因为每个的话题都在变化，今天是panda twin，明天可能是别的什么，所有一定得是非监督学习</p>
+<p><img src="20251008-Week8/image-20250915160336155.png" alt="image-20250915160336155"></p>
+<p>此图像显示了DNA微矩列数据的图片，而这些看起来像电子表格的微小网格。除此外，每个小柱子代表一个人的遗传或DNA活动。例如，第一根整个柱子都来自一个人的DNA。</p>
+<p>对于这张图而言，这个想法是为了测量每个人表达了多少特定基因。因此，红色、绿色、灰色等这些颜色显示了不同个体具有有或不具有特定基因及其或活性的程度。</p>
+<p>在这张图上使用聚类算法，即让机器自动找出个体的主要类型，将个体分组导不同的类别中，因为我们没有提前为算法提供示例的正确答案。</p>
+<p><img src="20251008-Week8/image-20250915160700648.png" alt="image-20250915160700648"></p>
+<p>每个公司都有自己的客户管理系统，自动将客户分组到不同的细分市场，以便更有效地为客户服务。</p>
+<p>以下是非监督学习的一些算法。</p>
+<p><img src="20251008-Week8/image-20250915161858133.png" alt="image-20250915161858133"></p>
+<h2 id="异常检测（Anomaly-detection）"><a href="#异常检测（Anomaly-detection）" class="headerlink" title="异常检测（Anomaly detection）"></a>异常检测（Anomaly detection）</h2><p>用于检测异常时间，这对于金融系统中的欺诈检测非常重要，因为异常事件和异常交易可能是欺诈的迹象。</p>
+<h2 id="降维（Dimensionality-reduction）"><a href="#降维（Dimensionality-reduction）" class="headerlink" title="降维（Dimensionality reduction）"></a>降维（Dimensionality reduction）</h2><p>可以将一个大数据集神奇地压缩成一个小得多的数据集，同时丢失尽可能少的信息。</p>
+<h3 id="Some-Questions"><a href="#Some-Questions" class="headerlink" title="Some Questions"></a>Some Questions</h3><p><img src="20251008-Week8/image-20250915161828757.png" alt="image-20250915161828757"></p>
+<h3 id="Answers"><a href="#Answers" class="headerlink" title="Answers"></a>Answers</h3><p><img src="20251008-Week8/image-20250915162246268.png" alt="image-20250915162246268"></p>
+<h1 id="三、线性回归模型"><a href="#三、线性回归模型" class="headerlink" title="三、线性回归模型"></a>三、线性回归模型</h1><h2 id="Part1"><a href="#Part1" class="headerlink" title="Part1"></a>Part1</h2><h3 id="最佳房价预测模型"><a href="#最佳房价预测模型" class="headerlink" title="最佳房价预测模型"></a>最佳房价预测模型</h3><p><img src="20251008-Week8/image-20250917125303875.png" alt="image-20250917125303875"></p>
+<p>监督学习：</p>
+<ul>
+<li><p>分类问题：存在一组离散的、有限的可能输出</p>
+</li>
+<li><p>回归问题：可以输出无限多可能的数字</p>
+<p>模型的另一个表现形式：<strong>数据表</strong></p>
+</li>
+</ul>
+<p><img src="20251008-Week8/image-20250917154709869.png" alt="image-20250917154709869"></p>
+<p><strong>训练集</strong>：用于训练模型的数据集，包括输出特征（例如房屋的大小）和输出目标（例如房屋价格），其中输出目标就算我们将从学习的模型中得到的正确答案。</p>
+<p><strong>训练过程</strong></p>
+<p><img src="20251008-Week8/image-20250917155635831.png" alt="image-20250917155635831"></p>
+<p>在这个训练集中，每一行代表一个不同的训练示例</p>
+<p>引用一个具体的训练例子，这会对应到这张表中的特定行，我将使用括号中的 $x$ 上标 $i$，$y$ 中的上标 $i$，即描述训练集的标准符号：$(x^{(i)},y^{(i)})$</p>
+<h2 id="Part-2"><a href="#Part-2" class="headerlink" title="Part 2"></a>Part 2</h2><p>$f$ 的工作是采用新的输出 $x$ 和输出并进行估计或预测，我将其成为 <code>y-hat</code>，它的写法类似于顶部带哦有这个小帽子的变量 $y$。在机器学习中，惯例 <code>y-hat</code>是y 的估计或预测。</p>
+<p>当符号只是 $y$ 时，则指的时目标，即训练集中的实际真实值，相反，<code>y-hat</code> 是个估计值</p>
+<p>单变量线性回归模型：具有一个输入变量的线性模型</p>
+<p><img src="20251008-Week8/C1_W1_L3_S1_model.png" alt="C1_W1_L3_S1_model"></p>
+<h1 id="四、代价函数"><a href="#四、代价函数" class="headerlink" title="四、代价函数"></a>四、代价函数</h1><h2 id="代价函数的数学定义"><a href="#代价函数的数学定义" class="headerlink" title="代价函数的数学定义"></a>代价函数的数学定义</h2><p>就是评估模型的精度（即误差）</p>
+<p><img src="20251008-Week8/image-20250917163514947.png" alt="image-20250917163514947"></p>
+<p>简单地用一个数学函数拟合现实的回归问题</p>
+<p>在机器学习中，模型的参数是你可以在训练期间调整以改进模型的变量，参数 $w$ 和 $b$ 被称为系数或权重。</p>
+<p>以下是不同 $w$ 和 $b$  对用的回归函数</p>
+<p><img src="20251008-Week8/image-20250919152134628.png" alt="image-20250919152134628"></p>
+<p><strong>平均误差代价函数</strong>：对于所有回归问题而言可以提供良好的结果，也是最常用的代价函数</p>
+<p><img src="20251008-Week8/image-20250919152925597.png" alt="image-20250919152925597"></p>
+<h2 id="如何用代价函数为模型找到最佳参数"><a href="#如何用代价函数为模型找到最佳参数" class="headerlink" title="如何用代价函数为模型找到最佳参数"></a>如何用代价函数为模型找到最佳参数</h2><p>先讨论 $b$ 为0的情况，即只考虑 $w$ 对 $J$ 的影响。</p>
+<p><img src="20251008-Week8/image-20250919153445305.png" alt="image-20250919153445305"></p>
+<p>根据参数 $w$ 的取值得到不同的 $J$，绘制出 $J$ 关于 $w$ 的函数图像，可以看出该图像是个抛物线。</p>
+<p><img src="20251008-Week8/image-20250919160254670.png" alt="image-20250919160254670"></p>
+<p>又已知 $J$ 是衡量平方误差有多大的成本函数，因此选择最小化这些平方误差的 $w$，是它们经可能小，将为我们提供一个好的模型。</p>
+<p><img src="20251008-Week8/image-20250919161857748.png" alt="image-20250919161857748"></p>
+<p>最后在网络上找到了markdown的中文笔记，我就看看笔记就好，这样效率高些，接下来就是学习其他的了。</p>
+<p>今天开始重新回归论文的精读，先前都是在夯实基础，看了一些机器学习的内容，本来想把笔记上传到博客上的，但是因为公式渲染的一些问题而不得不放弃了。（因为博客其实挺花费时间的，所有我现在开始只简单的记录一些学到的没见过的东西，可能不尽详细，但是没关系，我会copy一些博客的内容。当然，这会标注清楚来源，主要用于自己后续学习回顾使用。）</p>
+<p>接下来内容算是第一篇跟着视频精读论文的博客（写得好的话我再考虑单起一篇论文吧，现在先当作是学习周记的一部分），因为之前都是从头读到尾的，采用的方式方法对于一个新人而言完全不可靠。所以在后面的文章中会根据推荐的一些读论文的顺序和方法来精读。现在，让我们开始读吧。</p>
+<h1 id="Attention-is-All-Your-Need-——-Transformer"><a href="#Attention-is-All-Your-Need-——-Transformer" class="headerlink" title="Attention is All Your Need —— Transformer"></a>Attention is All Your Need —— Transformer</h1><h2 id="一、标题与作者"><a href="#一、标题与作者" class="headerlink" title="一、标题与作者"></a>一、标题与作者</h2><p>首先，要看明白标题的内涵（如果要写自己的论文的时候，写的标题自然是要有吸引力的，可以参考这文章 —— xxx is All Your Need）</p>
+<p>其次，作者一般的顺序是根据贡献度排序的，即一作、二作等，但在名字后面加 * 表示同等贡献。</p>
+<h2 id="二、摘要"><a href="#二、摘要" class="headerlink" title="二、摘要"></a>二、摘要</h2><ul>
+<li><strong>序列转录模型</strong>：给定序列生成另一序列，比如机器翻译。这样的模型主要是依赖于比较复杂的循环或者卷积神经网络，一般使用 encoder 、decoder 的模型架构。</li>
+<li>提出了一种新的简单网络架构——Transformer，它完全基于注意力机制，彻底摒弃了循环和卷积结构。</li>
+<li>该模型在质量上更优，同时具有更高的并行化程度且训练时间显著减少。</li>
+<li>（一般论文的代码放在摘要部分便于读者复现，这篇有点不一样，在结论部分。）</li>
+</ul>
+<h2 id="三、结论"><a href="#三、结论" class="headerlink" title="三、结论"></a>三、结论</h2><ul>
+<li>该文章的研究方向主要是机器翻译的方向</li>
+<li>$Transformer$ 是首个完全基于注意力的序列转换模型，把之前所有的循环层和卷积层全部换成的 $multi-headed self-attention$（对于传统的时序网络架构而已，$transfromer$ 能够<strong>并行</strong>地处理更多的数据，提高计算性能）</li>
+<li>在翻译任务中，模型实现了新的最优性能。</li>
+<li>对<strong>未来的期待</strong>，即该文章未来方向的应用和可研发的方向：将 Transformer 扩展至文本以外的输入输出模态问题，并研究局部受限注意力机制以高效处理图像、音频和视频等大型输入输出。减少生成过程的序列依赖性（减少生成的时序化，提高并行度）也是另一研究目标。</li>
+</ul>
+<h2 id="四、导言"><a href="#四、导言" class="headerlink" title="四、导言"></a>四、导言</h2><ul>
+<li>循环神经网络已被公认为序列建模与转换任务（如语言建模和机器翻译）的尖端技术：LSTM、GRU，有两个典型的模型：循环语言模型和编码器、解码器模型（输出结构化信息比较多）</li>
+<li>RNN计算的特点是序列从左往右一步一步的往前做。假设是一个句子的话就会一个词一个词的看，对 $t$ 个词，会输出一个 $h<em>t$，而它是由前面一个词的<strong>隐藏状态</strong> $h</em>{t-1}$ 和当前第 $t$ 个词决定的。这样，就可以<strong>将历史信息通过隐藏状态 $h_{t-1}$ 放到当下</strong>，然后和当前的词进行计算得到 $h_t$。这也是RNN如何能够有效处理时序信息的一个关键所在。</li>
+<li>但是，RNN的特点也是其缺点所在，<strong>并行度很差</strong>。在计算第 $t$ 个词的时候必须保证前面 $t-1$ 个词全部计算完毕，在时间上无法并行。同时，因为历史信息是一步一步往后传递的，导致如果时序信息很长的话（即需要存储的前后文就很长了），那么在很早起的那些时<strong>序信息在后面很有可能会丢掉</strong>。要是不想丢到信息，就得做出比较大的 $h_t$，导致内存开销会很大。</li>
+<li>Transformer 模型架构，它摒弃了循环结构，完全依赖注意⼒机制来捕捉输⼊与输出之间的全局依赖关系。Transformer 能够实现显著更⾼的并⾏化程度。</li>
+</ul>
+<h2 id="五、相关工作（背景）"><a href="#五、相关工作（背景）" class="headerlink" title="五、相关工作（背景）"></a>五、相关工作（背景）</h2><ul>
+<li>首先提到如何使用<strong>卷积神经网络</strong>来替换循环神经网络来减少时序的计算。然后又提到，使用卷积神经网络对于比较长的序列难以建模。因为卷积计算的时候每次看到的是一个比较小的窗口，如果两个像素的位置比较远的话，就需要较多层的卷积一层一层计算最后才能把这两个隔得远的像素给融合起来。</li>
+<li>但是如果使用transformer注意力机制的话，因为一次能看到所有的像素，所以一层就看到所有的序列，但是由于对注意⼒加权位置进⾏平均化⽽降低了有效分辨率。</li>
+<li>承认了卷积比较好的地方：可以做多个通道，一个输出通道可以识别不一样的模式。为了模拟模拟卷积神经网络多输出通道这样一个效果，transformer 提供了一个 $Multi-Head Attention$ 的机制。</li>
+<li>已存在⾃注意⼒机制、端到端记忆⽹络且表现效果优异。</li>
+<li>transformer 是⾸个完全依赖⾃注意⼒计算输⼊输出表⽰，⽽不使⽤序列对⻬ RNN或卷积的转换模型。</li>
+</ul>
+<h2 id="六、模型"><a href="#六、模型" class="headerlink" title="六、模型"></a>六、模型</h2><ul>
+<li>编码器-解码器结构：编码器将符号表⽰序列(x,…,x)映射为连续表⽰序列 z=(z,…,z)。在给定 z 的情况下，解码器逐步⽣成符号输出序列(y,…,y)。该模型在每个时间步都采⽤⾃回归⽅式[9]，在⽣成下⼀个符号时会将先前⽣成的符号作为附加输⼊。</li>
+<li>Transformer 采用在编码器和解码器中均采⽤堆叠的⾃注意⼒机制和逐点全连接层的编码器-解码器结构。</li>
+</ul>
+<p><img src="20251008-Week8/image-20250922162035651.png" alt="image-20250922162035651"></p>
+<ul>
+<li>下面的两个方块分别是编码器和解码器的输入（解码器在预测的时候没有输入，所以这里应该是之前时刻的输出作为输入）</li>
+<li>$N_x$ ：有 n 层 transfomer block</li>
+</ul>
+<h3 id="（一）编码器与解码器"><a href="#（一）编码器与解码器" class="headerlink" title="（一）编码器与解码器"></a>（一）编码器与解码器</h3><h4 id="编码器"><a href="#编码器" class="headerlink" title="编码器"></a>编码器</h4><ul>
+<li><p>编码器由 N=6 个相同层堆叠⽽成。每层包含两个⼦层：第⼀层是多头⾃注意⼒机制（multi-head self-attention），第⼆层是简单的位置智能能全连接前馈⽹络（MLP）。在每个⼦层周围采⽤<strong>残差连接</strong>，随后进⾏层归⼀化（layer normalization）。</p>
+</li>
+<li><p>其中，每个子层（sub-layer）的输出结果都是 </p>
+<script type="math/tex; mode=display">
+LayerNorm(x+Sublayer(x))</script><p>即输入先进入子层，然后因为是残差连接，把前面子层的输出和输入再加在一起，最后进入$LayerNorm$。而残差需要输入和输出的大小是一样的。如果不一样的话还得做投影，所以文章把每一层的输出的纬度都变成了512（有异于之前的CNN：空间纬度往下减，但是channel网上拉）。</p>
+</li>
+</ul>
+<h4 id="LayerNorm"><a href="#LayerNorm" class="headerlink" title="$LayerNorm$"></a>$LayerNorm$</h4><ul>
+<li><p>$batch$：样本（行），$feature$：特征（列）</p>
+</li>
+<li><p>$BatchNorm$：把每一列（特征）放在一个小mini batch 中，然后把它的均值变成0，方差变成1。</p>
+<p><img src="20251008-Week8/image-20250924150116195.png" alt="image-20250924150116195"></p>
+</li>
+<li><p>而 $LayerNorm$ 就是相当于 $BatchNorm$ 的装置，即把每一行（batch）放在一个小 mini ‘block’ 中，然后把它的均值变成0，方差变成1。</p>
+<p><img src="20251008-Week8/image-20250924150127452.png" alt="image-20250924150127452"></p>
+</li>
+<li><p>但是为什么 $LayNorm$ 用的会更多一些？<br>在时序序列模型中，每个样本的长度可能会发生变化。对于 $batchNrom$ 时，如果样本长度变化比较大的话，每次做小批量计算出来的方差抖动是比较大的（沿着特征切）。除此之外，要预测的时候要把全局的均值和方差记录下来。对于这个全局的均值和方差而言，如果碰到一个新的预测样本，比如特别长的序列（这个序列长度在之前的训练中并没有接触过），那个这个全局的均值和方差很有可能就不是那么的好用。但是！对于 $LayNorm$ 而言，计算的是每个样本自己的均值和方差（沿着样本切），也就不需要存在一个全局的均值方差。</p>
+</li>
+<li><p><img src="20251008-Week8/image-20250924150245425.png" alt="image-20250924150245425"></p>
+</li>
+</ul>
+<h4 id="解码器"><a href="#解码器" class="headerlink" title="解码器"></a>解码器</h4><ul>
+<li>解码器同样由 N=6 个相同层堆叠⽽成。除编码器层中的两个⼦层外，解码器额外插⼊第三个⼦层，该⼦层对编码器堆栈的输出执⾏多头注意⼒计算。</li>
+<li>与编码器类似，我们在每个⼦层周围采⽤残差连接并实施层归⼀化。</li>
+<li>多了一个自回归：<strong>掩码机制</strong>结合输出嵌⼊向右偏移⼀位的特性，确保位置 i 的预测仅能依赖于⼩于 i 的已知输出位置，从而保证训练和预测的时候行为是一致的。</li>
+</ul>
+<h3 id="注意力层"><a href="#注意力层" class="headerlink" title="注意力层"></a>注意力层</h3><ul>
+<li><p>不同的注意力机制拥有不同的注意力函数（$query$ 与⼀组 $key$ 对映射到 $output$ 的过程，其中$query$、 $key$ 、$value$ 和 $output$ 均为向量。 $output$ 被计算为 $value$ 的加权和，其中每个 $value$ 的权重通过$query$ 与对应 $key$ 的相似度函数计算得出）。</p>
+</li>
+<li><p>随着 $query$ 的改变，尽管 $key$ 、$value$ 没有发生变化，此时的权重分配发生了变化，输出也发生了变化。</p>
+<p><img src="20251008-Week8/image-20250924161136410.png" alt="image-20250924161136410"></p>
+</li>
+</ul>
+<p><img src="20251008-Week8/image-20251004154122199.png" alt="image-20251004154122199"></p>
+<h3 id="缩放点积注意⼒"><a href="#缩放点积注意⼒" class="headerlink" title="缩放点积注意⼒"></a>缩放点积注意⼒</h3><p><img src="20251008-Week8/image-20251004153928646.png" alt="image-20251004153928646"></p>
+<h3 id="多头注意⼒"><a href="#多头注意⼒" class="headerlink" title="多头注意⼒"></a>多头注意⼒</h3><p><img src="20251008-Week8/image-20251004154104469.png" alt="image-20251004154104469"></p>
+<h4 id="Attention-如何在编码器和解码器之间起到作用"><a href="#Attention-如何在编码器和解码器之间起到作用" class="headerlink" title="Attention 如何在编码器和解码器之间起到作用"></a>Attention 如何在编码器和解码器之间起到作用</h4><ul>
+<li>对输入进行一个维度不变的加权和</li>
+<li>attention的输出就是 value 的加权和（而这个权重由 key 和 query 的相似性决定）</li>
+<li>作用是对序列信息进行一个汇聚aggregation，抓取我们感兴趣的信息存在每一维度的输出中，这样方便MLP进行语义空间的转换时可以并列进行的</li>
+</ul>
+<p><img src="20251008-Week8/image-20251004154912348.png" alt="image-20251004154912348"></p>
+<h3 id="位置级前馈网络（osition-wise-Feed-Forward-Network）"><a href="#位置级前馈网络（osition-wise-Feed-Forward-Network）" class="headerlink" title="位置级前馈网络（osition-wise Feed-Forward Network）"></a>位置级前馈网络（osition-wise Feed-Forward Network）</h3><ul>
+<li>隐藏线性层</li>
+</ul>
+<p><img src="20251008-Week8/image-20251004160333038-1759565027046-1.png" alt="image-20251004160333038"></p>
+<p><img src="20251008-Week8/image-20251004160256802.png" alt="image-20251004160256802"></p>
+<h3 id="Embedding"><a href="#Embedding" class="headerlink" title="Embedding"></a>Embedding</h3><h3 id="Posititonal-Encoding"><a href="#Posititonal-Encoding" class="headerlink" title="Posititonal Encoding"></a>Posititonal Encoding</h3><h2 id="七、实验"><a href="#七、实验" class="headerlink" title="七、实验"></a>七、实验</h2><h2 id="八、评论"><a href="#八、评论" class="headerlink" title="八、评论"></a>八、评论</h2></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://solitudeab.github.io">SolitudeAB</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://solitudeab.github.io/2025/10/08/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20251008-Week8/">https://solitudeab.github.io/2025/10/08/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20251008-Week8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://solitudeab.github.io" target="_blank">我的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%8C%BB%E5%AD%A6AI%E5%AD%A6%E4%B9%A0/">医学AI学习</a><a class="post-meta__tags" href="/tags/%E5%91%A8%E8%AE%B0/">周记</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,x,wechat,weibo,qq,qzone,douban,linkedin"></div><link rel="stylesheet" href="/pluginsSrc/butterfly-extsrc/sharejs/dist/css/share.min.css?v=1.1.6" media="print" onload="this.media='all'"><script src="/pluginsSrc/butterfly-extsrc/sharejs/dist/js/social-share.min.js?v=1.1.6" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/09/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20251009-504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/" title="504医学AI入门"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">504医学AI入门</div></div><div class="info-2"><div class="info-item-1">504医学AI入门关于Python：医学AI组在研究中基本上所使用的语言都是Python，语法上比较简单，所以不要担心语言上会有大的问题，对python不熟悉的话随学随补即可。 一、环境搭建这部分强烈建议从一开始就使用anaconda进行环境管理，后期不同的项目用不同的环境，可以保证不会乱并且可迁移，而且将来在linux服务器上用GPU跑模型是必不可少的，所以第一步的任务：  在自己的电脑（mac、windows）与一台linux服务器上成功安装一个anaconda。  尝试在anaconda中进行创建、删除、激活环境等环境管理操作，在不同环境中安装并使用不同的python版本，体会环境隔离。  创建一个学习与练习用的环境，安装opencv，安装pytorch的GPU版本。  如有余力可尝试安装并远程使用jupyter。 PS：以上任务优先在一台有GPU的linux服务器上进行。   二、图像处理基础由于医学AI方向面向的数据更多还是图像，所以关于图像处理的一些基础知识与实战代码还是有必要了解的，比如图像数据的格式、图像如何存储、图像的各种变换方法、一些基础算子比如Sobel、C...</div></div></div></a><a class="pagination-related" href="/2025/09/19/machine_learning/20250919-2.CS229-Prob/" title="概率论"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">概率论</div></div><div class="info-2"><div class="info-item-1"> 本文是斯坦福大学CS229机器学习课程的基础材料，原始文件下载 原文作者：Arian Maleki ， Tom Do 翻译：石振宇 审核和修改制作：黄海广 备注：请关注github的更新。  CS229 机器学习课程复习材料-概率论[TOC] 概率论复习和参考概率论是对不确定性的研究。通过这门课，我们将依靠概率论中的概念来推导机器学习算法。这篇笔记试图涵盖适用于CS229的概率论基础。概率论的数学理论非常复杂，并且涉及到“分析”的一个分支：测度论。在这篇笔记中，我们提供了概率的一些基本处理方法，但是不会涉及到这些更复杂的细节。 1. 概率的基本要素为了定义集合上的概率，我们需要一些基本元素，  样本空间$\Omega $：随机实验的所有结果的集合。在这里，每个结果 $w \in \Omega $ 可以被认为是实验结束时现实世界状态的完整描述。  事件集（事件空间）$\mathcal{F}$：元素 $A \in \mathcal{F}$ 的集合（称为事件）是 $\Omega $ 的子集（即每个 $A \subseteq \Omega$ 是一个实验可能结果的集合）。 备注：$\ma...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/09/14/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20250914-Week6/" title="Week6"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-14</div><div class="info-item-2">Week6</div></div><div class="info-2"><div class="info-item-1">模型基础一、语义分割概念 学习视频 语义分割前言_哔哩哔哩_bilibili  目标：  什么是语义分割 暂定的学习规划 语义分割任务常见数据集格式 语义分割得到结果的具体形式 语义分割常见评价标准 语义分割标注工具 （一）常见分割任务 语义分割（FCN）：对每一个像素进行分类  实例分割（Mask R-CNN）：针对同一个类别的不同目标也采用不同颜色进行分类，结果更精细，只关注目标背景  全景分割（Panoptic FPN）语义 + 实例 + 背景划分  精细程度逐级递增   （二）pytorch 官方提供的语义分割网络     （三）语义分割任务常见数据集格式 Pascal VOC  PASCAL VOC2012数据集介绍_pascal voc 2012-CSDN博客  语义分割中提供的是png图片（记录每个像素所属的一个类别信息），这个png图片使用调色板的模式进行存储。 图片（第二张图片）实际是一个一通道的图片（黑白图片），但看到的确实彩色的。 用 python 的 Pillow 去读取 png 图片的话，默认读取的是调色板的模式（P模式），通道数为1（单通道）。 但是读...</div></div></div></a><a class="pagination-related" href="/2025/08/10/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20250810-Week3/" title="Week3"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-10</div><div class="info-item-2">Week3</div></div><div class="info-2"><div class="info-item-1">Opencv（二） 上一周学到彩色图片像素点的统计，这一周就从纯黑纯白图片像素点统计开始  代码 1234567891011121314import cv2# 读取图片（默认以BGR格式加载）image = cv2.imread(&#x27;image.jpg&#x27;)# 查看矩阵内容print(image)  # 直接打印整个矩阵print(image.shape)  # 打印矩阵形状：(高度, 宽度, 通道数)# 查看特定像素值（例如第10行第20列的BGR值）print(image[10, 20])  # 输出格式：[B, G, R]# 查看部分矩阵（例如前10行前10列）print(image[:10, :10])   一、纯黑纯白图片像素点统计 以下为纯白图片(1080, 2298, 3)的像素点统计结果，可与纯黑图片做比对   不存在纯黑的图片（或者计算机很难实现），以下图片是(650, 650, 3)的纯黑图片像素点统计结果，可以看出黑色图片的像素点并不如纯白图片集中，即不如白色纯    二、随机生成彩色图片 代码 12345678910111213141516...</div></div></div></a><a class="pagination-related" href="/2025/07/20/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20250720-Week1/" title="Week1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-07-20</div><div class="info-item-2">Week1</div></div><div class="info-2"><div class="info-item-1">语义分割 学习视频 语义分割前言_哔哩哔哩_bilibili  一、前言目标：  [x] 什么是语义分割 [x] 暂定的学习规划 [x] 语义分割任务常见数据集格式 [x] 语义分割得到结果的具体形式 [x] 语义分割常见评价标准 [x] 语义分割标注工具  1. 常见分割任务 语义分割（FCN）：对每一个像素进行分类  实例分割（Mask R-CNN）：针对同一个类别的不同目标也采用不同颜色进行分类，结果更精细，只关注目标背景  全景分割（Panoptic FPN）语义 + 实例 + 背景划分    精细程度逐级递增   2. pytorch 官方提供的语义分割网络 3. 语义分割任务常见数据集格式 Pascal VOC  PASCAL VOC2012数据集介绍_pascal voc 2012-CSDN博客  语义分割中提供的是png图片（记录每个像素所属的一个类别信息），这个png图片使用调色板的模式进行存储。 图片（第二张图片）实际是一个一通道的图片（黑白图片），但看到的确实彩色的。 用 python 的 Pillow 去读取 png 图片的话，默认读取的是调色板的模式（P...</div></div></div></a><a class="pagination-related" href="/2025/07/31/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20250731-Week2/" title="Week2"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-07-31</div><div class="info-item-2">Week2</div></div><div class="info-2"><div class="info-item-1">Opencv（一）一、常见的图片格式及图片类型 图片格式  bmp：比较老的格式|不常见|无损-&gt;基本上无压缩|体积大|被淘汰  jpg（jpeg）：用最少的磁盘空间得到较好的图片质量  png：无损压缩的位图片形格式（首选）    图片类型：[ 黑白 ]  [ 彩色 ]   ​    【gif(动图) -&gt; 一帧一帧拿出来】  图片的本质：由像素点组成的一个矩阵，每个元素（像素点）都是在 [0,255] 之间  二、读取第一张黑白图片12import cv2import numpy as np  读取和展示  path：路径 0：代表灰度图 1：彩色图  12345678path = r&quot;./R-C.jpg&quot;img = cv2.imread(path,0)print(type(img))print(img.shape)print(img)cv2.imshow(&#x27;image&#x27;, img)cv2.waitKey()cv2.destroyAllWindows()  需要注意的是这里的cv2.imshow(&#39;image&#39...</div></div></div></a><a class="pagination-related" href="/2025/08/10/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20250810-Week4/" title="Week4"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-10</div><div class="info-item-2">Week4</div></div><div class="info-2"><div class="info-item-1">Opencv（三）一、图像基础知识复习 图像是由像素构成的 像素点的多少决定了图片的质量（相同图片大小，像素点越多，单个像素点越小，图片质量越好）   图像的分类   二值图像：像素点非0即1   灰度图像：像素点有256个结果   彩色图像：由三通道（三原色RGB）进行叠加的图像     Opencv读取彩色图像的特点  读取结果：BGR（注意顺序）  每个像素点由BGR三个分量构成 例：（245，168，200）-&gt; B：245 、G：168、R：200     二、灰度图片像素的选取与修改 源码 123456789101112131415161718192021import cv2gray_img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 0)cv2.imshow(&#x27;gray_img&#x27;, gray_img)# 选取灰度图像的某个像素点【矩阵-numpy中的数组】gray_img[100,100]gray_img[100,...</div></div></div></a><a class="pagination-related" href="/2025/08/14/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20250814-Week5/" title="Week5"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-14</div><div class="info-item-2">Week5</div></div><div class="info-2"><div class="info-item-1">图像处理方法一、Sobel算子 OpenCV 图像处理之膨胀与腐蚀  （一）什么是Sobel算子？ Sobel 算子是图像一种图像边缘   图像边缘检测重要算子之一  与梯度密度密不可分 -&gt; 目的：图像边缘检测的方法，本质是==梯度运算==   （二）什么情况下会产生梯度？利用 3 * 3 的卷积核放在二值图像中有三种位置关系，如下   全黑全白的像素值是相同的，只有在边缘部位时会有梯度产生。所有，梯度是进行边缘你检测的一个核心(边缘的梯度：255 - 0 = 255)    （三）Sobel 算子原理 遍历过程  卷积核顺序放到原图上    卷积核固定（中间列都是0）  卷积核中心位置在中间4x3区域内（对于边缘位置，卷积核暂时无法顾及到）  但是卷积核的核心无法顾及到原图像的边缘，如下   解决方法：  法一：边缘列（行）取均值或均值  法二（官方给的理论可能性）：paddng（边缘加一行 ”补0” ）   padding为0不改变原图像，此法可以顾及到每一个像素点       梯度计算  利用3  3 的卷积核与原图上顺序遍历的3  3矩阵（9个像素点）进行梯度计算...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">SolitudeAB</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SolitudeAB"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/SolitudeAB" target="_blank" title="GitHub"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:jiaxwoo@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #DEAC96;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.</span> <span class="toc-text">一、监督学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E5%9B%9E%E5%BD%92"><span class="toc-number">1.1.</span> <span class="toc-text">（一）回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E5%88%86%E7%B1%BB"><span class="toc-number">1.2.</span> <span class="toc-text">（二）分类</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.</span> <span class="toc-text">二、非监督学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95%EF%BC%88Clustering%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">聚类算法（Clustering）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%EF%BC%88Anomaly-detection%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">异常检测（Anomaly detection）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%8D%E7%BB%B4%EF%BC%88Dimensionality-reduction%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">降维（Dimensionality reduction）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Some-Questions"><span class="toc-number">2.3.1.</span> <span class="toc-text">Some Questions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Answers"><span class="toc-number">2.3.2.</span> <span class="toc-text">Answers</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">三、线性回归模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Part1"><span class="toc-number">3.1.</span> <span class="toc-text">Part1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E4%BD%B3%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.1.1.</span> <span class="toc-text">最佳房价预测模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-2"><span class="toc-number">3.2.</span> <span class="toc-text">Part 2</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">四、代价函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%E7%9A%84%E6%95%B0%E5%AD%A6%E5%AE%9A%E4%B9%89"><span class="toc-number">4.1.</span> <span class="toc-text">代价函数的数学定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%94%A8%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E6%89%BE%E5%88%B0%E6%9C%80%E4%BD%B3%E5%8F%82%E6%95%B0"><span class="toc-number">4.2.</span> <span class="toc-text">如何用代价函数为模型找到最佳参数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Attention-is-All-Your-Need-%E2%80%94%E2%80%94-Transformer"><span class="toc-number">5.</span> <span class="toc-text">Attention is All Your Need —— Transformer</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%A0%87%E9%A2%98%E4%B8%8E%E4%BD%9C%E8%80%85"><span class="toc-number">5.1.</span> <span class="toc-text">一、标题与作者</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%91%98%E8%A6%81"><span class="toc-number">5.2.</span> <span class="toc-text">二、摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%BB%93%E8%AE%BA"><span class="toc-number">5.3.</span> <span class="toc-text">三、结论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%AF%BC%E8%A8%80"><span class="toc-number">5.4.</span> <span class="toc-text">四、导言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C%EF%BC%88%E8%83%8C%E6%99%AF%EF%BC%89"><span class="toc-number">5.5.</span> <span class="toc-text">五、相关工作（背景）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%A8%A1%E5%9E%8B"><span class="toc-number">5.6.</span> <span class="toc-text">六、模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E7%BC%96%E7%A0%81%E5%99%A8%E4%B8%8E%E8%A7%A3%E7%A0%81%E5%99%A8"><span class="toc-number">5.6.1.</span> <span class="toc-text">（一）编码器与解码器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E5%99%A8"><span class="toc-number">5.6.1.1.</span> <span class="toc-text">编码器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LayerNorm"><span class="toc-number">5.6.1.2.</span> <span class="toc-text">$LayerNorm$</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E7%A0%81%E5%99%A8"><span class="toc-number">5.6.1.3.</span> <span class="toc-text">解码器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E5%8A%9B%E5%B1%82"><span class="toc-number">5.6.2.</span> <span class="toc-text">注意力层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%A9%E6%94%BE%E7%82%B9%E7%A7%AF%E6%B3%A8%E6%84%8F%E2%BC%92"><span class="toc-number">5.6.3.</span> <span class="toc-text">缩放点积注意⼒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%A4%B4%E6%B3%A8%E6%84%8F%E2%BC%92"><span class="toc-number">5.6.4.</span> <span class="toc-text">多头注意⼒</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Attention-%E5%A6%82%E4%BD%95%E5%9C%A8%E7%BC%96%E7%A0%81%E5%99%A8%E5%92%8C%E8%A7%A3%E7%A0%81%E5%99%A8%E4%B9%8B%E9%97%B4%E8%B5%B7%E5%88%B0%E4%BD%9C%E7%94%A8"><span class="toc-number">5.6.4.1.</span> <span class="toc-text">Attention 如何在编码器和解码器之间起到作用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%8D%E7%BD%AE%E7%BA%A7%E5%89%8D%E9%A6%88%E7%BD%91%E7%BB%9C%EF%BC%88osition-wise-Feed-Forward-Network%EF%BC%89"><span class="toc-number">5.6.5.</span> <span class="toc-text">位置级前馈网络（osition-wise Feed-Forward Network）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Embedding"><span class="toc-number">5.6.6.</span> <span class="toc-text">Embedding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Posititonal-Encoding"><span class="toc-number">5.6.7.</span> <span class="toc-text">Posititonal Encoding</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%AE%9E%E9%AA%8C"><span class="toc-number">5.7.</span> <span class="toc-text">七、实验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E8%AF%84%E8%AE%BA"><span class="toc-number">5.8.</span> <span class="toc-text">八、评论</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/%E8%AF%AD%E5%BD%95/" title="语录">语录</a><time datetime="2026-07-02T12:45:25.136Z" title="发表于 2026-07-02 20:45:25">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/hello-world/" title="Hello World">Hello World</a><time datetime="2026-07-02T12:45:25.014Z" title="发表于 2026-07-02 20:45:25">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/machine_learning/20260702-math/" title="高等数学">高等数学</a><time datetime="2026-07-02T12:05:42.000Z" title="发表于 2026-07-02 20:05:42">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/paper/Eyes/v3/20260509-Untitled-2/" title="Untitled 2">Untitled 2</a><time datetime="2026-05-09T07:00:54.000Z" title="发表于 2026-05-09 15:00:54">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/07/paper/Eyes/v3/20260507-Untitled-1/" title="Untitled 1">Untitled 1</a><time datetime="2026-05-07T13:46:03.000Z" title="发表于 2026-05-07 21:46:03">2026-05-07</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By SolitudeAB</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="/pluginsSrc/medium-zoom/dist/medium-zoom.min.js?v=1.1.0"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        loader: {
+          load: [
+            // Four font extension packages (optional)
+            //- '[tex]/bbm',
+            //- '[tex]/bboldx',
+            //- '[tex]/dsfont',
+            '[tex]/mhchem'
+          ],
+          paths: {
+            'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+
+            //- // Four font extension packages (optional)
+            //- 'mathjax-bbm-extension': '[mathjax]/../@mathjax/mathjax-bbm-font-extension',
+            //- 'mathjax-bboldx-extension': '[mathjax]/../@mathjax/mathjax-bboldx-font-extension',
+            //- 'mathjax-dsfont-extension': '[mathjax]/../@mathjax/mathjax-dsfont-font-extension',
+            'mathjax-mhchem-extension': '[mathjax]/../@mathjax/mathjax-mhchem-font-extension'
+          }
+        },
+        output: {
+          font: 'mathjax-newcm',
+        },
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+          packages: {
+            '[+]': [
+              'mhchem'
+            ]
+          }
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          menuOptions: {
+            settings: {
+              enrich: false  // Turn off Braille and voice narration text automatic generation
+            }
+          },
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = '/pluginsSrc/mathjax/tex-mml-chtml.js?v=4.1.0'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><div id="aplayer"></div><script src="/js/custom.js"></script><script id="canvas_nest" defer="defer" color="222,172,150" opacity="0.5" zIndex="-1" count="99" mobile="false" src="/pluginsSrc/butterfly-extsrc/dist/canvas-nest.min.js?v=1.1.6"></script><link rel="stylesheet" href="/pluginsSrc/aplayer/dist/APlayer.min.css?v=1.10.1" media="print" onload="this.media='all'"><script src="/pluginsSrc/aplayer/dist/APlayer.min.js?v=1.10.1"></script><script src="/pluginsSrc/butterfly-extsrc/metingjs/dist/Meting.min.js?v=1.1.6"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="/pluginsSrc/pjax/pjax.min.js?v=0.2.8" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章..." type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.4"></script></div></div></body></html>

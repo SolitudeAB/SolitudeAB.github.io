@@ -1,0 +1,378 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Pycharm远程执行无法显示cv2.imshow()无法显示原因分析 | 我的博客</title><meta name="author" content="SolitudeAB"><meta name="copyright" content="SolitudeAB"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="12export DISPLAY&#x3D;localhost:10.0echo $DISPLAY 1 是OpenCV的版本导致cv2.imshow()无法显示吗？12qt.qpa.plugin: Could not load the Qt platform plugin &quot;xcb&quot; in &quot;&#x2F;opt&#x2F;virtualenvs&#x2F;ai-shop&#x2F;lib&#x2F;python3.7&#x2F;site">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pycharm远程执行无法显示cv2.imshow()无法显示原因分析">
+<meta property="og:url" content="https://solitudeab.github.io/2025/07/30/%E4%B8%9A%E4%BD%99/20250730-cv2.imshow()%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8%E4%BD%BF%E7%94%A8%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="12export DISPLAY&#x3D;localhost:10.0echo $DISPLAY 1 是OpenCV的版本导致cv2.imshow()无法显示吗？12qt.qpa.plugin: Could not load the Qt platform plugin &quot;xcb&quot; in &quot;&#x2F;opt&#x2F;virtualenvs&#x2F;ai-shop&#x2F;lib&#x2F;python3.7&#x2F;site">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://solitudeab.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2025-07-30T15:40:47.000Z">
+<meta property="article:modified_time" content="2026-07-02T12:45:25.114Z">
+<meta property="article:author" content="SolitudeAB">
+<meta property="article:tag" content="技术随笔">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://solitudeab.github.io/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Pycharm远程执行无法显示cv2.imshow()无法显示原因分析",
+  "url": "https://solitudeab.github.io/2025/07/30/%E4%B8%9A%E4%BD%99/20250730-cv2.imshow()%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8%E4%BD%BF%E7%94%A8%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/",
+  "image": "https://solitudeab.github.io/img/avatar.jpg",
+  "datePublished": "2025-07-30T15:40:47.000Z",
+  "dateModified": "2026-07-02T12:45:25.114Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "SolitudeAB",
+      "url": "https://solitudeab.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://solitudeab.github.io/2025/07/30/%E4%B8%9A%E4%BD%99/20250730-cv2.imshow()%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8%E4%BD%BF%E7%94%A8%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/index.html"><link rel="preconnect"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css?v=7.1.0"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js?v=4.13.0',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Pycharm远程执行无法显示cv2.imshow()无法显示原因分析',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="我的博客" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div class="bg-animation" id="web_bg" style="background-image: url(/img/bg.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/SolitudeAB/blog-source/new/main/source/_posts"><i class="fa-fw fas fa-pen"></i><span> 写文章</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">我的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">Pycharm远程执行无法显示cv2.imshow()无法显示原因分析</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/SolitudeAB/blog-source/new/main/source/_posts"><i class="fa-fw fas fa-pen"></i><span> 写文章</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Pycharm远程执行无法显示cv2.imshow()无法显示原因分析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-07-30T15:40:47.000Z" title="发表于 2025-07-30 23:40:47">2025-07-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-07-02T12:45:25.114Z" title="更新于 2026-07-02 20:45:25">2026-07-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">600</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>2分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export DISPLAY=localhost:10.0</span><br><span class="line">echo $DISPLAY</span><br></pre></td></tr></table></figure>
+<h2 id="1-是OpenCV的版本导致cv2-imshow-无法显示吗？"><a href="#1-是OpenCV的版本导致cv2-imshow-无法显示吗？" class="headerlink" title="1 是OpenCV的版本导致cv2.imshow()无法显示吗？"></a>1 是OpenCV的版本导致cv2.imshow()无法显示吗？</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">qt.qpa.plugin: Could not load the Qt platform plugin <span class="string">&quot;xcb&quot;</span> <span class="keyword">in</span> <span class="string">&quot;/opt/virtualenvs/ai-shop/lib/python3.7/site-packages/cv2/qt/plugins&quot;</span> even though it was found.</span><br><span class="line">This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix <span class="keyword">this</span> problem.</span><br></pre></td></tr></table></figure>
+<p>默认使用opencv-python ==4.5.1.48，在xshell中执行的时候会提示上面的错误，如果将opencv-python== 4.1.2.30降级，则执行的时候会出现cannot connect to X server的错误。而若在MobaXterm执行，这可正常显示图片。</p>
+<p><strong>结论：出现上面错误的根本原因不是Linux端的问题，因为MobaXterm可以正常显示。</strong></p>
+<h2 id="2-那直接通过MobaXterm执行脚本并能够显示图片的原因是什么呢？"><a href="#2-那直接通过MobaXterm执行脚本并能够显示图片的原因是什么呢？" class="headerlink" title="2 那直接通过MobaXterm执行脚本并能够显示图片的原因是什么呢？"></a>2 那直接通过MobaXterm执行脚本并能够显示图片的原因是什么呢？</h2><p>探索发现，如下图所示，Linux会将数据发送给Windows机器上的一个X Server，然后X Server将窗口渲染出来，从而实现通过console显示窗口的效果。</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/1700062-9ae568c78f1cd173.png?imageMogr2/auto-orient/strip|imageView2/2/w/735/format/webp" alt="img"></p>
+<p>显示原理</p>
+<p>那这里的X Server是如何启动的呢？实际上在使用MobaXterm或者XShell（安装了Xmanager，否则不会启动）启动一个console窗口时，该工具会自动启动一个X Server服务，因此可以显示图像窗口。</p>
+<p><strong>结论：XShell未集成X Server，X Server集成在Xmanager中，因此只有安装了X Manger才能不出现上述的错误。MobaXterm默认集成了X Server，启动一个窗口时，会启动一个X Server，因此可以直接显示图片窗口。</strong></p>
+<h2 id="3-Pycharm中远程调试如何显示图像窗口？"><a href="#3-Pycharm中远程调试如何显示图像窗口？" class="headerlink" title="3 Pycharm中远程调试如何显示图像窗口？"></a>3 Pycharm中远程调试如何显示图像窗口？</h2><p>按照上面的逻辑，如果让Pycharm中能显示图像窗口，则必须先启动一个X Server，如下图所示。</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/1700062-f08cc9b86eb2a883.png?imageMogr2/auto-orient/strip|imageView2/2/w/736/format/webp" alt="img"></p>
+<p>pycharm远程调试显示图像窗口</p>
+<p>基于此，① 先使用MobaXterm启动一个会话窗口，这样后台就默认启动一个X Serve服务。在会话窗口中输入<code>echo $DISPLAY</code>，查看display number，如下图所示。</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/1700062-346e3be6105a8065.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp" alt="img"></p>
+<p>查看Display number</p>
+<p>② 在Pycharm中修改要执行脚本的配置，Run-&gt;Edit，打开Edit Configuration settingsPycharm，在环境变量中添加<code>DISPLAY=localhost:17.0</code>，如下图所示，</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/1700062-1613528bb2edbf59.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp" alt="img"></p>
+<p>修改脚本配置</p>
+<p>③ 然后Run脚本即可显示图片窗口，如下图所示。</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/1700062-6a3078086b7d96ee.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp" alt="img"></p>
+<p>image.png</p>
+<p><strong>注意显示的窗口中有MobaXterm的Logo，说明用了MobaXterm的X Serve。</strong><br> <strong>PS: 本文实验用的Pycharm配置了Linux远程执行，通过ssh使用远端机器的python解释器。</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://solitudeab.github.io">SolitudeAB</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://solitudeab.github.io/2025/07/30/%E4%B8%9A%E4%BD%99/20250730-cv2.imshow()%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8%E4%BD%BF%E7%94%A8%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">https://solitudeab.github.io/2025/07/30/%E4%B8%9A%E4%BD%99/20250730-cv2.imshow()%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8%E4%BD%BF%E7%94%A8%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://solitudeab.github.io" target="_blank">我的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,x,wechat,weibo,qq,qzone,douban,linkedin"></div><link rel="stylesheet" href="/pluginsSrc/butterfly-extsrc/sharejs/dist/css/share.min.css?v=1.1.6" media="print" onload="this.media='all'"><script src="/pluginsSrc/butterfly-extsrc/sharejs/dist/js/social-share.min.js?v=1.1.6" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/07/31/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20250731-Week2/" title="Week2"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Week2</div></div><div class="info-2"><div class="info-item-1">Opencv（一）一、常见的图片格式及图片类型 图片格式  bmp：比较老的格式|不常见|无损-&gt;基本上无压缩|体积大|被淘汰  jpg（jpeg）：用最少的磁盘空间得到较好的图片质量  png：无损压缩的位图片形格式（首选）    图片类型：[ 黑白 ]  [ 彩色 ]   ​    【gif(动图) -&gt; 一帧一帧拿出来】  图片的本质：由像素点组成的一个矩阵，每个元素（像素点）都是在 [0,255] 之间  二、读取第一张黑白图片12import cv2import numpy as np  读取和展示  path：路径 0：代表灰度图 1：彩色图  12345678path = r&quot;./R-C.jpg&quot;img = cv2.imread(path,0)print(type(img))print(img.shape)print(img)cv2.imshow(&#x27;image&#x27;, img)cv2.waitKey()cv2.destroyAllWindows()  需要注意的是这里的cv2.imshow(&#39;image&#39...</div></div></div></a><a class="pagination-related" href="/2025/07/27/blogs/LearningSchedule/20250727-Week1/" title="Week1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Week1</div></div><div class="info-2"><div class="info-item-1">语义分割 学习视频 语义分割前言_哔哩哔哩_bilibili  一、前言目标：  [x] 什么是语义分割 [x] 暂定的学习规划 [x] 语义分割任务常见数据集格式 [x] 语义分割得到结果的具体形式 [x] 语义分割常见评价标准 [x] 语义分割标注工具  1. 常见分割任务 语义分割（FCN）：对每一个像素进行分类  实例分割（Mask R-CNN）：针对同一个类别的不同目标也采用不同颜色进行分类，结果更精细，只关注目标背景  全景分割（Panoptic FPN）语义 + 实例 + 背景划分    精细程度逐级递增   2. pytorch 官方提供的语义分割网络 3. 语义分割任务常见数据集格式 Pascal VOC  PASCAL VOC2012数据集介绍_pascal voc 2012-CSDN博客  语义分割中提供的是png图片（记录每个像素所属的一个类别信息），这个png图片使用调色板的模式进行存储。 图片（第二张图片）实际是一个一通道的图片（黑白图片），但看到的确实彩色的。 用 python 的 Pillow 去读取 png 图片的话，默认读取的是调色板的模式（P...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/08/23/%E4%B8%9A%E4%BD%99/20250823-%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/" title="语义分割"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-23</div><div class="info-item-2">语义分割</div></div><div class="info-2"><div class="info-item-1">语义分割 学习视频 语义分割前言_哔哩哔哩_bilibili  一、前言目标：  [x] 什么是语义分割 [x] 暂定的学习规划 [x] 语义分割任务常见数据集格式 [x] 语义分割得到结果的具体形式 [x] 语义分割常见评价标准 [x] 语义分割标注工具  1. 常见分割任务 语义分割（FCN）：对每一个像素进行分类  实例分割（Mask R-CNN）：针对同一个类别的不同目标也采用不同颜色进行分类，结果更精细，只关注目标背景  全景分割（Panoptic FPN）语义 + 实例 + 背景划分    精细程度逐级递增   2. pytorch 官方提供的语义分割网络 3. 语义分割任务常见数据集格式 Pascal VOC  PASCAL VOC2012数据集介绍_pascal voc 2012-CSDN博客  语义分割中提供的是png图片（记录每个像素所属的一个类别信息），这个png图片使用调色板的模式进行存储。 图片（第二张图片）实际是一个一通道的图片（黑白图片），但看到的确实彩色的。 用 python 的 Pillow 去读取 png 图片的话，默认读取的是调色板的模式（P...</div></div></div></a><a class="pagination-related" href="/2025/08/25/%E4%B8%9A%E4%BD%99/20250825-%E5%8D%B7%E7%A7%AF/" title="卷积"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-25</div><div class="info-item-2">卷积</div></div><div class="info-2"><div class="info-item-1">卷积如何通俗易懂地解释卷积？ - 知乎 从数学上讲，卷积就是一种运算。 某种运算，能被定义出来，至少有以下特征：  首先是抽象的、符号化的 其次，在生活、科研中，有着广泛的作用  比如加法：  a+b ，是抽象的，本身只是一个数学符号 在现实中，有非常多的意义，比如增加、合成、旋转等等  卷积，是我们学习高等数学之后，新接触的一种运算，因为涉及到积分、级数，所以看起来觉得很复杂。 1 卷积的定义 我们称 (f∗g)(n) 为 f,g 的卷积 其连续的定义为：  其离散的定义为：  这两个式子有一个共同的特征：  这个特征有什么意义？ 我们令 x=τ,y=n−τ ，那么 x+y=n 就是下面这些直线：  如果遍历这些直线，就好比，把毛巾沿着角卷起来：   此处受到 荆哲：卷积为什么叫「卷」积？ 答案的启发。 只看数学符号，卷积是抽象的，不好理解的，但是，我们可以通过现实中的意义，来习惯卷积这种运算，正如我们小学的时候，学习加减乘除需要各种苹果、糖果来帮助我们习惯一样。 我们来看看现实中，这样的定义有什么意义。 2 离散卷积的例子：丢骰子 我有两枚骰子：  把这两枚骰子都抛出去：  ...</div></div></div></a><a class="pagination-related" href="/2025/02/20/%E4%B8%9A%E4%BD%99/20250220-z.nn.linear/" title="z.nn.linear"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-20</div><div class="info-item-2">z.nn.linear</div></div><div class="info-2"><div class="info-item-1">类比：想象你有一台咖啡机，它有一个输入口和一个输出口。输入口可以放入咖啡豆和水，这些输入会经过咖啡机的处理，最终变成一杯咖啡。nn.Linear 就像这台咖啡机，它有输入和输出，它的作用是将输入“转换”成输出。 什么是 nn.Linear？在神经网络中，nn.Linear 是一个线性层，它的作用是接收一个输入向量，通过一定的“加权”和“偏移”处理，输出一个新的向量。简单来说，nn.Linear 会根据一定的规则将输入数据转化为输出数据。 数学解释：nn.Linear 可以看作是一个矩阵乘法操作。它接受一个输入向量 x，然后用一个权重矩阵 W 进行乘法操作，再加上一个偏置项 b。公式是： 1复制代码y = W * x + b 其中：  x 是输入向量。 W 是权重矩阵，它控制每个输入特征对输出的影响。 b 是偏置项，它帮助调整输出的结果。 y 是输出向量。  举个例子：假设我们有一个非常简单的神经网络，它的输入是一个 2 维向量 [x1, x2]。如果我们使用一个 nn.Linear 层，它的输出是一个 3 维的向量 [y1, y2, y3]。  输入向量是 [x1, x2]，也就...</div></div></div></a><a class="pagination-related" href="/2025/08/28/%E4%B8%9A%E4%BD%99/20250828-Markdown-%E8%AF%AD%E6%B3%95/" title="Markdown 语法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-28</div><div class="info-item-2">Markdown 语法</div></div><div class="info-2"><div class="info-item-1">标题1标题2标题3 这是一段引用    有序列表：1.打开冰箱2.把大象塞进去3.关上冰箱 无序列表：  阿斯芬迪   按时打卡  明天要做的事：  [ ] 吃饭 [ ] 睡觉 [x] 打豆豆  代码块：123int main()&#123;    return 0;&#125; 数学公式：  \frac{\partial f}{\partial x}=2\sqrt{a}x表格     姓名 年龄 成绩     张三 19 99   李四 20 33     脚注：一键三连1  横线  哈哈哈 百度 百度,百度,百度 请参考标题1 URL：http://www.baidu.com  斜体*加粗printf,下划线,  : smile : ,$\theta=x^2$H2O,  X^2 ，==这是一段高亮文字==  </div></div></div></a><a class="pagination-related" href="/2025/02/23/%E4%B8%9A%E4%BD%99/20250223-DeepSeek/" title="DeepSeek"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-23</div><div class="info-item-2">DeepSeek</div></div><div class="info-2"><div class="info-item-1">技术突破和市场营销兼而有之，说白了就是：技术牛 + 会搞事 + 赶上了好时候。 一、为什么是DeepSeek爆发？1、技术确实能打比如它可能搞了个“更聪明还更便宜”的AI模型： 1）做题（数学、编程）比ChatGPT还猛，但用起来省电省钱。 2）直接开源代码，让程序员白嫖，口碑一下就炸了。 3）国产模型对于汉字理解和输出能力更好 4）机器逻辑转化为自然语言逻辑推理 5）仅此 openAI （ close 源）第二模型 2、正好踩中风口1）企业现在都想用AI省钱（比如用AI客服裁掉真人），它价格便宜，老板们心动。 2）国内政策推国产AI（怕被国外卡脖子），它刚好是“自家孩子”。 3）普通人被ChatGPT搞出好奇心，但用不了GPT-4，转头就试它。 3、特别会“刷存在感”1）和阿里、腾讯这些大厂合作，贴牌“国家队”标签。 2）在程序员论坛（GitHub）、抖音、B站疯狂推教程，让小白也能玩起来。 举个栗子 就像突然有个新奶茶店，奶茶比别人好喝还半价（技术强），同时找网红直播带货（市场会玩），再加上最近全网流行喝奶茶（行业风口），不火才怪。 4. 创新处1）MoE（混合专家模式）： ...</div></div></div></a><a class="pagination-related" href="/2025/08/25/%E4%B8%9A%E4%BD%99/20250825-%E5%8D%B7%E7%A7%AF%E4%BB%A3%E7%A0%81/" title="卷积代码"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-25</div><div class="info-item-2">卷积代码</div></div><div class="info-2"><div class="info-item-1">洛德的计算机图形学教程图像滤波目录 引言 卷积 模糊 高斯模糊 动态模糊 查找边缘 锐化 浮雕 均值与中值滤波器 结论  返回目录 引言图像滤镜功能可让您对照片应用各种特效。此处描述的图像滤镜类型采用二维滤镜，类似于 Paint Shop Pro 中的”用户自定义滤镜”和 Photoshop 中的”自定义滤镜”功能。 卷积运算图像滤镜的核心原理在于：您拥有一个二维滤镜矩阵和一张二维图像。随后，针对图像的每个像素，计算乘积之和。每个乘积由当前像素或其邻近像素的颜色值与滤镜矩阵对应位置的值相乘得出。滤镜矩阵中心值需与当前像素相乘，而矩阵其余元素则与对应的邻近像素相乘。 这种对两个二维函数的元素进行乘积求和，并让其中一个函数遍历另一个函数每个元素的操作，被称为卷积或相关运算。卷积与相关的区别在于：卷积运算需要翻转滤镜矩阵，但通常矩阵本身具有对称性，因此两者并无实际差异。 使用卷积的滤波器相对简单。当然也存在更复杂的滤波器，它们能够运用更花哨的函数，实现更为复杂的效果（例如 Photoshop 中的彩色铅笔滤镜），但此类滤波器不在本文讨论范围内。 二维卷积运算需要四重循环，因此除非使用小...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">SolitudeAB</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SolitudeAB"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/SolitudeAB" target="_blank" title="GitHub"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:jiaxwoo@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #DEAC96;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%98%AFOpenCV%E7%9A%84%E7%89%88%E6%9C%AC%E5%AF%BC%E8%87%B4cv2-imshow-%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E5%90%97%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">1 是OpenCV的版本导致cv2.imshow()无法显示吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%82%A3%E7%9B%B4%E6%8E%A5%E9%80%9A%E8%BF%87MobaXterm%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E5%B9%B6%E8%83%BD%E5%A4%9F%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87%E7%9A%84%E5%8E%9F%E5%9B%A0%E6%98%AF%E4%BB%80%E4%B9%88%E5%91%A2%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">2 那直接通过MobaXterm执行脚本并能够显示图片的原因是什么呢？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Pycharm%E4%B8%AD%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95%E5%A6%82%E4%BD%95%E6%98%BE%E7%A4%BA%E5%9B%BE%E5%83%8F%E7%AA%97%E5%8F%A3%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">3 Pycharm中远程调试如何显示图像窗口？</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/%E8%AF%AD%E5%BD%95/" title="语录">语录</a><time datetime="2026-07-02T12:45:25.136Z" title="发表于 2026-07-02 20:45:25">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/hello-world/" title="Hello World">Hello World</a><time datetime="2026-07-02T12:45:25.014Z" title="发表于 2026-07-02 20:45:25">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/machine_learning/20260702-math/" title="高等数学">高等数学</a><time datetime="2026-07-02T12:05:42.000Z" title="发表于 2026-07-02 20:05:42">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/paper/Eyes/v3/20260509-Untitled-2/" title="Untitled 2">Untitled 2</a><time datetime="2026-05-09T07:00:54.000Z" title="发表于 2026-05-09 15:00:54">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/07/paper/Eyes/v3/20260507-Untitled-1/" title="Untitled 1">Untitled 1</a><time datetime="2026-05-07T13:46:03.000Z" title="发表于 2026-05-07 21:46:03">2026-05-07</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By SolitudeAB</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="/pluginsSrc/medium-zoom/dist/medium-zoom.min.js?v=1.1.0"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        loader: {
+          load: [
+            // Four font extension packages (optional)
+            //- '[tex]/bbm',
+            //- '[tex]/bboldx',
+            //- '[tex]/dsfont',
+            '[tex]/mhchem'
+          ],
+          paths: {
+            'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+
+            //- // Four font extension packages (optional)
+            //- 'mathjax-bbm-extension': '[mathjax]/../@mathjax/mathjax-bbm-font-extension',
+            //- 'mathjax-bboldx-extension': '[mathjax]/../@mathjax/mathjax-bboldx-font-extension',
+            //- 'mathjax-dsfont-extension': '[mathjax]/../@mathjax/mathjax-dsfont-font-extension',
+            'mathjax-mhchem-extension': '[mathjax]/../@mathjax/mathjax-mhchem-font-extension'
+          }
+        },
+        output: {
+          font: 'mathjax-newcm',
+        },
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+          packages: {
+            '[+]': [
+              'mhchem'
+            ]
+          }
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          menuOptions: {
+            settings: {
+              enrich: false  // Turn off Braille and voice narration text automatic generation
+            }
+          },
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = '/pluginsSrc/mathjax/tex-mml-chtml.js?v=4.1.0'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><div id="aplayer"></div><script src="/js/custom.js"></script><script id="canvas_nest" defer="defer" color="222,172,150" opacity="0.5" zIndex="-1" count="99" mobile="false" src="/pluginsSrc/butterfly-extsrc/dist/canvas-nest.min.js?v=1.1.6"></script><link rel="stylesheet" href="/pluginsSrc/aplayer/dist/APlayer.min.css?v=1.10.1" media="print" onload="this.media='all'"><script src="/pluginsSrc/aplayer/dist/APlayer.min.js?v=1.10.1"></script><script src="/pluginsSrc/butterfly-extsrc/metingjs/dist/Meting.min.js?v=1.1.6"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="/pluginsSrc/pjax/pjax.min.js?v=0.2.8" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章..." type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.4"></script></div></div></body></html>

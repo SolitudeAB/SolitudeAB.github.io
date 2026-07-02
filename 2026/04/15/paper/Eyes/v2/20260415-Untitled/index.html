@@ -1,0 +1,365 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Untitled | 我的博客</title><meta name="author" content="SolitudeAB"><meta name="copyright" content="SolitudeAB"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="原始差图的ssim和psnr（要计算相对原始图像的增强百分比）  病灶（retfound ks散度蒸馏） 血管 （fragi）                                            —&gt;  三通道重要性图 —&gt; 指导 眼底图像增强  背景（着重提亮部分） 拿到先验图像 —&gt; 使用spade调制（静态） retinex 物理光照增强网络 scm模块">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Untitled">
+<meta property="og:url" content="https://solitudeab.github.io/2026/04/15/paper/Eyes/v2/20260415-Untitled/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="原始差图的ssim和psnr（要计算相对原始图像的增强百分比）  病灶（retfound ks散度蒸馏） 血管 （fragi）                                            —&gt;  三通道重要性图 —&gt; 指导 眼底图像增强  背景（着重提亮部分） 拿到先验图像 —&gt; 使用spade调制（静态） retinex 物理光照增强网络 scm模块">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://solitudeab.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2026-04-15T07:32:20.000Z">
+<meta property="article:modified_time" content="2026-07-02T12:45:25.108Z">
+<meta property="article:author" content="SolitudeAB">
+<meta property="article:tag" content="眼底图像增强">
+<meta property="article:tag" content="论文实验">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://solitudeab.github.io/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Untitled",
+  "url": "https://solitudeab.github.io/2026/04/15/paper/Eyes/v2/20260415-Untitled/",
+  "image": "https://solitudeab.github.io/img/avatar.jpg",
+  "datePublished": "2026-04-15T07:32:20.000Z",
+  "dateModified": "2026-07-02T12:45:25.108Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "SolitudeAB",
+      "url": "https://solitudeab.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://solitudeab.github.io/2026/04/15/paper/Eyes/v2/20260415-Untitled/index.html"><link rel="preconnect"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css?v=7.1.0"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js?v=4.13.0',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Untitled',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="我的博客" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div class="bg-animation" id="web_bg" style="background-image: url(/img/bg.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/SolitudeAB/blog-source/new/main/source/_posts"><i class="fa-fw fas fa-pen"></i><span> 写文章</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">我的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">Untitled</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/SolitudeAB/blog-source/new/main/source/_posts"><i class="fa-fw fas fa-pen"></i><span> 写文章</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Untitled</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-04-15T07:32:20.000Z" title="发表于 2026-04-15 15:32:20">2026-04-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-07-02T12:45:25.108Z" title="更新于 2026-07-02 20:45:25">2026-07-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%BA%E6%96%87%E5%AE%9E%E9%AA%8C/">论文实验</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">107</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><ol>
+<li>原始差图的ssim和psnr（要计算相对原始图像的增强百分比）</li>
+</ol>
+<p>病灶（retfound ks散度蒸馏）</p>
+<p>血管 （fragi）                                            —&gt;  三通道重要性图 —&gt; 指导 眼底图像增强 </p>
+<p>背景（着重提亮部分）</p>
+<p>拿到先验图像 —&gt; 使用spade调制（静态） retinex 物理光照增强网络</p>
+<p>scm模块（训练过程权重共享）：训练 3-4 个级联阶段 推理 1个阶段 </p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://solitudeab.github.io">SolitudeAB</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://solitudeab.github.io/2026/04/15/paper/Eyes/v2/20260415-Untitled/">https://solitudeab.github.io/2026/04/15/paper/Eyes/v2/20260415-Untitled/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://solitudeab.github.io" target="_blank">我的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%9C%BC%E5%BA%95%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/">眼底图像增强</a><a class="post-meta__tags" href="/tags/%E8%AE%BA%E6%96%87%E5%AE%9E%E9%AA%8C/">论文实验</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,x,wechat,weibo,qq,qzone,douban,linkedin"></div><link rel="stylesheet" href="/pluginsSrc/butterfly-extsrc/sharejs/dist/css/share.min.css?v=1.1.6" media="print" onload="this.media='all'"><script src="/pluginsSrc/butterfly-extsrc/sharejs/dist/js/social-share.min.js?v=1.1.6" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/04/16/paper/Eyes/v2/20260416-network/" title="network"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">network</div></div><div class="info-2"><div class="info-item-1">3.1 Overview of the Architecture现有的低照度眼底图像增强算法普遍面临“物理平滑与病理保真”之间的本征矛盾。针对此瓶颈，本文提出了一种语义校准的 Retinex 重要性引导框架（SCR-IG）。该框架打破了传统 Retinex 模型中各向同性（Isotropic）的光照估计假设，将多维医学语义先验深度注入到光照残差的映射过程中。如图 X 所示，SCR-IG 包含三个核心组件：基于非对称知识蒸馏的多维语义先验生成模块（KD-SIPG）、基于多分支门控的条件变异光照校准模块（Cond-SVIC），以及确保边缘端极低延迟的自校准推理机制（SCM）。在统一的拓扑感知与课程学习优化景观下，该网络能够在极度退化的图像中实现微米级的病灶保留与高置信度的光照恢复。 3.2 Asymmetric Knowledge Distillation for Semantic Prior Generation (KD-SIPG)在极低信噪比与不均匀照明的眼底成像退化空间中，直接提取可靠的病理结构是一个典型的不适定问题。KD-SIPG 旨在不增加边缘部署算力负担的前提下，构建一个...</div></div></div></a><a class="pagination-related" href="/2026/04/11/paper/Eyes/v2/20260411-%E8%B7%AF%E7%BA%BF/" title="路线"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">路线</div></div><div class="info-2"><div class="info-item-1">这是一个非常聪明且极其严谨的工程策略！在深度学习开发中，这种“先搭骨架，再逐个外挂模块”的方法被称为增量式开发（Incremental Development）。它不仅能最大程度避免代码跑通后却不知道哪里出错的尴尬，还能顺手把你论文里最核心的消融实验（Ablation Study）给做了。 为了让 Codex（或 Copilot/Cursor）写出最符合你心意的 PyTorch 代码，我为你准备了英文 Prompt 序列（因为 AI 编程助手对英文指令和 PyTorch API 的映射最为精准）。 你可以新建一个工程，然后按顺序把下面的 Prompt 喂给 Codex。  第一步：搭建 Baseline（最基础的 Retinex 级联网络）目标： 先不要任何先验（没有 SIPG）和动态路由（没有 Cond-SVIC），只用一个普通的 3x3 卷积块作为光照估计器，并实现 SCM 的 $T$ 次循环。这个版本将作为你论文里最底层的 Baseline。 新建文件：models/baseline.py 喂给 Codex 的 Prompt： Plaintext 12345Please w...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/04/11/paper/Eyes/deepsearch/20260411-%E7%9C%BC%E5%BA%95%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84%E5%92%8C%E7%8E%B0%E5%86%B5%E8%B0%83%E6%9F%A5/" title="眼底图像增强实验目的和现况调查"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-11</div><div class="info-item-2">眼底图像增强实验目的和现况调查</div></div><div class="info-2"><div class="info-item-1">度学习驱动的眼底图像增强研究（2019–2024）：下游临床任务、病灶保留机制与数据溯源全景评估在过去五年（2019年至2024年）的医学图像计算领域，深度学习技术在眼科疾病自动化筛查中的应用经历了从理论探索到临床落地的深刻范式转变。眼底彩色照相（Fundus Photography）作为诊断糖尿病视网膜病变（DR）、青光眼、老年性黄斑变性（AMD）以及心血管疾病视网膜微血管并发症的核心无创手段，其图像质量直接决定了后续临床诊断的准确性与安全性。然而，在实际的临床采集中，尤其是在基层医疗机构或使用便携式非散瞳设备时，眼底图像极易受到不均匀光照、设备伪影、传感器噪声以及患者眼球微小震颤导致的运动模糊等退化因素的严重干扰。 早期的眼底图像增强（Fundus Image Enhancement）算法多从自然图像处理领域直接移植而来，其评估体系高度依赖于峰值信噪比（PSNR）和结构相似性（SSIM）等全局感官质量评估（IQA）指标。然而，随着研究的深入，包括在TMI（IEEE Transactions on Medical Imaging）、MIA（Medical Image Analy...</div></div></div></a><a class="pagination-related" href="/2026/03/08/paper/20260308-%E9%9A%8F%E7%AC%942026.3.8/" title="随笔2026.3.8"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-08</div><div class="info-item-2">随笔2026.3.8</div></div><div class="info-2"><div class="info-item-1">随着论文阅读量的增加和我所谓理想架构的搭建，我算是对深度学习有了一知半解。 要探讨一个网络模型的合理性，我觉得应该从以下几个方面考量  网络的创新点  当然要和最新的网络模型相比较：比方说sota指标（PSNR、SSIM），还有运行效率，成本，应对极端情况的表现型（也就是说模型的泛化能力，这应该就不得不提到无监督训练的重要性了）   我最近看到的是半监督模型的优势，我觉得说的很有道理啊，单纯的无监督虽然泛化能力强，但它对于细节的保真效果就相对更弱啊；而单纯的有监督，虽然对于细节的描绘很有优势，但是它对于没见过的场景，就很吃瘪了，所以引出了半监督——我都有，两个各有优劣，我干嘛只要选择一种，不能兼顾吗，尽管会损失一部分精度。 但是，怎么把这两个部分训练得到的权重结合起来，这倒是个值得考虑的问题   模型的目的意义  比如医学模型，你要在医学上解决什么问题？像下游任务，就是解决医学图像的增强问题，方便医生诊断疾病（这里的医生是广义的，也可以是智能体医生——当然这也是目前顶刊顶会人才的发展方向，我觉得可以走，但是太容易想到了，也有可能你刚做出来，别人已经把文章发出来了）   像下边的，...</div></div></div></a><a class="pagination-related" href="/2026/03/11/paper/Eyes/20260311-2026.3.11%E6%97%A5%E5%BF%97/" title="2026.3.11日志"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-11</div><div class="info-item-2">2026.3.11日志</div></div><div class="info-2"><div class="info-item-1">   /media/sda/wjx/eyes/SCI-IG_Projectv2/weights/ours_sipg_v1.1/training_metrics.log  这绝对算得上是一份完美达标的阶段性答卷！你完全可以、并且非常迫切地需要进入下一步（换装 Frangi 滤波）了。 仔细观察你跑完这 100 轮的最终战报，我们可以得出几个极其确定的科研结论，这标志着你的“打地基”阶段已经圆满结束： 1. 视觉伪影已被彻底“物理超度”对比你发来的 unsup_val_epoch100.jpg 和之前的灾难图，现在的增强结果极其稳定：  没有“白纱”：图像没有出现过曝发白，证明 ISRetinexLoss 的指数放大惩罚完美生效。 没有“幽冥绿”：视网膜本征的橘红色泽被牢牢锁死，证明 Color Constancy Loss (颜色恒常性) 起到了定海神针的作用。  2. Sobel 算子的天花板已至看你的日志，网络在第 96 轮冲到了 PSNR: 22.42dB | SSIM: 0.9169 的好成绩，但随后几轮开始在 21.5dB 左右横盘震荡。 这说明网络目前的权重已经收敛到了...</div></div></div></a><a class="pagination-related" href="/2026/03/01/paper/Eyes/20260301-2026.3.1%E6%97%A5%E5%BF%97/" title="2026.3.1日志"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-01</div><div class="info-item-2">2026.3.1日志</div></div><div class="info-2"><div class="info-item-1">  评估 Epoch 100 增强结果（完美暴露了 SCI 的死穴）跑到了第 100 个 Epoch，模型已经彻底收敛了。你看这组图，可以说它成功地完成了一个 Baseline 该做的事，但也极其完美地展示了为什么传统物理模型无法直接用于医学图像。 🔍 诊断 1：监督分支 (sup_val_epoch100.jpg) —— “用力过猛的去阴影” 成功点：对比第一行（有巨大黑色暗斑）和第二行，网络确实把阴影区域提亮了。 致命缺陷（色彩畸变与过度曝光）：仔细看第一列和第三列的中间那行图。原本是阴影的地方，被提亮后变成了极度不自然的惨白色/蜡黄色，和周围正常的肉色视网膜形成了严重的断层。 原因：网络为了强行满足 MSE Loss 去拟合高清 GT，在阴影区疯狂拉升光照图的值。但因为没有语义指导，它不知道该恢复什么颜色，最后只能弄出一块过度曝光的“补丁”。  🔍 诊断 2：无监督分支 (unsup_val_epoch100.jpg) —— “大雾弥漫的平滑灾难” 成功点：四张真实世界的“黑图”都被成功点亮，视盘和粗大血管都显现出来了。 致命缺陷（对比度丧失与细节模糊）：整张图看起来像...</div></div></div></a><a class="pagination-related" href="/2026/03/11/paper/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/20260311-ISecret0/" title="ISecret0"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-11</div><div class="info-item-2">ISecret0</div></div><div class="info-2"><div class="info-item-1">第一阶段：环境准备 (Environment Setup)在运行任何代码之前，你需要一个 Python 环境。推荐使用 Anaconda 或 Miniconda 来管理。  下载代码：  如果你会用 Git：在终端输入 git clone https://github.com/QtacierP/ISECRET.git（假设这是仓库地址，如果 README 没给地址，请在 GitHub 搜索论文标题找到对应仓库）。 如果不会 Git：直接在 GitHub 页面点击绿色的 “Code” 按钮，选择 “Download ZIP”，然后解压到一个文件夹。   创建虚拟环境： 打开终端（Terminal 或 CMD），输入以下命令创建一个干净的环境（建议使用 Python 3.8，比较稳定）： Bash 12conda create -n isecret python=3.8conda activate isecret  安装依赖包： 根据 README 中的指示 ，你需要安装 requirements.txt 里列出的库。确保你的终端路径已经进入了代码文件夹（包含 requirement...</div></div></div></a><a class="pagination-related" href="/2026/04/01/paper/Eyes/20260401-eyes/" title="eyes"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-01</div><div class="info-item-2">eyes</div></div><div class="info-2"><div class="info-item-1">深度融合与语义觉察：基于重要性图引导的下一代眼底图像增强深度学习框架视网膜成像增强的背景与技术分歧的演进视网膜眼底摄影作为一种非侵入性的核心诊断模态，在糖尿病视网膜病变（DR）、青光眼、年龄相关性黄斑变性（AMD）以及高血压相关心血管疾病的早期筛查中扮演着不可替代的角色 。然而，在真实世界的临床环境中，尤其是在基层医疗或资源匮乏地区的非散瞳筛查中，眼底图像的质量极易受到操作者经验、设备传感器限制、患者屈光间质浑浊（如白内障）以及照明条件波动的影响 。这些因素导致的图像退化通常表现为光照不均、对比度极低、严重的传感器噪声以及伪影，不仅直接掩盖了微小动脉瘤、出血点和细微毛细血管等关键病理生物标志物，也大幅降低了下游计算机辅助诊断（CAD）系统的准确性与可靠性 。 近年来，深度学习在医学图像增强领域取得了突破性进展，但现有技术路线逐渐显现出严重的分歧。第一种技术路线以物理模型驱动的网络为代表，其核心典范为自校准光照网络（Self-Calibrated Illumination, SCI）。该框架植根于Retinex物理理论，通过极简的全卷积网络和权重共享机制，实现了极高的计算效率和光照...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">SolitudeAB</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SolitudeAB"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/SolitudeAB" target="_blank" title="GitHub"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:jiaxwoo@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #DEAC96;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/%E8%AF%AD%E5%BD%95/" title="语录">语录</a><time datetime="2026-07-02T12:45:25.136Z" title="发表于 2026-07-02 20:45:25">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/hello-world/" title="Hello World">Hello World</a><time datetime="2026-07-02T12:45:25.014Z" title="发表于 2026-07-02 20:45:25">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/machine_learning/20260702-math/" title="高等数学">高等数学</a><time datetime="2026-07-02T12:05:42.000Z" title="发表于 2026-07-02 20:05:42">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/paper/Eyes/v3/20260509-Untitled-2/" title="Untitled 2">Untitled 2</a><time datetime="2026-05-09T07:00:54.000Z" title="发表于 2026-05-09 15:00:54">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/07/paper/Eyes/v3/20260507-Untitled-1/" title="Untitled 1">Untitled 1</a><time datetime="2026-05-07T13:46:03.000Z" title="发表于 2026-05-07 21:46:03">2026-05-07</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By SolitudeAB</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="/pluginsSrc/medium-zoom/dist/medium-zoom.min.js?v=1.1.0"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        loader: {
+          load: [
+            // Four font extension packages (optional)
+            //- '[tex]/bbm',
+            //- '[tex]/bboldx',
+            //- '[tex]/dsfont',
+            '[tex]/mhchem'
+          ],
+          paths: {
+            'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+
+            //- // Four font extension packages (optional)
+            //- 'mathjax-bbm-extension': '[mathjax]/../@mathjax/mathjax-bbm-font-extension',
+            //- 'mathjax-bboldx-extension': '[mathjax]/../@mathjax/mathjax-bboldx-font-extension',
+            //- 'mathjax-dsfont-extension': '[mathjax]/../@mathjax/mathjax-dsfont-font-extension',
+            'mathjax-mhchem-extension': '[mathjax]/../@mathjax/mathjax-mhchem-font-extension'
+          }
+        },
+        output: {
+          font: 'mathjax-newcm',
+        },
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+          packages: {
+            '[+]': [
+              'mhchem'
+            ]
+          }
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          menuOptions: {
+            settings: {
+              enrich: false  // Turn off Braille and voice narration text automatic generation
+            }
+          },
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = '/pluginsSrc/mathjax/tex-mml-chtml.js?v=4.1.0'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><div id="aplayer"></div><script src="/js/custom.js"></script><script id="canvas_nest" defer="defer" color="222,172,150" opacity="0.5" zIndex="-1" count="99" mobile="false" src="/pluginsSrc/butterfly-extsrc/dist/canvas-nest.min.js?v=1.1.6"></script><link rel="stylesheet" href="/pluginsSrc/aplayer/dist/APlayer.min.css?v=1.10.1" media="print" onload="this.media='all'"><script src="/pluginsSrc/aplayer/dist/APlayer.min.js?v=1.10.1"></script><script src="/pluginsSrc/butterfly-extsrc/metingjs/dist/Meting.min.js?v=1.1.6"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="/pluginsSrc/pjax/pjax.min.js?v=0.2.8" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章..." type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.4"></script></div></div></body></html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Dice系数 | 我的博客</title><meta name="author" content="SolitudeAB"><meta name="copyright" content="SolitudeAB"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="🎯 Dice系数：医学图像分割的核心评估指标📖 基本概念Dice系数（Dice Similarity Coefficient, DSC）是一种用于衡量两个样本集合相似度的统计指标。在医学图像分割中，它专门用于评估算法分割结果与医生标注的金标准之间的重叠程度。  🧮 数学公式1Dice &#x3D; 2 × |A ∩ B| &#x2F; (|A| + |B|) 其中：  A &#x3D; 模型预测的分割区域（二值掩码） B">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dice系数">
+<meta property="og:url" content="https://solitudeab.github.io/2025/10/11/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%A1%B9%E7%9B%AE/20251011-Dice%E7%B3%BB%E6%95%B0/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="🎯 Dice系数：医学图像分割的核心评估指标📖 基本概念Dice系数（Dice Similarity Coefficient, DSC）是一种用于衡量两个样本集合相似度的统计指标。在医学图像分割中，它专门用于评估算法分割结果与医生标注的金标准之间的重叠程度。  🧮 数学公式1Dice &#x3D; 2 × |A ∩ B| &#x2F; (|A| + |B|) 其中：  A &#x3D; 模型预测的分割区域（二值掩码） B">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://solitudeab.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2025-10-11T09:07:19.000Z">
+<meta property="article:modified_time" content="2026-07-02T12:45:24.809Z">
+<meta property="article:author" content="SolitudeAB">
+<meta property="article:tag" content="医学AI学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://solitudeab.github.io/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Dice系数",
+  "url": "https://solitudeab.github.io/2025/10/11/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%A1%B9%E7%9B%AE/20251011-Dice%E7%B3%BB%E6%95%B0/",
+  "image": "https://solitudeab.github.io/img/avatar.jpg",
+  "datePublished": "2025-10-11T09:07:19.000Z",
+  "dateModified": "2026-07-02T12:45:24.809Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "SolitudeAB",
+      "url": "https://solitudeab.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://solitudeab.github.io/2025/10/11/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%A1%B9%E7%9B%AE/20251011-Dice%E7%B3%BB%E6%95%B0/index.html"><link rel="preconnect"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css?v=7.1.0"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js?v=4.13.0',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Dice系数',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="我的博客" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div class="bg-animation" id="web_bg" style="background-image: url(/img/bg.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/SolitudeAB/blog-source/new/main/source/_posts"><i class="fa-fw fas fa-pen"></i><span> 写文章</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">我的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">Dice系数</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/SolitudeAB/blog-source/new/main/source/_posts"><i class="fa-fw fas fa-pen"></i><span> 写文章</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Dice系数</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-11T09:07:19.000Z" title="发表于 2025-10-11 17:07:19">2025-10-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-07-02T12:45:24.809Z" title="更新于 2026-07-02 20:45:24">2026-07-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%8C%BB%E5%AD%A6AI%E5%AD%A6%E4%B9%A0/">医学AI学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">632</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>2分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="🎯-Dice系数：医学图像分割的核心评估指标"><a href="#🎯-Dice系数：医学图像分割的核心评估指标" class="headerlink" title="🎯 Dice系数：医学图像分割的核心评估指标"></a>🎯 <strong>Dice系数：医学图像分割的核心评估指标</strong></h2><h3 id="📖-基本概念"><a href="#📖-基本概念" class="headerlink" title="📖 基本概念"></a><strong>📖 基本概念</strong></h3><p><strong>Dice系数</strong>（Dice Similarity Coefficient, DSC）是一种用于衡量两个样本集合相似度的统计指标。在医学图像分割中，它专门用于<strong>评估算法分割结果与医生标注的金标准之间的重叠程度</strong>。</p>
+<hr>
+<h3 id="🧮-数学公式"><a href="#🧮-数学公式" class="headerlink" title="🧮 数学公式"></a><strong>🧮 数学公式</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Dice = 2 × |A ∩ B| / (|A| + |B|)</span><br></pre></td></tr></table></figure>
+<p>其中：</p>
+<ul>
+<li><strong>A</strong> = 模型预测的分割区域（二值掩码）</li>
+<li><strong>B</strong> = 医生标注的真实分割区域（金标准）</li>
+<li><strong>|A ∩ B|</strong> = 预测与真实区域的重叠像素数（True Positives）</li>
+<li><strong>|A| + |B|</strong> = 预测区域和真实区域的像素总数</li>
+</ul>
+<hr>
+<h3 id="🎯-直观理解"><a href="#🎯-直观理解" class="headerlink" title="🎯 直观理解"></a><strong>🎯 直观理解</strong></h3><p>把Dice系数想象成<strong>“重叠率”</strong>：</p>
+<ul>
+<li><strong>Dice = 1.0</strong>：完美分割，预测与真实完全重合</li>
+<li><strong>Dice = 0.8</strong>：80%的重叠，很好的分割结果  </li>
+<li><strong>Dice = 0.5</strong>：50%的重叠，一般水平</li>
+<li><strong>Dice = 0.0</strong>：完全没有重叠，分割完全失败</li>
+</ul>
+<hr>
+<h3 id="🏥-在医学图像中的实际意义"><a href="#🏥-在医学图像中的实际意义" class="headerlink" title="🏥 在医学图像中的实际意义"></a><strong>🏥 在医学图像中的实际意义</strong></h3><h4 id="以脑肿瘤分割为例："><a href="#以脑肿瘤分割为例：" class="headerlink" title="以脑肿瘤分割为例："></a><strong>以脑肿瘤分割为例：</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">真实肿瘤区域：1000个像素</span><br><span class="line">预测肿瘤区域：1200个像素  </span><br><span class="line">重叠区域：900个像素</span><br><span class="line"></span><br><span class="line">Dice = 2 × 900 / (1000 + 1200) = 1800 / 2200 ≈ 0.82</span><br></pre></td></tr></table></figure>
+<p><strong>解读</strong>：模型找到了82%的肿瘤区域，这是一个相当不错的分割结果。</p>
+<hr>
+<h3 id="📊-Dice系数的临床接受标准"><a href="#📊-Dice系数的临床接受标准" class="headerlink" title="📊 Dice系数的临床接受标准"></a><strong>📊 Dice系数的临床接受标准</strong></h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Dice系数范围</th>
+<th>临床评价</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.90-1.00</td>
+<td>优秀</td>
+<td>研究发表、临床部署</td>
+</tr>
+<tr>
+<td>0.80-0.89</td>
+<td>良好</td>
+<td>多数临床可接受</td>
+</tr>
+<tr>
+<td>0.70-0.79</td>
+<td>一般</td>
+<td>需要改进</td>
+</tr>
+<tr>
+<td>&lt;0.70</td>
+<td>较差</td>
+<td>临床不可接受</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h3 id="⚖️-为什么医学图像分割偏爱Dice系数？"><a href="#⚖️-为什么医学图像分割偏爱Dice系数？" class="headerlink" title="⚖️ 为什么医学图像分割偏爱Dice系数？"></a><strong>⚖️ 为什么医学图像分割偏爱Dice系数？</strong></h3><h4 id="优点："><a href="#优点：" class="headerlink" title="优点："></a><strong>优点：</strong></h4><ol>
+<li><strong>对不平衡数据友好</strong>：医学图像中目标区域通常很小（如肿瘤只占图像的1-5%）</li>
+<li><strong>直观易懂</strong>：0-1范围，越接近1越好</li>
+<li><strong>临床相关性</strong>：直接反映分割的准确性</li>
+</ol>
+<h4 id="与其他指标对比："><a href="#与其他指标对比：" class="headerlink" title="与其他指标对比："></a><strong>与其他指标对比：</strong></h4><ul>
+<li><strong>准确率</strong>：在高度不平衡的数据中会虚高（如背景占95%时，全预测为背景也有95%准确率）</li>
+<li><strong>IoU</strong>：与Dice相关但更严格，Dice = 2×IoU/(1+IoU)</li>
+</ul>
+<hr>
+<h3 id="🔍-你的nnU-Net结果解读"><a href="#🔍-你的nnU-Net结果解读" class="headerlink" title="🔍 你的nnU-Net结果解读"></a><strong>🔍 你的nnU-Net结果解读</strong></h3><p>从你之前的图表：</p>
+<ul>
+<li><strong>Dice从0.55提升到0.95</strong></li>
+<li><strong>这意味着分割重叠率从55%提升到95%</strong></li>
+<li><strong>95%的Dice系数在医学图像分割中属于优秀水平</strong></li>
+</ul>
+<p>这在临床上意味着模型能够<strong>准确识别出95%的病变区域</strong>，对于辅助诊断具有很高的实用价值！</p>
+<p>Dice系数是评估医学AI模型是否达到临床应用标准的<strong>关键指标</strong>。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://solitudeab.github.io">SolitudeAB</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://solitudeab.github.io/2025/10/11/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%A1%B9%E7%9B%AE/20251011-Dice%E7%B3%BB%E6%95%B0/">https://solitudeab.github.io/2025/10/11/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%A1%B9%E7%9B%AE/20251011-Dice%E7%B3%BB%E6%95%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://solitudeab.github.io" target="_blank">我的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%8C%BB%E5%AD%A6AI%E5%AD%A6%E4%B9%A0/">医学AI学习</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,x,wechat,weibo,qq,qzone,douban,linkedin"></div><link rel="stylesheet" href="/pluginsSrc/butterfly-extsrc/sharejs/dist/css/share.min.css?v=1.1.6" media="print" onload="this.media='all'"><script src="/pluginsSrc/butterfly-extsrc/sharejs/dist/js/social-share.min.js?v=1.1.6" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/11/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%A1%B9%E7%9B%AE/20251011-%E4%BA%94%E6%8A%98%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81/" title="五折交叉验证"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">五折交叉验证</div></div><div class="info-2"><div class="info-item-1">五折交叉验证是一种非常重要的机器学习模型评估方法，特别在医学图像分析中广泛应用。让我用通俗易懂的方式解释： 🎯 基本概念什么是五折交叉验证？把整个数据集平均分成5份，轮流使用其中4份训练，1份验证，重复5次。 1234567数据集 = [1, 2, 3, 4, 5]  # 分成5份第1折：训练[2,3,4,5] 验证[1]第2折：训练[1,3,4,5] 验证[2]  第3折：训练[1,2,4,5] 验证[3]第4折：训练[1,2,3,5] 验证[4]第5折：训练[1,2,3,4] 验证[5]  🏥 在nnU-Net中的具体应用数据划分方式123456789# 假设你有100个病人的数据patients = [f&quot;patient_&#123;i:03d&#125;&quot; for i in range(100)]# 五折交叉验证划分：fold_0 = patients[0:20]    # 验证集fold_1 = patients[20:40]   # 验证集  fold_2 = patients[40:60]   # 验证集fold_3 = patients[6...</div></div></div></a><a class="pagination-related" href="/2025/10/11/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20251011-Week9/" title="Week9"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Week9</div></div><div class="info-2"><div class="info-item-1">其实因为个人的学习路线不是很确定，读论文感觉脱离了我这专业，或者说是与实际相脱离了，所以学学停停的，效率很低下。只能慢慢地适应与接触了，论文不能少，现在基本上也可以比较完整地看完一篇文章了（自己看可能还不是会很理解，毕竟医学图像分割领域。 </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/10/11/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/CNN%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/20251011-%E5%85%A8%E8%BF%9E%E6%8E%A5%E5%B1%82/" title="全连接层"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-11</div><div class="info-item-2">全连接层</div></div><div class="info-2"><div class="info-item-1">本文探讨了卷积神经网络中的全连接层作用及其在特征整合和分类中的重要性，解释了其如何帮助模型减少特征位置对分类的影响，并增强了模型的鲁棒性。 有部分内容是转载的知乎的，如有侵权，请告知，删除便是，但由于是总结的，所以不一一列出原作者是who。 再次感谢，也希望给其他小白受益。 首先说明：可以不用全连接层的。 理解1： 卷积取的是局部特征，全连接就是把以前的局部特征重新通过权值矩阵组装成完整的图。 因为用到了所有的局部特征，所以叫全连接。 理解2： 从卷积网络谈起，卷积网络在形式上有一点点像咱们正在召开的“人民代表大会制度”。卷积核的个数相当于候选人，图像中不同的特征会激活不同的“候选人”（卷积核）。 池化层（仅指最大池化）起着类似于“合票”的作用，不同特征在对不同的“候选人”有着各自的喜好。 全连接相当于是“代表普选”。所有被各个区域选出的代表，对最终结果进行“投票”，全连接保证了receiptive field 是整个图像，既图像中各个部分（所谓所有代表），都有对最终结果影响的权利。 理解3： 假设你是一只小蚂蚁，你的任务是找小面包。你的视野还比较窄，只能看到很小一片区域。当你找...</div></div></div></a><a class="pagination-related" href="/2025/08/31/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/CNN%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/20250831-%E5%8D%B7%E7%A7%AF/" title="卷积"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-31</div><div class="info-item-2">卷积</div></div><div class="info-2"><div class="info-item-1">一、线性滤波与卷积的基本概念线性滤波可以说是图像处理最基本的方法，它可以允许我们对图像进行处理，产生很多不同的效果。做法很简单： 首先，我们有一个二维的滤波器矩阵（有个高大上的名字叫卷积核）和一个要处理的二维图像。然后，对于图像的每一个像素点，计算它的邻域像素和滤波器矩阵的对应元素的乘积，然后加起来，作为该像素位置的值。这样就完成了滤波过程。  对图像和滤波矩阵进行逐个元素相乘再求和的操作就相当于将一个二维的函数移动到另一个二维函数的所有位置，这个操作就叫卷积或者协相关。卷积和协相关的差别是，卷积需要先对滤波矩阵进行180的翻转，但如果矩阵是对称的，那么两者就没有什么差别了。 Correlation（协相关）和 Convolution（卷积）可以说是图像处理最基本的操作，但却非常有用。这两个操作有两个非常关键的特点：它们是线性的，而且具有平移不变性shift-invariant。平移不变性指我们在图像的每个位置都执行相同的操作。线性指这个操作是线性的，也就是我们用每个像素的邻域的线性组合来代替这个像素。这两个属性使得这个操作非常简单，因为线性操作是最简单的，然后在所有地方都做同样...</div></div></div></a><a class="pagination-related" href="/2025/08/12/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/CNN%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/20250812-%E8%86%A8%E8%83%80%E4%B8%8E%E8%85%90%E8%9A%80/" title="膨胀与腐蚀"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-12</div><div class="info-item-2">膨胀与腐蚀</div></div><div class="info-2"><div class="info-item-1">OpenCV 图像处理之膨胀与腐蚀 参考文献：OpenCV 图像处理之膨胀与腐蚀 - 知乎  1、什么是膨胀与腐蚀膨胀与腐蚀属于形态学范围，具体的含义根据字面意思来理解即可。但是更形象的话就是“增肥”与“减肥”。 它们的用途就是用来处理图形问题上。总结性的来说：膨胀用来处理缺陷问题；腐蚀用来处理毛刺问题。 膨胀就是把缺陷给填补了，腐蚀就是把毛刺给腐蚀掉了。这里其实说的并不严谨，也是为了大家理解方便。下面我们就用实例来进行演示。 2、形态学处理——膨胀我们先引入一张图片进行分析。 程序实现： 123456img = cv2.imread(&#x27;Pic/corrode.png&#x27;)def cv_show(img):    cv2.imshow(&#x27;&#x27;, img)    cv2.waitKey(0)    cv2.destroyAllWindows()cv_show(img)  图中我们可以看到，这张图片是一个二值图片（只有黑白），而且还增加了一些毛刺。而且还包含字体中还包含一些小的间隙（缺陷）。 下面我们对这张图片进行膨胀处理。膨胀是如何处理的呢？对于...</div></div></div></a><a class="pagination-related" href="/2025/10/09/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20251009-504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/" title="504医学AI入门"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-09</div><div class="info-item-2">504医学AI入门</div></div><div class="info-2"><div class="info-item-1">504医学AI入门关于Python：医学AI组在研究中基本上所使用的语言都是Python，语法上比较简单，所以不要担心语言上会有大的问题，对python不熟悉的话随学随补即可。 一、环境搭建这部分强烈建议从一开始就使用anaconda进行环境管理，后期不同的项目用不同的环境，可以保证不会乱并且可迁移，而且将来在linux服务器上用GPU跑模型是必不可少的，所以第一步的任务：  在自己的电脑（mac、windows）与一台linux服务器上成功安装一个anaconda。  尝试在anaconda中进行创建、删除、激活环境等环境管理操作，在不同环境中安装并使用不同的python版本，体会环境隔离。  创建一个学习与练习用的环境，安装opencv，安装pytorch的GPU版本。  如有余力可尝试安装并远程使用jupyter。 PS：以上任务优先在一台有GPU的linux服务器上进行。   二、图像处理基础由于医学AI方向面向的数据更多还是图像，所以关于图像处理的一些基础知识与实战代码还是有必要了解的，比如图像数据的格式、图像如何存储、图像的各种变换方法、一些基础算子比如Sobel、C...</div></div></div></a><a class="pagination-related" href="/2025/09/14/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/CNN%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/20250914-%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" title="卷积神经网络基础"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-14</div><div class="info-item-2">卷积神经网络基础</div></div><div class="info-2"><div class="info-item-1">目录 卷积神经网络 全连接层 卷积层 池化层  一、卷积神经网络（一）CNN（Convolutional Neural NetWork）卷积神经网络：所有包含了卷积层的网络   雏形：LeCun 的 LeNet（1998）的网络结构（卷积神经网络发展史中的第一个卷积神经网络）  （二）卷积神经网络（CNN）的发展史 （三）卷积神经网络（CNN）的应用 图像分类 图像检索 目标检测 图像分割 无人驾驶 图像描述 图像风格迁移       二、全连接层（一）BP（back propagation）算法 BP（back propagation）算法包括信号的前向传播和误差的反向传播两个过程。即计算误差输出时按从输入到输出的方向进行，而调整权值和阈值则从输出到输入的方向进行。  信号从左到右的正向传播过程中能够得到一个输出值，然后将输出值和我们所期望得到的输出值进行对比得到误差值 通过计算每一个节点的偏导数，计算得到每个节点的误差梯度 将得到的损失值反向应用到损失梯度上，就达到了误差的反向传播  （二）实例：利用BP神经网络左车牌数字识别 1、输入层图片的读取与转换   首先，读入一张彩...</div></div></div></a><a class="pagination-related" href="/2025/08/10/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20250810-Week3/" title="Week3"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-10</div><div class="info-item-2">Week3</div></div><div class="info-2"><div class="info-item-1">Opencv（二） 上一周学到彩色图片像素点的统计，这一周就从纯黑纯白图片像素点统计开始  代码 1234567891011121314import cv2# 读取图片（默认以BGR格式加载）image = cv2.imread(&#x27;image.jpg&#x27;)# 查看矩阵内容print(image)  # 直接打印整个矩阵print(image.shape)  # 打印矩阵形状：(高度, 宽度, 通道数)# 查看特定像素值（例如第10行第20列的BGR值）print(image[10, 20])  # 输出格式：[B, G, R]# 查看部分矩阵（例如前10行前10列）print(image[:10, :10])   一、纯黑纯白图片像素点统计 以下为纯白图片(1080, 2298, 3)的像素点统计结果，可与纯黑图片做比对   不存在纯黑的图片（或者计算机很难实现），以下图片是(650, 650, 3)的纯黑图片像素点统计结果，可以看出黑色图片的像素点并不如纯白图片集中，即不如白色纯    二、随机生成彩色图片 代码 12345678910111213141516...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">SolitudeAB</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SolitudeAB"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/SolitudeAB" target="_blank" title="GitHub"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:jiaxwoo@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #DEAC96;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8E%AF-Dice%E7%B3%BB%E6%95%B0%EF%BC%9A%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E7%9A%84%E6%A0%B8%E5%BF%83%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87"><span class="toc-number">1.</span> <span class="toc-text">🎯 Dice系数：医学图像分割的核心评估指标</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%96-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">📖 基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%A7%AE-%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">🧮 数学公式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8E%AF-%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3"><span class="toc-number">1.3.</span> <span class="toc-text">🎯 直观理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8F%A5-%E5%9C%A8%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E4%B8%AD%E7%9A%84%E5%AE%9E%E9%99%85%E6%84%8F%E4%B9%89"><span class="toc-number">1.4.</span> <span class="toc-text">🏥 在医学图像中的实际意义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A5%E8%84%91%E8%82%BF%E7%98%A4%E5%88%86%E5%89%B2%E4%B8%BA%E4%BE%8B%EF%BC%9A"><span class="toc-number">1.4.1.</span> <span class="toc-text">以脑肿瘤分割为例：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8A-Dice%E7%B3%BB%E6%95%B0%E7%9A%84%E4%B8%B4%E5%BA%8A%E6%8E%A5%E5%8F%97%E6%A0%87%E5%87%86"><span class="toc-number">1.5.</span> <span class="toc-text">📊 Dice系数的临床接受标准</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9A%96%EF%B8%8F-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E5%81%8F%E7%88%B1Dice%E7%B3%BB%E6%95%B0%EF%BC%9F"><span class="toc-number">1.6.</span> <span class="toc-text">⚖️ 为什么医学图像分割偏爱Dice系数？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A"><span class="toc-number">1.6.1.</span> <span class="toc-text">优点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8E%E5%85%B6%E4%BB%96%E6%8C%87%E6%A0%87%E5%AF%B9%E6%AF%94%EF%BC%9A"><span class="toc-number">1.6.2.</span> <span class="toc-text">与其他指标对比：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%8D-%E4%BD%A0%E7%9A%84nnU-Net%E7%BB%93%E6%9E%9C%E8%A7%A3%E8%AF%BB"><span class="toc-number">1.7.</span> <span class="toc-text">🔍 你的nnU-Net结果解读</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/%E8%AF%AD%E5%BD%95/" title="语录">语录</a><time datetime="2026-07-02T12:45:25.136Z" title="发表于 2026-07-02 20:45:25">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/hello-world/" title="Hello World">Hello World</a><time datetime="2026-07-02T12:45:25.014Z" title="发表于 2026-07-02 20:45:25">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/machine_learning/20260702-math/" title="高等数学">高等数学</a><time datetime="2026-07-02T12:05:42.000Z" title="发表于 2026-07-02 20:05:42">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/paper/Eyes/v3/20260509-Untitled-2/" title="Untitled 2">Untitled 2</a><time datetime="2026-05-09T07:00:54.000Z" title="发表于 2026-05-09 15:00:54">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/07/paper/Eyes/v3/20260507-Untitled-1/" title="Untitled 1">Untitled 1</a><time datetime="2026-05-07T13:46:03.000Z" title="发表于 2026-05-07 21:46:03">2026-05-07</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By SolitudeAB</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="/pluginsSrc/medium-zoom/dist/medium-zoom.min.js?v=1.1.0"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        loader: {
+          load: [
+            // Four font extension packages (optional)
+            //- '[tex]/bbm',
+            //- '[tex]/bboldx',
+            //- '[tex]/dsfont',
+            '[tex]/mhchem'
+          ],
+          paths: {
+            'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+
+            //- // Four font extension packages (optional)
+            //- 'mathjax-bbm-extension': '[mathjax]/../@mathjax/mathjax-bbm-font-extension',
+            //- 'mathjax-bboldx-extension': '[mathjax]/../@mathjax/mathjax-bboldx-font-extension',
+            //- 'mathjax-dsfont-extension': '[mathjax]/../@mathjax/mathjax-dsfont-font-extension',
+            'mathjax-mhchem-extension': '[mathjax]/../@mathjax/mathjax-mhchem-font-extension'
+          }
+        },
+        output: {
+          font: 'mathjax-newcm',
+        },
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+          packages: {
+            '[+]': [
+              'mhchem'
+            ]
+          }
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          menuOptions: {
+            settings: {
+              enrich: false  // Turn off Braille and voice narration text automatic generation
+            }
+          },
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = '/pluginsSrc/mathjax/tex-mml-chtml.js?v=4.1.0'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><div id="aplayer"></div><script src="/js/custom.js"></script><script id="canvas_nest" defer="defer" color="222,172,150" opacity="0.5" zIndex="-1" count="99" mobile="false" src="/pluginsSrc/butterfly-extsrc/dist/canvas-nest.min.js?v=1.1.6"></script><link rel="stylesheet" href="/pluginsSrc/aplayer/dist/APlayer.min.css?v=1.10.1" media="print" onload="this.media='all'"><script src="/pluginsSrc/aplayer/dist/APlayer.min.js?v=1.10.1"></script><script src="/pluginsSrc/butterfly-extsrc/metingjs/dist/Meting.min.js?v=1.1.6"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="/pluginsSrc/pjax/pjax.min.js?v=0.2.8" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章..." type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.4"></script></div></div></body></html>

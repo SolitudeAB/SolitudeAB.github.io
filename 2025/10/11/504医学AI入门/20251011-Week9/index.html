@@ -1,0 +1,358 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Week9 | 我的博客</title><meta name="author" content="SolitudeAB"><meta name="copyright" content="SolitudeAB"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="其实因为个人的学习路线不是很确定，读论文感觉脱离了我这专业，或者说是与实际相脱离了，所以学学停停的，效率很低下。只能慢慢地适应与接触了，论文不能少，现在基本上也可以比较完整地看完一篇文章了（自己看可能还不是会很理解，毕竟医学图像分割领域。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Week9">
+<meta property="og:url" content="https://solitudeab.github.io/2025/10/11/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20251011-Week9/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="其实因为个人的学习路线不是很确定，读论文感觉脱离了我这专业，或者说是与实际相脱离了，所以学学停停的，效率很低下。只能慢慢地适应与接触了，论文不能少，现在基本上也可以比较完整地看完一篇文章了（自己看可能还不是会很理解，毕竟医学图像分割领域。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://solitudeab.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2025-10-11T09:06:16.000Z">
+<meta property="article:modified_time" content="2026-07-02T12:45:24.734Z">
+<meta property="article:author" content="SolitudeAB">
+<meta property="article:tag" content="医学AI学习">
+<meta property="article:tag" content="周记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://solitudeab.github.io/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Week9",
+  "url": "https://solitudeab.github.io/2025/10/11/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20251011-Week9/",
+  "image": "https://solitudeab.github.io/img/avatar.jpg",
+  "datePublished": "2025-10-11T09:06:16.000Z",
+  "dateModified": "2026-07-02T12:45:24.734Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "SolitudeAB",
+      "url": "https://solitudeab.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://solitudeab.github.io/2025/10/11/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20251011-Week9/index.html"><link rel="preconnect"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css?v=7.1.0"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js?v=4.13.0',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Week9',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="我的博客" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div class="bg-animation" id="web_bg" style="background-image: url(/img/bg.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/SolitudeAB/blog-source/new/main/source/_posts"><i class="fa-fw fas fa-pen"></i><span> 写文章</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">我的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">Week9</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/SolitudeAB/blog-source/new/main/source/_posts"><i class="fa-fw fas fa-pen"></i><span> 写文章</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Week9</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-11T09:06:16.000Z" title="发表于 2025-10-11 17:06:16">2025-10-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-07-02T12:45:24.734Z" title="更新于 2026-07-02 20:45:24">2026-07-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%8C%BB%E5%AD%A6AI%E5%AD%A6%E4%B9%A0/">医学AI学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">109</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>其实因为个人的学习路线不是很确定，读论文感觉脱离了我这专业，或者说是与实际相脱离了，所以学学停停的，效率很低下。只能慢慢地适应与接触了，论文不能少，现在基本上也可以比较完整地看完一篇文章了（自己看可能还不是会很理解，毕竟医学图像分割领域。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://solitudeab.github.io">SolitudeAB</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://solitudeab.github.io/2025/10/11/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20251011-Week9/">https://solitudeab.github.io/2025/10/11/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20251011-Week9/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://solitudeab.github.io" target="_blank">我的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%8C%BB%E5%AD%A6AI%E5%AD%A6%E4%B9%A0/">医学AI学习</a><a class="post-meta__tags" href="/tags/%E5%91%A8%E8%AE%B0/">周记</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,x,wechat,weibo,qq,qzone,douban,linkedin"></div><link rel="stylesheet" href="/pluginsSrc/butterfly-extsrc/sharejs/dist/css/share.min.css?v=1.1.6" media="print" onload="this.media='all'"><script src="/pluginsSrc/butterfly-extsrc/sharejs/dist/js/social-share.min.js?v=1.1.6" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/11/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%A1%B9%E7%9B%AE/20251011-Dice%E7%B3%BB%E6%95%B0/" title="Dice系数"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Dice系数</div></div><div class="info-2"><div class="info-item-1">🎯 Dice系数：医学图像分割的核心评估指标📖 基本概念Dice系数（Dice Similarity Coefficient, DSC）是一种用于衡量两个样本集合相似度的统计指标。在医学图像分割中，它专门用于评估算法分割结果与医生标注的金标准之间的重叠程度。  🧮 数学公式1Dice = 2 × |A ∩ B| / (|A| + |B|) 其中：  A = 模型预测的分割区域（二值掩码） B = 医生标注的真实分割区域（金标准） |A ∩ B| = 预测与真实区域的重叠像素数（True Positives） |A| + |B| = 预测区域和真实区域的像素总数   🎯 直观理解把Dice系数想象成“重叠率”：  Dice = 1.0：完美分割，预测与真实完全重合 Dice = 0.8：80%的重叠，很好的分割结果   Dice = 0.5：50%的重叠，一般水平 Dice = 0.0：完全没有重叠，分割完全失败   🏥 在医学图像中的实际意义以脑肿瘤分割为例：12345真实肿瘤区域：1000个像素预测肿瘤区域：1200个像素  重叠区域：900个像素Dice = 2 ×...</div></div></div></a><a class="pagination-related" href="/2025/10/09/machine_learning/20251009-week3/" title="第3周"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">第3周</div></div><div class="info-2"><div class="info-item-1">第3周[TOC] 六、逻辑回归(Logistic Regression)6.1 分类问题参考文档: 6 - 1 - Classification (8 min).mkv 在这个以及接下来的几个视频中，开始介绍分类问题。 在分类问题中，你要预测的变量 $y$ 是离散的值，我们将学习一种叫做逻辑回归 (Logistic Regression) 的算法，这是目前最流行使用最广泛的一种学习算法。 在分类问题中，我们尝试预测的是结果是否属于某一个类（例如正确或错误）。分类问题的例子有：判断一封电子邮件是否是垃圾邮件；判断一次金融交易是否是欺诈；之前我们也谈到了肿瘤分类问题的例子，区别一个肿瘤是恶性的还是良性的。  我们从二元的分类问题开始讨论。 我们将因变量(dependent variable)可能属于的两个类分别称为负向类（negative class）和正向类（positive class），则因变量$y\in { 0,1 \}$ ，其中 0 表示负向类，1 表示正向类。   如果我们要用线性回归算法来解决一个分类问题，对于分类， $y$ 取值为 0 或者1，但如果你使用的是线性回归...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/08/10/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20250810-Week4/" title="Week4"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-10</div><div class="info-item-2">Week4</div></div><div class="info-2"><div class="info-item-1">Opencv（三）一、图像基础知识复习 图像是由像素构成的 像素点的多少决定了图片的质量（相同图片大小，像素点越多，单个像素点越小，图片质量越好）   图像的分类   二值图像：像素点非0即1   灰度图像：像素点有256个结果   彩色图像：由三通道（三原色RGB）进行叠加的图像     Opencv读取彩色图像的特点  读取结果：BGR（注意顺序）  每个像素点由BGR三个分量构成 例：（245，168，200）-&gt; B：245 、G：168、R：200     二、灰度图片像素的选取与修改 源码 123456789101112131415161718192021import cv2gray_img = cv2.imread(r&quot;/home/jiax/workspace/Python Learning/Opencv-course/R-C.jpg&quot;, 0)cv2.imshow(&#x27;gray_img&#x27;, gray_img)# 选取灰度图像的某个像素点【矩阵-numpy中的数组】gray_img[100,100]gray_img[100,...</div></div></div></a><a class="pagination-related" href="/2025/07/20/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20250720-Week1/" title="Week1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-07-20</div><div class="info-item-2">Week1</div></div><div class="info-2"><div class="info-item-1">语义分割 学习视频 语义分割前言_哔哩哔哩_bilibili  一、前言目标：  [x] 什么是语义分割 [x] 暂定的学习规划 [x] 语义分割任务常见数据集格式 [x] 语义分割得到结果的具体形式 [x] 语义分割常见评价标准 [x] 语义分割标注工具  1. 常见分割任务 语义分割（FCN）：对每一个像素进行分类  实例分割（Mask R-CNN）：针对同一个类别的不同目标也采用不同颜色进行分类，结果更精细，只关注目标背景  全景分割（Panoptic FPN）语义 + 实例 + 背景划分    精细程度逐级递增   2. pytorch 官方提供的语义分割网络 3. 语义分割任务常见数据集格式 Pascal VOC  PASCAL VOC2012数据集介绍_pascal voc 2012-CSDN博客  语义分割中提供的是png图片（记录每个像素所属的一个类别信息），这个png图片使用调色板的模式进行存储。 图片（第二张图片）实际是一个一通道的图片（黑白图片），但看到的确实彩色的。 用 python 的 Pillow 去读取 png 图片的话，默认读取的是调色板的模式（P...</div></div></div></a><a class="pagination-related" href="/2025/10/08/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20251008-Week8/" title="Week8"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-08</div><div class="info-item-2">Week8</div></div><div class="info-2"><div class="info-item-1">中间停了几周，因为我发现自己机器学习的基础还是太薄弱了，然后在b站上找了一些机器学习的基础课程（虽然是纯英文的，但就当是学英语了——基础反正也挺薄弱的） 一、监督学习监督学习：学习输入到输出或 $x$ 到 $y$ 映射  垃圾邮件过滤器（spam filtering） 语言识别（speech recognition） 机器翻译（machine translation） 个性化广告（online advertising） 自动驾驶（self-driving car） 目视检查（visual inspection）  在所有使用这些应用程序重，你将收件是使用输入示例 $x$ 和正确答案（即标签$y$ ）来训练你的模型，在模型从这些输入、输出或 $x$ 和 $y$对中学习之后，它门可以采用一个全新的输入 $x$，这是它以前从未见过的东西，并尝试产生适当的相应输出 $y$. 以下是监督学习的两个主要类型： （一）回归 这种房价预测是一种特殊类型的监督学习，称为——回归。我的意思是，通过回归，我们试图从无数可能的数字中预测一个数字 回归的任务是——预测数字，即从从无数可能的输出数字中预测数...</div></div></div></a><a class="pagination-related" href="/2025/08/10/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20250810-Week3/" title="Week3"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-10</div><div class="info-item-2">Week3</div></div><div class="info-2"><div class="info-item-1">Opencv（二） 上一周学到彩色图片像素点的统计，这一周就从纯黑纯白图片像素点统计开始  代码 1234567891011121314import cv2# 读取图片（默认以BGR格式加载）image = cv2.imread(&#x27;image.jpg&#x27;)# 查看矩阵内容print(image)  # 直接打印整个矩阵print(image.shape)  # 打印矩阵形状：(高度, 宽度, 通道数)# 查看特定像素值（例如第10行第20列的BGR值）print(image[10, 20])  # 输出格式：[B, G, R]# 查看部分矩阵（例如前10行前10列）print(image[:10, :10])   一、纯黑纯白图片像素点统计 以下为纯白图片(1080, 2298, 3)的像素点统计结果，可与纯黑图片做比对   不存在纯黑的图片（或者计算机很难实现），以下图片是(650, 650, 3)的纯黑图片像素点统计结果，可以看出黑色图片的像素点并不如纯白图片集中，即不如白色纯    二、随机生成彩色图片 代码 12345678910111213141516...</div></div></div></a><a class="pagination-related" href="/2025/09/14/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20250914-Week6/" title="Week6"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-14</div><div class="info-item-2">Week6</div></div><div class="info-2"><div class="info-item-1">模型基础一、语义分割概念 学习视频 语义分割前言_哔哩哔哩_bilibili  目标：  什么是语义分割 暂定的学习规划 语义分割任务常见数据集格式 语义分割得到结果的具体形式 语义分割常见评价标准 语义分割标注工具 （一）常见分割任务 语义分割（FCN）：对每一个像素进行分类  实例分割（Mask R-CNN）：针对同一个类别的不同目标也采用不同颜色进行分类，结果更精细，只关注目标背景  全景分割（Panoptic FPN）语义 + 实例 + 背景划分  精细程度逐级递增   （二）pytorch 官方提供的语义分割网络     （三）语义分割任务常见数据集格式 Pascal VOC  PASCAL VOC2012数据集介绍_pascal voc 2012-CSDN博客  语义分割中提供的是png图片（记录每个像素所属的一个类别信息），这个png图片使用调色板的模式进行存储。 图片（第二张图片）实际是一个一通道的图片（黑白图片），但看到的确实彩色的。 用 python 的 Pillow 去读取 png 图片的话，默认读取的是调色板的模式（P模式），通道数为1（单通道）。 但是读...</div></div></div></a><a class="pagination-related" href="/2025/08/14/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20250814-Week5/" title="Week5"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-14</div><div class="info-item-2">Week5</div></div><div class="info-2"><div class="info-item-1">图像处理方法一、Sobel算子 OpenCV 图像处理之膨胀与腐蚀  （一）什么是Sobel算子？ Sobel 算子是图像一种图像边缘   图像边缘检测重要算子之一  与梯度密度密不可分 -&gt; 目的：图像边缘检测的方法，本质是==梯度运算==   （二）什么情况下会产生梯度？利用 3 * 3 的卷积核放在二值图像中有三种位置关系，如下   全黑全白的像素值是相同的，只有在边缘部位时会有梯度产生。所有，梯度是进行边缘你检测的一个核心(边缘的梯度：255 - 0 = 255)    （三）Sobel 算子原理 遍历过程  卷积核顺序放到原图上    卷积核固定（中间列都是0）  卷积核中心位置在中间4x3区域内（对于边缘位置，卷积核暂时无法顾及到）  但是卷积核的核心无法顾及到原图像的边缘，如下   解决方法：  法一：边缘列（行）取均值或均值  法二（官方给的理论可能性）：paddng（边缘加一行 ”补0” ）   padding为0不改变原图像，此法可以顾及到每一个像素点       梯度计算  利用3  3 的卷积核与原图上顺序遍历的3  3矩阵（9个像素点）进行梯度计算...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">SolitudeAB</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SolitudeAB"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/SolitudeAB" target="_blank" title="GitHub"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:jiaxwoo@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #DEAC96;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/%E8%AF%AD%E5%BD%95/" title="语录">语录</a><time datetime="2026-07-02T12:45:25.136Z" title="发表于 2026-07-02 20:45:25">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/hello-world/" title="Hello World">Hello World</a><time datetime="2026-07-02T12:45:25.014Z" title="发表于 2026-07-02 20:45:25">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/machine_learning/20260702-math/" title="高等数学">高等数学</a><time datetime="2026-07-02T12:05:42.000Z" title="发表于 2026-07-02 20:05:42">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/paper/Eyes/v3/20260509-Untitled-2/" title="Untitled 2">Untitled 2</a><time datetime="2026-05-09T07:00:54.000Z" title="发表于 2026-05-09 15:00:54">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/07/paper/Eyes/v3/20260507-Untitled-1/" title="Untitled 1">Untitled 1</a><time datetime="2026-05-07T13:46:03.000Z" title="发表于 2026-05-07 21:46:03">2026-05-07</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By SolitudeAB</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="/pluginsSrc/medium-zoom/dist/medium-zoom.min.js?v=1.1.0"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        loader: {
+          load: [
+            // Four font extension packages (optional)
+            //- '[tex]/bbm',
+            //- '[tex]/bboldx',
+            //- '[tex]/dsfont',
+            '[tex]/mhchem'
+          ],
+          paths: {
+            'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+
+            //- // Four font extension packages (optional)
+            //- 'mathjax-bbm-extension': '[mathjax]/../@mathjax/mathjax-bbm-font-extension',
+            //- 'mathjax-bboldx-extension': '[mathjax]/../@mathjax/mathjax-bboldx-font-extension',
+            //- 'mathjax-dsfont-extension': '[mathjax]/../@mathjax/mathjax-dsfont-font-extension',
+            'mathjax-mhchem-extension': '[mathjax]/../@mathjax/mathjax-mhchem-font-extension'
+          }
+        },
+        output: {
+          font: 'mathjax-newcm',
+        },
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+          packages: {
+            '[+]': [
+              'mhchem'
+            ]
+          }
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          menuOptions: {
+            settings: {
+              enrich: false  // Turn off Braille and voice narration text automatic generation
+            }
+          },
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = '/pluginsSrc/mathjax/tex-mml-chtml.js?v=4.1.0'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><div id="aplayer"></div><script src="/js/custom.js"></script><script id="canvas_nest" defer="defer" color="222,172,150" opacity="0.5" zIndex="-1" count="99" mobile="false" src="/pluginsSrc/butterfly-extsrc/dist/canvas-nest.min.js?v=1.1.6"></script><link rel="stylesheet" href="/pluginsSrc/aplayer/dist/APlayer.min.css?v=1.10.1" media="print" onload="this.media='all'"><script src="/pluginsSrc/aplayer/dist/APlayer.min.js?v=1.10.1"></script><script src="/pluginsSrc/butterfly-extsrc/metingjs/dist/Meting.min.js?v=1.1.6"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="/pluginsSrc/pjax/pjax.min.js?v=0.2.8" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章..." type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.4"></script></div></div></body></html>

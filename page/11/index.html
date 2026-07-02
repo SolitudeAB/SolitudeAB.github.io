@@ -1,0 +1,411 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>我的博客</title><meta name="author" content="SolitudeAB"><meta name="copyright" content="SolitudeAB"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="我的博客">
+<meta property="og:url" content="https://solitudeab.github.io/page/11/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://solitudeab.github.io/img/avatar.jpg">
+<meta property="article:author" content="SolitudeAB">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://solitudeab.github.io/img/avatar.jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://solitudeab.github.io/page/11/index.html"><link rel="preconnect"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css?v=7.1.0"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js?v=4.13.0',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '我的博客',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="我的博客" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div class="bg-animation" id="web_bg" style="background-image: url(/img/bg.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/SolitudeAB/blog-source/new/main/source/_posts"><i class="fa-fw fas fa-pen"></i><span> 写文章</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">我的博客</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/SolitudeAB/blog-source/new/main/source/_posts"><i class="fa-fw fas fa-pen"></i><span> 写文章</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">我的博客</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/SolitudeAB" target="_blank" title="GitHub"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:jiaxwoo@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #DEAC96;"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/09/03/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20250903-Week7/" title="Week7">Week7</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-09-03T11:09:08.000Z" title="发表于 2025-09-03 19:09:08">2025-09-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%8C%BB%E5%AD%A6AI%E5%AD%A6%E4%B9%A0/">医学AI学习</a></span></div><div class="content">三、Dilated Convolution膨胀卷积（空洞卷积）（一）膨胀卷积和一般卷积的区别 r是普通卷积和空洞卷积的差别所在，我们称之为膨胀因子。当r=1时，表示卷积核各元素之前没有空隙，即相邻两个元素间位置相差1，此时其实就是我们正常的卷积，所以广义上说，普通的卷积是一种特殊的空洞卷积；当r=2时，表示卷积核各元素之前有一个空隙，即相邻两个元素间位置相差2，此时就是我们上图中的卷积核，为方便大家理解，我把上图r=2时的卷积核提取出来，如下图所示：  当然了当r=3、r=4都是同样的道理，这里就不过多叙述了。 （二）为什么使用膨胀卷积？在语言分割任务当中，通常会使用分类网络作为网络的 backbone1 。 首先，通过backbone，将我们的图片进行一系列的下采样，然后再通过一系列的上采样还原我们原图的大小。平常在使用图像分类网络中，我们一般会将我们的高度和宽度下采样32倍。由于后续我们需要通过上采用还原回原图的尺寸，所以如果我们将特征图的高宽下采样倍率调的太大的话，对我们还原原因的影响是很大的。比如 VGG网络，它是通过最大池化下采样，即maxpooling层进行池化操作的...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/08/31/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/CNN%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/20250831-BN/" title="BN">BN</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-08-31T13:28:03.000Z" title="发表于 2025-08-31 21:28:03">2025-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%8C%BB%E5%AD%A6AI%E5%AD%A6%E4%B9%A0/">医学AI学习</a></span></div><div class="content">一、什么是BN？Batch Normalization是2015年一篇论文中提出的数据归一化方法，往往用在深度神经网络中激活层之前。其作用可以加快模型训练时的收敛速度，使得模型训练过程更加稳定，避免梯度爆炸或者梯度消失。并且起到一定的正则化作用，几乎代替了Dropout。 二、BN核心公式是什么？如下：  Input:B=\{x_{1...m}\};\gamma ,\beta (parameters\ to\ be\ learned)\\ Output:\{y_i=BN_{\gamma ,\beta}(x_i)\}\\ u_{B} \leftarrow\frac{1}{m}\sum_{i=1}^{m}{x_i}\\ \sigma_{B}^2\leftarrow\frac{1}{m}\sum_{i=1}^m(x_i-\mu_B)^2\\ \tilde{x}_i\leftarrow\frac{x_i-\mu_B}{\sqrt{\sigma_B^2+\epsilon}}\\ y_i\leftarrow\gamma\tilde{x}_i+\beta\\解释一下上述公式：  输入为数值集合...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/08/31/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/CNN%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/20250831-CNN/" title="CNN">CNN</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-08-31T11:15:46.000Z" title="发表于 2025-08-31 19:15:46">2025-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%8C%BB%E5%AD%A6AI%E5%AD%A6%E4%B9%A0/">医学AI学习</a></span></div><div class="content">卷积神经网络（CNN）的原理引言： 可查看前篇文章——神经网络：构建人工智能的基石  卷积神经网络（Convolutional Neural Network，CNN）是一种在计算机视觉领域取得了巨大成功的深度学习模型。它们的设计灵感来自于生物学中的视觉系统，旨在模拟人类视觉处理的方式。在过去的几年中，CNN已经在图像识别、目标检测、图像生成和许多其他领域取得了显著的进展，成为了计算机视觉和深度学习研究的重要组成部分。 一、图像原理在了解卷积神经网络前，我们先来看看图像的原理： 图像在计算机中是一堆按顺序排列的数字，数值为0到255。0表示最暗，255表示最亮。 如下图：  上图是只有黑白颜色的灰度图，而更普遍的图片表达方式是RGB颜色模型，即红、绿、蓝三原色的色光以不同的比例相加，以产生多种多样的色光。RGB颜色模型中，单个矩阵就扩展成了有序排列的三个矩阵，也可以用三维张量去理解。 其中的每一个矩阵又叫这个图片的一个channel（通道），宽, 高, 深来描述。  二、为什么要学习卷积神经网络？在传统神经网络中，我们要识别下图红色框中的图像时，我们很可能识别不出来，因为这六张图的...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/08/31/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/CNN%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/20250831-%E5%8D%B7%E7%A7%AF/" title="卷积">卷积</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-08-31T11:15:18.000Z" title="发表于 2025-08-31 19:15:18">2025-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%8C%BB%E5%AD%A6AI%E5%AD%A6%E4%B9%A0/">医学AI学习</a></span></div><div class="content">一、线性滤波与卷积的基本概念线性滤波可以说是图像处理最基本的方法，它可以允许我们对图像进行处理，产生很多不同的效果。做法很简单： 首先，我们有一个二维的滤波器矩阵（有个高大上的名字叫卷积核）和一个要处理的二维图像。然后，对于图像的每一个像素点，计算它的邻域像素和滤波器矩阵的对应元素的乘积，然后加起来，作为该像素位置的值。这样就完成了滤波过程。  对图像和滤波矩阵进行逐个元素相乘再求和的操作就相当于将一个二维的函数移动到另一个二维函数的所有位置，这个操作就叫卷积或者协相关。卷积和协相关的差别是，卷积需要先对滤波矩阵进行180的翻转，但如果矩阵是对称的，那么两者就没有什么差别了。 Correlation（协相关）和 Convolution（卷积）可以说是图像处理最基本的操作，但却非常有用。这两个操作有两个非常关键的特点：它们是线性的，而且具有平移不变性shift-invariant。平移不变性指我们在图像的每个位置都执行相同的操作。线性指这个操作是线性的，也就是我们用每个像素的邻域的线性组合来代替这个像素。这两个属性使得这个操作非常简单，因为线性操作是最简单的，然后在所有地方都做同样...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/08/31/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/CNN%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/20250831-%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%85%85/" title="卷积神经网络基础补充">卷积神经网络基础补充</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-08-31T11:14:53.000Z" title="发表于 2025-08-31 19:14:53">2025-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%8C%BB%E5%AD%A6AI%E5%AD%A6%E4%B9%A0/">医学AI学习</a></span></div><div class="content">一、误差的计算（一）图示各个符号的含义 $x$：输入 $σ$：隐层 $w_{ij}^{(k)}$：$i$表示上一层的第$i$的节点，$j$表示本层中第$j$个节点，$k$表示该节点位于第$k$层 （二）计算1、第一层节点的输出，即$w_{ij}^{(1)}$权值对应的输出 2、最后一层节点的输入，即$w_{ij}^{(2)}$权值对应的输出（$y_1$、$y_2$）  注意，最后一层的计算中并没有使用激活函数，因为在计算多位损失的过程中，一般最后一层的激活函数统一使用 softmax 函数  3、Softmax 函数的计算过程 前面计算得到的$y_1$、$y_2$并不符合任一分布，而我们的目的是为了得到一个概率分布，所以我们需要对输出的结果进行Softmax 处理   （三）Cross Entropy Loss 交叉熵损失 针对多分类问题（Softmax 输出，所有输出概率和为1）   针对二分类问题（Sigmoid 输出，每个输出节点之间互不相干）  sigmoid 输出的结果不会满足任何一个经验分布（概率分布——和为1）   其中$o_i^$为真实标签值，$o_i$为预测值，...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/08/28/blogs/LearningSchedule/20250828-Week6/" title="Week6">Week6</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-08-28T04:03:26.000Z" title="发表于 2025-08-28 12:03:26">2025-08-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%BF%97/">生活日志</a></span></div><div class="content">模型基础一、语义分割概念 学习视频 语义分割前言_哔哩哔哩_bilibili  目标：  什么是语义分割 暂定的学习规划 语义分割任务常见数据集格式 语义分割得到结果的具体形式 语义分割常见评价标准 语义分割标注工具 （一）常见分割任务 语义分割（FCN）：对每一个像素进行分类  实例分割（Mask R-CNN）：针对同一个类别的不同目标也采用不同颜色进行分类，结果更精细，只关注目标背景  全景分割（Panoptic FPN）语义 + 实例 + 背景划分  精细程度逐级递增   （二）pytorch 官方提供的语义分割网络     （三）语义分割任务常见数据集格式 Pascal VOC  PASCAL VOC2012数据集介绍_pascal voc 2012-CSDN博客  语义分割中提供的是png图片（记录每个像素所属的一个类别信息），这个png图片使用调色板的模式进行存储。 图片（第二张图片）实际是一个一通道的图片（黑白图片），但看到的确实彩色的。 用 python 的 Pillow 去读取 png 图片的话，默认读取的是调色板的模式（P模式），通道数为1（单通道）。 但是读...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/08/28/%E4%B8%9A%E4%BD%99/20250828-Markdown-%E8%AF%AD%E6%B3%95/" title="Markdown 语法">Markdown 语法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-08-28T03:37:18.000Z" title="发表于 2025-08-28 11:37:18">2025-08-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a></span></div><div class="content">标题1标题2标题3 这是一段引用    有序列表：1.打开冰箱2.把大象塞进去3.关上冰箱 无序列表：  阿斯芬迪   按时打卡  明天要做的事：  [ ] 吃饭 [ ] 睡觉 [x] 打豆豆  代码块：123int main()&#123;    return 0;&#125; 数学公式：  \frac{\partial f}{\partial x}=2\sqrt{a}x表格     姓名 年龄 成绩     张三 19 99   李四 20 33     脚注：一键三连1  横线  哈哈哈 百度 百度,百度,百度 请参考标题1 URL：http://www.baidu.com  斜体*加粗printf,下划线,  : smile : ,$\theta=x^2$H2O,  X^2 ，==这是一段高亮文字==  </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/08/28/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/CNN%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/20250828-%E6%B1%A0%E5%8C%96(pooling)/" title="池化(pooling)">池化(pooling)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-08-28T03:31:02.000Z" title="发表于 2025-08-28 11:31:02">2025-08-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%8C%BB%E5%AD%A6AI%E5%AD%A6%E4%B9%A0/">医学AI学习</a></span></div><div class="content">池化（pooling） 意即“缩并”  池化过程在一般卷积过程后。池化（pooling） 的本质，其实就是采样。Pooling 对于输入的 Feature Map，选择某种方式对其进行降维压缩，以加快运算速度。 采用较多的一种池化过程叫最大池化（Max Pooling），其具体操作过程如下：  池化过程类似于卷积过程，如上图所示，表示的就是对一个 feature map邻域内的值，用一个 的filter，步长为2进行‘扫描’，选择最大值输出到下一层，这叫做 Max Pooling。 max pooling常用的 ， 的效果：特征图高度、宽度减半，通道数不变。 还有一种叫平均池化（Average Pooling）,就是从以上取某个区域的最大值改为求这个区域的平均值，其具体操作过程如下：  如上图所示，表示的就是对一个 feature map邻域内的值，用一个 的filter，步长为2进行‘扫描’，计算平均值输出到下一层，这叫做 Mean Pooling。 【池化层没有参数、池化层没有参数、池化层没有参数】 （重要的事情说三遍） 池化的作用： （1）保留主要特征的同时减少参数和计算量...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/08/25/%E4%B8%9A%E4%BD%99/20250825-%E5%8D%B7%E7%A7%AF%E4%BB%A3%E7%A0%81/" title="卷积代码">卷积代码</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-08-25T15:25:52.000Z" title="发表于 2025-08-25 23:25:52">2025-08-25</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a></span></div><div class="content">洛德的计算机图形学教程图像滤波目录 引言 卷积 模糊 高斯模糊 动态模糊 查找边缘 锐化 浮雕 均值与中值滤波器 结论  返回目录 引言图像滤镜功能可让您对照片应用各种特效。此处描述的图像滤镜类型采用二维滤镜，类似于 Paint Shop Pro 中的”用户自定义滤镜”和 Photoshop 中的”自定义滤镜”功能。 卷积运算图像滤镜的核心原理在于：您拥有一个二维滤镜矩阵和一张二维图像。随后，针对图像的每个像素，计算乘积之和。每个乘积由当前像素或其邻近像素的颜色值与滤镜矩阵对应位置的值相乘得出。滤镜矩阵中心值需与当前像素相乘，而矩阵其余元素则与对应的邻近像素相乘。 这种对两个二维函数的元素进行乘积求和，并让其中一个函数遍历另一个函数每个元素的操作，被称为卷积或相关运算。卷积与相关的区别在于：卷积运算需要翻转滤镜矩阵，但通常矩阵本身具有对称性，因此两者并无实际差异。 使用卷积的滤波器相对简单。当然也存在更复杂的滤波器，它们能够运用更花哨的函数，实现更为复杂的效果（例如 Photoshop 中的彩色铅笔滤镜），但此类滤波器不在本文讨论范围内。 二维卷积运算需要四重循环，因此除非使用小...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/08/25/%E4%B8%9A%E4%BD%99/20250825-%E5%8D%B7%E7%A7%AF/" title="卷积">卷积</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-08-25T05:05:12.000Z" title="发表于 2025-08-25 13:05:12">2025-08-25</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a></span></div><div class="content">卷积如何通俗易懂地解释卷积？ - 知乎 从数学上讲，卷积就是一种运算。 某种运算，能被定义出来，至少有以下特征：  首先是抽象的、符号化的 其次，在生活、科研中，有着广泛的作用  比如加法：  a+b ，是抽象的，本身只是一个数学符号 在现实中，有非常多的意义，比如增加、合成、旋转等等  卷积，是我们学习高等数学之后，新接触的一种运算，因为涉及到积分、级数，所以看起来觉得很复杂。 1 卷积的定义 我们称 (f∗g)(n) 为 f,g 的卷积 其连续的定义为：  其离散的定义为：  这两个式子有一个共同的特征：  这个特征有什么意义？ 我们令 x=τ,y=n−τ ，那么 x+y=n 就是下面这些直线：  如果遍历这些直线，就好比，把毛巾沿着角卷起来：   此处受到 荆哲：卷积为什么叫「卷」积？ 答案的启发。 只看数学符号，卷积是抽象的，不好理解的，但是，我们可以通过现实中的意义，来习惯卷积这种运算，正如我们小学的时候，学习加减乘除需要各种苹果、糖果来帮助我们习惯一样。 我们来看看现实中，这样的定义有什么意义。 2 离散卷积的例子：丢骰子 我有两枚骰子：  把这两枚骰子都抛出去：  ...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/10/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#content-inner">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/#content-inner">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/#content-inner">14</a><a class="extend next" rel="next" href="/page/12/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">SolitudeAB</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SolitudeAB"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/SolitudeAB" target="_blank" title="GitHub"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:jiaxwoo@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #DEAC96;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/%E8%AF%AD%E5%BD%95/" title="语录">语录</a><time datetime="2026-07-02T12:45:25.136Z" title="发表于 2026-07-02 20:45:25">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/hello-world/" title="Hello World">Hello World</a><time datetime="2026-07-02T12:45:25.014Z" title="发表于 2026-07-02 20:45:25">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/machine_learning/20260702-math/" title="高等数学">高等数学</a><time datetime="2026-07-02T12:05:42.000Z" title="发表于 2026-07-02 20:05:42">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/paper/Eyes/v3/20260509-Untitled-2/" title="Untitled 2">Untitled 2</a><time datetime="2026-05-09T07:00:54.000Z" title="发表于 2026-05-09 15:00:54">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/07/paper/Eyes/v3/20260507-Untitled-1/" title="Untitled 1">Untitled 1</a><time datetime="2026-05-07T13:46:03.000Z" title="发表于 2026-05-07 21:46:03">2026-05-07</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/VL/"><span class="card-category-list-name">VL</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%8C%BB%E5%AD%A6AI%E5%AD%A6%E4%B9%A0/"><span class="card-category-list-name">医学AI学习</span><span class="card-category-list-count">26</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97/"><span class="card-category-list-name">学习日志</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/"><span class="card-category-list-name">技术随笔</span><span class="card-category-list-count">12</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"><span class="card-category-list-name">机器学习</span><span class="card-category-list-count">13</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%BF%97/"><span class="card-category-list-name">生活日志</span><span class="card-category-list-count">15</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%A7%91%E7%A0%94%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/"><span class="card-category-list-name">科研学习计划</span><span class="card-category-list-count">9</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">笔记</span><span class="card-category-list-count">1</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 1.15em; color: rgb(175, 170, 146);">笔记</a><a href="/tags/Transformer/" style="font-size: 1.21em; color: rgb(50, 146, 196);">Transformer</a><a href="/tags/CycleGAN/" style="font-size: 1.21em; color: rgb(134, 181, 107);">CycleGAN</a><a href="/tags/PyTorch/" style="font-size: 1.3em; color: rgb(70, 144, 118);">PyTorch</a><a href="/tags/%E5%8C%BB%E5%AD%A6AI%E5%AD%A6%E4%B9%A0/" style="font-size: 1.38em; color: rgb(145, 113, 71);">医学AI学习</a><a href="/tags/CNN/" style="font-size: 1.41em; color: rgb(50, 50, 153);">CNN</a><a href="/tags/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/" style="font-size: 1.24em; color: rgb(60, 125, 94);">语义分割</a><a href="/tags/%E5%91%A8%E8%AE%B0/" style="font-size: 1.39em; color: rgb(76, 135, 77);">周记</a><a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 1.32em; color: rgb(125, 127, 50);">服务器</a><a href="/tags/Pooling/" style="font-size: 1.28em; color: rgb(85, 152, 124);">Pooling</a><a href="/tags/nnU-Net/" style="font-size: 1.17em; color: rgb(58, 151, 67);">nnU-Net</a><a href="/tags/Jupyter/" style="font-size: 1.19em; color: rgb(158, 50, 175);">Jupyter</a><a href="/tags/eye-enhance/" style="font-size: 1.17em; color: rgb(50, 58, 68);">eye_enhance</a><a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 1.32em; color: rgb(50, 50, 194);">机器学习</a><a href="/tags/SCI/" style="font-size: 1.36em; color: rgb(50, 50, 151);">SCI</a><a href="/tags/%E7%9C%BC%E5%BA%95%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/" style="font-size: 1.43em; color: rgb(50, 125, 149);">眼底图像增强</a><a href="/tags/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/" style="font-size: 1.3em; color: rgb(50, 84, 50);">技术随笔</a><a href="/tags/DeepSeek/" style="font-size: 1.17em; color: rgb(120, 185, 65);">DeepSeek</a><a href="/tags/Markdown/" style="font-size: 1.17em; color: rgb(154, 70, 50);">Markdown</a><a href="/tags/tmux/" style="font-size: 1.19em; color: rgb(50, 50, 50);">tmux</a><a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 1.17em; color: rgb(84, 145, 50);">学习记录</a><a href="/tags/%E8%AE%BA%E6%96%87%E5%AE%9E%E9%AA%8C/" style="font-size: 1.45em; color: rgb(177, 163, 180);">论文实验</a><a href="/tags/I-Secret/" style="font-size: 1.34em; color: rgb(133, 172, 50);">I-Secret</a><a href="/tags/BatchNorm/" style="font-size: 1.22em; color: rgb(50, 58, 105);">BatchNorm</a><a href="/tags/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%BF%97/" style="font-size: 1.34em; color: rgb(100, 73, 149);">生活日志</a><a href="/tags/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/" style="font-size: 1.28em; color: rgb(119, 144, 159);">知识蒸馏</a><a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 1.36em; color: rgb(150, 110, 105);">日志</a><a href="/tags/%E7%A7%91%E7%A0%94%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/" style="font-size: 1.26em; color: rgb(121, 135, 163);">科研学习计划</a><a href="/tags/pix2pix/" style="font-size: 1.15em; color: rgb(173, 91, 103);">pix2pix</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      <a class="card-more-btn" href="/archives/"
+            title="查看更多">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/07/">
+            <span class="card-archive-list-date">
+              七月 2026
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/05/">
+            <span class="card-archive-list-date">
+              五月 2026
+            </span>
+            <span class="card-archive-list-count">4</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/04/">
+            <span class="card-archive-list-date">
+              四月 2026
+            </span>
+            <span class="card-archive-list-count">15</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/03/">
+            <span class="card-archive-list-date">
+              三月 2026
+            </span>
+            <span class="card-archive-list-count">22</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/02/">
+            <span class="card-archive-list-date">
+              二月 2026
+            </span>
+            <span class="card-archive-list-count">6</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/01/">
+            <span class="card-archive-list-date">
+              一月 2026
+            </span>
+            <span class="card-archive-list-count">6</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/12/">
+            <span class="card-archive-list-date">
+              十二月 2025
+            </span>
+            <span class="card-archive-list-count">7</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/11/">
+            <span class="card-archive-list-date">
+              十一月 2025
+            </span>
+            <span class="card-archive-list-count">4</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">132</div></div><div class="webinfo-item"><div class="item-name">运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2026-05-01T00:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">344k</div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-07-02T12:46:07.610Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By SolitudeAB</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="/pluginsSrc/medium-zoom/dist/medium-zoom.min.js?v=1.1.0"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('/pluginsSrc/typed.js/dist/typed.umd.js?v=3.0.0').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = ["记录学习，分享技术，偶尔碎碎念。"].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      const from = '出自 ' + data.from
+      typedJSFn.processSubtitle(data.hitokoto, [from])
+    })
+    .catch(err => {
+      console.error('Failed to get the Hitokoto API:', err)
+      typedJSFn.processSubtitle(["记录学习，分享技术，偶尔碎碎念。"])
+    })
+}
+typedJSFn.run(subtitleType)
+</script></div><div id="aplayer"></div><script src="/js/custom.js"></script><script id="canvas_nest" defer="defer" color="222,172,150" opacity="0.5" zIndex="-1" count="99" mobile="false" src="/pluginsSrc/butterfly-extsrc/dist/canvas-nest.min.js?v=1.1.6"></script><link rel="stylesheet" href="/pluginsSrc/aplayer/dist/APlayer.min.css?v=1.10.1" media="print" onload="this.media='all'"><script src="/pluginsSrc/aplayer/dist/APlayer.min.js?v=1.10.1"></script><script src="/pluginsSrc/butterfly-extsrc/metingjs/dist/Meting.min.js?v=1.1.6"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="/pluginsSrc/pjax/pjax.min.js?v=0.2.8" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章..." type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.4"></script></div></div></body></html>

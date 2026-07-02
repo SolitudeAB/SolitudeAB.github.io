@@ -1,0 +1,846 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>高等数学 | 我的博客</title><meta name="author" content="SolitudeAB"><meta name="copyright" content="SolitudeAB"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="高等数学1.导数定义：导数和微分的概念 $f’({{x}{0}})&#x3D;\underset{\Delta x\to 0}{\mathop{\lim }}\,\frac{f({{x}{0}}+\Delta x)-f({{x}_{0}})}{\Delta x}$ （1） 或者： $f’({{x}{0}})&#x3D;\underset{x\to {{x}{0}}}{\mathop{\lim }}\,\frac{f(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高等数学">
+<meta property="og:url" content="https://solitudeab.github.io/2026/07/02/machine_learning/20260702-math/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="高等数学1.导数定义：导数和微分的概念 $f’({{x}{0}})&#x3D;\underset{\Delta x\to 0}{\mathop{\lim }}\,\frac{f({{x}{0}}+\Delta x)-f({{x}_{0}})}{\Delta x}$ （1） 或者： $f’({{x}{0}})&#x3D;\underset{x\to {{x}{0}}}{\mathop{\lim }}\,\frac{f(">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://solitudeab.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2026-07-02T12:05:42.000Z">
+<meta property="article:modified_time" content="2026-07-02T12:45:25.084Z">
+<meta property="article:author" content="SolitudeAB">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://solitudeab.github.io/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "高等数学",
+  "url": "https://solitudeab.github.io/2026/07/02/machine_learning/20260702-math/",
+  "image": "https://solitudeab.github.io/img/avatar.jpg",
+  "datePublished": "2026-07-02T12:05:42.000Z",
+  "dateModified": "2026-07-02T12:45:25.084Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "SolitudeAB",
+      "url": "https://solitudeab.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://solitudeab.github.io/2026/07/02/machine_learning/20260702-math/index.html"><link rel="preconnect"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css?v=7.1.0"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js?v=4.13.0',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '高等数学',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="我的博客" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div class="bg-animation" id="web_bg" style="background-image: url(/img/bg.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/SolitudeAB/blog-source/new/main/source/_posts"><i class="fa-fw fas fa-pen"></i><span> 写文章</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">我的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">高等数学</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/SolitudeAB/blog-source/new/main/source/_posts"><i class="fa-fw fas fa-pen"></i><span> 写文章</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">高等数学</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-07-02T12:05:42.000Z" title="发表于 2026-07-02 20:05:42">2026-07-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-07-02T12:45:25.084Z" title="更新于 2026-07-02 20:45:25">2026-07-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">11k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>54分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h3 id="高等数学"><a href="#高等数学" class="headerlink" title="高等数学"></a>高等数学</h3><h4 id="1-导数定义："><a href="#1-导数定义：" class="headerlink" title="1.导数定义："></a>1.导数定义：</h4><p>导数和微分的概念</p>
+<p>$f’({{x}<em>{0}})=\underset{\Delta x\to 0}{\mathop{\lim }}\,\frac{f({{x}</em>{0}}+\Delta x)-f({{x}_{0}})}{\Delta x}$ （1）</p>
+<p>或者：</p>
+<p>$f’({{x}<em>{0}})=\underset{x\to {{x}</em>{0}}}{\mathop{\lim }}\,\frac{f(x)-f({{x}<em>{0}})}{x-{{x}</em>{0}}}$ （2）</p>
+<h4 id="2-左右导数导数的几何意义和物理意义"><a href="#2-左右导数导数的几何意义和物理意义" class="headerlink" title="2.左右导数导数的几何意义和物理意义"></a>2.左右导数导数的几何意义和物理意义</h4><p>函数$f(x)$在$x_0$处的左、右导数分别定义为：</p>
+<p>左导数：${{{f}’}<em>{-}}({{x}</em>{0}})=\underset{\Delta x\to {{0}^{-}}}{\mathop{\lim }}\,\frac{f({{x}<em>{0}}+\Delta x)-f({{x}</em>{0}})}{\Delta x}=\underset{x\to x<em>{0}^{-}}{\mathop{\lim }}\,\frac{f(x)-f({{x}</em>{0}})}{x-{{x}<em>{0}}},(x={{x}</em>{0}}+\Delta x)$</p>
+<p>右导数：${{{f}’}<em>{+}}({{x}</em>{0}})=\underset{\Delta x\to {{0}^{+}}}{\mathop{\lim }}\,\frac{f({{x}<em>{0}}+\Delta x)-f({{x}</em>{0}})}{\Delta x}=\underset{x\to x<em>{0}^{+}}{\mathop{\lim }}\,\frac{f(x)-f({{x}</em>{0}})}{x-{{x}_{0}}}$</p>
+<h4 id="3-函数的可导性与连续性之间的关系"><a href="#3-函数的可导性与连续性之间的关系" class="headerlink" title="3.函数的可导性与连续性之间的关系"></a>3.函数的可导性与连续性之间的关系</h4><p>Th1: 函数$f(x)$在$x_0$处可微$\Leftrightarrow f(x)$在$x_0$处可导</p>
+<p>Th2: 若函数在点$x_0$处可导，则$y=f(x)$在点$x_0$处连续，反之则不成立。即函数连续不一定可导。</p>
+<p>Th3: ${f}’({{x}<em>{0}})$存在$\Leftrightarrow {{{f}’}</em>{-}}({{x}<em>{0}})={{{f}’}</em>{+}}({{x}_{0}})$</p>
+<h4 id="4-平面曲线的切线和法线"><a href="#4-平面曲线的切线和法线" class="headerlink" title="4.平面曲线的切线和法线"></a>4.平面曲线的切线和法线</h4><p>切线方程 : $y-{{y}<em>{0}}=f’({{x}</em>{0}})(x-{{x}_{0}})$</p>
+<p>法线方程：$y-{{y}<em>{0}}=-\frac{1}{f’({{x}</em>{0}})}(x-{{x}<em>{0}}),f’({{x}</em>{0}})\ne 0$</p>
+<h4 id="5-四则运算法则"><a href="#5-四则运算法则" class="headerlink" title="5.四则运算法则"></a>5.四则运算法则</h4><p>设函数$u=u(x)，v=v(x)$]在点$x$可导则</p>
+<p>(1) $(u\pm v{)}’={u}’\pm {v}’$ $d(u\pm v)=du\pm dv$</p>
+<p>(2)$(uv{)}’=u{v}’+v{u}’$ $d(uv)=udv+vdu$</p>
+<p>(3) $(\frac{u}{v}{)}’=\frac{v{u}’-u{v}’}{{{v}^{2}}}(v\ne 0)$ $d(\frac{u}{v})=\frac{vdu-udv}{{{v}^{2}}}$</p>
+<h4 id="6-基本导数与微分表"><a href="#6-基本导数与微分表" class="headerlink" title="6.基本导数与微分表"></a>6.基本导数与微分表</h4><p>(1) $y=c$（常数） ${y}’=0$ $dy=0$</p>
+<p>(2) $y={{x}^{\alpha }}$($\alpha $为实数) ${y}’=\alpha {{x}^{\alpha -1}}$ $dy=\alpha {{x}^{\alpha -1}}dx$</p>
+<p>(3) $y={{a}^{x}}$ ${y}’={{a}^{x}}\ln a$ $dy={{a}^{x}}\ln adx$<br>特例: $({{{e}}^{x}}{)}’={{{e}}^{x}}$ $d({{{e}}^{x}})={{{e}}^{x}}dx$</p>
+<p>(4) $y={{\log }_{a}}x$ ${y}’=\frac{1}{x\ln a}$</p>
+<p>$dy=\frac{1}{x\ln a}dx$<br>特例:$y=\ln x$ $(\ln x{)}’=\frac{1}{x}$ $d(\ln x)=\frac{1}{x}dx$</p>
+<p>(5) $y=\sin x$</p>
+<p>${y}’=\cos x$ $d(\sin x)=\cos xdx$</p>
+<p>(6) $y=\cos x$</p>
+<p>${y}’=-\sin x$ $d(\cos x)=-\sin xdx$</p>
+<p>(7) $y=\tan x$</p>
+<p>${y}’=\frac{1}{{{\cos }^{2}}x}={{\sec }^{2}}x$ $d(\tan x)={{\sec }^{2}}xdx$</p>
+<p>(8) $y=\cot x$ ${y}’=-\frac{1}{{{\sin }^{2}}x}=-{{\csc }^{2}}x$ $d(\cot x)=-{{\csc }^{2}}xdx$</p>
+<p>(9) $y=\sec x$ ${y}’=\sec x\tan x$</p>
+<p>$d(\sec x)=\sec x\tan xdx$<br>(10) $y=\csc x$ ${y}’=-\csc x\cot x$</p>
+<p>$d(\csc x)=-\csc x\cot xdx$<br>(11) $y=\arcsin x$</p>
+<p>${y}’=\frac{1}{\sqrt{1-{{x}^{2}}}}$</p>
+<p>$d(\arcsin x)=\frac{1}{\sqrt{1-{{x}^{2}}}}dx$<br>(12) $y=\arccos x$</p>
+<p>${y}’=-\frac{1}{\sqrt{1-{{x}^{2}}}}$ $d(\arccos x)=-\frac{1}{\sqrt{1-{{x}^{2}}}}dx$</p>
+<p>(13) $y=\arctan x$</p>
+<p>${y}’=\frac{1}{1+{{x}^{2}}}$ $d(\arctan x)=\frac{1}{1+{{x}^{2}}}dx$</p>
+<p>(14) $y=\operatorname{arc}\cot x$</p>
+<p>${y}’=-\frac{1}{1+{{x}^{2}}}$</p>
+<p>$d(\operatorname{arc}\cot x)=-\frac{1}{1+{{x}^{2}}}dx$<br>(15) $y=shx$</p>
+<p>${y}’=chx$ $d(shx)=chxdx$</p>
+<p>(16) $y=chx$</p>
+<p>${y}’=shx$ $d(chx)=shxdx$</p>
+<h4 id="7-复合函数，反函数，隐函数以及参数方程所确定的函数的微分法"><a href="#7-复合函数，反函数，隐函数以及参数方程所确定的函数的微分法" class="headerlink" title="7.复合函数，反函数，隐函数以及参数方程所确定的函数的微分法"></a>7.复合函数，反函数，隐函数以及参数方程所确定的函数的微分法</h4><p>(1) 反函数的运算法则: 设$y=f(x)$在点$x$的某邻域内单调连续，在点$x$处可导且${f}’(x)\ne 0$，则其反函数在点$x$所对应的$y$处可导，并且有$\frac{dy}{dx}=\frac{1}{\frac{dx}{dy}}$</p>
+<p>(2) 复合函数的运算法则:若$\mu =\varphi (x)$在点$x$可导,而$y=f(\mu )$在对应点$\mu $($\mu =\varphi (x)$)可导,则复合函数$y=f(\varphi (x))$在点$x$可导,且${y}’={f}’(\mu )\cdot {\varphi }’(x)$</p>
+<p>(3) 隐函数导数$\frac{dy}{dx}$的求法一般有三种方法：</p>
+<p>1)方程两边对$x$求导，要记住$y$是$x$的函数，则$y$的函数是$x$的复合函数.例如$\frac{1}{y}$，${{y}^{2}}$，$ln y$，${{{e}}^{y}}$等均是$x$的复合函数.<br>对$x$求导应按复合函数连锁法则做.</p>
+<p>2)公式法.由$F(x,y)=0$知 $\frac{dy}{dx}=-\frac{{{{{F}’}}<em>{x}}(x,y)}{{{{{F}’}}</em>{y}}(x,y)}$,其中，${{{F}’}<em>{x}}(x,y)$，<br>${{{F}’}</em>{y}}(x,y)$分别表示$F(x,y)$对$x$和$y$的偏导数</p>
+<p>3)利用微分形式不变性</p>
+<h4 id="8-常用高阶导数公式"><a href="#8-常用高阶导数公式" class="headerlink" title="8.常用高阶导数公式"></a>8.常用高阶导数公式</h4><p>（1）$({{a}^{x}}){{\,}^{(n)}}={{a}^{x}}{{\ln }^{n}}a\quad (a&gt;{0})\quad \quad ({{{e}}^{x}}){{\,}^{(n)}}={e}{{\,}^{x}}$</p>
+<p>（2）$(\sin kx{)}{{\,}^{(n)}}={{k}^{n}}\sin (kx+n\cdot \frac{\pi }{{2}})$</p>
+<p>（3）$(\cos kx{)}{{\,}^{(n)}}={{k}^{n}}\cos (kx+n\cdot \frac{\pi }{{2}})$</p>
+<p>（4）$({{x}^{m}}){{\,}^{(n)}}=m(m-1)\cdots (m-n+1){{x}^{m-n}}$</p>
+<p>（5）$(\ln x){{\,}^{(n)}}={{(-{1})}^{(n-{1})}}\frac{(n-{1})!}{{{x}^{n}}}$</p>
+<p>（6）莱布尼兹公式：若$u(x)\,,v(x)$均$n$阶可导，则<br>${{(uv)}^{(n)}}=\sum\limits<em>{i={0}}^{n}{c</em>{n}^{i}{{u}^{(i)}}{{v}^{(n-i)}}}$，其中${{u}^{({0})}}=u$，${{v}^{({0})}}=v$</p>
+<h4 id="9-微分中值定理，泰勒公式"><a href="#9-微分中值定理，泰勒公式" class="headerlink" title="9.微分中值定理，泰勒公式"></a>9.微分中值定理，泰勒公式</h4><p><strong>Th1:(费马定理)</strong></p>
+<p>若函数$f(x)$满足条件：</p>
+<p>(1)函数$f(x)$在${{x}<em>{0}}$的某邻域内有定义，并且在此邻域内恒有<br>$f(x)\le f({{x}</em>{0}})$或$f(x)\ge f({{x}_{0}})$,</p>
+<p>(2) $f(x)$在${{x}<em>{0}}$处可导,则有 ${f}’({{x}</em>{0}})=0$</p>
+<p><strong>Th2:(罗尔定理)</strong></p>
+<p>设函数$f(x)$满足条件：</p>
+<p>(1)在闭区间$[a,b]$上连续；</p>
+<p>(2)在$(a,b)$内可导；</p>
+<p>(3)$f(a)=f(b)$；</p>
+<p>则在$(a,b)$内一存在个$\xi $，使 ${f}’(\xi )=0$</p>
+<p><strong>Th3: (拉格朗日中值定理)</strong></p>
+<p>设函数$f(x)$满足条件：</p>
+<p>(1)在$[a,b]$上连续；</p>
+<p>(2)在$(a,b)$内可导；</p>
+<p>则在$(a,b)$内一存在个$\xi $，使 $\frac{f(b)-f(a)}{b-a}={f}’(\xi )$</p>
+<p><strong>Th4: (柯西中值定理)</strong></p>
+<p>设函数$f(x)$，$g(x)$满足条件：<br>(1) 在$[a,b]$上连续；</p>
+<p>(2) 在$(a,b)$内可导且${f}’(x)$，${g}’(x)$均存在，且${g}’(x)\ne 0$</p>
+<p>则在$(a,b)$内存在一个$\xi $，使 $\frac{f(b)-f(a)}{g(b)-g(a)}=\frac{{f}’(\xi )}{{g}’(\xi )}$</p>
+<h4 id="10-洛必达法则"><a href="#10-洛必达法则" class="headerlink" title="10.洛必达法则"></a>10.洛必达法则</h4><p><strong>法则 Ⅰ ($\frac{0}{0}$型)</strong></p>
+<p>设函数$f\left( x \right),g\left( x \right)$</p>
+<p>满足条件：</p>
+<p>$\underset{x\to {{x}<em>{0}}}{\mathop{\lim }}\,f\left( x \right)=0,\underset{x\to {{x}</em>{0}}}{\mathop{\lim }}\,g\left( x \right)=0$;</p>
+<p>$f\left( x \right),g\left( x \right)$在${{x}<em>{0}}$的邻域内可导，(在${{x}</em>{0}}$处可除外)且${g}’\left( x \right)\ne 0$;</p>
+<p>$\underset{x\to {{x}_{0}}}{\mathop{\lim }}\,\frac{{f}’\left( x \right)}{{g}’\left( x \right)}$存在(或$\infty $)。</p>
+<p>则:<br>$\underset{x\to {{x}<em>{0}}}{\mathop{\lim }}\,\frac{f\left( x \right)}{g\left( x \right)}=\underset{x\to {{x}</em>{0}}}{\mathop{\lim }}\,\frac{{f}’\left( x \right)}{{g}’\left( x \right)}$。<br>法则${{I}’}$ ($\frac{0}{0}$型)</p>
+<p>设函数$f\left( x \right),g\left( x \right)$</p>
+<p>满足条件：</p>
+<p>$\underset{x\to \infty }{\mathop{\lim }}\,f\left(x \right)=0,\underset{x \to \infty}{\mathop{\lim}}\,g\left(x \right)=0$;</p>
+<p>存在一个$X&gt;0$,当$\left| x \right|&gt;X$时,$f\left( x \right),g\left( x \right)$可导,且${g}’\left( x \right)\ne 0$;$\underset{x\to {{x}_{0}}}{\mathop{\lim}}\,\frac{{f}’\left(x \right)}{{g}’\left(x \right)}$存在(或$\infty $)。</p>
+<p>则:<br>$\underset{x\to {{x}<em>{0}}}{\mathop{\lim }}\,\frac{f\left( x \right)}{g\left( x \right)}=\underset{x\to {{x}</em>{0}}}{\mathop{\lim }}\,\frac{{f}’\left( x \right)}{{g}’\left( x \right)}$</p>
+<p><strong>法则 Ⅱ($\frac{\infty }{\infty }$型)</strong></p>
+<p>设函数$f\left( x \right),g\left( x \right)$满足条件：<br>$\underset{x\to {{x}<em>{0}}}{\mathop{\lim }}\,f\left( x \right)=\infty ,\underset{x\to {{x}</em>{0}}}{\mathop{\lim }}\,g\left( x \right)=\infty$;</p>
+<p>$f\left( x \right),g\left( x \right)$在${{x}<em>{0}}$ 的邻域内可导(在${{x}</em>{0}}$处可除外)且${g}’\left( x \right)\ne 0$;$\underset{x\to {{x}_{0}}}{\mathop{\lim }}\,\frac{{f}’\left( x \right)}{{g}’\left( x \right)}$存在(或$\infty$)。</p>
+<p>则</p>
+<p>$\underset{x\to {{x}<em>{0}}}{\mathop{\lim }}\,\frac{f\left( x \right)}{g\left( x \right)}=\underset{x\to {{x}</em>{0}}}{\mathop{\lim }}\,\frac{{f}’\left( x \right)}{{g}’\left( x \right)}.$</p>
+<p>同理法则${I{I}’}$($\frac{\infty }{\infty }$型)仿法则${{I}’}$可写出。</p>
+<h4 id="11-泰勒公式"><a href="#11-泰勒公式" class="headerlink" title="11.泰勒公式"></a>11.泰勒公式</h4><p>设函数$f(x)$在点${{x}<em>{0}}$处的某邻域内具有$n+1$阶导数，则对该邻域内异于${{x}</em>{0}}$的任意点$x$，在${{x}_{0}}$与$x$之间至少存在<br>一个$\xi$，使得：</p>
+<p>$f(x)=f({{x}<em>{0}})+{f}’({{x}</em>{0}})(x-{{x}<em>{0}})+\frac{1}{2!}{f}’’({{x}</em>{0}}){{(x-{{x}_{0}})}^{2}}+\cdots$</p>
+<p>$+\frac{{{f}^{(n)}}({{x}<em>{0}})}{n!}{{(x-{{x}</em>{0}})}^{n}}+{{R}_{n}}(x)$</p>
+<p>其中 ${{R}<em>{n}}(x)=\frac{{{f}^{(n+1)}}(\xi )}{(n+1)!}{{(x-{{x}</em>{0}})}^{n+1}}$称为$f(x)$在点${{x}_{0}}$处的$n$阶泰勒余项。</p>
+<p>令${{x}<em>{0}}=0$，则$n$阶泰勒公式<br>$f(x)=f(0)+{f}’(0)x+\frac{1}{2!}{f}’’(0){{x}^{2}}+\cdots +\frac{{{f}^{(n)}}(0)}{n!}{{x}^{n}}+{{R}</em>{n}}(x)$……(1)</p>
+<p>其中 ${{R}_{n}}(x)=\frac{{{f}^{(n+1)}}(\xi )}{(n+1)!}{{x}^{n+1}}$，$\xi $在 0 与$x$之间.(1)式称为<strong>麦克劳林公式</strong></p>
+<p>常用五种函数在${{x}_{0}}=0$处的泰勒公式</p>
+<p>(1) ${{{e}}^{x}}=1+x+\frac{1}{2!}{{x}^{2}}+\cdots +\frac{1}{n!}{{x}^{n}}+\frac{{{x}^{n+1}}}{(n+1)!}{{e}^{\xi }}$</p>
+<p>或 $=1+x+\frac{1}{2!}{{x}^{2}}+\cdots +\frac{1}{n!}{{x}^{n}}+o({{x}^{n}})$</p>
+<p>(2) $\sin x=x-\frac{1}{3!}{{x}^{3}}+\cdots +\frac{{{x}^{n}}}{n!}\sin \frac{n\pi }{2}+\frac{{{x}^{n+1}}}{(n+1)!}\sin (\xi +\frac{n+1}{2}\pi )$</p>
+<p>或 $=x-\frac{1}{3!}{{x}^{3}}+\cdots +\frac{{{x}^{n}}}{n!}\sin \frac{n\pi }{2}+o({{x}^{n}})$</p>
+<p>(3) $\cos x=1-\frac{1}{2!}{{x}^{2}}+\cdots +\frac{{{x}^{n}}}{n!}\cos \frac{n\pi }{2}+\frac{{{x}^{n+1}}}{(n+1)!}\cos (\xi +\frac{n+1}{2}\pi )$</p>
+<p>或 $=1-\frac{1}{2!}{{x}^{2}}+\cdots +\frac{{{x}^{n}}}{n!}\cos \frac{n\pi }{2}+o({{x}^{n}})$</p>
+<p>(4) $\ln (1+x)=x-\frac{1}{2}{{x}^{2}}+\frac{1}{3}{{x}^{3}}-\cdots +{{(-1)}^{n-1}}\frac{{{x}^{n}}}{n}+\frac{{{(-1)}^{n}}{{x}^{n+1}}}{(n+1){{(1+\xi )}^{n+1}}}$</p>
+<p>或 $=x-\frac{1}{2}{{x}^{2}}+\frac{1}{3}{{x}^{3}}-\cdots +{{(-1)}^{n-1}}\frac{{{x}^{n}}}{n}+o({{x}^{n}})$</p>
+<p>(5) ${{(1+x)}^{m}}=1+mx+\frac{m(m-1)}{2!}{{x}^{2}}+\cdots +\frac{m(m-1)\cdots (m-n+1)}{n!}{{x}^{n}}$<br>$+\frac{m(m-1)\cdots (m-n+1)}{(n+1)!}{{x}^{n+1}}{{(1+\xi )}^{m-n-1}}$</p>
+<p>或 ${{(1+x)}^{m}}=1+mx+\frac{m(m-1)}{2!}{{x}^{2}}+\cdots$ $+\frac{m(m-1)\cdots(m-n+1)}{n!}{{x}^{n}}+o({{x}^{n}})$</p>
+<h4 id="12-函数单调性的判断"><a href="#12-函数单调性的判断" class="headerlink" title="12.函数单调性的判断"></a>12.函数单调性的判断</h4><p><strong>Th1:</strong> </p>
+<p>设函数$f(x)$在$(a,b)$区间内可导，如果对$\forall x\in (a,b)$，都有$f\,’(x)&gt;0$（或$f\,’(x)&lt;0$），则函数$f(x)$在$(a,b)$内是单调增加的（或单调减少）</p>
+<p><strong>Th2:</strong> </p>
+<p>（取极值的必要条件）设函数$f(x)$在${{x}<em>{0}}$处可导，且在${{x}</em>{0}}$处取极值，则$f\,’({{x}_{0}})=0$。</p>
+<p><strong>Th3:</strong> </p>
+<p>（取极值的第一充分条件）设函数$f(x)$在${{x}<em>{0}}$的某一邻域内可微，且$f\,’({{x}</em>{0}})=0$（或$f(x)$在${{x}<em>{0}}$处连续，但$f\,’({{x}</em>{0}})$不存在。）</p>
+<p>(1)若当$x$经过${{x}<em>{0}}$时，$f\,’(x)$由“+”变“-”，则$f({{x}</em>{0}})$为极大值；</p>
+<p>(2)若当$x$经过${{x}<em>{0}}$时，$f\,’(x)$由“-”变“+”，则$f({{x}</em>{0}})$为极小值；</p>
+<p>(3)若$f\,’(x)$经过$x={{x}<em>{0}}$的两侧不变号，则$f({{x}</em>{0}})$不是极值。</p>
+<p><strong>Th4:</strong> </p>
+<p>(取极值的第二充分条件)设$f(x)$在点${{x}<em>{0}}$处有$f’’(x)\ne 0$，且$f\,’({{x}</em>{0}})=0$，则 当$f’\,’({{x}<em>{0}})&lt;0$时，$f({{x}</em>{0}})$为极大值；<br>当$f’\,’({{x}<em>{0}})&gt;0$时，$f({{x}</em>{0}})$为极小值。<br>注：如果$f’\,’({{x}_{0}})&lt;0$，此方法失效。</p>
+<h4 id="13-渐近线的求法"><a href="#13-渐近线的求法" class="headerlink" title="13.渐近线的求法"></a>13.渐近线的求法</h4><p>(1)水平渐近线 若$\underset{x\to +\infty }{\mathop{\lim }}\,f(x)=b$，或$\underset{x\to -\infty }{\mathop{\lim }}\,f(x)=b$，则</p>
+<p>$y=b$称为函数$y=f(x)$的水平渐近线。</p>
+<p>(2)铅直渐近线 若$\underset{x\to x<em>{0}^{-}}{\mathop{\lim }}\,f(x)=\infty $，或$\underset{x\to x</em>{0}^{+}}{\mathop{\lim }}\,f(x)=\infty $，则</p>
+<p>$x={{x}_{0}}$称为$y=f(x)$的铅直渐近线。</p>
+<p>(3)斜渐近线 若$a=\underset{x\to \infty }{\mathop{\lim }}\,\frac{f(x)}{x},\quad b=\underset{x\to \infty }{\mathop{\lim }}\,[f(x)-ax]$，则<br>$y=ax+b$称为$y=f(x)$的斜渐近线。</p>
+<h4 id="14-函数凹凸性的判断"><a href="#14-函数凹凸性的判断" class="headerlink" title="14.函数凹凸性的判断"></a>14.函数凹凸性的判断</h4><p><strong>Th1:</strong> (凹凸性的判别定理）若在 I 上$f’’(x)<0$（或$f''(x)>0$），则$f(x)$在 I 上是凸的（或凹的）。</p>
+<p><strong>Th2:</strong> (拐点的判别定理 1)若在${{x}<em>{0}}$处$f’’(x)=0$，（或$f’’(x)$不存在），当$x$变动经过${{x}</em>{0}}$时，$f’’(x)$变号，则$({{x}<em>{0}},f({{x}</em>{0}}))$为拐点。</p>
+<p><strong>Th3:</strong> (拐点的判别定理 2)设$f(x)$在${{x}<em>{0}}$点的某邻域内有三阶导数，且$f’’(x)=0$，$f’’’(x)\ne 0$，则$({{x}</em>{0}},f({{x}_{0}}))$为拐点。</p>
+<h4 id="15-弧微分"><a href="#15-弧微分" class="headerlink" title="15.弧微分"></a>15.弧微分</h4><p>$dS=\sqrt{1+y{{‘}^{2}}}dx$</p>
+<h4 id="16-曲率"><a href="#16-曲率" class="headerlink" title="16.曲率"></a>16.曲率</h4><p>曲线$y=f(x)$在点$(x,y)$处的曲率$k=\frac{\left| y’’ \right|}{{{(1+y{{‘}^{2}})}^{\tfrac{3}{2}}}}$。<br>对于参数方程$\left{ \begin{align}  &amp; x=\varphi (t) \  &amp; y=\psi (t) \ \end{align} \right.,$$k=\frac{\left| \varphi ‘(t)\psi ‘’(t)-\varphi ‘’(t)\psi ‘(t) \right|}{{{[\varphi {{‘}^{2}}(t)+\psi {{‘}^{2}}(t)]}^{\tfrac{3}{2}}}}$。</p>
+<h4 id="17-曲率半径"><a href="#17-曲率半径" class="headerlink" title="17.曲率半径"></a>17.曲率半径</h4><p>曲线在点$M$处的曲率$k(k\ne 0)$与曲线在点$M$处的曲率半径$\rho $有如下关系：$\rho =\frac{1}{k}$。</p>
+<h3 id="线性代数"><a href="#线性代数" class="headerlink" title="线性代数"></a>线性代数</h3><h4 id="行列式"><a href="#行列式" class="headerlink" title="行列式"></a>行列式</h4><p><strong>1.行列式按行（列）展开定理</strong></p>
+<p>(1) 设$A = ( a<em>{{ij}} )</em>{n \times n}$，则：$a<em>{i1}A</em>{j1} +a<em>{i2}A</em>{j2} + \cdots + a<em>{{in}}A</em>{{jn}} = \begin{cases}|A|,i=j\ 0,i \neq j\end{cases}$</p>
+<p>或$a<em>{1i}A</em>{1j} + a<em>{2i}A</em>{2j} + \cdots + a<em>{{ni}}A</em>{{nj}} = \begin{cases}|A|,i=j\ 0,i \neq j\end{cases}$即 $AA^{<em>} = A^{</em>}A = \left| A \right|E,$其中：$A^{*} = \begin{pmatrix} A<em>{11} &amp; A</em>{12} &amp; \ldots &amp; A<em>{1n} \ A</em>{21} &amp; A<em>{22} &amp; \ldots &amp; A</em>{2n} \ \ldots &amp; \ldots &amp; \ldots &amp; \ldots \ A<em>{n1} &amp; A</em>{n2} &amp; \ldots &amp; A<em>{{nn}} \ \end{pmatrix} = (A</em>{{ji}}) = {(A_{{ij}})}^{T}$</p>
+<p>$D<em>{n} = \begin{vmatrix} 1 &amp; 1 &amp; \ldots &amp; 1 \ x</em>{1} &amp; x<em>{2} &amp; \ldots &amp; x</em>{n} \ \ldots &amp; \ldots &amp; \ldots &amp; \ldots \ x<em>{1}^{n - 1} &amp; x</em>{2}^{n - 1} &amp; \ldots &amp; x<em>{n}^{n - 1} \ \end{vmatrix} = \prod</em>{1 \leq j &lt; i \leq n}^{}\,(x<em>{i} - x</em>{j})$</p>
+<p>(2) 设$A,B$为$n$阶方阵，则$\left| {AB} \right| = \left| A \right|\left| B \right| = \left| B \right|\left| A \right| = \left| {BA} \right|$，但$\left| A \pm B \right| = \left| A \right| \pm \left| B \right|$不一定成立。</p>
+<p>(3) $\left| {kA} \right| = k^{n}\left| A \right|$,$A$为$n$阶方阵。</p>
+<p>(4) 设$A$为$n$阶方阵，$|A^{T}| = |A|;|A^{- 1}| = |A|^{- 1}$（若$A$可逆），$|A^{*}| = |A|^{n - 1}$</p>
+<p>$n \geq 2$</p>
+<p>(5) $\left| \begin{matrix}  &amp; {A\quad O} \  &amp; {O\quad B} \ \end{matrix} \right| = \left| \begin{matrix}  &amp; {A\quad C} \  &amp; {O\quad B} \ \end{matrix} \right| = \left| \begin{matrix}  &amp; {A\quad O} \  &amp; {C\quad B} \ \end{matrix} \right| =| A||B|$<br>，$A,B$为方阵，但$\left| \begin{matrix} {O} &amp; A<em>{m \times m} \  B</em>{n \times n} &amp; { O} \ \end{matrix} \right| = ({- 1)}^{{mn}}|A||B|$ 。</p>
+<p>(6) 范德蒙行列式$D<em>{n} = \begin{vmatrix} 1 &amp; 1 &amp; \ldots &amp; 1 \ x</em>{1} &amp; x<em>{2} &amp; \ldots &amp; x</em>{n} \ \ldots &amp; \ldots &amp; \ldots &amp; \ldots \ x<em>{1}^{n - 1} &amp; x</em>{2}^{n 1} &amp; \ldots &amp; x<em>{n}^{n - 1} \ \end{vmatrix} =  \prod</em>{1 \leq j &lt; i \leq n}^{}\,(x<em>{i} - x</em>{j})$</p>
+<p>设$A$是$n$阶方阵，$\lambda<em>{i}(i = 1,2\cdots,n)$是$A$的$n$个特征值，则<br>$|A| = \prod</em>{i = 1}^{n}\lambda_{i}$</p>
+<h4 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a>矩阵</h4><p>矩阵：$m \times n$个数$a<em>{{ij}}$排成$m$行$n$列的表格$\begin{bmatrix}  a</em>{11}\quad a<em>{12}\quad\cdots\quad a</em>{1n} \ a<em>{21}\quad a</em>{22}\quad\cdots\quad a<em>{2n} \ \quad\cdots\cdots\cdots\cdots\cdots \  a</em>{m1}\quad a<em>{m2}\quad\cdots\quad a</em>{{mn}} \ \end{bmatrix}$ 称为矩阵，简记为$A$，或者$\left( a<em>{{ij}} \right)</em>{m \times n}$ 。若$m = n$，则称$A$是$n$阶矩阵或$n$阶方阵。</p>
+<p><strong>矩阵的线性运算</strong></p>
+<p><strong>1.矩阵的加法</strong></p>
+<p>设$A = (a<em>{{ij}}),B = (b</em>{{ij}})$是两个$m \times n$矩阵，则$m \times n$ 矩阵$C = c<em>{{ij}}) = a</em>{{ij}} + b_{{ij}}$称为矩阵$A$与$B$的和，记为$A + B = C$ 。</p>
+<p><strong>2.矩阵的数乘</strong></p>
+<p>设$A = (a<em>{{ij}})$是$m \times n$矩阵，$k$是一个常数，则$m \times n$矩阵$(ka</em>{{ij}})$称为数$k$与矩阵$A$的数乘，记为${kA}$。</p>
+<p><strong>3.矩阵的乘法</strong></p>
+<p>设$A = (a<em>{{ij}})$是$m \times n$矩阵，$B = (b</em>{{ij}})$是$n \times s$矩阵，那么$m \times s$矩阵$C = (c<em>{{ij}})$，其中$c</em>{{ij}} = a<em>{i1}b</em>{1j} + a<em>{i2}b</em>{2j} + \cdots + a<em>{{in}}b</em>{{nj}} = \sum<em>{k =1}^{n}{a</em>{{ik}}b_{{kj}}}$称为${AB}$的乘积，记为$C = AB$ 。</p>
+<p><strong>4.</strong> $\mathbf{A}^{\mathbf{T}}$<strong>、</strong>$\mathbf{A}^{\mathbf{-1}}$<strong>、</strong>$\mathbf{A}^{\mathbf{<em>}}$<em>*三者之间的关系</em></em></p>
+<p>(1) ${(A^{T})}^{T} = A,{(AB)}^{T} = B^{T}A^{T},{(kA)}^{T} = kA^{T},{(A \pm B)}^{T} = A^{T} \pm B^{T}$</p>
+<p>(2) $\left( A^{- 1} \right)^{- 1} = A,\left( {AB} \right)^{- 1} = B^{- 1}A^{- 1},\left( {kA} \right)^{- 1} = \frac{1}{k}A^{- 1},$</p>
+<p>但 ${(A \pm B)}^{- 1} = A^{- 1} \pm B^{- 1}$不一定成立。</p>
+<p>(3) $\left( A^{<em>} \right)^{</em>} = |A|^{n - 2}\ A\ \ (n \geq 3)$，$\left({AB} \right)^{<em>} = B^{</em>}A^{<em>},$ $\left( {kA} \right)^{</em>} = k^{n -1}A^{*}{\ \ }\left( n \geq 2 \right)$</p>
+<p>但$\left( A \pm B \right)^{<em>} = A^{</em>} \pm B^{*}$不一定成立。</p>
+<p>(4) ${(A^{- 1})}^{T} = {(A^{T})}^{- 1},\ \left( A^{- 1} \right)^{<em>} ={(AA^{</em>})}^{- 1},{(A^{<em>})}^{T} = \left( A^{T} \right)^{</em>}$</p>
+<p><strong>5.有关</strong>$\mathbf{A}^{\mathbf{<em>}}$<em>*的结论</em></em></p>
+<p>(1) $AA^{<em>} = A^{</em>}A = |A|E$</p>
+<p>(2) $|A^{<em>}| = |A|^{n - 1}\ (n \geq 2),\ \ \ \ {(kA)}^{</em>} = k^{n -1}A^{<em>},{{\ \ }\left( A^{</em>} \right)}^{*} = |A|^{n - 2}A(n \geq 3)$</p>
+<p>(3) 若$A$可逆，则$A^{<em>} = |A|A^{- 1},{(A^{</em>})}^{*} = \frac{1}{|A|}A$</p>
+<p>(4) 若$A$为$n$阶方阵，则：</p>
+<p>$r(A^*)=\begin{cases}n,\quad r(A)=n\ 1,\quad r(A)=n-1\ 0,\quad r(A)&lt;n-1\end{cases}$</p>
+<p><strong>6.有关</strong>$\mathbf{A}^{\mathbf{- 1}}$<strong>的结论</strong></p>
+<p>$A$可逆$\Leftrightarrow AB = E; \Leftrightarrow |A| \neq 0; \Leftrightarrow r(A) = n;$</p>
+<p>$\Leftrightarrow A$可以表示为初等矩阵的乘积；$\Leftrightarrow A;\Leftrightarrow Ax = 0$。</p>
+<p><strong>7.有关矩阵秩的结论</strong></p>
+<p>(1) 秩$r(A)$=行秩=列秩；</p>
+<p>(2) $r(A_{m \times n}) \leq \min(m,n);$</p>
+<p>(3) $A \neq 0 \Rightarrow r(A) \geq 1$；</p>
+<p>(4) $r(A \pm B) \leq r(A) + r(B);$</p>
+<p>(5) 初等变换不改变矩阵的秩</p>
+<p>(6) $r(A) + r(B) - n \leq r(AB) \leq \min(r(A),r(B)),$特别若$AB = O$<br>则：$r(A) + r(B) \leq n$</p>
+<p>(7) 若$A^{- 1}$存在$\Rightarrow r(AB) = r(B);$ 若$B^{- 1}$存在<br>$\Rightarrow r(AB) = r(A);$</p>
+<p>若$r(A<em>{m \times n}) = n \Rightarrow r(AB) = r(B);$ 若$r(A</em>{m \times s}) = n\Rightarrow r(AB) = r\left( A \right)$。</p>
+<p>(8) $r(A_{m \times s}) = n \Leftrightarrow Ax = 0$只有零解</p>
+<p><strong>8.分块求逆公式</strong></p>
+<p>$\begin{pmatrix} A &amp; O \ O &amp; B \ \end{pmatrix}^{- 1} = \begin{pmatrix} A^{-1} &amp; O \ O &amp; B^{- 1} \ \end{pmatrix}$； $\begin{pmatrix} A &amp; C \ O &amp; B \\end{pmatrix}^{- 1} = \begin{pmatrix} A^{- 1}&amp; - A^{- 1}CB^{- 1} \ O &amp; B^{- 1} \ \end{pmatrix}$；</p>
+<p>$\begin{pmatrix} A &amp; O \ C &amp; B \ \end{pmatrix}^{- 1} = \begin{pmatrix}  A^{- 1}&amp;{O} \   - B^{- 1}CA^{- 1} &amp; B^{- 1} \\end{pmatrix}$； $\begin{pmatrix} O &amp; A \ B &amp; O \ \end{pmatrix}^{- 1} =\begin{pmatrix} O &amp; B^{- 1} \ A^{- 1} &amp; O \ \end{pmatrix}$</p>
+<p>这里$A$，$B$均为可逆方阵。</p>
+<h4 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h4><p><strong>1.有关向量组的线性表示</strong></p>
+<p>(1)$\alpha<em>{1},\alpha</em>{2},\cdots,\alpha_{s}$线性相关$\Leftrightarrow$至少有一个向量可以用其余向量线性表示。</p>
+<p>(2)$\alpha<em>{1},\alpha</em>{2},\cdots,\alpha<em>{s}$线性无关，$\alpha</em>{1},\alpha<em>{2},\cdots,\alpha</em>{s}$，$\beta$线性相关$\Leftrightarrow \beta$可以由$\alpha<em>{1},\alpha</em>{2},\cdots,\alpha_{s}$唯一线性表示。</p>
+<p>(3) $\beta$可以由$\alpha<em>{1},\alpha</em>{2},\cdots,\alpha<em>{s}$线性表示<br>$\Leftrightarrow r(\alpha</em>{1},\alpha<em>{2},\cdots,\alpha</em>{s}) =r(\alpha<em>{1},\alpha</em>{2},\cdots,\alpha_{s},\beta)$ 。</p>
+<p><strong>2.有关向量组的线性相关性</strong></p>
+<p>(1)部分相关，整体相关；整体无关，部分无关.</p>
+<p>(2) ① $n$个$n$维向量<br>$\alpha<em>{1},\alpha</em>{2}\cdots\alpha<em>{n}$线性无关$\Leftrightarrow \left|\left\lbrack \alpha</em>{1}\alpha<em>{2}\cdots\alpha</em>{n} \right\rbrack \right| \neq0$， $n$个$n$维向量$\alpha<em>{1},\alpha</em>{2}\cdots\alpha<em>{n}$线性相关<br>$\Leftrightarrow |\lbrack\alpha</em>{1},\alpha<em>{2},\cdots,\alpha</em>{n}\rbrack| = 0$<br>。</p>
+<p>② $n + 1$个$n$维向量线性相关。</p>
+<p>③ 若$\alpha<em>{1},\alpha</em>{2}\cdots\alpha_{S}$线性无关，则添加分量后仍线性无关；或一组向量线性相关，去掉某些分量后仍线性相关。</p>
+<p><strong>3.有关向量组的线性表示</strong></p>
+<p>(1) $\alpha<em>{1},\alpha</em>{2},\cdots,\alpha_{s}$线性相关$\Leftrightarrow$至少有一个向量可以用其余向量线性表示。</p>
+<p>(2) $\alpha<em>{1},\alpha</em>{2},\cdots,\alpha<em>{s}$线性无关，$\alpha</em>{1},\alpha<em>{2},\cdots,\alpha</em>{s}$，$\beta$线性相关$\Leftrightarrow\beta$ 可以由$\alpha<em>{1},\alpha</em>{2},\cdots,\alpha_{s}$唯一线性表示。</p>
+<p>(3) $\beta$可以由$\alpha<em>{1},\alpha</em>{2},\cdots,\alpha<em>{s}$线性表示<br>$\Leftrightarrow r(\alpha</em>{1},\alpha<em>{2},\cdots,\alpha</em>{s}) =r(\alpha<em>{1},\alpha</em>{2},\cdots,\alpha_{s},\beta)$</p>
+<p><strong>4.向量组的秩与矩阵的秩之间的关系</strong></p>
+<p>设$r(A_{m \times n}) =r$，则$A$的秩$r(A)$与$A$的行列向量组的线性相关性关系为：</p>
+<p>(1) 若$r(A_{m \times n}) = r = m$，则$A$的行向量组线性无关。</p>
+<p>(2) 若$r(A_{m \times n}) = r &lt; m$，则$A$的行向量组线性相关。</p>
+<p>(3) 若$r(A_{m \times n}) = r = n$，则$A$的列向量组线性无关。</p>
+<p>(4) 若$r(A_{m \times n}) = r &lt; n$，则$A$的列向量组线性相关。</p>
+<p><strong>5.</strong>$\mathbf{n}$<strong>维向量空间的基变换公式及过渡矩阵</strong></p>
+<p>若$\alpha<em>{1},\alpha</em>{2},\cdots,\alpha<em>{n}$与$\beta</em>{1},\beta<em>{2},\cdots,\beta</em>{n}$是向量空间$V$的两组基，则基变换公式为：</p>
+<p>$(\beta<em>{1},\beta</em>{2},\cdots,\beta<em>{n}) = (\alpha</em>{1},\alpha<em>{2},\cdots,\alpha</em>{n})\begin{bmatrix}  c<em>{11}&amp; c</em>{12}&amp; \cdots &amp; c<em>{1n} \  c</em>{21}&amp; c<em>{22}&amp;\cdots &amp; c</em>{2n} \ \cdots &amp; \cdots &amp; \cdots &amp; \cdots \  c<em>{n1}&amp; c</em>{n2} &amp; \cdots &amp; c<em>{{nn}} \\end{bmatrix} = (\alpha</em>{1},\alpha<em>{2},\cdots,\alpha</em>{n})C$</p>
+<p>其中$C$是可逆矩阵，称为由基$\alpha<em>{1},\alpha</em>{2},\cdots,\alpha<em>{n}$到基$\beta</em>{1},\beta<em>{2},\cdots,\beta</em>{n}$的过渡矩阵。</p>
+<p><strong>6.坐标变换公式</strong></p>
+<p>若向量$\gamma$在基$\alpha<em>{1},\alpha</em>{2},\cdots,\alpha<em>{n}$与基$\beta</em>{1},\beta<em>{2},\cdots,\beta</em>{n}$的坐标分别是<br>$X = {(x<em>{1},x</em>{2},\cdots,x_{n})}^{T}$，</p>
+<p>$Y = \left( y<em>{1},y</em>{2},\cdots,y<em>{n} \right)^{T}$ 即： $\gamma =x</em>{1}\alpha<em>{1} + x</em>{2}\alpha<em>{2} + \cdots + x</em>{n}\alpha<em>{n} = y</em>{1}\beta<em>{1} +y</em>{2}\beta<em>{2} + \cdots + y</em>{n}\beta<em>{n}$，则向量坐标变换公式为$X = CY$ 或$Y = C^{- 1}X$，其中$C$是从基$\alpha</em>{1},\alpha<em>{2},\cdots,\alpha</em>{n}$到基$\beta<em>{1},\beta</em>{2},\cdots,\beta_{n}$的过渡矩阵。</p>
+<p><strong>7.向量的内积</strong></p>
+<p>$(\alpha,\beta) = a<em>{1}b</em>{1} + a<em>{2}b</em>{2} + \cdots + a<em>{n}b</em>{n} = \alpha^{T}\beta = \beta^{T}\alpha$</p>
+<p><strong>8.Schmidt 正交化</strong></p>
+<p>若$\alpha<em>{1},\alpha</em>{2},\cdots,\alpha<em>{s}$线性无关，则可构造$\beta</em>{1},\beta<em>{2},\cdots,\beta</em>{s}$使其两两正交，且$\beta<em>{i}$仅是$\alpha</em>{1},\alpha<em>{2},\cdots,\alpha</em>{i}$的线性组合$(i= 1,2,\cdots,n)$，再把$\beta<em>{i}$单位化，记$\gamma</em>{i} =\frac{\beta<em>{i}}{\left| \beta</em>{i}\right|}$，则$\gamma<em>{1},\gamma</em>{2},\cdots,\gamma<em>{i}$是规范正交向量组。其中<br>$\beta</em>{1} = \alpha<em>{1}$， $\beta</em>{2} = \alpha<em>{2} -\frac{(\alpha</em>{2},\beta<em>{1})}{(\beta</em>{1},\beta<em>{1})}\beta</em>{1}$ ， $\beta<em>{3} =\alpha</em>{3} - \frac{(\alpha<em>{3},\beta</em>{1})}{(\beta<em>{1},\beta</em>{1})}\beta<em>{1} -\frac{(\alpha</em>{3},\beta<em>{2})}{(\beta</em>{2},\beta<em>{2})}\beta</em>{2}$ ，</p>
+<p>…………</p>
+<p>$\beta<em>{s} = \alpha</em>{s} - \frac{(\alpha<em>{s},\beta</em>{1})}{(\beta<em>{1},\beta</em>{1})}\beta<em>{1} - \frac{(\alpha</em>{s},\beta<em>{2})}{(\beta</em>{2},\beta<em>{2})}\beta</em>{2} - \cdots - \frac{(\alpha<em>{s},\beta</em>{s - 1})}{(\beta<em>{s - 1},\beta</em>{s - 1})}\beta_{s - 1}$</p>
+<p><strong>9.正交基及规范正交基</strong></p>
+<p>向量空间一组基中的向量如果两两正交，就称为正交基；若正交基中每个向量都是单位向量，就称其为规范正交基。</p>
+<h4 id="线性方程组"><a href="#线性方程组" class="headerlink" title="线性方程组"></a>线性方程组</h4><p><strong>1．克莱姆法则</strong></p>
+<p>线性方程组$\begin{cases}  a<em>{11}x</em>{1} + a<em>{12}x</em>{2} + \cdots +a<em>{1n}x</em>{n} = b<em>{1} \   a</em>{21}x<em>{1} + a</em>{22}x<em>{2} + \cdots + a</em>{2n}x<em>{n} =b</em>{2} \   \quad\cdots\cdots\cdots\cdots\cdots\cdots\cdots\cdots\cdots \ a<em>{n1}x</em>{1} + a<em>{n2}x</em>{2} + \cdots + a<em>{{nn}}x</em>{n} = b<em>{n} \ \end{cases}$，如果系数行列式$D = \left| A \right| \neq 0$，则方程组有唯一解，$x</em>{1} = \frac{D<em>{1}}{D},x</em>{2} = \frac{D<em>{2}}{D},\cdots,x</em>{n} =\frac{D<em>{n}}{D}$，其中$D</em>{j}$是把$D$中第$j$列元素换成方程组右端的常数列所得的行列式。</p>
+<p><strong>2.</strong> $n$阶矩阵$A$可逆$\Leftrightarrow Ax = 0$只有零解。$\Leftrightarrow\forall b,Ax = b$总有唯一解，一般地，$r(A_{m \times n}) = n \Leftrightarrow Ax= 0$只有零解。</p>
+<p><strong>3.非奇次线性方程组有解的充分必要条件，线性方程组解的性质和解的结构</strong></p>
+<p>(1) 设$A$为$m \times n$矩阵，若$r(A_{m \times n}) = m$，则对$Ax =b$而言必有$r(A) = r(A \vdots b) = m$，从而$Ax = b$有解。</p>
+<p>(2) 设$x<em>{1},x</em>{2},\cdots x<em>{s}$为$Ax = b$的解，则$k</em>{1}x<em>{1} + k</em>{2}x<em>{2}\cdots + k</em>{s}x<em>{s}$当$k</em>{1} + k<em>{2} + \cdots + k</em>{s} = 1$时仍为$Ax =b$的解；但当$k<em>{1} + k</em>{2} + \cdots + k<em>{s} = 0$时，则为$Ax =0$的解。特别$\frac{x</em>{1} + x<em>{2}}{2}$为$Ax = b$的解；$2x</em>{3} - (x<em>{1} +x</em>{2})$为$Ax = 0$的解。</p>
+<p>(3) 非齐次线性方程组${Ax} = b$无解$\Leftrightarrow r(A) + 1 =r(\overline{A}) \Leftrightarrow b$不能由$A$的列向量$\alpha<em>{1},\alpha</em>{2},\cdots,\alpha_{n}$线性表示。</p>
+<p><strong>4.奇次线性方程组的基础解系和通解，解空间，非奇次线性方程组的通解</strong></p>
+<p>(1) 齐次方程组${Ax} = 0$恒有解(必有零解)。当有非零解时，由于解向量的任意线性组合仍是该齐次方程组的解向量，因此${Ax}= 0$的全体解向量构成一个向量空间，称为该方程组的解空间，解空间的维数是$n - r(A)$，解空间的一组基称为齐次方程组的基础解系。</p>
+<p>(2) $\eta<em>{1},\eta</em>{2},\cdots,\eta_{t}$是${Ax} = 0$的基础解系，即：</p>
+<ol>
+<li><p>$\eta<em>{1},\eta</em>{2},\cdots,\eta_{t}$是${Ax} = 0$的解；</p>
+</li>
+<li><p>$\eta<em>{1},\eta</em>{2},\cdots,\eta_{t}$线性无关；</p>
+</li>
+<li><p>${Ax} = 0$的任一解都可以由$\eta<em>{1},\eta</em>{2},\cdots,\eta<em>{t}$线性表出.<br>$k</em>{1}\eta<em>{1} + k</em>{2}\eta<em>{2} + \cdots + k</em>{t}\eta<em>{t}$是${Ax} = 0$的通解，其中$k</em>{1},k<em>{2},\cdots,k</em>{t}$是任意常数。</p>
+</li>
+</ol>
+<h4 id="矩阵的特征值和特征向量"><a href="#矩阵的特征值和特征向量" class="headerlink" title="矩阵的特征值和特征向量"></a>矩阵的特征值和特征向量</h4><p><strong>1.矩阵的特征值和特征向量的概念及性质</strong></p>
+<p>(1) 设$\lambda$是$A$的一个特征值，则 ${kA},{aA} + {bE},A^{2},A^{m},f(A),A^{T},A^{- 1},A^{*}$有一个特征值分别为<br>${kλ},{aλ} + b,\lambda^{2},\lambda^{m},f(\lambda),\lambda,\lambda^{- 1},\frac{|A|}{\lambda},$且对应特征向量相同（$A^{T}$ 例外）。</p>
+<p>(2)若$\lambda<em>{1},\lambda</em>{2},\cdots,\lambda<em>{n}$为$A$的$n$个特征值，则$\sum</em>{i= 1}^{n}\lambda<em>{i} = \sum</em>{i = 1}^{n}a<em>{{ii}},\prod</em>{i = 1}^{n}\lambda_{i}= |A|$ ,从而$|A| \neq 0 \Leftrightarrow A$没有特征值。</p>
+<p>(3)设$\lambda<em>{1},\lambda</em>{2},\cdots,\lambda<em>{s}$为$A$的$s$个特征值，对应特征向量为$\alpha</em>{1},\alpha<em>{2},\cdots,\alpha</em>{s}$，</p>
+<p>若: $\alpha = k<em>{1}\alpha</em>{1} + k<em>{2}\alpha</em>{2} + \cdots + k<em>{s}\alpha</em>{s}$ ,</p>
+<p>则: $A^{n}\alpha = k<em>{1}A^{n}\alpha</em>{1} + k<em>{2}A^{n}\alpha</em>{2} + \cdots +k<em>{s}A^{n}\alpha</em>{s} = k<em>{1}\lambda</em>{1}^{n}\alpha<em>{1} +k</em>{2}\lambda<em>{2}^{n}\alpha</em>{2} + \cdots k<em>{s}\lambda</em>{s}^{n}\alpha_{s}$ 。</p>
+<p><strong>2.相似变换、相似矩阵的概念及性质</strong></p>
+<p>(1) 若$A \sim B$，则</p>
+<ol>
+<li><p>$A^{T} \sim B^{T},A^{- 1} \sim B^{- 1},,A^{<em>} \sim B^{</em>}$</p>
+</li>
+<li><p>$|A| = |B|,\sum<em>{i = 1}^{n}A</em>{{ii}} = \sum<em>{i =1}^{n}b</em>{{ii}},r(A) = r(B)$</p>
+</li>
+<li><p>$|\lambda E - A| = |\lambda E - B|$，对$\forall\lambda$成立</p>
+</li>
+</ol>
+<p><strong>3.矩阵可相似对角化的充分必要条件</strong></p>
+<p>(1)设$A$为$n$阶方阵，则$A$可对角化$\Leftrightarrow$对每个$k<em>{i}$重根特征值$\lambda</em>{i}$，有$n-r(\lambda<em>{i}E - A) = k</em>{i}$</p>
+<p>(2) 设$A$可对角化，则由$P^{- 1}{AP} = \Lambda,$有$A = {PΛ}P^{-1}$，从而$A^{n} = P\Lambda^{n}P^{- 1}$</p>
+<p>(3) 重要结论</p>
+<ol>
+<li><p>若$A \sim B,C \sim D$，则$\begin{bmatrix}  A &amp; O \ O &amp; C \\end{bmatrix} \sim \begin{bmatrix} B &amp; O \  O &amp; D \\end{bmatrix}$.</p>
+</li>
+<li><p>若$A \sim B$，则$f(A) \sim f(B),\left| f(A) \right| \sim \left| f(B)\right|$，其中$f(A)$为关于$n$阶方阵$A$的多项式。</p>
+</li>
+<li><p>若$A$为可对角化矩阵，则其非零特征值的个数(重根重复计算)＝秩($A$)</p>
+</li>
+</ol>
+<p><strong>4.实对称矩阵的特征值、特征向量及相似对角阵</strong></p>
+<p>(1)相似矩阵：设$A,B$为两个$n$阶方阵，如果存在一个可逆矩阵$P$，使得$B =P^{- 1}{AP}$成立，则称矩阵$A$与$B$相似，记为$A \sim B$。</p>
+<p>(2)相似矩阵的性质：如果$A \sim B$则有：</p>
+<ol>
+<li><p>$A^{T} \sim B^{T}$</p>
+</li>
+<li><p>$A^{- 1} \sim B^{- 1}$ （若$A$，$B$均可逆）</p>
+</li>
+<li><p>$A^{k} \sim B^{k}$ （$k$为正整数）</p>
+</li>
+<li><p>$\left| {λE} - A \right| = \left| {λE} - B \right|$，从而$A,B$<br>有相同的特征值</p>
+</li>
+<li><p>$\left| A \right| = \left| B \right|$，从而$A,B$同时可逆或者不可逆</p>
+</li>
+<li><p>秩$\left( A \right) =$秩$\left( B \right),\left| {λE} - A \right| =\left| {λE} - B \right|$，$A,B$不一定相似</p>
+</li>
+</ol>
+<h4 id="二次型"><a href="#二次型" class="headerlink" title="二次型"></a>二次型</h4><p><strong>1.</strong>$\mathbf{n}$<strong>个变量</strong>$\mathbf{x}<em>{\mathbf{1}}\mathbf{,}\mathbf{x}</em>{\mathbf{2}}\mathbf{,\cdots,}\mathbf{x}_{\mathbf{n}}$<strong>的二次齐次函数</strong></p>
+<p>$f(x<em>{1},x</em>{2},\cdots,x<em>{n}) = \sum</em>{i = 1}^{n}{\sum<em>{j =1}^{n}{a</em>{{ij}}x<em>{i}y</em>{j}}}$，其中$a<em>{{ij}} = a</em>{{ji}}(i,j =1,2,\cdots,n)$，称为$n$元二次型，简称二次型. 若令$x = \ \begin{bmatrix}x<em>{1} \ x</em>{1} \  \vdots \ x<em>{n} \ \end{bmatrix},A = \begin{bmatrix}  a</em>{11}&amp; a<em>{12}&amp; \cdots &amp; a</em>{1n} \  a<em>{21}&amp; a</em>{22}&amp; \cdots &amp; a<em>{2n} \ \cdots &amp;\cdots &amp;\cdots &amp;\cdots \  a</em>{n1}&amp; a<em>{n2} &amp; \cdots &amp; a</em>{{nn}} \\end{bmatrix}$,这二次型$f$可改写成矩阵向量形式$f =x^{T}{Ax}$。其中$A$称为二次型矩阵，因为$a<em>{{ij}} =a</em>{{ji}}(i,j =1,2,\cdots,n)$，所以二次型矩阵均为对称矩阵，且二次型与对称矩阵一一对应，并把矩阵$A$的秩称为二次型的秩。</p>
+<p><strong>2.惯性定理，二次型的标准形和规范形</strong></p>
+<p>(1) 惯性定理</p>
+<p>对于任一二次型，不论选取怎样的合同变换使它化为仅含平方项的标准型，其正负惯性指数与所选变换无关，这就是所谓的惯性定理。</p>
+<p>(2) 标准形</p>
+<p>二次型$f = \left( x<em>{1},x</em>{2},\cdots,x_{n} \right) =x^{T}{Ax}$经过合同变换$x = {Cy}$化为$f = x^{T}{Ax} =y^{T}C^{T}{AC}$</p>
+<p>$y = \sum<em>{i = 1}^{r}{d</em>{i}y_{i}^{2}}$称为 $f(r \leq n)$的标准形。在一般的数域内，二次型的标准形不是唯一的，与所作的合同变换有关，但系数不为零的平方项的个数由$r(A)$唯一确定。</p>
+<p>(3) 规范形</p>
+<p>任一实二次型$f$都可经过合同变换化为规范形$f = z<em>{1}^{2} + z</em>{2}^{2} + \cdots z<em>{p}^{2} - z</em>{p + 1}^{2} - \cdots -z_{r}^{2}$，其中$r$为$A$的秩，$p$为正惯性指数，$r -p$为负惯性指数，且规范型唯一。</p>
+<p><strong>3.用正交变换和配方法化二次型为标准形，二次型及其矩阵的正定性</strong></p>
+<p>设$A$正定$\Rightarrow {kA}(k &gt; 0),A^{T},A^{- 1},A^{*}$正定；$|A| &gt;0$,$A$可逆；$a<em>{{ii}} &gt; 0$，且$|A</em>{{ii}}| &gt; 0$</p>
+<p>$A$，$B$正定$\Rightarrow A +B$正定，但${AB}$，${BA}$不一定正定</p>
+<p>$A$正定$\Leftrightarrow f(x) = x^{T}{Ax} &gt; 0,\forall x \neq 0$</p>
+<p>$\Leftrightarrow A$的各阶顺序主子式全大于零</p>
+<p>$\Leftrightarrow A$的所有特征值大于零</p>
+<p>$\Leftrightarrow A$的正惯性指数为$n$</p>
+<p>$\Leftrightarrow$存在可逆阵$P$使$A = P^{T}P$</p>
+<p>$\Leftrightarrow$存在正交矩阵$Q$，使$Q^{T}{AQ} = Q^{- 1}{AQ} =\begin{pmatrix} \lambda<em>{1} &amp; &amp; \ \begin{matrix}  &amp; \  &amp; \ \end{matrix} &amp;\ddots &amp; \  &amp; &amp; \lambda</em>{n} \ \end{pmatrix},$</p>
+<p>其中$\lambda<em>{i} &gt; 0,i = 1,2,\cdots,n.$正定$\Rightarrow {kA}(k &gt;0),A^{T},A^{- 1},A^{*}$正定； $|A| &gt; 0,A$可逆；$a</em>{{ii}} &gt;0$，且$|A_{{ii}}| &gt; 0$ 。</p>
+<h3 id="概率论和数理统计"><a href="#概率论和数理统计" class="headerlink" title="概率论和数理统计"></a>概率论和数理统计</h3><h4 id="随机事件和概率"><a href="#随机事件和概率" class="headerlink" title="随机事件和概率"></a>随机事件和概率</h4><p><strong>1.事件的关系与运算</strong></p>
+<p>(1) 子事件：$A \subset B$，若$A$发生，则$B$发生。</p>
+<p>(2) 相等事件：$A = B$，即$A \subset B$，且$B \subset A$ 。</p>
+<p>(3) 和事件：$A\bigcup B$（或$A + B$），$A$与$B$中至少有一个发生。</p>
+<p>(4) 差事件：$A - B$，$A$发生但$B$不发生。</p>
+<p>(5) 积事件：$A\bigcap B$（或${AB}$），$A$与$B$同时发生。</p>
+<p>(6) 互斥事件（互不相容）：$A\bigcap B$=$\varnothing$。</p>
+<p>(7) 互逆事件（对立事件）：<br>$A\bigcap B=\varnothing ,A\bigcup B=\Omega ,A=\bar{B},B=\bar{A}$</p>
+<p><strong>2.运算律</strong><br>(1) 交换律：$A\bigcup B=B\bigcup A,A\bigcap B=B\bigcap A$<br>(2) 结合律：$(A\bigcup B)\bigcup C=A\bigcup (B\bigcup C)$<br>(3) 分配律：$(A\bigcap B)\bigcap C=A\bigcap (B\bigcap C)$</p>
+<p><strong>3.德$\centerdot $摩根律</strong></p>
+<p>$\overline{A\bigcup B}=\bar{A}\bigcap \bar{B}$ $\overline{A\bigcap B}=\bar{A}\bigcup \bar{B}$</p>
+<p><strong>4.完全事件组</strong></p>
+<p>${{A}<em>{1}}{{A}</em>{2}}\cdots {{A}<em>{n}}$两两互斥，且和事件为必然事件，即${{A}</em>{i}}\bigcap {{A}_{j}}=\varnothing, i\ne j ,\underset{i=1}{\overset{n}{\mathop \bigcup }}\,=\Omega$</p>
+<p><strong>5.概率的基本公式</strong><br><strong>(1)条件概率:</strong><br>$P(B|A)=\frac{P(AB)}{P(A)}$,表示$A$发生的条件下，$B$发生的概率。</p>
+<p><strong>(2)全概率公式：</strong><br>$P(A)=\sum\limits<em>{i=1}^{n}{P(A|{{B}</em>{i}})P({{B}<em>{i}}),{{B}</em>{i}}{{B}<em>{j}}}=\varnothing ,i\ne j,\underset{i=1}{\overset{n}{\mathop{\bigcup }}}\,{{B}</em>{i}}=\Omega$</p>
+<p><strong>(3) Bayes 公式：</strong></p>
+<p>$P({{B}<em>{j}}|A)=\frac{P(A|{{B}</em>{j}})P({{B}<em>{j}})}{\sum\limits</em>{i=1}^{n}{P(A|{{B}<em>{i}})P({{B}</em>{i}})}},j=1,2,\cdots ,n$<br>注：上述公式中事件${{B}_{i}}$的个数可为可列个。</p>
+<p><strong>(4)乘法公式：</strong><br>$P({{A}<em>{1}}{{A}</em>{2}})=P({{A}<em>{1}})P({{A}</em>{2}}|{{A}<em>{1}})=P({{A}</em>{2}})P({{A}<em>{1}}|{{A}</em>{2}})$<br>$P({{A}<em>{1}}{{A}</em>{2}}\cdots {{A}<em>{n}})=P({{A}</em>{1}})P({{A}<em>{2}}|{{A}</em>{1}})P({{A}<em>{3}}|{{A}</em>{1}}{{A}<em>{2}})\cdots P({{A}</em>{n}}|{{A}<em>{1}}{{A}</em>{2}}\cdots {{A}_{n-1}})$</p>
+<p><strong>6.事件的独立性</strong></p>
+<p>(1)$A$与$B$相互独立</p>
+<p>$\Leftrightarrow P(AB)=P(A)P(B)$</p>
+<p>(2)$A$，$B$，$C$两两独立<br>$\Leftrightarrow P(AB)=P(A)P(B)$;$P(BC)=P(B)P(C)$ ;$P(AC)=P(A)P(C)$;</p>
+<p>(3)$A$，$B$，$C$相互独立<br>$\Leftrightarrow P(AB)=P(A)P(B)$; $P(BC)=P(B)P(C)$ ;<br>$P(AC)=P(A)P(C)$ ; $P(ABC)=P(A)P(B)P(C)$</p>
+<p><strong>7.独立重复试验</strong></p>
+<p>将某试验独立重复$n$次，若每次实验中事件 A 发生的概率为$p$，则$n$次试验中$A$发生$k$次的概率为：<br>$P(X=k)=C_{n}^{k}{{p}^{k}}{{(1-p)}^{n-k}}$</p>
+<p><strong>8.重要公式与结论</strong><br>$(1)P(\bar{A})=1-P(A)$</p>
+<p>$(2)P(A\bigcup B)=P(A)+P(B)-P(AB)$<br>$P(A\bigcup B\bigcup C)=P(A)+P(B)+P(C)-P(AB)-P(BC)-P(AC)+P(ABC)$</p>
+<p>$(3)P(A-B)=P(A)-P(AB)$</p>
+<p>$(4)P(A\bar{B})=P(A)-P(AB),P(A)=P(AB)+P(A\bar{B}),$<br>$P(A\bigcup B)=P(A)+P(\bar{A}B)=P(AB)+P(A\bar{B})+P(\bar{A}B)$</p>
+<p>(5)条件概率$P(\centerdot |B)$满足概率的所有性质，<br>例如：. $P({{\bar{A}}<em>{1}}|B)=1-P({{A}</em>{1}}|B)$<br>$P({{A}<em>{1}}\bigcup {{A}</em>{2}}|B)=P({{A}<em>{1}}|B)+P({{A}</em>{2}}|B)-P({{A}<em>{1}}{{A}</em>{2}}|B)$<br>$P({{A}<em>{1}}{{A}</em>{2}}|B)=P({{A}<em>{1}}|B)P({{A}</em>{2}}|{{A}_{1}}B)$</p>
+<p>(6)若${{A}<em>{1}},{{A}</em>{2}},\cdots ,{{A}<em>{n}}$相互独立，则$P(\bigcap\limits</em>{i=1}^{n}{{{A}<em>{i}}})=\prod\limits</em>{i=1}^{n}{P({{A}<em>{i}})},$<br>$P(\bigcup\limits</em>{i=1}^{n}{{{A}<em>{i}}})=\prod\limits</em>{i=1}^{n}{(1-P({{A}_{i}}))}$</p>
+<p>(7)互斥、互逆与独立性之间的关系：<br>$A$与$B$互逆$\Rightarrow$ $A$与$B$互斥，但反之不成立，$A$与$B$互斥（或互逆）且均非零概率事件$\Rightarrow $$A$与$B$不独立.</p>
+<p>(8)若${{A}<em>{1}},{{A}</em>{2}},\cdots ,{{A}<em>{m}},{{B}</em>{1}},{{B}<em>{2}},\cdots ,{{B}</em>{n}}$相互独立，则$f({{A}<em>{1}},{{A}</em>{2}},\cdots ,{{A}<em>{m}})$与$g({{B}</em>{1}},{{B}<em>{2}},\cdots ,{{B}</em>{n}})$也相互独立，其中$f(\centerdot ),g(\centerdot )$分别表示对相应事件做任意事件运算后所得的事件，另外，概率为 1（或 0）的事件与任何事件相互独立.</p>
+<h4 id="随机变量及其概率分布"><a href="#随机变量及其概率分布" class="headerlink" title="随机变量及其概率分布"></a>随机变量及其概率分布</h4><p><strong>1.随机变量及概率分布</strong></p>
+<p>取值带有随机性的变量，严格地说是定义在样本空间上，取值于实数的函数称为随机变量，概率分布通常指分布函数或分布律</p>
+<p><strong>2.分布函数的概念与性质</strong></p>
+<p>定义： $F(x) = P(X \leq x), - \infty &lt; x &lt; + \infty$</p>
+<p>性质：(1)$0 \leq F(x) \leq 1$</p>
+<p>(2) $F(x)$单调不减</p>
+<p>(3) 右连续$F(x + 0) = F(x)$</p>
+<p>(4) $F( - \infty) = 0,F( + \infty) = 1$</p>
+<p><strong>3.离散型随机变量的概率分布</strong></p>
+<p>$P(X = x<em>{i}) = p</em>{i},i = 1,2,\cdots,n,\cdots\quad\quad p<em>{i} \geq 0,\sum</em>{i =1}^{\infty}p_{i} = 1$</p>
+<p><strong>4.连续型随机变量的概率密度</strong></p>
+<p>概率密度$f(x)$;非负可积，且:</p>
+<p>(1)$f(x) \geq 0,$</p>
+<p>(2)$\int_{- \infty}^{+\infty}{f(x){dx} = 1}$</p>
+<p>(3)$x$为$f(x)$的连续点，则:</p>
+<p>$f(x) = F’(x)$分布函数$F(x) = \int_{- \infty}^{x}{f(t){dt}}$</p>
+<p><strong>5.常见分布</strong></p>
+<p>(1) 0-1 分布:$P(X = k) = p^{k}{(1 - p)}^{1 - k},k = 0,1$</p>
+<p>(2) 二项分布:$B(n,p)$： $P(X = k) = C_{n}^{k}p^{k}{(1 - p)}^{n - k},k =0,1,\cdots,n$</p>
+<p>(3) <strong>Poisson</strong>分布:$p(\lambda)$： $P(X = k) = \frac{\lambda^{k}}{k!}e^{-\lambda},\lambda &gt; 0,k = 0,1,2\cdots$</p>
+<p>(4) 均匀分布$U(a,b)$：$f(x) = { \begin{matrix}  &amp; \frac{1}{b - a},a &lt; x&lt; b \  &amp; 0, \ \end{matrix}$</p>
+<p>(5) 正态分布:$N(\mu,\sigma^{2}):$ $\varphi(x) =\frac{1}{\sqrt{2\pi}\sigma}e^{- \frac{{(x - \mu)}^{2}}{2\sigma^{2}}},\sigma &gt; 0,\infty &lt; x &lt; + \infty$</p>
+<p>(6)指数分布:$E(\lambda):f(x) ={ \begin{matrix}  &amp; \lambda e^{-{λx}},x &gt; 0,\lambda &gt; 0 \  &amp; 0, \ \end{matrix}$</p>
+<p>(7)几何分布:$G(p):P(X = k) = {(1 - p)}^{k - 1}p,0 &lt; p &lt; 1,k = 1,2,\cdots.$</p>
+<p>(8)超几何分布: $H(N,M,n):P(X = k) = \frac{C<em>{M}^{k}C</em>{N - M}^{n -k}}{C_{N}^{n}},k =0,1,\cdots,min(n,M)$</p>
+<p><strong>6.随机变量函数的概率分布</strong></p>
+<p>(1)离散型：$P(X = x<em>{1}) = p</em>{i},Y = g(X)$</p>
+<p>则: $P(Y = y<em>{j}) = \sum</em>{g(x<em>{i}) = y</em>{i}}^{}{P(X = x_{i})}$</p>
+<p>(2)连续型：$X\tilde{\ }f_{X}(x),Y = g(x)$</p>
+<p>则:$F<em>{y}(y) = P(Y \leq y) = P(g(X) \leq y) = \int</em>{g(x) \leq y}^{}{f<em>{x}(x)dx}$， $f</em>{Y}(y) = F’_{Y}(y)$</p>
+<p><strong>7.重要公式与结论</strong></p>
+<p>(1) $X\sim N(0,1) \Rightarrow \varphi(0) = \frac{1}{\sqrt{2\pi}},\Phi(0) =\frac{1}{2},$ $\Phi( - a) = P(X \leq - a) = 1 - \Phi(a)$</p>
+<p>(2) $X\sim N\left( \mu,\sigma^{2} \right) \Rightarrow \frac{X -\mu}{\sigma}\sim N\left( 0,1 \right),P(X \leq a) = \Phi(\frac{a -\mu}{\sigma})$</p>
+<p>(3) $X\sim E(\lambda) \Rightarrow P(X &gt; s + t|X &gt; s) = P(X &gt; t)$</p>
+<p>(4) $X\sim G(p) \Rightarrow P(X = m + k|X &gt; m) = P(X = k)$</p>
+<p>(5) 离散型随机变量的分布函数为阶梯间断函数；连续型随机变量的分布函数为连续函数，但不一定为处处可导函数。</p>
+<p>(6) 存在既非离散也非连续型随机变量。</p>
+<h4 id="多维随机变量及其分布"><a href="#多维随机变量及其分布" class="headerlink" title="多维随机变量及其分布"></a>多维随机变量及其分布</h4><p><strong>1.二维随机变量及其联合分布</strong></p>
+<p>由两个随机变量构成的随机向量$(X,Y)$， 联合分布为$F(x,y) = P(X \leq x,Y \leq y)$</p>
+<p><strong>2.二维离散型随机变量的分布</strong></p>
+<p>(1) 联合概率分布律 $P{ X = x<em>{i},Y = y</em>{j}} = p_{{ij}};i,j =1,2,\cdots$</p>
+<p>(2) 边缘分布律 $p<em>{i \cdot} = \sum</em>{j = 1}^{\infty}p<em>{{ij}},i =1,2,\cdots$ $p</em>{\cdot j} = \sum<em>{i}^{\infty}p</em>{{ij}},j = 1,2,\cdots$</p>
+<p>(3) 条件分布律 $P{ X = x<em>{i}|Y = y</em>{j}} = \frac{p<em>{{ij}}}{p</em>{\cdot j}}$<br>$P{ Y = y<em>{j}|X = x</em>{i}} = \frac{p<em>{{ij}}}{p</em>{i \cdot}}$</p>
+<p><strong>3. 二维连续性随机变量的密度</strong></p>
+<p>(1) 联合概率密度$f(x,y):$</p>
+<ol>
+<li><p>$f(x,y) \geq 0$</p>
+</li>
+<li><p>$\int<em>{- \infty}^{+ \infty}{\int</em>{- \infty}^{+ \infty}{f(x,y)dxdy}} = 1$</p>
+</li>
+</ol>
+<p>(2) 分布函数：$F(x,y) = \int<em>{- \infty}^{x}{\int</em>{- \infty}^{y}{f(u,v)dudv}}$</p>
+<p>(3) 边缘概率密度： $f<em>{X}\left( x \right) = \int</em>{- \infty}^{+ \infty}{f\left( x,y \right){dy}}$ $f<em>{Y}(y) = \int</em>{- \infty}^{+ \infty}{f(x,y)dx}$</p>
+<p>(4) 条件概率密度：$f<em>{X|Y}\left( x \middle| y \right) = \frac{f\left( x,y \right)}{f</em>{Y}\left( y \right)}$ $f<em>{Y|X}(y|x) = \frac{f(x,y)}{f</em>{X}(x)}$</p>
+<p><strong>4.常见二维随机变量的联合分布</strong></p>
+<p>(1) 二维均匀分布：$(x,y) \sim U(D)$ ,$f(x,y) = \begin{cases} \frac{1}{S(D)},(x,y) \in D \   0,其他  \end{cases}$</p>
+<p>(2) 二维正态分布：$(X,Y)\sim N(\mu<em>{1},\mu</em>{2},\sigma<em>{1}^{2},\sigma</em>{2}^{2},\rho)$,$(X,Y)\sim N(\mu<em>{1},\mu</em>{2},\sigma<em>{1}^{2},\sigma</em>{2}^{2},\rho)$</p>
+<p>$f(x,y) = \frac{1}{2\pi\sigma<em>{1}\sigma</em>{2}\sqrt{1 - \rho^{2}}}.\exp\left{ \frac{- 1}{2(1 - \rho^{2})}\lbrack\frac{{(x - \mu<em>{1})}^{2}}{\sigma</em>{1}^{2}} - 2\rho\frac{(x - \mu<em>{1})(y - \mu</em>{2})}{\sigma<em>{1}\sigma</em>{2}} + \frac{{(y - \mu<em>{2})}^{2}}{\sigma</em>{2}^{2}}\rbrack \right}$</p>
+<p><strong>5.随机变量的独立性和相关性</strong></p>
+<p>$X$和$Y$的相互独立:$\Leftrightarrow F\left( x,y \right) = F<em>{X}\left( x \right)F</em>{Y}\left( y \right)$:</p>
+<p>$\Leftrightarrow p<em>{{ij}} = p</em>{i \cdot} \cdot p<em>{\cdot j}$（离散型）<br>$\Leftrightarrow f\left( x,y \right) = f</em>{X}\left( x \right)f_{Y}\left( y \right)$（连续型）</p>
+<p>$X$和$Y$的相关性：</p>
+<p>相关系数$\rho_{{XY}} = 0$时，称$X$和$Y$不相关，<br>否则称$X$和$Y$相关</p>
+<p><strong>6.两个随机变量简单函数的概率分布</strong></p>
+<p>离散型： $P\left( X = x<em>{i},Y = y</em>{i} \right) = p_{{ij}},Z = g\left( X,Y \right)$ 则：</p>
+<p>$P(Z = z<em>{k}) = P\left{ g\left( X,Y \right) = z</em>{k} \right} = \sum<em>{g\left( x</em>{i},y<em>{i} \right) = z</em>{k}}^{}{P\left( X = x<em>{i},Y = y</em>{j} \right)}$</p>
+<p>连续型： $\left( X,Y \right) \sim f\left( x,y \right),Z = g\left( X,Y \right)$<br>则：</p>
+<p>$F<em>{z}\left( z \right) = P\left{ g\left( X,Y \right) \leq z \right} = \iint</em>{g(x,y) \leq z}^{}{f(x,y)dxdy}$，$f<em>{z}(z) = F’</em>{z}(z)$</p>
+<p><strong>7.重要公式与结论</strong></p>
+<p>(1) 边缘密度公式： $f<em>{X}(x) = \int</em>{- \infty}^{+ \infty}{f(x,y)dy,}$<br>$f<em>{Y}(y) = \int</em>{- \infty}^{+ \infty}{f(x,y)dx}$</p>
+<p>(2) $P\left{ \left( X,Y \right) \in D \right} = \iint_{D}^{}{f\left( x,y \right){dxdy}}$</p>
+<p>(3) 若$(X,Y)$服从二维正态分布$N(\mu<em>{1},\mu</em>{2},\sigma<em>{1}^{2},\sigma</em>{2}^{2},\rho)$<br>则有：</p>
+<ol>
+<li><p>$X\sim N\left( \mu<em>{1},\sigma</em>{1}^{2} \right),Y\sim N(\mu<em>{2},\sigma</em>{2}^{2}).$</p>
+</li>
+<li><p>$X$与$Y$相互独立$\Leftrightarrow \rho = 0$，即$X$与$Y$不相关。</p>
+</li>
+<li><p>$C<em>{1}X + C</em>{2}Y\sim N(C<em>{1}\mu</em>{1} + C<em>{2}\mu</em>{2},C<em>{1}^{2}\sigma</em>{1}^{2} + C<em>{2}^{2}\sigma</em>{2}^{2} + 2C<em>{1}C</em>{2}\sigma<em>{1}\sigma</em>{2}\rho)$</p>
+</li>
+<li><p>${\ X}$关于$Y=y$的条件分布为： $N(\mu<em>{1} + \rho\frac{\sigma</em>{1}}{\sigma<em>{2}}(y - \mu</em>{2}),\sigma_{1}^{2}(1 - \rho^{2}))$</p>
+</li>
+<li><p>$Y$关于$X = x$的条件分布为： $N(\mu<em>{2} + \rho\frac{\sigma</em>{2}}{\sigma<em>{1}}(x - \mu</em>{1}),\sigma_{2}^{2}(1 - \rho^{2}))$</p>
+</li>
+</ol>
+<p>(4) 若$X$与$Y$独立，且分别服从$N(\mu<em>{1},\sigma</em>{1}^{2}),N(\mu<em>{1},\sigma</em>{2}^{2}),$<br>则：$\left( X,Y \right)\sim N(\mu<em>{1},\mu</em>{2},\sigma<em>{1}^{2},\sigma</em>{2}^{2},0),$</p>
+<p>$C<em>{1}X + C</em>{2}Y\tilde{\ }N(C<em>{1}\mu</em>{1} + C<em>{2}\mu</em>{2},C<em>{1}^{2}\sigma</em>{1}^{2} C<em>{2}^{2}\sigma</em>{2}^{2}).$</p>
+<p>(5) 若$X$与$Y$相互独立，$f\left( x \right)$和$g\left( x \right)$为连续函数， 则$f\left( X \right)$和$g(Y)$也相互独立。</p>
+<h4 id="随机变量的数字特征"><a href="#随机变量的数字特征" class="headerlink" title="随机变量的数字特征"></a>随机变量的数字特征</h4><p><strong>1.数学期望</strong></p>
+<p>离散型：$P\left{ X = x<em>{i} \right} = p</em>{i},E(X) = \sum<em>{i}^{}{x</em>{i}p_{i}}$；</p>
+<p>连续型： $X\sim f(x),E(X) = \int_{- \infty}^{+ \infty}{xf(x)dx}$</p>
+<p>性质：</p>
+<p>(1) $E(C) = C,E\lbrack E(X)\rbrack = E(X)$</p>
+<p>(2) $E(C<em>{1}X + C</em>{2}Y) = C<em>{1}E(X) + C</em>{2}E(Y)$</p>
+<p>(3) 若$X$和$Y$独立，则$E(XY) = E(X)E(Y)$</p>
+<p>(4)$\left\lbrack E(XY) \right\rbrack^{2} \leq E(X^{2})E(Y^{2})$</p>
+<p><strong>2.方差</strong>：$D(X) = E\left\lbrack X - E(X) \right\rbrack^{2} = E(X^{2}) - \left\lbrack E(X) \right\rbrack^{2}$</p>
+<p><strong>3.标准差</strong>：$\sqrt{D(X)}$，</p>
+<p><strong>4.离散型：</strong>$D(X) = \sum<em>{i}^{}{\left\lbrack x</em>{i} - E(X) \right\rbrack^{2}p_{i}}$</p>
+<p><strong>5.连续型：</strong>$D(X) = {\int_{- \infty}^{+ \infty}\left\lbrack x - E(X) \right\rbrack}^{2}f(x)dx$</p>
+<p>性质：</p>
+<p>(1)$\ D(C) = 0,D\lbrack E(X)\rbrack = 0,D\lbrack D(X)\rbrack = 0$</p>
+<p>(2) $X$与$Y$相互独立，则$D(X \pm Y) = D(X) + D(Y)$</p>
+<p>(3)$\ D\left( C<em>{1}X + C</em>{2} \right) = C_{1}^{2}D\left( X \right)$</p>
+<p>(4) 一般有 $D(X \pm Y) = D(X) + D(Y) \pm 2Cov(X,Y) = D(X) + D(Y) \pm<br>2\rho\sqrt{D(X)}\sqrt{D(Y)}$</p>
+<p>(5)$\ D\left( X \right) &lt; E\left( X - C \right)^{2},C \neq E\left( X \right)$</p>
+<p>(6)$\ D(X) = 0 \Leftrightarrow P\left{ X = C \right} = 1$</p>
+<p><strong>6.随机变量函数的数学期望</strong></p>
+<p>(1) 对于函数$Y = g(x)$</p>
+<p>$X$为离散型：$P{ X = x<em>{i}} = p</em>{i},E(Y) = \sum<em>{i}^{}{g(x</em>{i})p_{i}}$；</p>
+<p>$X$为连续型：$X\sim f(x),E(Y) = \int_{- \infty}^{+ \infty}{g(x)f(x)dx}$</p>
+<p>(2) $Z = g(X,Y)$;$\left( X,Y \right)\sim P{ X = x<em>{i},Y = y</em>{j}} = p<em>{{ij}}$; $E(Z) = \sum</em>{i}^{}{\sum<em>{j}^{}{g(x</em>{i},y<em>{j})p</em>{{ij}}}}$ $\left( X,Y \right)\sim f(x,y)$;$E(Z) = \int<em>{- \infty}^{+ \infty}{\int</em>{- \infty}^{+ \infty}{g(x,y)f(x,y)dxdy}}$</p>
+<p><strong>7.协方差</strong></p>
+<p>$Cov(X,Y) = E\left\lbrack (X - E(X)(Y - E(Y)) \right\rbrack$</p>
+<p><strong>8.相关系数</strong></p>
+<p>$\rho_{{XY}} = \frac{Cov(X,Y)}{\sqrt{D(X)}\sqrt{D(Y)}}$,$k$阶原点矩 $E(X^{k})$;<br>$k$阶中心矩 $E\left{ {\lbrack X - E(X)\rbrack}^{k} \right}$</p>
+<p>性质：</p>
+<p>(1)$\ Cov(X,Y) = Cov(Y,X)$</p>
+<p>(2)$\ Cov(aX,bY) = abCov(Y,X)$</p>
+<p>(3)$\ Cov(X<em>{1} + X</em>{2},Y) = Cov(X<em>{1},Y) + Cov(X</em>{2},Y)$</p>
+<p>(4)$\ \left| \rho\left( X,Y \right) \right| \leq 1$</p>
+<p>(5) $\ \rho\left( X,Y \right) = 1 \Leftrightarrow P\left( Y = aX + b \right) = 1$ ，其中$a &gt; 0$</p>
+<p>$\rho\left( X,Y \right) = - 1 \Leftrightarrow P\left( Y = aX + b \right) = 1$<br>，其中$a &lt; 0$</p>
+<p><strong>9.重要公式与结论</strong></p>
+<p>(1)$\ D(X) = E(X^{2}) - E^{2}(X)$</p>
+<p>(2)$\ Cov(X,Y) = E(XY) - E(X)E(Y)$</p>
+<p>(3) $\left| \rho\left( X,Y \right) \right| \leq 1,$且 $\rho\left( X,Y \right) = 1 \Leftrightarrow P\left( Y = aX + b \right) = 1$，其中$a &gt; 0$</p>
+<p>$\rho\left( X,Y \right) = - 1 \Leftrightarrow P\left( Y = aX + b \right) = 1$，其中$a &lt; 0$</p>
+<p>(4) 下面 5 个条件互为充要条件：</p>
+<p>$\rho(X,Y) = 0$ $\Leftrightarrow Cov(X,Y) = 0$ $\Leftrightarrow E(X,Y) = E(X)E(Y)$ $\Leftrightarrow D(X + Y) = D(X) + D(Y)$ $\Leftrightarrow  D(X - Y) = D(X) + D(Y)$</p>
+<p>注：$X$与$Y$独立为上述 5 个条件中任何一个成立的充分条件，但非必要条件。</p>
+<h4 id="数理统计的基本概念"><a href="#数理统计的基本概念" class="headerlink" title="数理统计的基本概念"></a>数理统计的基本概念</h4><p><strong>1.基本概念</strong></p>
+<p>总体：研究对象的全体，它是一个随机变量，用$X$表示。</p>
+<p>个体：组成总体的每个基本元素。</p>
+<p>简单随机样本：来自总体$X$的$n$个相互独立且与总体同分布的随机变量$X<em>{1},X</em>{2}\cdots,X_{n}$，称为容量为$n$的简单随机样本，简称样本。</p>
+<p>统计量：设$X<em>{1},X</em>{2}\cdots,X<em>{n},$是来自总体$X$的一个样本，$g(X</em>{1},X<em>{2}\cdots,X</em>{n})$）是样本的连续函数，且$g()$中不含任何未知参数，则称$g(X<em>{1},X</em>{2}\cdots,X_{n})$为统计量。</p>
+<p>样本均值：$\overline{X} = \frac{1}{n}\sum<em>{i = 1}^{n}X</em>{i}$</p>
+<p>样本方差：$S^{2} = \frac{1}{n - 1}\sum<em>{i = 1}^{n}{(X</em>{i} - \overline{X})}^{2}$</p>
+<p>样本矩：样本$k$阶原点矩：$A<em>{k} = \frac{1}{n}\sum</em>{i = 1}^{n}X_{i}^{k},k = 1,2,\cdots$</p>
+<p>样本$k$阶中心矩：$B<em>{k} = \frac{1}{n}\sum</em>{i = 1}^{n}{(X_{i} - \overline{X})}^{k},k = 1,2,\cdots$</p>
+<p><strong>2.分布</strong></p>
+<p>$\chi^{2}$分布：$\chi^{2} = X<em>{1}^{2} + X</em>{2}^{2} + \cdots + X<em>{n}^{2}\sim\chi^{2}(n)$，其中$X</em>{1},X<em>{2}\cdots,X</em>{n},$相互独立，且同服从$N(0,1)$</p>
+<p>$t$分布：$T = \frac{X}{\sqrt{Y/n}}\sim t(n)$ ，其中$X\sim N\left( 0,1 \right),Y\sim\chi^{2}(n),$且$X$，$Y$ 相互独立。</p>
+<p>$F$分布：$F = \frac{X/n<em>{1}}{Y/n</em>{2}}\sim F(n<em>{1},n</em>{2})$，其中$X\sim\chi^{2}\left( n<em>{1} \right),Y\sim\chi^{2}(n</em>{2}),$且$X$，$Y$相互独立。</p>
+<p>分位数：若$P(X \leq x<em>{\alpha}) = \alpha,$则称$x</em>{\alpha}$为$X$的$\alpha$分位数</p>
+<p><strong>3.正态总体的常用样本分布</strong></p>
+<p>(1) 设$X<em>{1},X</em>{2}\cdots,X_{n}$为来自正态总体$N(\mu,\sigma^{2})$的样本，</p>
+<p>$\overline{X} = \frac{1}{n}\sum<em>{i = 1}^{n}X</em>{i},S^{2} = \frac{1}{n - 1}\sum<em>{i = 1}^{n}{{(X</em>{i} - \overline{X})}^{2},}$则：</p>
+<ol>
+<li><p>$\overline{X}\sim N\left( \mu,\frac{\sigma^{2}}{n} \right){\ \ }$或者$\frac{\overline{X} - \mu}{\frac{\sigma}{\sqrt{n}}}\sim N(0,1)$</p>
+</li>
+<li><p>$\frac{(n - 1)S^{2}}{\sigma^{2}} = \frac{1}{\sigma^{2}}\sum<em>{i = 1}^{n}{{(X</em>{i} - \overline{X})}^{2}\sim\chi^{2}(n - 1)}$</p>
+</li>
+<li><p>$\frac{1}{\sigma^{2}}\sum<em>{i = 1}^{n}{{(X</em>{i} - \mu)}^{2}\sim\chi^{2}(n)}$</p>
+</li>
+</ol>
+<p>4)${\ \ }\frac{\overline{X} - \mu}{S/\sqrt{n}}\sim t(n - 1)$</p>
+<p><strong>4.重要公式与结论</strong></p>
+<p>(1) 对于$\chi^{2}\sim\chi^{2}(n)$，有$E(\chi^{2}(n)) = n,D(\chi^{2}(n)) = 2n;$</p>
+<p>(2) 对于$T\sim t(n)$，有$E(T) = 0,D(T) = \frac{n}{n - 2}(n &gt; 2)$；</p>
+<p>(3) 对于$F\tilde{\ }F(m,n)$，有 $\frac{1}{F}\sim F(n,m),F<em>{a/2}(m,n) = \frac{1}{F</em>{1 - a/2}(n,m)};$</p>
+<p>(4) 对于任意总体$X$，有 $E(\overline{X}) = E(X),E(S^{2}) = D(X),D(\overline{X}) = \frac{D(X)}{n}$</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://solitudeab.github.io">SolitudeAB</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://solitudeab.github.io/2026/07/02/machine_learning/20260702-math/">https://solitudeab.github.io/2026/07/02/machine_learning/20260702-math/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://solitudeab.github.io" target="_blank">我的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,x,wechat,weibo,qq,qzone,douban,linkedin"></div><link rel="stylesheet" href="/pluginsSrc/butterfly-extsrc/sharejs/dist/css/share.min.css?v=1.1.6" media="print" onload="this.media='all'"><script src="/pluginsSrc/butterfly-extsrc/sharejs/dist/js/social-share.min.js?v=1.1.6" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/07/02/hello-world/" title="Hello World"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Hello World</div></div><div class="info-2"><div class="info-item-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new &quot;My New Post&quot; More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment </div></div></div></a><a class="pagination-related" href="/2026/05/09/paper/Eyes/v3/20260509-Untitled-2/" title="Untitled 2"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Untitled 2</div></div><div class="info-2"><div class="info-item-1">    variant PSNR SSIM LPIPS Dice clDice IoU Worst-5% PSNR FPS Latency(ms) NIQE     step2_target_image 31.6525 0.9769 0.1104 0.0134 0.0075 0.0068 22.3836 456.76 2.1893 7.0543   step2_prior_vessel 30.4076 0.9752 0.1539 0.0143 0.0134 0.0072 22.1637 456.99 2.1882 9.5320   step2_mix_r025 31.5926 0.9769 0.1099 0.0140 0.0093 0.0071 22.3863 457.86 2.1841 7.3503   step2_mix_r05 31.3740 0.9764 0.1157 0.0151 0.0116 0.0077 22.3262 457.80 2.1843 8.3198   step2_mix_r075 30.9590 0.9758 0.1324 0.0148 0.0121 ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/09/19/machine_learning/20250919-week9/" title="第9周"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-19</div><div class="info-item-2">第9周</div></div><div class="info-2"><div class="info-item-1">第9周[TOC] 十五、异常检测(Anomaly Detection)15.1 问题的动机参考文档: 15 - 1 - Problem Motivation (8 min).mkv 在接下来的一系列视频中，我将向大家介绍异常检测(Anomaly detection)问题。这是机器学习算法的一个常见应用。这种算法的一个有趣之处在于：它虽然主要用于非监督学习问题，但从某些角度看，它又类似于一些监督学习问题。 什么是异常检测呢？为了解释这个概念，让我举一个例子吧： 假想你是一个飞机引擎制造商，当你生产的飞机引擎从生产线上流出时，你需要进行QA(质量控制测试)，而作为这个测试的一部分，你测量了飞机引擎的一些特征变量，比如引擎运转时产生的热量，或者引擎的振动等等。  这样一来，你就有了一个数据集，从$x^{(1)}$到$x^{(m)}$，如果你生产了$m$个引擎的话，你将这些数据绘制成图表，看起来就是这个样子：  这里的每个点、每个叉，都是你的无标签数据。这样，异常检测问题可以定义如下：我们假设后来有一天，你有一个新的飞机引擎从生产线上流出，而你的新飞机引擎有特征变量$x_{test}$。...</div></div></div></a><a class="pagination-related" href="/2025/10/09/machine_learning/20251009-week3/" title="第3周"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-09</div><div class="info-item-2">第3周</div></div><div class="info-2"><div class="info-item-1">第3周[TOC] 六、逻辑回归(Logistic Regression)6.1 分类问题参考文档: 6 - 1 - Classification (8 min).mkv 在这个以及接下来的几个视频中，开始介绍分类问题。 在分类问题中，你要预测的变量 $y$ 是离散的值，我们将学习一种叫做逻辑回归 (Logistic Regression) 的算法，这是目前最流行使用最广泛的一种学习算法。 在分类问题中，我们尝试预测的是结果是否属于某一个类（例如正确或错误）。分类问题的例子有：判断一封电子邮件是否是垃圾邮件；判断一次金融交易是否是欺诈；之前我们也谈到了肿瘤分类问题的例子，区别一个肿瘤是恶性的还是良性的。  我们从二元的分类问题开始讨论。 我们将因变量(dependent variable)可能属于的两个类分别称为负向类（negative class）和正向类（positive class），则因变量$y\in { 0,1 \}$ ，其中 0 表示负向类，1 表示正向类。   如果我们要用线性回归算法来解决一个分类问题，对于分类， $y$ 取值为 0 或者1，但如果你使用的是线性回归...</div></div></div></a><a class="pagination-related" href="/2025/09/19/machine_learning/20250919-week7/" title="第7周"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-19</div><div class="info-item-2">第7周</div></div><div class="info-2"><div class="info-item-1">第7周[TOC] 十二、支持向量机(Support Vector Machines)12.1 优化目标参考视频: 12 - 1 - Optimization Objective (15 min).mkv 到目前为止,你已经见过一系列不同的学习算法。在监督学习中，许多学习算法的性能都非常类似，因此，重要的不是你该选择使用学习算法A还是学习算法B，而更重要的是，应用这些算法时，所创建的大量数据在应用这些算法时，表现情况通常依赖于你的水平。比如：你为学习算法所设计的特征量的选择，以及如何选择正则化参数，诸如此类的事。还有一个更加强大的算法广泛的应用于工业界和学术界，它被称为支持向量机(Support Vector Machine)。与逻辑回归和神经网络相比，支持向量机，或者简称SVM，在学习复杂的非线性方程时提供了一种更为清晰，更加强大的方式。因此，在接下来的视频中，我会探讨这一算法。在稍后的课程中，我也会对监督学习算法进行简要的总结。当然，仅仅是作简要描述。但对于支持向量机，鉴于该算法的强大和受欢迎度，在本课中，我会花许多时间来讲解它。它也是我们所介绍的最后一个监督学习算法。 正如我...</div></div></div></a><a class="pagination-related" href="/2025/09/19/machine_learning/20250919-week4/" title="第4周"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-19</div><div class="info-item-2">第4周</div></div><div class="info-2"><div class="info-item-1">第4周[TOC] 第八、神经网络：表述(Neural Networks: Representation)8.1 非线性假设参考视频: 8 - 1 - Non-linear Hypotheses (10 min).mkv 我们之前学的，无论是线性回归还是逻辑回归都有这样一个缺点，即：当特征太多时，计算的负荷会非常大。 下面是一个例子：  当我们使用$x1$, $x_2$ 的多次项式进行预测时，我们可以应用的很好。之前我们已经看到过，使用非线性的多项式项，能够帮助我们建立更好的分类模型。假设我们有非常多的特征，例如大于100个变量，我们希望用这100个特征来构建一个非线性的多项式模型，结果将是数量非常惊人的特征组合，即便我们只采用两两特征的组合$(x_1x_2+x_1x_3+x_1x_4+…+x_2x_3+x_2x_4+…+x{99}x_{100})$，我们也会有接近5000个组合而成的特征。这对于一般的逻辑回归来说需要计算的特征太多了。 假设我们希望训练一个模型来识别视觉对象（例如识别一张图片上是否是一辆汽车），我们怎样才能这么做呢？一种方法是我们利用很多汽车的图片和很多非汽车的图...</div></div></div></a><a class="pagination-related" href="/2025/09/19/machine_learning/20250919-2.CS229-Prob/" title="概率论"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-19</div><div class="info-item-2">概率论</div></div><div class="info-2"><div class="info-item-1"> 本文是斯坦福大学CS229机器学习课程的基础材料，原始文件下载 原文作者：Arian Maleki ， Tom Do 翻译：石振宇 审核和修改制作：黄海广 备注：请关注github的更新。  CS229 机器学习课程复习材料-概率论[TOC] 概率论复习和参考概率论是对不确定性的研究。通过这门课，我们将依靠概率论中的概念来推导机器学习算法。这篇笔记试图涵盖适用于CS229的概率论基础。概率论的数学理论非常复杂，并且涉及到“分析”的一个分支：测度论。在这篇笔记中，我们提供了概率的一些基本处理方法，但是不会涉及到这些更复杂的细节。 1. 概率的基本要素为了定义集合上的概率，我们需要一些基本元素，  样本空间$\Omega $：随机实验的所有结果的集合。在这里，每个结果 $w \in \Omega $ 可以被认为是实验结束时现实世界状态的完整描述。  事件集（事件空间）$\mathcal{F}$：元素 $A \in \mathcal{F}$ 的集合（称为事件）是 $\Omega $ 的子集（即每个 $A \subseteq \Omega$ 是一个实验可能结果的集合）。 备注：$\ma...</div></div></div></a><a class="pagination-related" href="/2025/09/19/machine_learning/20250919-week2/" title="第2周"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-19</div><div class="info-item-2">第2周</div></div><div class="info-2"><div class="info-item-1">第2周[TOC] 四、多变量线性回归(Linear Regression with Multiple Variables)4.1 多维特征参考视频: 4 - 1 - Multiple Features (8 min).mkv 目前为止，我们探讨了单变量/特征的回归模型，现在我们对房价模型增加更多的特征，例如房间数楼层等，构成一个含有多个变量的模型，模型中的特征为$\left( {x{1}},{x{2}},…,{x_{n}} \right)$。  增添更多特征后，我们引入一系列新的注释： $n$ 代表特征的数量 ${x^{\left( i \right)}}$代表第 $i$ 个训练实例，是特征矩阵中的第$i$行，是一个向量（vector）。 比方说，上图的 ${x}^{(2)}\text{=}\begin{bmatrix} 1416\\ 3\\ 2\\ 40 \end{bmatrix}$， ${x}_{j}^{\left( i \right)}$代表特征矩阵中第 $i$ 行的第 $j$ 个特征，也就是第 $i$ 个训练实例的第 $j$ 个特征。 如上图的$x{2}^{\left( ...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">SolitudeAB</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SolitudeAB"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/SolitudeAB" target="_blank" title="GitHub"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:jiaxwoo@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #DEAC96;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6"><span class="toc-number">1.</span> <span class="toc-text">高等数学</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%AF%BC%E6%95%B0%E5%AE%9A%E4%B9%89%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">1.导数定义：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%B7%A6%E5%8F%B3%E5%AF%BC%E6%95%B0%E5%AF%BC%E6%95%B0%E7%9A%84%E5%87%A0%E4%BD%95%E6%84%8F%E4%B9%89%E5%92%8C%E7%89%A9%E7%90%86%E6%84%8F%E4%B9%89"><span class="toc-number">1.2.</span> <span class="toc-text">2.左右导数导数的几何意义和物理意义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%AF%E5%AF%BC%E6%80%A7%E4%B8%8E%E8%BF%9E%E7%BB%AD%E6%80%A7%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">1.3.</span> <span class="toc-text">3.函数的可导性与连续性之间的关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%B9%B3%E9%9D%A2%E6%9B%B2%E7%BA%BF%E7%9A%84%E5%88%87%E7%BA%BF%E5%92%8C%E6%B3%95%E7%BA%BF"><span class="toc-number">1.4.</span> <span class="toc-text">4.平面曲线的切线和法线</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E5%9B%9B%E5%88%99%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99"><span class="toc-number">1.5.</span> <span class="toc-text">5.四则运算法则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E5%9F%BA%E6%9C%AC%E5%AF%BC%E6%95%B0%E4%B8%8E%E5%BE%AE%E5%88%86%E8%A1%A8"><span class="toc-number">1.6.</span> <span class="toc-text">6.基本导数与微分表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-%E5%A4%8D%E5%90%88%E5%87%BD%E6%95%B0%EF%BC%8C%E5%8F%8D%E5%87%BD%E6%95%B0%EF%BC%8C%E9%9A%90%E5%87%BD%E6%95%B0%E4%BB%A5%E5%8F%8A%E5%8F%82%E6%95%B0%E6%96%B9%E7%A8%8B%E6%89%80%E7%A1%AE%E5%AE%9A%E7%9A%84%E5%87%BD%E6%95%B0%E7%9A%84%E5%BE%AE%E5%88%86%E6%B3%95"><span class="toc-number">1.7.</span> <span class="toc-text">7.复合函数，反函数，隐函数以及参数方程所确定的函数的微分法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-%E5%B8%B8%E7%94%A8%E9%AB%98%E9%98%B6%E5%AF%BC%E6%95%B0%E5%85%AC%E5%BC%8F"><span class="toc-number">1.8.</span> <span class="toc-text">8.常用高阶导数公式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-%E5%BE%AE%E5%88%86%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86%EF%BC%8C%E6%B3%B0%E5%8B%92%E5%85%AC%E5%BC%8F"><span class="toc-number">1.9.</span> <span class="toc-text">9.微分中值定理，泰勒公式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-%E6%B4%9B%E5%BF%85%E8%BE%BE%E6%B3%95%E5%88%99"><span class="toc-number">1.10.</span> <span class="toc-text">10.洛必达法则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-%E6%B3%B0%E5%8B%92%E5%85%AC%E5%BC%8F"><span class="toc-number">1.11.</span> <span class="toc-text">11.泰勒公式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-%E5%87%BD%E6%95%B0%E5%8D%95%E8%B0%83%E6%80%A7%E7%9A%84%E5%88%A4%E6%96%AD"><span class="toc-number">1.12.</span> <span class="toc-text">12.函数单调性的判断</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-%E6%B8%90%E8%BF%91%E7%BA%BF%E7%9A%84%E6%B1%82%E6%B3%95"><span class="toc-number">1.13.</span> <span class="toc-text">13.渐近线的求法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-%E5%87%BD%E6%95%B0%E5%87%B9%E5%87%B8%E6%80%A7%E7%9A%84%E5%88%A4%E6%96%AD"><span class="toc-number">1.14.</span> <span class="toc-text">14.函数凹凸性的判断</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#15-%E5%BC%A7%E5%BE%AE%E5%88%86"><span class="toc-number">1.15.</span> <span class="toc-text">15.弧微分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-%E6%9B%B2%E7%8E%87"><span class="toc-number">1.16.</span> <span class="toc-text">16.曲率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#17-%E6%9B%B2%E7%8E%87%E5%8D%8A%E5%BE%84"><span class="toc-number">1.17.</span> <span class="toc-text">17.曲率半径</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">线性代数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F"><span class="toc-number">2.1.</span> <span class="toc-text">行列式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5"><span class="toc-number">2.2.</span> <span class="toc-text">矩阵</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%91%E9%87%8F"><span class="toc-number">2.3.</span> <span class="toc-text">向量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84"><span class="toc-number">2.4.</span> <span class="toc-text">线性方程组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E7%9A%84%E7%89%B9%E5%BE%81%E5%80%BC%E5%92%8C%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="toc-number">2.5.</span> <span class="toc-text">矩阵的特征值和特征向量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E6%AC%A1%E5%9E%8B"><span class="toc-number">2.6.</span> <span class="toc-text">二次型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1"><span class="toc-number">3.</span> <span class="toc-text">概率论和数理统计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E4%BA%8B%E4%BB%B6%E5%92%8C%E6%A6%82%E7%8E%87"><span class="toc-number">3.1.</span> <span class="toc-text">随机事件和概率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%8F%8A%E5%85%B6%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83"><span class="toc-number">3.2.</span> <span class="toc-text">随机变量及其概率分布</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E7%BB%B4%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%8F%8A%E5%85%B6%E5%88%86%E5%B8%83"><span class="toc-number">3.3.</span> <span class="toc-text">多维随机变量及其分布</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E6%95%B0%E5%AD%97%E7%89%B9%E5%BE%81"><span class="toc-number">3.4.</span> <span class="toc-text">随机变量的数字特征</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">3.5.</span> <span class="toc-text">数理统计的基本概念</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/%E8%AF%AD%E5%BD%95/" title="语录">语录</a><time datetime="2026-07-02T12:45:25.136Z" title="发表于 2026-07-02 20:45:25">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/hello-world/" title="Hello World">Hello World</a><time datetime="2026-07-02T12:45:25.014Z" title="发表于 2026-07-02 20:45:25">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/machine_learning/20260702-math/" title="高等数学">高等数学</a><time datetime="2026-07-02T12:05:42.000Z" title="发表于 2026-07-02 20:05:42">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/paper/Eyes/v3/20260509-Untitled-2/" title="Untitled 2">Untitled 2</a><time datetime="2026-05-09T07:00:54.000Z" title="发表于 2026-05-09 15:00:54">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/07/paper/Eyes/v3/20260507-Untitled-1/" title="Untitled 1">Untitled 1</a><time datetime="2026-05-07T13:46:03.000Z" title="发表于 2026-05-07 21:46:03">2026-05-07</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By SolitudeAB</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="/pluginsSrc/medium-zoom/dist/medium-zoom.min.js?v=1.1.0"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        loader: {
+          load: [
+            // Four font extension packages (optional)
+            //- '[tex]/bbm',
+            //- '[tex]/bboldx',
+            //- '[tex]/dsfont',
+            '[tex]/mhchem'
+          ],
+          paths: {
+            'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+
+            //- // Four font extension packages (optional)
+            //- 'mathjax-bbm-extension': '[mathjax]/../@mathjax/mathjax-bbm-font-extension',
+            //- 'mathjax-bboldx-extension': '[mathjax]/../@mathjax/mathjax-bboldx-font-extension',
+            //- 'mathjax-dsfont-extension': '[mathjax]/../@mathjax/mathjax-dsfont-font-extension',
+            'mathjax-mhchem-extension': '[mathjax]/../@mathjax/mathjax-mhchem-font-extension'
+          }
+        },
+        output: {
+          font: 'mathjax-newcm',
+        },
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+          packages: {
+            '[+]': [
+              'mhchem'
+            ]
+          }
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          menuOptions: {
+            settings: {
+              enrich: false  // Turn off Braille and voice narration text automatic generation
+            }
+          },
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = '/pluginsSrc/mathjax/tex-mml-chtml.js?v=4.1.0'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><div id="aplayer"></div><script src="/js/custom.js"></script><script id="canvas_nest" defer="defer" color="222,172,150" opacity="0.5" zIndex="-1" count="99" mobile="false" src="/pluginsSrc/butterfly-extsrc/dist/canvas-nest.min.js?v=1.1.6"></script><link rel="stylesheet" href="/pluginsSrc/aplayer/dist/APlayer.min.css?v=1.10.1" media="print" onload="this.media='all'"><script src="/pluginsSrc/aplayer/dist/APlayer.min.js?v=1.10.1"></script><script src="/pluginsSrc/butterfly-extsrc/metingjs/dist/Meting.min.js?v=1.1.6"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="/pluginsSrc/pjax/pjax.min.js?v=0.2.8" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章..." type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.4"></script></div></div></body></html>

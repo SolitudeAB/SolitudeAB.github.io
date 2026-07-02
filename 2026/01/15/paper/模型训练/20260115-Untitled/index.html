@@ -1,0 +1,395 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Untitled | 我的博客</title><meta name="author" content="SolitudeAB"><meta name="copyright" content="SolitudeAB"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="脚本功能：  自动读取你的两个文件夹。 打乱顺序。 按照 80% 训练 : 10% 验证 : 10% 测试 的比例分配。 自动创建 train, val, test 目录，并把图片复制进去。  📄 创建一个文件叫 split_data.py，复制以下代码：12345678910111213141516171819202122232425262728293031323334353637383940">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Untitled">
+<meta property="og:url" content="https://solitudeab.github.io/2026/01/15/paper/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/20260115-Untitled/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="脚本功能：  自动读取你的两个文件夹。 打乱顺序。 按照 80% 训练 : 10% 验证 : 10% 测试 的比例分配。 自动创建 train, val, test 目录，并把图片复制进去。  📄 创建一个文件叫 split_data.py，复制以下代码：12345678910111213141516171819202122232425262728293031323334353637383940">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://solitudeab.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2026-01-15T12:59:45.000Z">
+<meta property="article:modified_time" content="2026-07-02T12:45:25.109Z">
+<meta property="article:author" content="SolitudeAB">
+<meta property="article:tag" content="眼底图像增强">
+<meta property="article:tag" content="论文实验">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://solitudeab.github.io/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Untitled",
+  "url": "https://solitudeab.github.io/2026/01/15/paper/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/20260115-Untitled/",
+  "image": "https://solitudeab.github.io/img/avatar.jpg",
+  "datePublished": "2026-01-15T12:59:45.000Z",
+  "dateModified": "2026-07-02T12:45:25.109Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "SolitudeAB",
+      "url": "https://solitudeab.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://solitudeab.github.io/2026/01/15/paper/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/20260115-Untitled/index.html"><link rel="preconnect"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css?v=7.1.0"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js?v=4.13.0',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Untitled',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="我的博客" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div class="bg-animation" id="web_bg" style="background-image: url(/img/bg.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/SolitudeAB/blog-source/new/main/source/_posts"><i class="fa-fw fas fa-pen"></i><span> 写文章</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">我的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">Untitled</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/SolitudeAB/blog-source/new/main/source/_posts"><i class="fa-fw fas fa-pen"></i><span> 写文章</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Untitled</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-01-15T12:59:45.000Z" title="发表于 2026-01-15 20:59:45">2026-01-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-07-02T12:45:25.109Z" title="更新于 2026-07-02 20:45:25">2026-07-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%BA%E6%96%87%E5%AE%9E%E9%AA%8C/">论文实验</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">1.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p><strong>脚本功能</strong>：</p>
+<ol>
+<li>自动读取你的两个文件夹。</li>
+<li>打乱顺序。</li>
+<li>按照 <strong>80% 训练 : 10% 验证 : 10% 测试</strong> 的比例分配。</li>
+<li>自动创建 <code>train</code>, <code>val</code>, <code>test</code> 目录，并把图片复制进去。</li>
+</ol>
+<h4 id="📄-创建一个文件叫-split-data-py，复制以下代码："><a href="#📄-创建一个文件叫-split-data-py，复制以下代码：" class="headerlink" title="📄 创建一个文件叫 split_data.py，复制以下代码："></a>📄 创建一个文件叫 <code>split_data.py</code>，复制以下代码：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">import shutil</span><br><span class="line">import random</span><br><span class="line">from pathlib import Path</span><br><span class="line"></span><br><span class="line"># ================= 配置区域 =================</span><br><span class="line"># 1. 你的原始数据路径 (根据你的截图，假设脚本和 eyes 文件夹在同一级)</span><br><span class="line"># 如果路径不对，请修改这里。例如绝对路径: r&quot;D:/MyData/eyes/normlight_image&quot;</span><br><span class="line">SOURCE_HIGH_QUALITY = &quot;eyes/normlight_image&quot;  # 对应 normlight</span><br><span class="line">SOURCE_LOW_QUALITY = &quot;eyes/lowlight_image&quot;    # 对应 lowlight</span><br><span class="line"></span><br><span class="line"># 2. 你想把整理好的数据输出到哪里？</span><br><span class="line">OUTPUT_ROOT = &quot;dataset_ready&quot;</span><br><span class="line"></span><br><span class="line"># 3. 分配比例 (训练 : 验证 : 测试)</span><br><span class="line"># 这里设置的是 8 : 1 : 1</span><br><span class="line">TRAIN_RATIO = 0.8</span><br><span class="line">VAL_RATIO = 0.1</span><br><span class="line"># 剩下的自动归为测试集</span><br><span class="line"></span><br><span class="line"># ===========================================</span><br><span class="line"></span><br><span class="line">def make_dir(path):</span><br><span class="line">    if not os.path.exists(path):</span><br><span class="line">        os.makedirs(path)</span><br><span class="line"></span><br><span class="line">def split_and_copy(source_folder, target_type, all_files):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    source_folder: 原始文件夹路径</span><br><span class="line">    target_type: 目标子文件夹名 (比如 &#x27;crop_good&#x27; 或 &#x27;crop_usable&#x27;)</span><br><span class="line">    all_files: 文件名列表</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    total = len(all_files)</span><br><span class="line">    train_count = int(total * TRAIN_RATIO)</span><br><span class="line">    val_count = int(total * VAL_RATIO)</span><br><span class="line">    </span><br><span class="line">    # 切分列表</span><br><span class="line">    train_files = all_files[:train_count]</span><br><span class="line">    val_files = all_files[train_count : train_count + val_count]</span><br><span class="line">    test_files = all_files[train_count + val_count:]</span><br><span class="line"></span><br><span class="line">    # 定义映射关系： (数据集类型, 文件列表)</span><br><span class="line">    tasks = [</span><br><span class="line">        (&quot;train&quot;, train_files),</span><br><span class="line">        (&quot;val&quot;, val_files),</span><br><span class="line">        (&quot;test&quot;, test_files)</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    print(f&quot;正在处理 &#123;target_type&#125; ... 总数: &#123;total&#125;&quot;)</span><br><span class="line">    print(f&quot; -&gt; 训练集: &#123;len(train_files)&#125;, 验证集: &#123;len(val_files)&#125;, 测试集: &#123;len(test_files)&#125;&quot;)</span><br><span class="line"></span><br><span class="line">    for split_name, files in tasks:</span><br><span class="line">        # 构建目标路径: dataset_ready/train/crop_good</span><br><span class="line">        target_dir = os.path.join(OUTPUT_ROOT, split_name, target_type)</span><br><span class="line">        make_dir(target_dir)</span><br><span class="line"></span><br><span class="line">        # 同时我们也顺手建立 degrade_good 文件夹，虽然现在是空的，但保持结构完整</span><br><span class="line">        # 只有处理 high_quality 时才需要建立 degrade_good 占位</span><br><span class="line">        if target_type == &quot;crop_good&quot;:</span><br><span class="line">            degrade_placeholder = os.path.join(OUTPUT_ROOT, split_name, &quot;degrade_good&quot;)</span><br><span class="line">            make_dir(degrade_placeholder)</span><br><span class="line"></span><br><span class="line">        # 开始复制</span><br><span class="line">        for fname in files:</span><br><span class="line">            src = os.path.join(source_folder, fname)</span><br><span class="line">            dst = os.path.join(target_dir, fname)</span><br><span class="line">            # 复制文件</span><br><span class="line">            shutil.copy2(src, dst)</span><br><span class="line">    </span><br><span class="line">    print(f&quot;完成 &#123;target_type&#125; 的分配！\n&quot;)</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    # 0. 检查路径是否存在</span><br><span class="line">    if not os.path.exists(SOURCE_HIGH_QUALITY) or not os.path.exists(SOURCE_LOW_QUALITY):</span><br><span class="line">        print(&quot;错误：找不到原始文件夹，请检查 SOURCE_HIGH_QUALITY 和 SOURCE_LOW_QUALITY 的路径配置！&quot;)</span><br><span class="line">        return</span><br><span class="line"></span><br><span class="line">    # 1. 获取所有图片文件</span><br><span class="line">    # 过滤掉非图片文件，防止把系统隐藏文件拷进去</span><br><span class="line">    valid_exts = (&#x27;.jpg&#x27;, &#x27;.jpeg&#x27;, &#x27;.png&#x27;, &#x27;.bmp&#x27;, &#x27;.tif&#x27;)</span><br><span class="line">    </span><br><span class="line">    hq_files = [f for f in os.listdir(SOURCE_HIGH_QUALITY) if f.lower().endswith(valid_exts)]</span><br><span class="line">    lq_files = [f for f in os.listdir(SOURCE_LOW_QUALITY) if f.lower().endswith(valid_exts)]</span><br><span class="line"></span><br><span class="line">    # 2. 打乱顺序 (随机种子固定，保证每次运行结果复现)</span><br><span class="line">    random.seed(42)</span><br><span class="line">    random.shuffle(hq_files)</span><br><span class="line">    random.shuffle(lq_files)</span><br><span class="line"></span><br><span class="line">    # 3. 执行分配</span><br><span class="line">    # 映射关系: normlight -&gt; crop_good</span><br><span class="line">    split_and_copy(SOURCE_HIGH_QUALITY, &quot;crop_good&quot;, hq_files)</span><br><span class="line">    </span><br><span class="line">    # 映射关系: lowlight -&gt; crop_usable</span><br><span class="line">    split_and_copy(SOURCE_LOW_QUALITY, &quot;crop_usable&quot;, lq_files)</span><br><span class="line"></span><br><span class="line">    print(&quot;=&quot;*30)</span><br><span class="line">    print(f&quot;所有数据已整理完毕！请查看 &#x27;&#123;OUTPUT_ROOT&#125;&#x27; 文件夹。&quot;)</span><br><span class="line">    print(&quot;接下来的步骤：运行 degrade_eyeq.py 生成 degrade_good 数据。&quot;)</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<hr>
+<p>当你运行完上面的脚本后，你会得到一个 <code>dataset_ready</code> 文件夹。现在的结构是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">dataset_ready</span><br><span class="line">├── train</span><br><span class="line">│   ├── crop_good      (里面有 80% 的 normlight 图片)</span><br><span class="line">│   ├── crop_usable    (里面有 80% 的 lowlight 图片)</span><br><span class="line">│   └── degrade_good   (空的，等待下一步填充)</span><br><span class="line">├── val</span><br><span class="line">│   └── ... (同上)</span><br><span class="line">└── test</span><br><span class="line">    └── ... (同上)</span><br></pre></td></tr></table></figure>
+<h4 id="第二步：运行作者的脚本-生成配对数据"><a href="#第二步：运行作者的脚本-生成配对数据" class="headerlink" title="第二步：运行作者的脚本 (生成配对数据)"></a>第二步：运行作者的脚本 (生成配对数据)</h4><p>现在我们要用 <code>degrade_eyeq.py</code> 来“生产”训练数据了。 这个脚本有三个输出口，我们要把它们对准正确的位置：</p>
+<ul>
+<li><code>--test_dir</code>: <strong>输入</strong>。指向刚才改名的 <code>raw_good</code>。</li>
+<li><code>--gt_dir</code>: <strong>输出1 (标准答案)</strong>。这里存放裁剪干净的高清图，我们让它输出到 <code>crop_good</code>。</li>
+<li><code>--output_dir</code>: <strong>输出2 (模糊图)</strong>。这里存放人工降质图，输出到 <code>degrade_good</code>。</li>
+<li><code>--mask_dir</code>: <strong>输出3 (掩膜)</strong>。输出到 <code>mask</code>。</li>
+</ul>
+<p>请在终端依次运行以下三条命令（假设你在项目根目录）：</p>
+<p><strong>1. 处理训练集 (Train)</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python tools/degrade_eyeq.py \</span><br><span class="line">  --test_dir ./dataset_ready/train/raw_good \</span><br><span class="line">  --gt_dir ./dataset_ready/train/crop_good \</span><br><span class="line">  --output_dir ./dataset_ready/train/degrade_good \</span><br><span class="line">  --mask_dir ./dataset_ready/train/mask</span><br></pre></td></tr></table></figure>
+<p><strong>2. 处理验证集 (Val)</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python tools/degrade_eyeq.py \</span><br><span class="line">  --test_dir ./dataset_ready/val/raw_good \</span><br><span class="line">  --gt_dir ./dataset_ready/val/crop_good \</span><br><span class="line">  --output_dir ./dataset_ready/val/degrade_good \</span><br><span class="line">  --mask_dir ./dataset_ready/val/mask</span><br></pre></td></tr></table></figure>
+<p><strong>3. 处理测试集 (Test)</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python tools/degrade_eyeq.py \</span><br><span class="line">  --test_dir ./dataset_ready/test/raw_good \</span><br><span class="line">  --gt_dir ./dataset_ready/test/crop_good \</span><br><span class="line">  --output_dir ./dataset_ready/test/degrade_good \</span><br><span class="line">  --mask_dir ./dataset_ready/test/mask</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="第三步：处理-Usable-真实的低质量图"><a href="#第三步：处理-Usable-真实的低质量图" class="headerlink" title="第三步：处理 Usable (真实的低质量图)"></a>第三步：处理 Usable (真实的低质量图)</h4><p>I-SECRET 的 README 里有一句很重要的话：</p>
+<blockquote>
+<p>“Please note, this script should be applied to the usable dataset for the cropping preprocessing.” (注意：此脚本也应用于 usable 数据集以进行裁剪预处理。)</p>
+</blockquote>
+<p>这意味着，你原本的 <code>crop_usable</code> 里的图可能尺寸不对（不是 1024x1024），也需要过一遍这个脚本。<strong>但是</strong>，我们不需要给烂图再加模糊（degrade）了，我们只需要它帮我们<strong>裁剪</strong>。</p>
+<p>所以，我们也把 <code>dataset_ready/train/crop_usable</code> 改名为 <code>raw_usable</code>，然后运行脚本，但我们<strong>只关心 gt_dir 的输出</strong>（因为那是裁剪好的图）：</p>
+<p><strong>4. 预处理 Usable 数据 (以 Train 为例，其他同理)</strong></p>
+<p>Bash</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python tools/degrade_eyeq.py \</span><br><span class="line">  --test_dir ./dataset_ready/train/raw_usable \</span><br><span class="line">  --gt_dir ./dataset_ready/train/crop_usable \</span><br><span class="line">  --output_dir ./dataset_ready/train/temp_garbage \</span><br><span class="line">  --mask_dir ./dataset_ready/train/mask_usable</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python tools/degrade_eyeq.py \</span><br><span class="line">  --test_dir ./dataset_ready/test/raw_usable \</span><br><span class="line">  --gt_dir ./dataset_ready/test/crop_usable \</span><br><span class="line">  --output_dir ./dataset_ready/test/temp_garbage \</span><br><span class="line">  --mask_dir ./dataset_ready/test/mask_usable</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python tools/degrade_eyeq.py \</span><br><span class="line">  --test_dir ./dataset_ready/val/raw_usable \</span><br><span class="line">  --gt_dir ./dataset_ready/val/crop_usable \</span><br><span class="line">  --output_dir ./dataset_ready/val/temp_garbage \</span><br><span class="line">  --mask_dir ./dataset_ready/val/mask_usable</span><br></pre></td></tr></table></figure>
+<p><em>(解释：这里 <code>--output_dir</code> 填 <code>temp_garbage</code> 是因为脚本一定会生成模糊图，但真实的烂图不需要再变模糊了，所以生成出来的这些东西我们可以删掉，只保留 <code>crop_usable</code> 里的裁剪图。)</em></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://solitudeab.github.io">SolitudeAB</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://solitudeab.github.io/2026/01/15/paper/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/20260115-Untitled/">https://solitudeab.github.io/2026/01/15/paper/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/20260115-Untitled/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://solitudeab.github.io" target="_blank">我的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%9C%BC%E5%BA%95%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/">眼底图像增强</a><a class="post-meta__tags" href="/tags/%E8%AE%BA%E6%96%87%E5%AE%9E%E9%AA%8C/">论文实验</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,x,wechat,weibo,qq,qzone,douban,linkedin"></div><link rel="stylesheet" href="/pluginsSrc/butterfly-extsrc/sharejs/dist/css/share.min.css?v=1.1.6" media="print" onload="this.media='all'"><script src="/pluginsSrc/butterfly-extsrc/sharejs/dist/js/social-share.min.js?v=1.1.6" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/02/05/paper/20260205-SCI/" title="SCI"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">SCI</div></div><div class="info-2"><div class="info-item-1">这篇论文提出了一种名为 SCI (Self-Calibrated Illumination) 的低光照图像增强框架。该框架的核心创新在于利用权重共享机制和自校准模块，在训练阶段进行级联学习，而在测试阶段仅需使用单个模块即可推理，从而在保证极高视觉质量的同时，大幅降低了计算成本。 以下是基于文档内容的详细梳理：  一、基本信息 论文题目：Toward Fast, Flexible, and Robust Low-Light Image Enhancement (迈向快速、灵活且鲁棒的低光照图像增强)  作者：Long Ma, Tengyu Ma, Risheng Liu, Xin Fan, Zhongxuan Luo  发表会议：CVPR 2022 (IEEE/CVF Conference on Computer Vision and Pattern Recognition)  所属机构：大连理工大学软件技术学院、鹏城实验室等    二、文章概述这篇论文针对现有低光照图像增强技术难以兼顾视觉质量与计算效率，且在未知复杂场景下表现不佳的问题，提出了一种全新的自校准照明 (SCI) 学...</div></div></div></a><a class="pagination-related" href="/2026/01/15/%E8%A9%B9%E5%8D%9A%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/Week3/20260115-Isecret%E5%A4%8D%E7%8E%B0%E7%BB%93%E6%9E%9C/" title="Isecret复现结果"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Isecret复现结果</div></div><div class="info-2"><div class="info-item-1">结果路径(jpeg)1/media/sda/wjx/eyes/ISECRET/results/my_experiment_v1_output 数值结果(数值化分析)123456(/home/jiax/conda_envs/Isecret) jiax@npclab:/media/sda/wjx/eyes/ISECRET$ python tools/evaluate.py \  --test_dir ./results/my_experiment_v1_output \  --gt_dir ./dataset_ready/eyeq/test/crop_good100%|█████████████████████████████████████████████| 560/560 [00:00&lt;00:00, 77528.72it/s]PSNR : 32.831329330961125 +- 4.20334961688671SSIM : 0.9431459659438648 +- 0.02237573476332561  注意：测试PSNR和SSIM使用最好的权重训练得到的结果，如果...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/04/11/paper/Eyes/v2/20260411-%E8%B7%AF%E7%BA%BF/" title="路线"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-11</div><div class="info-item-2">路线</div></div><div class="info-2"><div class="info-item-1">这是一个非常聪明且极其严谨的工程策略！在深度学习开发中，这种“先搭骨架，再逐个外挂模块”的方法被称为增量式开发（Incremental Development）。它不仅能最大程度避免代码跑通后却不知道哪里出错的尴尬，还能顺手把你论文里最核心的消融实验（Ablation Study）给做了。 为了让 Codex（或 Copilot/Cursor）写出最符合你心意的 PyTorch 代码，我为你准备了英文 Prompt 序列（因为 AI 编程助手对英文指令和 PyTorch API 的映射最为精准）。 你可以新建一个工程，然后按顺序把下面的 Prompt 喂给 Codex。  第一步：搭建 Baseline（最基础的 Retinex 级联网络）目标： 先不要任何先验（没有 SIPG）和动态路由（没有 Cond-SVIC），只用一个普通的 3x3 卷积块作为光照估计器，并实现 SCM 的 $T$ 次循环。这个版本将作为你论文里最底层的 Baseline。 新建文件：models/baseline.py 喂给 Codex 的 Prompt： Plaintext 12345Please w...</div></div></div></a><a class="pagination-related" href="/2026/04/21/paper/Eyes/v3/20260422-test/" title="test"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-22</div><div class="info-item-2">test</div></div><div class="info-2"><div class="info-item-1">基于KD-SIPG重要性张量的眼底图像增强与跨领域融合模块深度研究报告1. 引言与KD-SIPG重要性张量的理论解构眼底图像的质量增强在医学计算机视觉领域本质上是一个高度非适定的逆问题。由于眼底成像设备的硬件限制、患者的屈光间质混浊（如白内障）以及不可控的外部照明条件，获取的眼底图像往往伴随着低对比度、高频噪声、不均匀照明以及伪影（如睫毛阴影或反光）。传统的图像增强算法或是常规的卷积神经网络（CNN）在处理此类退化时，通常倾向于优化全局图像逼真度指标（如峰值信噪比PSNR或结构相似性SSIM）。这种全局同质化的优化策略会产生一个致命的临床副作用：网络会过度平滑背景，从而将微动脉瘤、细小出血点、新生微血管等高频病理特征作为噪声抹除，使得增强后的图像在临床诊断上失去价值。 为了突破这一瓶颈，语义先验的提取与注入成为了维持“病理保真度”（Pathological Fidelity）的核心机制。KD-SIPG（Knowledge Distillation for Semantic Prior Generation，语义先验生成的异步知识蒸馏）模块正是为解决极端退化条件下的先验提取而设计的...</div></div></div></a><a class="pagination-related" href="/2026/03/11/paper/Eyes/20260311-2026.3.11%E6%97%A5%E5%BF%97/" title="2026.3.11日志"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-11</div><div class="info-item-2">2026.3.11日志</div></div><div class="info-2"><div class="info-item-1">   /media/sda/wjx/eyes/SCI-IG_Projectv2/weights/ours_sipg_v1.1/training_metrics.log  这绝对算得上是一份完美达标的阶段性答卷！你完全可以、并且非常迫切地需要进入下一步（换装 Frangi 滤波）了。 仔细观察你跑完这 100 轮的最终战报，我们可以得出几个极其确定的科研结论，这标志着你的“打地基”阶段已经圆满结束： 1. 视觉伪影已被彻底“物理超度”对比你发来的 unsup_val_epoch100.jpg 和之前的灾难图，现在的增强结果极其稳定：  没有“白纱”：图像没有出现过曝发白，证明 ISRetinexLoss 的指数放大惩罚完美生效。 没有“幽冥绿”：视网膜本征的橘红色泽被牢牢锁死，证明 Color Constancy Loss (颜色恒常性) 起到了定海神针的作用。  2. Sobel 算子的天花板已至看你的日志，网络在第 96 轮冲到了 PSNR: 22.42dB | SSIM: 0.9169 的好成绩，但随后几轮开始在 21.5dB 左右横盘震荡。 这说明网络目前的权重已经收敛到了...</div></div></div></a><a class="pagination-related" href="/2026/03/12/paper/Eyes/deepsearch/20260312-one/" title="one"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-12</div><div class="info-item-2">one</div></div><div class="info-2"><div class="info-item-1">https://gemini.google.com/share/534a9cf0a7e8 </div></div></div></a><a class="pagination-related" href="/2026/03/15/paper/Eyes/20260315-2026.3.15%E6%97%A5%E5%BF%97/" title="2026.3.15日志"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-15</div><div class="info-item-2">2026.3.15日志</div></div><div class="info-2"><div class="info-item-1">第一部分：你的网络 (SCR-IG) 损失函数体系你的网络采用的是“多损失联合优化”策略，总损失由监督分支、无监督分支以及语义对比约束三部分组成： \mathcal{L}_{Total} = \alpha \mathcal{L}_{Sup} + \beta \mathcal{L}_{Unsup} + 0.01 \mathcal{L}_{ICC\_Ours}(注：在你的 train.py 中，对比损失的权重被缩小为 0.01 以防止走火入魔) 1. 监督分支：正向重要性加权的修正 IS-Loss ($\mathcal{L}_{Sup}$)你放弃了 I-SECRET 的“倒数规避”逻辑，转而使用正向的指数放大机制（$\exp$），强制网络将注意力集中在病灶和毛细血管（$\overline{\alpha}_i$ 趋近于 1）的区域： \mathcal{L}_{Sup} = \mathcal{L}_{IS\_Retinex} = \frac{1}{N} \sum_{i=1}^{N} \exp(\lambda \cdot \overline{\alpha}_{i}) \left\| z_{...</div></div></div></a><a class="pagination-related" href="/2026/03/25/paper/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/20260325-gemini/" title="gemini"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-25</div><div class="info-item-2">gemini</div></div><div class="info-2"><div class="info-item-1">面向眼底图像临床质量评估的Agent协同与多模态大模型知识蒸馏前沿研究报告研究背景与核心计算瓶颈分析在医学影像分析领域，眼底图像的临床质量评估（Clinical Quality Assessment, CQA）是任何下游诊断任务（如糖尿病视网膜病变、青光眼筛查）不可或缺的前置条件。高质量的眼底图像需要满足多维度的严格标准，包括但不限于全局亮度的均匀性、对比度的适宜性、伪影（如睫毛遮挡、反光）的缺失，以及视网膜血管网络和视盘等关键解剖结构分割的精确度。传统上，这一质量评估过程高度依赖于专业眼科医师的人工标注与打分，这种方法不仅消耗巨大的人力成本，而且受限于评估者的主观差异，导致公开的高质量CQA数据集极度匮乏。 近年来，多模态大语言模型（Multimodal Large Language Models, MLLMs）和视觉语言大模型（Vision-Language Models, VLMs）在医学影像理解方面展现出了革命性的潜力。通过构建智能体（Agent）框架，大模型能够模拟人类专家的临床思维链，对医学图像进行多维度的细粒度评估。然而，在实际的工业部署和大规模数据集标注中，将海量...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">SolitudeAB</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SolitudeAB"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/SolitudeAB" target="_blank" title="GitHub"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:jiaxwoo@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #DEAC96;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%93%84-%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E5%8F%AB-split-data-py%EF%BC%8C%E5%A4%8D%E5%88%B6%E4%BB%A5%E4%B8%8B%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">📄 创建一个文件叫 split_data.py，复制以下代码：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E8%BF%90%E8%A1%8C%E4%BD%9C%E8%80%85%E7%9A%84%E8%84%9A%E6%9C%AC-%E7%94%9F%E6%88%90%E9%85%8D%E5%AF%B9%E6%95%B0%E6%8D%AE"><span class="toc-number">2.</span> <span class="toc-text">第二步：运行作者的脚本 (生成配对数据)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E5%A4%84%E7%90%86-Usable-%E7%9C%9F%E5%AE%9E%E7%9A%84%E4%BD%8E%E8%B4%A8%E9%87%8F%E5%9B%BE"><span class="toc-number">3.</span> <span class="toc-text">第三步：处理 Usable (真实的低质量图)</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/%E8%AF%AD%E5%BD%95/" title="语录">语录</a><time datetime="2026-07-02T12:45:25.136Z" title="发表于 2026-07-02 20:45:25">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/hello-world/" title="Hello World">Hello World</a><time datetime="2026-07-02T12:45:25.014Z" title="发表于 2026-07-02 20:45:25">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/machine_learning/20260702-math/" title="高等数学">高等数学</a><time datetime="2026-07-02T12:05:42.000Z" title="发表于 2026-07-02 20:05:42">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/paper/Eyes/v3/20260509-Untitled-2/" title="Untitled 2">Untitled 2</a><time datetime="2026-05-09T07:00:54.000Z" title="发表于 2026-05-09 15:00:54">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/07/paper/Eyes/v3/20260507-Untitled-1/" title="Untitled 1">Untitled 1</a><time datetime="2026-05-07T13:46:03.000Z" title="发表于 2026-05-07 21:46:03">2026-05-07</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By SolitudeAB</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="/pluginsSrc/medium-zoom/dist/medium-zoom.min.js?v=1.1.0"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        loader: {
+          load: [
+            // Four font extension packages (optional)
+            //- '[tex]/bbm',
+            //- '[tex]/bboldx',
+            //- '[tex]/dsfont',
+            '[tex]/mhchem'
+          ],
+          paths: {
+            'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+
+            //- // Four font extension packages (optional)
+            //- 'mathjax-bbm-extension': '[mathjax]/../@mathjax/mathjax-bbm-font-extension',
+            //- 'mathjax-bboldx-extension': '[mathjax]/../@mathjax/mathjax-bboldx-font-extension',
+            //- 'mathjax-dsfont-extension': '[mathjax]/../@mathjax/mathjax-dsfont-font-extension',
+            'mathjax-mhchem-extension': '[mathjax]/../@mathjax/mathjax-mhchem-font-extension'
+          }
+        },
+        output: {
+          font: 'mathjax-newcm',
+        },
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+          packages: {
+            '[+]': [
+              'mhchem'
+            ]
+          }
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          menuOptions: {
+            settings: {
+              enrich: false  // Turn off Braille and voice narration text automatic generation
+            }
+          },
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = '/pluginsSrc/mathjax/tex-mml-chtml.js?v=4.1.0'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><div id="aplayer"></div><script src="/js/custom.js"></script><script id="canvas_nest" defer="defer" color="222,172,150" opacity="0.5" zIndex="-1" count="99" mobile="false" src="/pluginsSrc/butterfly-extsrc/dist/canvas-nest.min.js?v=1.1.6"></script><link rel="stylesheet" href="/pluginsSrc/aplayer/dist/APlayer.min.css?v=1.10.1" media="print" onload="this.media='all'"><script src="/pluginsSrc/aplayer/dist/APlayer.min.js?v=1.10.1"></script><script src="/pluginsSrc/butterfly-extsrc/metingjs/dist/Meting.min.js?v=1.1.6"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="/pluginsSrc/pjax/pjax.min.js?v=0.2.8" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章..." type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.4"></script></div></div></body></html>

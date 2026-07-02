@@ -1,0 +1,432 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>路线 | 我的博客</title><meta name="author" content="SolitudeAB"><meta name="copyright" content="SolitudeAB"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="第一阶段：构建多模型+多Agent的“专家会诊”系统（小批量离线标注）【原版保留】：依然从海量数据中抽样 5%~10%。依然使用 EH-Benchmark 和 ICARE 框架配置决策 Agent，调用无监督分割工具（UM-SAM提取血管）和亮度对比度工具获取客观局部信息。 【概率分布升级】：  组建专家委员会：在评估 Agent 环节，我们不再只调用单一的 GPT-4V，而是同时并行调用 3-5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="路线">
+<meta property="og:url" content="https://solitudeab.github.io/2026/04/03/paper/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/20260403-%E8%B7%AF%E7%BA%BF/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="第一阶段：构建多模型+多Agent的“专家会诊”系统（小批量离线标注）【原版保留】：依然从海量数据中抽样 5%~10%。依然使用 EH-Benchmark 和 ICARE 框架配置决策 Agent，调用无监督分割工具（UM-SAM提取血管）和亮度对比度工具获取客观局部信息。 【概率分布升级】：  组建专家委员会：在评估 Agent 环节，我们不再只调用单一的 GPT-4V，而是同时并行调用 3-5">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://solitudeab.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2026-04-03T08:18:47.000Z">
+<meta property="article:modified_time" content="2026-07-02T12:45:25.113Z">
+<meta property="article:author" content="SolitudeAB">
+<meta property="article:tag" content="眼底图像增强">
+<meta property="article:tag" content="论文实验">
+<meta property="article:tag" content="知识蒸馏">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://solitudeab.github.io/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "路线",
+  "url": "https://solitudeab.github.io/2026/04/03/paper/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/20260403-%E8%B7%AF%E7%BA%BF/",
+  "image": "https://solitudeab.github.io/img/avatar.jpg",
+  "datePublished": "2026-04-03T08:18:47.000Z",
+  "dateModified": "2026-07-02T12:45:25.113Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "SolitudeAB",
+      "url": "https://solitudeab.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://solitudeab.github.io/2026/04/03/paper/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/20260403-%E8%B7%AF%E7%BA%BF/index.html"><link rel="preconnect"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css?v=7.1.0"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js?v=4.13.0',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '路线',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="我的博客" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div class="bg-animation" id="web_bg" style="background-image: url(/img/bg.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/SolitudeAB/blog-source/new/main/source/_posts"><i class="fa-fw fas fa-pen"></i><span> 写文章</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">我的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">路线</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/SolitudeAB/blog-source/new/main/source/_posts"><i class="fa-fw fas fa-pen"></i><span> 写文章</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">路线</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-04-03T08:18:47.000Z" title="发表于 2026-04-03 16:18:47">2026-04-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-07-02T12:45:25.113Z" title="更新于 2026-07-02 20:45:25">2026-07-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%BA%E6%96%87%E5%AE%9E%E9%AA%8C/">论文实验</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="第一阶段：构建多模型-多Agent的“专家会诊”系统（小批量离线标注）"><a href="#第一阶段：构建多模型-多Agent的“专家会诊”系统（小批量离线标注）" class="headerlink" title="第一阶段：构建多模型+多Agent的“专家会诊”系统（小批量离线标注）"></a>第一阶段：构建多模型+多Agent的“专家会诊”系统（小批量离线标注）</h2><p><strong>【原版保留】</strong>：依然从海量数据中抽样 5%~10%。依然使用 EH-Benchmark 和 ICARE 框架配置决策 Agent，调用无监督分割工具（UM-SAM提取血管）和亮度对比度工具获取客观局部信息。</p>
+<p><strong>【概率分布升级】</strong>：</p>
+<ul>
+<li><strong>组建专家委员会</strong>：在评估 Agent 环节，我们不再只调用单一的 GPT-4V，而是同时并行调用 <strong>3-5 个不同的顶级大模型</strong>（例如 GPT-4o、Claude 3.5、闭源医学垂类大模型等），或者使用同一个大模型配合不同的 Prompt 角色（如“视网膜专家”、“青光眼专家”）。</li>
+<li><strong>多源打分与输出</strong>：这几位“专家”各自结合工具的数据和原始图像，分别给出自己的评分和思维链（CoT）。</li>
+<li><strong>生成目标分布</strong>：对于同一张眼底图··，你现在得到的不再是一个死板的“4分”，而是一个<strong>分数集合</strong>（例如 [4.5, 4.0, 4.2, 4.0]）。我们可以据此计算出一个高斯分布（均值 $\mu=4.175$，方差 $\sigma$）。</li>
+</ul>
+<h3 id="步骤-1-1：物理扩增（“人为制造复杂病例”）"><a href="#步骤-1-1：物理扩增（“人为制造复杂病例”）" class="headerlink" title="步骤 1.1：物理扩增（“人为制造复杂病例”）"></a>步骤 1.1：物理扩增（“人为制造复杂病例”）</h3><p>因为 100 张图太少，小模型见不到世面。我们需要先用图像处理软件或脚本，对这 100 张图进行“物理破坏”，模拟临床中常见的烂图。</p>
+<ul>
+<li><strong>模拟曝光问题：</strong> 把一部分图片整体调暗（模拟曝光不足），或者在局部叠加白色高亮光斑（模拟闪光灯反光）。</li>
+<li><strong>模拟伪影问题：</strong> 在图片边缘贴上一些半透明的黑色细条（模拟睫毛遮挡），或者加上模糊的灰块（模拟镜头灰尘或患者白内障）。</li>
+<li><strong>模拟设备问题：</strong> 对图片进行不同程度的高斯模糊（模拟对焦失败）。</li>
+<li><strong>结果：</strong> 你的 100 张原图，瞬间变成了 <strong>1000 张</strong> 包含了各种质量缺陷的“考题图库”。</li>
+</ul>
+<h3 id="步骤-1-2：组建“大模型专家库”（“请不同的名医”）"><a href="#步骤-1-2：组建“大模型专家库”（“请不同的名医”）" class="headerlink" title="步骤 1.2：组建“大模型专家库”（“请不同的名医”）"></a>步骤 1.2：组建“大模型专家库”（“请不同的名医”）</h3><p>为了得到你设想的“概率分布”，我们不能只听一家之言。你需要准备几个不同的多模态大模型API接口。</p>
+<ul>
+<li>比如：你可以同时接入 GPT-4o（稳重型专家）、Claude 3.5（细节控专家）、Qwen-VL（国产视觉专家）等 3 到 5 个不同的大模型。</li>
+<li>这就相当于请了 5 位不同流派的顶级医生坐在了会诊室里。</li>
+</ul>
+<h3 id="步骤-1-3：为专家配备“外挂工具”（EH-Benchmark机制）"><a href="#步骤-1-3：为专家配备“外挂工具”（EH-Benchmark机制）" class="headerlink" title="步骤 1.3：为专家配备“外挂工具”（EH-Benchmark机制）"></a>步骤 1.3：为专家配备“外挂工具”（EH-Benchmark机制）</h3><p>名医看病也不能只靠肉眼猜，容易出现“幻觉”。我们要给他们发“医疗器械”。</p>
+<ul>
+<li><strong>发操作手册（RAG）：</strong> 在大模型看图前，系统先自动把“眼底图临床质量评估标准”发给它们，让它们复习一下打分规则。</li>
+<li><strong>发检测仪器（Tools）：</strong> 比如，我们后台运行一个简单的亮度计算器和一个开源的血管分割小脚本。当大模型看到一张图时，它能看到仪器传来的数据：“报告：这张图的平均亮度只有 40（偏暗），血管网络连通率 95%”。</li>
+<li>这样，专家们的判断就有了绝对客观的数据支撑。</li>
+</ul>
+<h3 id="步骤-1-4：强制做标准化问卷（ICARE机制）"><a href="#步骤-1-4：强制做标准化问卷（ICARE机制）" class="headerlink" title="步骤 1.4：强制做标准化问卷（ICARE机制）"></a>步骤 1.4：强制做标准化问卷（ICARE机制）</h3><p>为了防止专家们给出的评语天马行空，我们要逼他们做一套标准化的“单选题”。</p>
+<ul>
+<li>系统根据图片生成几个具体问题，比如：“该图的黄斑区是否有反光遮挡？A. 无；B. 轻度；C. 严重影响诊断。”</li>
+<li>5 位专家必须分别回答这些问题，并且要求他们<strong>把做题的思考过程写下来</strong>。</li>
+<li>写下来的这大段话（比如：“因为亮度仪器显示局部过曝，且根据选择题第2题我观察到了高光，所以对比度这一项我扣了分…”），就是未来教小模型“看图逻辑”的<strong>思维链（CoT）文本</strong>。</li>
+</ul>
+<h3 id="步骤-1-5：收集结果，生成“概率分布”（出具联合会诊报告）"><a href="#步骤-1-5：收集结果，生成“概率分布”（出具联合会诊报告）" class="headerlink" title="步骤 1.5：收集结果，生成“概率分布”（出具联合会诊报告）"></a>步骤 1.5：收集结果，生成“概率分布”（出具联合会诊报告）</h3><p>这是第一阶段的最后一步，也是衔接你想法的核心。</p>
+<ul>
+<li>对于这 1000 张图中的某一张（比如图001），5 位专家做完问卷后，分别给出了最终的质量总分：<strong>[85, 82, 88, 85, 80]</strong>。</li>
+<li>我们不取平均值，而是利用这 5 个分数，计算出一个<strong>高斯分布（概率分布）</strong>：<ul>
+<li><strong>均值（Mean）：</strong> 84 分（代表图像的整体质量倾向）。</li>
+<li><strong>方差/标准差（Variance）：</strong> 反映了这张图的<strong>不确定性</strong>。如果大家给的分数很接近，方差就小（这图没争议）；如果有人给 90，有人给 60，方差就大（说明这图的伪影极其刁钻，大模型也拿不准）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="硬骨头一：临床级“物理造假”的逼真度（对应步骤-1-1）"><a href="#硬骨头一：临床级“物理造假”的逼真度（对应步骤-1-1）" class="headerlink" title="硬骨头一：临床级“物理造假”的逼真度（对应步骤 1.1）"></a>硬骨头一：临床级“物理造假”的逼真度（对应步骤 1.1）</h3><p>用代码给图片加点高斯模糊或者调低亮度极其简单（两行代码的事），但<strong>要让这些缺陷看起来像真实的眼底病理或拍摄失误，非常困难。</strong></p>
+<ul>
+<li><strong>难点原因</strong>：如果你直接在图片上贴一个黑色的实心多边形来模拟“睫毛遮挡”，或者用生硬的白色渐变来模拟“闪光灯过曝”，大模型和未来的小模型都会变得很聪明——它们不会去学如何识别医学伪影，而是学会了<strong>“识别哪张图片被Photoshop处理过”</strong>。</li>
+<li><strong>致命后果</strong>：一旦小模型学偏了，当你把它部署到医院，面对真正因为白内障导致的复杂散射模糊时，它会完全抓瞎。如何用算法（例如引入基于物理的光学渲染，或者使用轻量级GAN网络）去生成<strong>符合医疗物理规律</strong>的伪影，是第一个技术深水区。</li>
+</ul>
+<h3 id="硬骨头二：Agent与外部脚本的“握手与幻觉”（对应步骤-1-3）"><a href="#硬骨头二：Agent与外部脚本的“握手与幻觉”（对应步骤-1-3）" class="headerlink" title="硬骨头二：Agent与外部脚本的“握手与幻觉”（对应步骤 1.3）"></a>硬骨头二：Agent与外部脚本的“握手与幻觉”（对应步骤 1.3）</h3><p>让大模型调用外部工具（EH-Benchmark 机制）在PPT上画起来容易，但大模型是一个极其“自大”且容易产生幻觉的黑盒。</p>
+<ul>
+<li><strong>难点原因</strong>：在实际开发中，你写了一个准确度极高的血管分割Python脚本，并把结果（如“血管连通性：92%”）返回给 GPT-4o。但 GPT-4o 可能会在输出时自作主张：“<em>虽然工具显示连通性是 92%，但我肉眼观察觉得只有 70%…</em>”。或者更糟的是，大模型在调用工具API时，经常会传错参数格式，导致程序直接崩溃。</li>
+<li><strong>系统要求</strong>：你需要编写极其严格的“格式化提示词（Prompt Engineering）”和状态机（State Machine）逻辑，死死按住大模型，强制它：<strong>必须且只能</strong>基于工具返回的数据进行逻辑推演，不准自由发挥。</li>
+</ul>
+<h3 id="硬骨头三：逼大模型出“有临床价值的题”（对应步骤-1-4）"><a href="#硬骨头三：逼大模型出“有临床价值的题”（对应步骤-1-4）" class="headerlink" title="硬骨头三：逼大模型出“有临床价值的题”（对应步骤 1.4）"></a>硬骨头三：逼大模型出“有临床价值的题”（对应步骤 1.4）</h3><p>引入 ICARE 机制让大模型自己出选择题并自己做，是为了保证评估的全面性。但大模型往往喜欢“水字数”。</p>
+<ul>
+<li><strong>难点原因</strong>：如果你不加以强力约束，大模型生成的选择题会是废话，例如：<em>“这是一张什么部位的图片？A. 肺部 B. 眼底 C. 骨骼”</em>。这种问题对评估质量毫无帮助。</li>
+<li><strong>过滤机制</strong>：你必须设计一个巧妙的“反思与过滤（Filtering）”机制。在系统里设定一个规则：<strong>如果一道题不看这张特定的图片也能凭医学常识答对，就立刻删除该题</strong>。如何用程序自动化地判断“这道题有没有质量评估价值”，是这一步最耗费脑力的地方。</li>
+</ul>
+<h3 id="硬骨头四：并发调度与极高的-API-烧钱速度"><a href="#硬骨头四：并发调度与极高的-API-烧钱速度" class="headerlink" title="硬骨头四：并发调度与极高的 API 烧钱速度"></a>硬骨头四：并发调度与极高的 API 烧钱速度</h3><p>这是最现实的工程挑战。</p>
+<ul>
+<li><strong>难点原因</strong>：你有 1000 张高分辨率图片，每张图片需要送给 5 个不同的顶级大模型。每次请求不仅包含图片，还包含极长的系统提示词、检索到的临床指南（RAG）、以及工具返回的数据。</li>
+<li><strong>并发噩梦</strong>：商业大模型（如 OpenAI、Anthropic）都有严格的并发限制（Rate Limits）和每分钟 Token 限制。如果你写个简单的 <code>for</code> 循环去跑，程序跑不到 10 张图就会因为触发 API 限制而大面积报错中断。</li>
+<li><strong>解决方案</strong>：你必须在后台搭建一个带有<strong>异步重试机制（Async Retry）</strong>、<strong>断点续传</strong>和<strong>并发控制令牌桶</strong>的强壮调度系统。此外，这几千次满负荷的多模态 API 调用，其账单成本也需要提前规划。</li>
+</ul>
+<h2 id="第二阶段：执行基于RL、特征与【概率分布】的混合代理蒸馏（模型训练）"><a href="#第二阶段：执行基于RL、特征与【概率分布】的混合代理蒸馏（模型训练）" class="headerlink" title="第二阶段：执行基于RL、特征与【概率分布】的混合代理蒸馏（模型训练）"></a>第二阶段：执行基于RL、特征与【概率分布】的混合代理蒸馏（模型训练）</h2><p><strong>【原版保留】</strong>：依然初始化一个轻量级视觉学生网络（如-+参数量小于1B的ResNet）。依然要结合 UM-SAM 策略进行深层特征激活图的蒸馏。</p>
+<p><strong>【概率分布升级】</strong>：</p>
+<ul>
+<li><strong>分布拟合（替代标量对齐）</strong>：在训练过程中，抛弃传统的均方误差拟合。使用带有隐空间（Latent Space）的网络结构（如概率 U-Net），利用 Kullback-Leibler 散度（KL Divergence）强迫小模型的输出分布去<strong>拟合第一阶段生成的“专家打分高斯分布”</strong>。</li>
+<li><strong>完美激活 UDCD 框架</strong>：在原路线中，UDCD（不确定性驱动的对比自蒸馏）需要“评估 Teacher 的置信度”。现在我们有了最完美的置信度指标——<strong>方差</strong>！如果几个大模型给出的分数方差极小（大家一致认为好或坏），小模型就老老实实学习分布；如果方差极大（说明碰到了极端模糊或罕见伪影，专家们意见分歧严重），系统就自动触发 UDCD 机制，切断直接的监督学习，转而增强类内/类间的对比学习损失。</li>
+<li><strong>RL 探索（MedVLM-R1）</strong>：依然引入 GRPO 强化学习，但这次的奖励机制变为：小模型自主探索生成的推理路径，如果其得出的结论落在了“专家概率分布的高置信度区间”内，就给予高奖励。</li>
+</ul>
+<h2 id="第三阶段：具备不确定性感知的大规模本地推理（全量部署）"><a href="#第三阶段：具备不确定性感知的大规模本地推理（全量部署）" class="headerlink" title="第三阶段：具备不确定性感知的大规模本地推理（全量部署）"></a>第三阶段：具备不确定性感知的大规模本地推理（全量部署）</h2><p><strong>【原版保留】</strong>：训练收敛后，彻底关闭所有的 Agent API调用，实现零 Token 的大规模本地推理。</p>
+<p><strong>【概率分布升级】</strong>：</p>
+<ul>
+<li><strong>输出自带“信心指数”</strong>：当你把剩余 90% 的海量眼底数据集丢给这个小模型时，经过轻量级模型的前向传播，它不仅能瞬间输出多维 CQA 指标（“亮度适宜度”、“血管分割精度”），还能同时输出一个<strong>置信区间/方差</strong>（因为它学到的是概率分布）。</li>
+<li><strong>临床价值</strong>：比如，小模型输出：“质量评分 82 分，置信度极高”，这批图直接过检；如果输出：“质量评分 65 分，置信度极低（方差很大）”，系统就可以自动拦截这张图，提示“此图存在极端复杂伪影，需人工介入”。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://solitudeab.github.io">SolitudeAB</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://solitudeab.github.io/2026/04/03/paper/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/20260403-%E8%B7%AF%E7%BA%BF/">https://solitudeab.github.io/2026/04/03/paper/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/20260403-%E8%B7%AF%E7%BA%BF/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://solitudeab.github.io" target="_blank">我的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%9C%BC%E5%BA%95%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/">眼底图像增强</a><a class="post-meta__tags" href="/tags/%E8%AE%BA%E6%96%87%E5%AE%9E%E9%AA%8C/">论文实验</a><a class="post-meta__tags" href="/tags/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/">知识蒸馏</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,x,wechat,weibo,qq,qzone,douban,linkedin"></div><link rel="stylesheet" href="/pluginsSrc/butterfly-extsrc/sharejs/dist/css/share.min.css?v=1.1.6" media="print" onload="this.media='all'"><script src="/pluginsSrc/butterfly-extsrc/sharejs/dist/js/social-share.min.js?v=1.1.6" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/04/08/paper/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/20260408-%E6%B1%87%E6%8A%A5/" title="汇报"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">汇报</div></div><div class="info-2"><div class="info-item-1">Page 02 / Method (重点聚焦 CQA 的构建与训练)Page 2: CQA 的基石——昂贵且真实的“医生反馈” (数据标注)  (讲解图表：引导大家看 Fig. 1 里的 Radiologists 图标或单独列出打分规则) 口语讲解引导： “在讲 CQA 网络结构之前，我们先来看看它的‘灵魂’从何而来。为了避免半监督学习中的确认偏差，最理想的情况是让医生坐在电脑前，人工筛选模型生成的每一张图 。但这在现实中是不可能的。” “因此，作者提出构建一个临床质量评估数据集，本质上是把放射科医生的经验‘蒸馏’下来 。作者请了两位经验丰富的放射科医生，对大量的 CT 图像进行 1-10 分的李克特量表（Likert scale）打分 。1分代表组织严重畸变，10分代表无伪影且解剖结构完美 。对于没有真实参考标准（Ground-Truth）的临床图，他们采用了‘初审+复审’的模式——一位医生先打分，另一位资深医生复核，最终达成共识 。这可以说是整个框架中最耗费人力，但也最关键的一步，因为它定义了什么是‘临床可用’。”  Page 3: CQA 的训练机制——如何让模型学会“医生...</div></div></div></a><a class="pagination-related" href="/2026/04/03/paper/Eyes/20260403-2026.4.3%E6%97%A5%E5%BF%97/" title="2026.4.3日志"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">2026.4.3日志</div></div><div class="info-2"><div class="info-item-1">训练指令 1python train.py --gpu_id 0 --epochs 100 --save_dir ./weights/test --batch_size 16 123456```测试指令 ``` </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/04/16/paper/Eyes/v2/20260416-network/" title="network"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-16</div><div class="info-item-2">network</div></div><div class="info-2"><div class="info-item-1">3.1 Overview of the Architecture现有的低照度眼底图像增强算法普遍面临“物理平滑与病理保真”之间的本征矛盾。针对此瓶颈，本文提出了一种语义校准的 Retinex 重要性引导框架（SCR-IG）。该框架打破了传统 Retinex 模型中各向同性（Isotropic）的光照估计假设，将多维医学语义先验深度注入到光照残差的映射过程中。如图 X 所示，SCR-IG 包含三个核心组件：基于非对称知识蒸馏的多维语义先验生成模块（KD-SIPG）、基于多分支门控的条件变异光照校准模块（Cond-SVIC），以及确保边缘端极低延迟的自校准推理机制（SCM）。在统一的拓扑感知与课程学习优化景观下，该网络能够在极度退化的图像中实现微米级的病灶保留与高置信度的光照恢复。 3.2 Asymmetric Knowledge Distillation for Semantic Prior Generation (KD-SIPG)在极低信噪比与不均匀照明的眼底成像退化空间中，直接提取可靠的病理结构是一个典型的不适定问题。KD-SIPG 旨在不增加边缘部署算力负担的前提下，构建一个...</div></div></div></a><a class="pagination-related" href="/2026/03/13/paper/Eyes/20260313-2026.3.13%E6%97%A5%E5%BF%97/" title="2026.3.13日志"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-13</div><div class="info-item-2">2026.3.13日志</div></div><div class="info-2"><div class="info-item-1">CQA 模块（打分系统）数据集来源：Agent自动评分（替代医生打分）  token消耗量很大，尝试采用模型蒸馏的方法，用大模型来训练出一个小模型，来做评分模型 评分：好、坏、接近好（用效果不那么好的模型跑出增强图替代）  接下来阅读方向 知识蒸馏  </div></div></div></a><a class="pagination-related" href="/2026/04/11/paper/Eyes/v2/20260411-deepseach/" title="deepseach"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-11</div><div class="info-item-2">deepseach</div></div><div class="info-2"><div class="info-item-1">针对SCR-IG眼底图像增强框架的独创性、半监督SOTA指标及CCF B类会议录用可行性的深度调研报告 https://gemini.google.com/share/1b92496849f8  在计算医学与计算机视觉的交叉领域，眼底图像的质量增强一直是一个极具挑战性的核心难题。随着便携式、手持式眼底相机的普及，由于硬件尺寸和成本的限制，所采集的眼底图像往往伴随着光照不均、对比度极低、以及严重的背景噪声等质量降质问题。这些低质量图像不仅极大地限制了眼科医生对糖尿病视网膜病变（Diabetic Retinopathy, DR）、青光眼等致盲性眼疾的早期诊断，同时也导致下游的计算机辅助诊断（CAD）系统性能出现断崖式下降。在传统的图像增强算法与深度学习增强网络中，存在一个难以调和的“内在矛盾”：从数学与信号处理的角度出发，消除低照度图像中的散斑噪声需要进行强烈的物理平滑（Physical Smoothing）；然而，从临床诊断的角度出发，这种物理平滑会不可逆地破坏甚至是抹除微小的病理性特征（Pathological Fidelity），例如微血管、微动脉瘤和细小渗出物。 本文旨在对所...</div></div></div></a><a class="pagination-related" href="/2026/03/25/paper/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/20260325-gemini/" title="gemini"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-25</div><div class="info-item-2">gemini</div></div><div class="info-2"><div class="info-item-1">面向眼底图像临床质量评估的Agent协同与多模态大模型知识蒸馏前沿研究报告研究背景与核心计算瓶颈分析在医学影像分析领域，眼底图像的临床质量评估（Clinical Quality Assessment, CQA）是任何下游诊断任务（如糖尿病视网膜病变、青光眼筛查）不可或缺的前置条件。高质量的眼底图像需要满足多维度的严格标准，包括但不限于全局亮度的均匀性、对比度的适宜性、伪影（如睫毛遮挡、反光）的缺失，以及视网膜血管网络和视盘等关键解剖结构分割的精确度。传统上，这一质量评估过程高度依赖于专业眼科医师的人工标注与打分，这种方法不仅消耗巨大的人力成本，而且受限于评估者的主观差异，导致公开的高质量CQA数据集极度匮乏。 近年来，多模态大语言模型（Multimodal Large Language Models, MLLMs）和视觉语言大模型（Vision-Language Models, VLMs）在医学影像理解方面展现出了革命性的潜力。通过构建智能体（Agent）框架，大模型能够模拟人类专家的临床思维链，对医学图像进行多维度的细粒度评估。然而，在实际的工业部署和大规模数据集标注中，将海量...</div></div></div></a><a class="pagination-related" href="/2026/05/07/paper/Eyes/v3/20260507-Untitled-1/" title="Untitled 1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-07</div><div class="info-item-2">Untitled 1</div></div><div class="info-2"><div class="info-item-1">多维先验调制增强生成网络 (PMEG-SCR) 深度解构该架构彻底摒弃了传统深度学习在医学图像增强中的“黑盒”映射，转而采用一种由底层医学物理先验深度驱动的“白盒化”特征干预流。整体架构被严密地划分为四个前向数据流阶段与一个后向梯度优化阶段。 阶段 1：全局导航中心 —— 双轨医学先验提取引擎 (KD-SIPG)在任何像素级像素增强开始之前，网络必须首先“理解”视网膜的解剖结构。该阶段是一个独立于主干网络的预计算引擎，旨在极端退化（极低信噪比、不均匀照明）的条件下，强行提取出可靠的医学先验。  1. 物理拓扑基线提取： 首先，输入图像 $y$ 经过全局环境光池化提取极低频基线 $x{rough}$。为了对抗免散瞳相机中致命的高光反射与睫毛遮挡，引入基于 Otsu 算法的物理异常掩码（Artifact Mask）$\mathcal{M}{art}$。随后，利用可微分的多尺度 Frangi 滤波器结合该掩码，计算出具备拓扑连通性的微血管概率分布 $\alpha_{vessel}$。  2. 异步语义知识蒸馏： 考虑到边缘设备的算力限制，引入了大型视网膜基础模型（Teacher，如 R...</div></div></div></a><a class="pagination-related" href="/2026/04/21/paper/Eyes/v3/20260422-test/" title="test"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-22</div><div class="info-item-2">test</div></div><div class="info-2"><div class="info-item-1">基于KD-SIPG重要性张量的眼底图像增强与跨领域融合模块深度研究报告1. 引言与KD-SIPG重要性张量的理论解构眼底图像的质量增强在医学计算机视觉领域本质上是一个高度非适定的逆问题。由于眼底成像设备的硬件限制、患者的屈光间质混浊（如白内障）以及不可控的外部照明条件，获取的眼底图像往往伴随着低对比度、高频噪声、不均匀照明以及伪影（如睫毛阴影或反光）。传统的图像增强算法或是常规的卷积神经网络（CNN）在处理此类退化时，通常倾向于优化全局图像逼真度指标（如峰值信噪比PSNR或结构相似性SSIM）。这种全局同质化的优化策略会产生一个致命的临床副作用：网络会过度平滑背景，从而将微动脉瘤、细小出血点、新生微血管等高频病理特征作为噪声抹除，使得增强后的图像在临床诊断上失去价值。 为了突破这一瓶颈，语义先验的提取与注入成为了维持“病理保真度”（Pathological Fidelity）的核心机制。KD-SIPG（Knowledge Distillation for Semantic Prior Generation，语义先验生成的异步知识蒸馏）模块正是为解决极端退化条件下的先验提取而设计的...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">SolitudeAB</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SolitudeAB"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/SolitudeAB" target="_blank" title="GitHub"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:jiaxwoo@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #DEAC96;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%A4%9A%E6%A8%A1%E5%9E%8B-%E5%A4%9AAgent%E7%9A%84%E2%80%9C%E4%B8%93%E5%AE%B6%E4%BC%9A%E8%AF%8A%E2%80%9D%E7%B3%BB%E7%BB%9F%EF%BC%88%E5%B0%8F%E6%89%B9%E9%87%8F%E7%A6%BB%E7%BA%BF%E6%A0%87%E6%B3%A8%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">第一阶段：构建多模型+多Agent的“专家会诊”系统（小批量离线标注）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-1-1%EF%BC%9A%E7%89%A9%E7%90%86%E6%89%A9%E5%A2%9E%EF%BC%88%E2%80%9C%E4%BA%BA%E4%B8%BA%E5%88%B6%E9%80%A0%E5%A4%8D%E6%9D%82%E7%97%85%E4%BE%8B%E2%80%9D%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">步骤 1.1：物理扩增（“人为制造复杂病例”）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-1-2%EF%BC%9A%E7%BB%84%E5%BB%BA%E2%80%9C%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%93%E5%AE%B6%E5%BA%93%E2%80%9D%EF%BC%88%E2%80%9C%E8%AF%B7%E4%B8%8D%E5%90%8C%E7%9A%84%E5%90%8D%E5%8C%BB%E2%80%9D%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">步骤 1.2：组建“大模型专家库”（“请不同的名医”）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-1-3%EF%BC%9A%E4%B8%BA%E4%B8%93%E5%AE%B6%E9%85%8D%E5%A4%87%E2%80%9C%E5%A4%96%E6%8C%82%E5%B7%A5%E5%85%B7%E2%80%9D%EF%BC%88EH-Benchmark%E6%9C%BA%E5%88%B6%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">步骤 1.3：为专家配备“外挂工具”（EH-Benchmark机制）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-1-4%EF%BC%9A%E5%BC%BA%E5%88%B6%E5%81%9A%E6%A0%87%E5%87%86%E5%8C%96%E9%97%AE%E5%8D%B7%EF%BC%88ICARE%E6%9C%BA%E5%88%B6%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">步骤 1.4：强制做标准化问卷（ICARE机制）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-1-5%EF%BC%9A%E6%94%B6%E9%9B%86%E7%BB%93%E6%9E%9C%EF%BC%8C%E7%94%9F%E6%88%90%E2%80%9C%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E2%80%9D%EF%BC%88%E5%87%BA%E5%85%B7%E8%81%94%E5%90%88%E4%BC%9A%E8%AF%8A%E6%8A%A5%E5%91%8A%EF%BC%89"><span class="toc-number">1.5.</span> <span class="toc-text">步骤 1.5：收集结果，生成“概率分布”（出具联合会诊报告）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E9%AA%A8%E5%A4%B4%E4%B8%80%EF%BC%9A%E4%B8%B4%E5%BA%8A%E7%BA%A7%E2%80%9C%E7%89%A9%E7%90%86%E9%80%A0%E5%81%87%E2%80%9D%E7%9A%84%E9%80%BC%E7%9C%9F%E5%BA%A6%EF%BC%88%E5%AF%B9%E5%BA%94%E6%AD%A5%E9%AA%A4-1-1%EF%BC%89"><span class="toc-number">1.6.</span> <span class="toc-text">硬骨头一：临床级“物理造假”的逼真度（对应步骤 1.1）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E9%AA%A8%E5%A4%B4%E4%BA%8C%EF%BC%9AAgent%E4%B8%8E%E5%A4%96%E9%83%A8%E8%84%9A%E6%9C%AC%E7%9A%84%E2%80%9C%E6%8F%A1%E6%89%8B%E4%B8%8E%E5%B9%BB%E8%A7%89%E2%80%9D%EF%BC%88%E5%AF%B9%E5%BA%94%E6%AD%A5%E9%AA%A4-1-3%EF%BC%89"><span class="toc-number">1.7.</span> <span class="toc-text">硬骨头二：Agent与外部脚本的“握手与幻觉”（对应步骤 1.3）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E9%AA%A8%E5%A4%B4%E4%B8%89%EF%BC%9A%E9%80%BC%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%87%BA%E2%80%9C%E6%9C%89%E4%B8%B4%E5%BA%8A%E4%BB%B7%E5%80%BC%E7%9A%84%E9%A2%98%E2%80%9D%EF%BC%88%E5%AF%B9%E5%BA%94%E6%AD%A5%E9%AA%A4-1-4%EF%BC%89"><span class="toc-number">1.8.</span> <span class="toc-text">硬骨头三：逼大模型出“有临床价值的题”（对应步骤 1.4）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E9%AA%A8%E5%A4%B4%E5%9B%9B%EF%BC%9A%E5%B9%B6%E5%8F%91%E8%B0%83%E5%BA%A6%E4%B8%8E%E6%9E%81%E9%AB%98%E7%9A%84-API-%E7%83%A7%E9%92%B1%E9%80%9F%E5%BA%A6"><span class="toc-number">1.9.</span> <span class="toc-text">硬骨头四：并发调度与极高的 API 烧钱速度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%89%A7%E8%A1%8C%E5%9F%BA%E4%BA%8ERL%E3%80%81%E7%89%B9%E5%BE%81%E4%B8%8E%E3%80%90%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E3%80%91%E7%9A%84%E6%B7%B7%E5%90%88%E4%BB%A3%E7%90%86%E8%92%B8%E9%A6%8F%EF%BC%88%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">第二阶段：执行基于RL、特征与【概率分布】的混合代理蒸馏（模型训练）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%EF%BC%9A%E5%85%B7%E5%A4%87%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7%E6%84%9F%E7%9F%A5%E7%9A%84%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%9C%AC%E5%9C%B0%E6%8E%A8%E7%90%86%EF%BC%88%E5%85%A8%E9%87%8F%E9%83%A8%E7%BD%B2%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">第三阶段：具备不确定性感知的大规模本地推理（全量部署）</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/%E8%AF%AD%E5%BD%95/" title="语录">语录</a><time datetime="2026-07-02T12:45:25.136Z" title="发表于 2026-07-02 20:45:25">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/hello-world/" title="Hello World">Hello World</a><time datetime="2026-07-02T12:45:25.014Z" title="发表于 2026-07-02 20:45:25">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/machine_learning/20260702-math/" title="高等数学">高等数学</a><time datetime="2026-07-02T12:05:42.000Z" title="发表于 2026-07-02 20:05:42">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/paper/Eyes/v3/20260509-Untitled-2/" title="Untitled 2">Untitled 2</a><time datetime="2026-05-09T07:00:54.000Z" title="发表于 2026-05-09 15:00:54">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/07/paper/Eyes/v3/20260507-Untitled-1/" title="Untitled 1">Untitled 1</a><time datetime="2026-05-07T13:46:03.000Z" title="发表于 2026-05-07 21:46:03">2026-05-07</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By SolitudeAB</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="/pluginsSrc/medium-zoom/dist/medium-zoom.min.js?v=1.1.0"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        loader: {
+          load: [
+            // Four font extension packages (optional)
+            //- '[tex]/bbm',
+            //- '[tex]/bboldx',
+            //- '[tex]/dsfont',
+            '[tex]/mhchem'
+          ],
+          paths: {
+            'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+
+            //- // Four font extension packages (optional)
+            //- 'mathjax-bbm-extension': '[mathjax]/../@mathjax/mathjax-bbm-font-extension',
+            //- 'mathjax-bboldx-extension': '[mathjax]/../@mathjax/mathjax-bboldx-font-extension',
+            //- 'mathjax-dsfont-extension': '[mathjax]/../@mathjax/mathjax-dsfont-font-extension',
+            'mathjax-mhchem-extension': '[mathjax]/../@mathjax/mathjax-mhchem-font-extension'
+          }
+        },
+        output: {
+          font: 'mathjax-newcm',
+        },
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+          packages: {
+            '[+]': [
+              'mhchem'
+            ]
+          }
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          menuOptions: {
+            settings: {
+              enrich: false  // Turn off Braille and voice narration text automatic generation
+            }
+          },
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = '/pluginsSrc/mathjax/tex-mml-chtml.js?v=4.1.0'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><div id="aplayer"></div><script src="/js/custom.js"></script><script id="canvas_nest" defer="defer" color="222,172,150" opacity="0.5" zIndex="-1" count="99" mobile="false" src="/pluginsSrc/butterfly-extsrc/dist/canvas-nest.min.js?v=1.1.6"></script><link rel="stylesheet" href="/pluginsSrc/aplayer/dist/APlayer.min.css?v=1.10.1" media="print" onload="this.media='all'"><script src="/pluginsSrc/aplayer/dist/APlayer.min.js?v=1.10.1"></script><script src="/pluginsSrc/butterfly-extsrc/metingjs/dist/Meting.min.js?v=1.1.6"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="/pluginsSrc/pjax/pjax.min.js?v=0.2.8" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章..." type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.4"></script></div></div></body></html>

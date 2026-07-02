@@ -1,0 +1,511 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>INR | 我的博客</title><meta name="author" content="SolitudeAB"><meta name="copyright" content="SolitudeAB"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="ImplicitNeuralRepresentationforCooperativeLow-lightImageEnhancement-Zotero 源码：https:&#x2F;&#x2F;github.com&#x2F;Ysz2022&#x2F;NeRCo&#x2F;tree&#x2F;main  ‍ （一）知识前瞻 用于协同低光图像增强的隐式神经表示  这是一个非常前沿的计算机视觉（ComputerVision）学术概念。简单来说，它是利用​一种特">
+<meta property="og:type" content="article">
+<meta property="og:title" content="INR">
+<meta property="og:url" content="https://solitudeab.github.io/2025/12/25/paper/20251225-INR/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="ImplicitNeuralRepresentationforCooperativeLow-lightImageEnhancement-Zotero 源码：https:&#x2F;&#x2F;github.com&#x2F;Ysz2022&#x2F;NeRCo&#x2F;tree&#x2F;main  ‍ （一）知识前瞻 用于协同低光图像增强的隐式神经表示  这是一个非常前沿的计算机视觉（ComputerVision）学术概念。简单来说，它是利用​一种特">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://solitudeab.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2025-12-25T02:09:55.000Z">
+<meta property="article:modified_time" content="2026-07-02T12:45:25.085Z">
+<meta property="article:author" content="SolitudeAB">
+<meta property="article:tag" content="CNN">
+<meta property="article:tag" content="论文实验">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://solitudeab.github.io/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "INR",
+  "url": "https://solitudeab.github.io/2025/12/25/paper/20251225-INR/",
+  "image": "https://solitudeab.github.io/img/avatar.jpg",
+  "datePublished": "2025-12-25T02:09:55.000Z",
+  "dateModified": "2026-07-02T12:45:25.085Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "SolitudeAB",
+      "url": "https://solitudeab.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://solitudeab.github.io/2025/12/25/paper/20251225-INR/index.html"><link rel="preconnect"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css?v=7.1.0"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js?v=4.13.0',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'INR',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="我的博客" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div class="bg-animation" id="web_bg" style="background-image: url(/img/bg.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/SolitudeAB/blog-source/new/main/source/_posts"><i class="fa-fw fas fa-pen"></i><span> 写文章</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">我的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">INR</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/SolitudeAB/blog-source/new/main/source/_posts"><i class="fa-fw fas fa-pen"></i><span> 写文章</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">INR</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-12-25T02:09:55.000Z" title="发表于 2025-12-25 10:09:55">2025-12-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-07-02T12:45:25.085Z" title="更新于 2026-07-02 20:45:25">2026-07-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%BA%E6%96%87%E5%AE%9E%E9%AA%8C/">论文实验</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><blockquote>
+<p><a href="zotero://open-pdf/library/items/JN7PJTPD">ImplicitNeuralRepresentationforCooperativeLow-lightImageEnhancement-Zotero</a></p>
+<p>源码：<a target="_blank" rel="noopener" href="https://github.com/Ysz2022/NeRCo/tree/main">https://github.com/Ysz2022/NeRCo/tree/main</a></p>
+</blockquote>
+<p>‍</p>
+<h1 id="（一）知识前瞻"><a href="#（一）知识前瞻" class="headerlink" title="（一）知识前瞻"></a>（一）知识前瞻</h1><blockquote>
+<p>用于协同低光图像增强的隐式神经表示</p>
+</blockquote>
+<p>这是一个非常前沿的计算机视觉（ComputerVision）学术概念。简单来说，它是利用​<strong>一种特殊的深度学习方法（隐式神经表示，INR）</strong> ​，结合​<strong>物理模型（通常是Retinex理论）</strong> ​，来**协同（联合）**解决照片光照不足、噪声大、细节丢失的问题。</p>
+<p>为了让你听懂，我们可以把这个复杂的术语拆解成三个部分来解释：</p>
+<hr>
+<h3 id="1-什么是“隐式神经表示”-ImplicitNeuralRepresentations-INR"><a href="#1-什么是“隐式神经表示”-ImplicitNeuralRepresentations-INR" class="headerlink" title="1.什么是“隐式神经表示”(ImplicitNeuralRepresentations,INR)?"></a>1.什么是“隐式神经表示”(ImplicitNeuralRepresentations,INR)?</h3><p>这是这个概念的核心技术。</p>
+<ul>
+<li><strong>传统图像表示（显式）：</strong> 就像一张位图（BMP/JPG），通过在一个二维网格上存储具体的像素点（Pixel）来记录图像。如果你放大，它就会变模糊或出现马赛克。</li>
+<li><p><strong>隐式神经表示（INR）：</strong> 就像一个​<strong>数学函数</strong>。它不存储像素点，而是存储一个神经网络。</p>
+<ul>
+<li>你告诉这个网络一个坐标$(x,y)$。</li>
+<li>网络计算后告诉你这个位置的颜色值$(r,g,b)$。</li>
+<li><strong>公式化表达：</strong>$F_\theta(x,y)=(r,g,b)$。</li>
+</ul>
+</li>
+</ul>
+<p>为什么要用它？</p>
+<p>因为它是连续的。这意味着无论你把图像放多大，它都能计算出中间的值，具有天然的“超分辨率”特性，且更能平滑地表示光照变化。</p>
+<h3 id="2-什么是“协同”-Cooperative"><a href="#2-什么是“协同”-Cooperative" class="headerlink" title="2.什么是“协同”(Cooperative)?"></a>2.什么是“协同”(Cooperative)?</h3><p>在低光照增强中，“协同”通常指的是<strong>Retinex理论</strong>的应用。Retinex理论认为一张图片是由两部分组成的：</p>
+<ol>
+<li><strong>反射率（Reflectance）：</strong> 物体原本的颜色和纹理（这是我们要恢复的清晰图像）。</li>
+<li><strong>光照（Illumination）：</strong> 环境打在物体上的光（在低光图中，这部分很暗且不均匀）。</li>
+</ol>
+<p>“协同”的意思是：</p>
+<p>这个算法并不是简单地把图片调亮，而是构建了两个神经网络（或一个网络的两个分支）：</p>
+<ul>
+<li>一个网络专门负责学习​<strong>光照</strong>（通常要求平滑）。</li>
+<li>一个网络专门负责学习反射率（包含细节）。<br>这两个部分在训练过程中相互配合、互相约束，最终合成出一张正常的亮图。</li>
+</ul>
+<h3 id="3-什么是“低光图像增强”-Low-LightImageEnhancement"><a href="#3-什么是“低光图像增强”-Low-LightImageEnhancement" class="headerlink" title="3.什么是“低光图像增强”(Low-LightImageEnhancement)?"></a>3.什么是“低光图像增强”(Low-LightImageEnhancement)?</h3><p>这个比较好理解，就是把夜晚或光线昏暗拍摄的照片，处理成亮度正常、色彩自然、没有噪点的照片。</p>
+<hr>
+<h3 id="总结：整个系统是如何工作的？"><a href="#总结：整个系统是如何工作的？" class="headerlink" title="总结：整个系统是如何工作的？"></a>总结：整个系统是如何工作的？</h3><p> <strong>“用于协同低光图像增强的隐式神经表示”</strong> 的工作流程可以想象成这样：</p>
+<ol>
+<li><strong>输入：</strong> 一张很黑的照片。</li>
+<li><strong>建模（INR）：</strong> 系统不把这张图看作像素矩阵，而是训练一个神经网络（INR）来代表这张图的内容。</li>
+<li><strong>协同分解：</strong> 这个网络内部会自动把图像拆解成“物体原本的颜色”和“光照情况”。<ul>
+<li>它利用INR的特性，保证“光照”是平滑变化的（因为真实世界的光通常是渐变的）。</li>
+<li>它利用INR的高频编码能力，保证“物体颜色”保留了锐利的边缘细节。</li>
+</ul>
+</li>
+<li><strong>增强：</strong> 系统调整“光照”部分的参数（把它变亮），然后再次与“物体颜色”结合。</li>
+<li><strong>输出：</strong> 任意分辨率的、清晰明亮的图像。</li>
+</ol>
+<h3 id="这种方法相比传统方法（如CNN）有什么好处？"><a href="#这种方法相比传统方法（如CNN）有什么好处？" class="headerlink" title="这种方法相比传统方法（如CNN）有什么好处？"></a>这种方法相比传统方法（如CNN）有什么好处？</h3><ol>
+<li><strong>分辨率无关性（Resolution-Agnostic）：</strong> 训练好后，你可以生成任意分辨率的增强图像，不会模糊。</li>
+<li><strong>更少的参数量：</strong> 不需要存储庞大的特征图，模型通常比较轻量。</li>
+<li><strong>更好的物理一致性：</strong> 因为利用了Retinex的协同机制，增强后的图片光影过渡更自然，不容易出现局部过曝或颜色失真。</li>
+</ol>
+<h3 id="简单类比"><a href="#简单类比" class="headerlink" title="简单类比"></a>简单类比</h3><ul>
+<li><strong>传统方法（Photoshop滤镜/普通CNN）：</strong> 就像一个修图师，拿着放大镜一个像素一个像素地把黑色的点涂白。如果图片太小，涂完会很粗糙。</li>
+<li><strong>隐式神经表示方法：</strong> 就像一个数学家，他先找出了描述这张图片光影变化的“公式”。然后他只需要修改公式里的“亮度系数”，就能重新画出一张极其精细的、完美的亮图。</li>
+</ul>
+<p><strong>你需要我为你解释相关的具体论文（例如相关的CVPR或ICCV论文）或者具体的网络架构图吗？</strong></p>
+<h1 id="（二）详细内容"><a href="#（二）详细内容" class="headerlink" title="（二）详细内容"></a>（二）详细内容</h1><p>这份论文是一篇发表在<strong>ICCV2023</strong>（国际计算机视觉大会，该领域的顶级会议）上的学术论文。</p>
+<hr>
+<h3 id="一、基本信息"><a href="#一、基本信息" class="headerlink" title="一、基本信息"></a>一、基本信息</h3><ul>
+<li><strong>论文标题：</strong> ImplicitNeuralRepresentationforCooperativeLow-lightImageEnhancement</li>
+<li><strong>中文标题：</strong> 用于协同低光图像增强的隐式神经表示(NeRCo)</li>
+<li><strong>作者团队：</strong> ShuzhouYang,JianZhang等人，主要来自北京大学深圳研究生院和鹏城实验室。</li>
+<li><strong>发表出处：</strong> ICCV2023。</li>
+</ul>
+<hr>
+<h3 id="二、文章概述"><a href="#二、文章概述" class="headerlink" title="二、文章概述"></a>二、文章概述</h3><p><strong>简单来说，这篇文章发明了一个叫</strong>​<strong>​<code>NeRCo</code>​</strong>​<strong>的新算法，专门用来把“黑乎乎”的照片修成“清晰明亮”的照片。</strong></p>
+<p>它的核心亮点在于：</p>
+<ol>
+<li><strong>不需要“标准答案”：</strong> 以前的很多方法需要一对照片（一张黑的，一张完美的）来教AI，但这很难获取。这个方法是<strong>无监督</strong>的，不需要一一对应的完美照片也能训练。</li>
+<li><strong>用数学公式“磨皮”：</strong> 它引入了“隐式神经表示”（INR），不仅能把照片变亮，还能像磨皮一样自动去掉噪点，让光照更均匀。</li>
+<li><strong>请了“语文老师”来指导：</strong> 它不仅看图，还用文字（比如“这是一张明亮的照片”）来指导AI修图，让修出来的颜色更符合人类的审美。</li>
+</ol>
+<hr>
+<h3 id="三、研究背景（为什么要研究这个？）"><a href="#三、研究背景（为什么要研究这个？）" class="headerlink" title="三、研究背景（为什么要研究这个？）"></a>三、研究背景（为什么要研究这个？）</h3><p><strong>1.现实中的问题</strong></p>
+<ul>
+<li><strong>不仅是看不清：</strong> 光线太暗不仅让我们看不清照片，还会影响电脑识别物体（比如自动驾驶在晚上看不清路，安防摄像头抓不到人脸）。</li>
+<li><strong>噪点多：</strong> 你在晚上拍照时，画面上总会有很多密密麻麻的噪点，很难处理。</li>
+</ul>
+<p><strong>2.现有方法的缺陷</strong></p>
+<ul>
+<li><strong>传统方法（比如调节伽马值）：</strong> 就像简单粗暴地调高亮度，结果往往是画面泛白，或者噪点也被放大了很多。</li>
+<li><p><strong>深度学习方法（AI）：</strong></p>
+<ul>
+<li>有的需要大量的“成对数据”（同一个场景，一张全黑一张全亮），这在现实中很难拍到。</li>
+<li>有的虽然把图片弄亮了，但颜色很奇怪（偏色），或者看着不自然，不是人类喜欢的样子。</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>本文的切入点</li>
+</ol>
+<p>作者认为，应该把复杂的现实场景先“标准化”，并且在修图时，引入<strong>语义（文字）</strong> 的指导，让AI知道什么样的图才是“好看的图”。</p>
+<hr>
+<h3 id="四、研究思路（他们是怎么做的？）"><a href="#四、研究思路（他们是怎么做的？）" class="headerlink" title="四、研究思路（他们是怎么做的？）"></a>四、研究思路（他们是怎么做的？）</h3><p>作者设计了一个复杂的系统，我们可以把它拆解成三个关键步骤：</p>
+<h4 id="第一步：把照片“洗干净”——神经表示归一化-NRN"><a href="#第一步：把照片“洗干净”——神经表示归一化-NRN" class="headerlink" title="第一步：把照片“洗干净”——神经表示归一化(NRN)"></a>第一步：把照片“洗干净”——神经表示归一化(NRN)</h4><ul>
+<li><p><strong>名词解释：隐式神经表示(INR)</strong></p>
+<ul>
+<li><em>小白解释：</em> 传统的照片是由一个个像素点（小方块）组成的。INR不记像素点，而是记一个“数学函数”。给这个函数一个坐标，它算出颜色。</li>
+<li><em>作用：</em> 因为这个函数是连续光滑的，它天然地不喜欢突兀的噪点。</li>
+</ul>
+</li>
+<li>作者的做法：<br>在修图之前，先用INR把黑照片处理一遍。这就像在化妆前先洗脸、打底，把照片里不均匀的黑斑、随机的噪点先平滑掉，统一一下“底子”，让后面的步骤更容易做。</li>
+</ul>
+<h4 id="第二步：左右互搏，自我提升——双闭环生成-DualLoop"><a href="#第二步：左右互搏，自我提升——双闭环生成-DualLoop" class="headerlink" title="第二步：左右互搏，自我提升——双闭环生成(DualLoop)"></a>第二步：左右互搏，自我提升——双闭环生成(DualLoop)</h4><ul>
+<li><strong>小白解释：</strong> 既然没有“标准答案”，AI怎么知道自己修得对不对呢？作者用了一个巧妙的办法：​ <strong>“一来一回”</strong> 。<ol>
+<li>把<strong>黑图</strong>变​<strong>亮图</strong>。</li>
+<li>再把这张<strong>亮图</strong>变回​<strong>黑图</strong>。</li>
+<li>比较一下：最后变回来的黑图，和最开始的黑图像不像？如果像，说明中间的变换是合理的。</li>
+</ol>
+</li>
+<li><strong>具体实现：</strong>  这是一个<strong>无监督</strong>的训练过程，不需要成对的照片，只要有一堆黑照片和一堆亮照片（不需要对应）就能训练。</li>
+</ul>
+<h4 id="第三步：请文字来当裁判——文本驱动的判别器-TAD"><a href="#第三步：请文字来当裁判——文本驱动的判别器-TAD" class="headerlink" title="第三步：请文字来当裁判——文本驱动的判别器(TAD)"></a>第三步：请文字来当裁判——文本驱动的判别器(TAD)</h4><ul>
+<li><p><strong>名词解释：CLIP模型 (Vision-Language Model)</strong></p>
+<ul>
+<li><em>小白解释：</em>  这是一个学过几亿张图和文字的超级AI，它知道“猫”长什么样，也知道“明亮的照片”应该是什么样。</li>
+</ul>
+</li>
+<li>作者的做法：<br>在AI修图的时候，作者引入了 CLIP 模型来监督。<ul>
+<li>它会问 CLIP：“这张修好的图，符合‘​<strong>明亮的照片</strong>’这个描述吗？”。</li>
+<li>如果不符合，CLIP 就会惩罚修图AI，逼着它往“看着舒服、颜色自然”的方向改。这解决了以前机器评分高但人眼看着丑的问题。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="五、研究结果（效果好不好？）"><a href="#五、研究结果（效果好不好？）" class="headerlink" title="五、研究结果（效果好不好？）"></a>五、研究结果（效果好不好？）</h3><p>作者在三个公开的数据集（LOL,LIME,LSRW）上进行了测试，结果非常强：</p>
+<ol>
+<li>客观指标（分数）：<br>在PSNR（峰值信噪比，越高越清晰）和SSIM（结构相似性，越高越像真图）这两个指标上，NeRCo几乎打败了所有对手，甚至超过了一些有监督（看过标准答案）的方法。</li>
+<li><p><strong>主观视觉（看着怎么样）：</strong></p>
+<ul>
+<li>看论文里的对比图（比如图1的乐高小人）：</li>
+<li>别的算法（如SCI,URetinexNet）修出来的图，有的泛紫，有的像蒙了一层灰。</li>
+<li>NeRCo修出来的图，颜色很正，对比度好，而且噪点非常少。</li>
+</ul>
+</li>
+<li>消融实验（证明每个部件都有用）：<br>作者像拆积木一样，试了去掉NRN或者去掉TAD会怎样。结果发现，如果去掉了这些模块，效果都会变差。这证明了作者提出的“隐式神经表示”和“文本监督”确实是核心功臣。</li>
+</ol>
+<hr>
+<h3 id="六、研究结论、不足与展望"><a href="#六、研究结论、不足与展望" class="headerlink" title="六、研究结论、不足与展望"></a>六、研究结论、不足与展望</h3><h4 id="1-结论"><a href="#1-结论" class="headerlink" title="1.结论"></a>1.结论</h4><p>这篇文章提出了NeRCo，这是<strong>第一个</strong>将“隐式神经表示”的可控拟合能力用于低光图像增强的方法。也是<strong>第一个</strong>引入“多模态学习”（用文字指导修图）到这个领域的方法。它成功地在没有成对数据的情况下，修出了高质量、颜色自然的图片。</p>
+<h4 id="2-不足（小白理解版）"><a href="#2-不足（小白理解版）" class="headerlink" title="2.不足（小白理解版）"></a>2.不足（小白理解版）</h4><p>虽然论文作者在正文中主要强调了优势，但我们可以从原理上推断出一些潜在的限制（论文末尾暗示了部分）：</p>
+<ul>
+<li><strong>计算可能比较慢：</strong> 隐式神经表示（INR）通常需要对每个像素坐标进行计算，推理速度可能不如纯卷积网络快。</li>
+<li><strong>对预训练模型的依赖：</strong> 它的效果很大程度上依赖于CLIP模型（那个语文老师）是否足够聪明。</li>
+</ul>
+<h4 id="3-展望（未来还能干啥？）"><a href="#3-展望（未来还能干啥？）" class="headerlink" title="3.展望（未来还能干啥？）"></a>3.展望（未来还能干啥？）</h4><p>作者认为，他们发明的这套方法（用INR做归一化，用文字做指导）不仅可以用来修黑照片，以后还可以用来：</p>
+<ul>
+<li><strong>去雾：</strong> 把有雾的照片变清晰。</li>
+<li><strong>压缩感知/高光谱成像：</strong> 处理更复杂的医学或科学成像数据。</li>
+</ul>
+<hr>
+<p><strong>一句话总结：</strong> 这篇论文教AI像画家一样，先用数学方法给画布打底（去噪），然后一边画一边听语文老师的指挥（颜色校正），最终把一张黑漆漆的废片变成了高清大片。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://solitudeab.github.io">SolitudeAB</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://solitudeab.github.io/2025/12/25/paper/20251225-INR/">https://solitudeab.github.io/2025/12/25/paper/20251225-INR/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://solitudeab.github.io" target="_blank">我的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CNN/">CNN</a><a class="post-meta__tags" href="/tags/%E8%AE%BA%E6%96%87%E5%AE%9E%E9%AA%8C/">论文实验</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,x,wechat,weibo,qq,qzone,douban,linkedin"></div><link rel="stylesheet" href="/pluginsSrc/butterfly-extsrc/sharejs/dist/css/share.min.css?v=1.1.6" media="print" onload="this.media='all'"><script src="/pluginsSrc/butterfly-extsrc/sharejs/dist/js/social-share.min.js?v=1.1.6" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/12/25/%E8%A9%B9%E5%8D%9A%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/Week2/20251225-%E6%97%A5%E5%BF%97/" title="日志"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">日志</div></div><div class="info-2"><div class="info-item-1">Week2  INR.md   BNM既然你提到了 Neural Representation for Normalization (NRN)  这篇论文（通常是指 Zheng et al.  等人提出的基于隐式神经表示的归一化思想），那么我们就可以把刚才的两个片段完全串联起来了。 你说得非常对，那个 MLP 模块（BNM）本质上就是 NRN 思想的具体落地。 为了让你透彻理解，我们抛开复杂的数学推导，用NRN 的核心哲学来解释这个模块到底在做什么，以及它为什么比传统的“减去均值、除以方差”更高级。  1. NRN 的核心哲学：把图像看作“函数”而不是“矩阵”在传统的 CNN（卷积神经网络）中，我们把图像看作一个数字矩阵（比如 $256 \times 256$ 的格子）。 但在 Neural Representation (神经表示) 的思想里，图像是一个连续的函数。  传统归一化（如 Instance Norm）： 是统计学方法。算出整张图的平均亮度，然后把所有像素统一减去这个值。这是一种“一刀切”的数学操作。 NRN (神经表示归一化)： 是拟合方法。它认为：任何一张受光照影...</div></div></div></a><a class="pagination-related" href="/2025/12/23/%E8%A9%B9%E5%8D%9A%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/Week2/20251223-%E4%BB%BB%E5%8A%A1/" title="任务"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">任务</div></div><div class="info-2"><div class="info-item-1">目标：实现无代码论文（找到对应缝合模块的论文以实现）MAR.md 日志.md  </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/04/21/paper/Eyes/v3/20260422-test/" title="test"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-22</div><div class="info-item-2">test</div></div><div class="info-2"><div class="info-item-1">基于KD-SIPG重要性张量的眼底图像增强与跨领域融合模块深度研究报告1. 引言与KD-SIPG重要性张量的理论解构眼底图像的质量增强在医学计算机视觉领域本质上是一个高度非适定的逆问题。由于眼底成像设备的硬件限制、患者的屈光间质混浊（如白内障）以及不可控的外部照明条件，获取的眼底图像往往伴随着低对比度、高频噪声、不均匀照明以及伪影（如睫毛阴影或反光）。传统的图像增强算法或是常规的卷积神经网络（CNN）在处理此类退化时，通常倾向于优化全局图像逼真度指标（如峰值信噪比PSNR或结构相似性SSIM）。这种全局同质化的优化策略会产生一个致命的临床副作用：网络会过度平滑背景，从而将微动脉瘤、细小出血点、新生微血管等高频病理特征作为噪声抹除，使得增强后的图像在临床诊断上失去价值。 为了突破这一瓶颈，语义先验的提取与注入成为了维持“病理保真度”（Pathological Fidelity）的核心机制。KD-SIPG（Knowledge Distillation for Semantic Prior Generation，语义先验生成的异步知识蒸馏）模块正是为解决极端退化条件下的先验提取而设计的...</div></div></div></a><a class="pagination-related" href="/2026/03/12/paper/Eyes/deepsearch/20260312-two/" title="two"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-12</div><div class="info-item-2">two</div></div><div class="info-2"><div class="info-item-1">https://gemini.google.com/share/0e035325ceda 突破物理与语义边界：基于视觉状态空间与隐式域自适应的下一代眼底图像增强架构 (SS-ITAR) 深度研究报告引言：现代计算眼科学中底层视觉增强的战略地位与技术演进视网膜眼底摄影作为一种非侵入性的核心诊断模态，在糖尿病视网膜病变（DR）、青光眼、年龄相关性黄斑变性（AMD）以及高血压相关心血管疾病的早期筛查中扮演着不可替代的角色 。然而，在真实世界的临床环境中，尤其是在基层医疗或资源匮乏地区的非散瞳筛查中，眼底图像的质量极易受到操作者经验、设备传感器限制、患者屈光间质浑浊（如白内障）以及照明条件波动的影响 。这些因素导致的图像退化通常表现为光照不均、对比度极低、严重的传感器噪声以及伪影，不仅直接掩盖了微小动脉瘤、出血点和细微毛细血管等关键病理生物标志物，也大幅降低了下游计算机辅助诊断（CAD）系统的准确性与可靠性 。随着医学人工智能逐渐从单一任务模型向通用的基础大模型（Foundation Models）演进，输入数据的底层视觉质量已成为决定模型特征提取上限的关键瓶颈。 在过去的研究周期中，医...</div></div></div></a><a class="pagination-related" href="/2026/05/07/paper/Eyes/v3/20260507-Untitled-1/" title="Untitled 1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-07</div><div class="info-item-2">Untitled 1</div></div><div class="info-2"><div class="info-item-1">多维先验调制增强生成网络 (PMEG-SCR) 深度解构该架构彻底摒弃了传统深度学习在医学图像增强中的“黑盒”映射，转而采用一种由底层医学物理先验深度驱动的“白盒化”特征干预流。整体架构被严密地划分为四个前向数据流阶段与一个后向梯度优化阶段。 阶段 1：全局导航中心 —— 双轨医学先验提取引擎 (KD-SIPG)在任何像素级像素增强开始之前，网络必须首先“理解”视网膜的解剖结构。该阶段是一个独立于主干网络的预计算引擎，旨在极端退化（极低信噪比、不均匀照明）的条件下，强行提取出可靠的医学先验。  1. 物理拓扑基线提取： 首先，输入图像 $y$ 经过全局环境光池化提取极低频基线 $x{rough}$。为了对抗免散瞳相机中致命的高光反射与睫毛遮挡，引入基于 Otsu 算法的物理异常掩码（Artifact Mask）$\mathcal{M}{art}$。随后，利用可微分的多尺度 Frangi 滤波器结合该掩码，计算出具备拓扑连通性的微血管概率分布 $\alpha_{vessel}$。  2. 异步语义知识蒸馏： 考虑到边缘设备的算力限制，引入了大型视网膜基础模型（Teacher，如 R...</div></div></div></a><a class="pagination-related" href="/2026/03/31/paper/Eyes/20260331-SCI-IG_v2/" title="SCI-IG_v2"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-31</div><div class="info-item-2">SCI-IG_v2</div></div><div class="info-2"><div class="info-item-1">计划这是一个非常精妙且具有深度的深度学习框架设计。SCR-IG 框架极其精准地抓住了当前医学图像增强领域的痛点：物理学派（SCI）速度极快但缺乏医疗语义保护，而语义学派（I-SECRET）保护了病灶但结构臃肿、极度退化下易失效。 将重要性图（Importance Map）作为空间变异先验（Spatially-Variant Prior）直接注入 Retinex 光照估计的底层物理过程中，这不仅在理论上自洽，在工程实现上也极具操作性。 以下为您将该框架的核心模块与其对应的创新点进行逐一拆解，并提供一套在现有 PyTorch 源码（以 SCI 为骨架，融合 I-SECRET 机制）上进行二次开发的实操计划。  一、 核心模块与创新点逐一拆解1. 多维语义重要性先验生成模块 (SIPG) 对应创新点：打破隐式学习瓶颈，实现零样本病灶觉察与微血管形态学保护。 机制分析： 原来的 I-SECRET 高度依赖 U-Net 解码器从零学习重要性图，这在极低信噪比下容易彻底失效 。 SIPG 模块通过引入固化权重的医疗基础模型（RETFound），利用其强大的泛化能力直接输出病灶概率掩码 $\a...</div></div></div></a><a class="pagination-related" href="/2026/04/11/paper/Eyes/v2/20260411-%E8%B7%AF%E7%BA%BF/" title="路线"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-11</div><div class="info-item-2">路线</div></div><div class="info-2"><div class="info-item-1">这是一个非常聪明且极其严谨的工程策略！在深度学习开发中，这种“先搭骨架，再逐个外挂模块”的方法被称为增量式开发（Incremental Development）。它不仅能最大程度避免代码跑通后却不知道哪里出错的尴尬，还能顺手把你论文里最核心的消融实验（Ablation Study）给做了。 为了让 Codex（或 Copilot/Cursor）写出最符合你心意的 PyTorch 代码，我为你准备了英文 Prompt 序列（因为 AI 编程助手对英文指令和 PyTorch API 的映射最为精准）。 你可以新建一个工程，然后按顺序把下面的 Prompt 喂给 Codex。  第一步：搭建 Baseline（最基础的 Retinex 级联网络）目标： 先不要任何先验（没有 SIPG）和动态路由（没有 Cond-SVIC），只用一个普通的 3x3 卷积块作为光照估计器，并实现 SCM 的 $T$ 次循环。这个版本将作为你论文里最底层的 Baseline。 新建文件：models/baseline.py 喂给 Codex 的 Prompt： Plaintext 12345Please w...</div></div></div></a><a class="pagination-related" href="/2026/04/01/paper/Eyes/20260401-eyes/" title="eyes"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-01</div><div class="info-item-2">eyes</div></div><div class="info-2"><div class="info-item-1">深度融合与语义觉察：基于重要性图引导的下一代眼底图像增强深度学习框架视网膜成像增强的背景与技术分歧的演进视网膜眼底摄影作为一种非侵入性的核心诊断模态，在糖尿病视网膜病变（DR）、青光眼、年龄相关性黄斑变性（AMD）以及高血压相关心血管疾病的早期筛查中扮演着不可替代的角色 。然而，在真实世界的临床环境中，尤其是在基层医疗或资源匮乏地区的非散瞳筛查中，眼底图像的质量极易受到操作者经验、设备传感器限制、患者屈光间质浑浊（如白内障）以及照明条件波动的影响 。这些因素导致的图像退化通常表现为光照不均、对比度极低、严重的传感器噪声以及伪影，不仅直接掩盖了微小动脉瘤、出血点和细微毛细血管等关键病理生物标志物，也大幅降低了下游计算机辅助诊断（CAD）系统的准确性与可靠性 。 近年来，深度学习在医学图像增强领域取得了突破性进展，但现有技术路线逐渐显现出严重的分歧。第一种技术路线以物理模型驱动的网络为代表，其核心典范为自校准光照网络（Self-Calibrated Illumination, SCI）。该框架植根于Retinex物理理论，通过极简的全卷积网络和权重共享机制，实现了极高的计算效率和光照...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">SolitudeAB</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SolitudeAB"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/SolitudeAB" target="_blank" title="GitHub"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:jiaxwoo@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #DEAC96;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E7%9F%A5%E8%AF%86%E5%89%8D%E7%9E%BB"><span class="toc-number">1.</span> <span class="toc-text">（一）知识前瞻</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E2%80%9C%E9%9A%90%E5%BC%8F%E7%A5%9E%E7%BB%8F%E8%A1%A8%E7%A4%BA%E2%80%9D-ImplicitNeuralRepresentations-INR"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.什么是“隐式神经表示”(ImplicitNeuralRepresentations,INR)?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BB%80%E4%B9%88%E6%98%AF%E2%80%9C%E5%8D%8F%E5%90%8C%E2%80%9D-Cooperative"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.什么是“协同”(Cooperative)?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BB%80%E4%B9%88%E6%98%AF%E2%80%9C%E4%BD%8E%E5%85%89%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA%E2%80%9D-Low-LightImageEnhancement"><span class="toc-number">1.0.3.</span> <span class="toc-text">3.什么是“低光图像增强”(Low-LightImageEnhancement)?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A%E6%95%B4%E4%B8%AA%E7%B3%BB%E7%BB%9F%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F"><span class="toc-number">1.0.4.</span> <span class="toc-text">总结：整个系统是如何工作的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%99%E7%A7%8D%E6%96%B9%E6%B3%95%E7%9B%B8%E6%AF%94%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%EF%BC%88%E5%A6%82CNN%EF%BC%89%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%A4%84%EF%BC%9F"><span class="toc-number">1.0.5.</span> <span class="toc-text">这种方法相比传统方法（如CNN）有什么好处？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%B1%BB%E6%AF%94"><span class="toc-number">1.0.6.</span> <span class="toc-text">简单类比</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E8%AF%A6%E7%BB%86%E5%86%85%E5%AE%B9"><span class="toc-number">2.</span> <span class="toc-text">（二）详细内容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="toc-number">2.0.1.</span> <span class="toc-text">一、基本信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%96%87%E7%AB%A0%E6%A6%82%E8%BF%B0"><span class="toc-number">2.0.2.</span> <span class="toc-text">二、文章概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF%EF%BC%88%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%A0%94%E7%A9%B6%E8%BF%99%E4%B8%AA%EF%BC%9F%EF%BC%89"><span class="toc-number">2.0.3.</span> <span class="toc-text">三、研究背景（为什么要研究这个？）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%A0%94%E7%A9%B6%E6%80%9D%E8%B7%AF%EF%BC%88%E4%BB%96%E4%BB%AC%E6%98%AF%E6%80%8E%E4%B9%88%E5%81%9A%E7%9A%84%EF%BC%9F%EF%BC%89"><span class="toc-number">2.0.4.</span> <span class="toc-text">四、研究思路（他们是怎么做的？）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E6%8A%8A%E7%85%A7%E7%89%87%E2%80%9C%E6%B4%97%E5%B9%B2%E5%87%80%E2%80%9D%E2%80%94%E2%80%94%E7%A5%9E%E7%BB%8F%E8%A1%A8%E7%A4%BA%E5%BD%92%E4%B8%80%E5%8C%96-NRN"><span class="toc-number">2.0.4.1.</span> <span class="toc-text">第一步：把照片“洗干净”——神经表示归一化(NRN)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%B7%A6%E5%8F%B3%E4%BA%92%E6%90%8F%EF%BC%8C%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87%E2%80%94%E2%80%94%E5%8F%8C%E9%97%AD%E7%8E%AF%E7%94%9F%E6%88%90-DualLoop"><span class="toc-number">2.0.4.2.</span> <span class="toc-text">第二步：左右互搏，自我提升——双闭环生成(DualLoop)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E8%AF%B7%E6%96%87%E5%AD%97%E6%9D%A5%E5%BD%93%E8%A3%81%E5%88%A4%E2%80%94%E2%80%94%E6%96%87%E6%9C%AC%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%88%A4%E5%88%AB%E5%99%A8-TAD"><span class="toc-number">2.0.4.3.</span> <span class="toc-text">第三步：请文字来当裁判——文本驱动的判别器(TAD)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E7%A0%94%E7%A9%B6%E7%BB%93%E6%9E%9C%EF%BC%88%E6%95%88%E6%9E%9C%E5%A5%BD%E4%B8%8D%E5%A5%BD%EF%BC%9F%EF%BC%89"><span class="toc-number">2.0.5.</span> <span class="toc-text">五、研究结果（效果好不好？）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E7%A0%94%E7%A9%B6%E7%BB%93%E8%AE%BA%E3%80%81%E4%B8%8D%E8%B6%B3%E4%B8%8E%E5%B1%95%E6%9C%9B"><span class="toc-number">2.0.6.</span> <span class="toc-text">六、研究结论、不足与展望</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%BB%93%E8%AE%BA"><span class="toc-number">2.0.6.1.</span> <span class="toc-text">1.结论</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%B8%8D%E8%B6%B3%EF%BC%88%E5%B0%8F%E7%99%BD%E7%90%86%E8%A7%A3%E7%89%88%EF%BC%89"><span class="toc-number">2.0.6.2.</span> <span class="toc-text">2.不足（小白理解版）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%B1%95%E6%9C%9B%EF%BC%88%E6%9C%AA%E6%9D%A5%E8%BF%98%E8%83%BD%E5%B9%B2%E5%95%A5%EF%BC%9F%EF%BC%89"><span class="toc-number">2.0.6.3.</span> <span class="toc-text">3.展望（未来还能干啥？）</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/%E8%AF%AD%E5%BD%95/" title="语录">语录</a><time datetime="2026-07-02T12:45:25.136Z" title="发表于 2026-07-02 20:45:25">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/hello-world/" title="Hello World">Hello World</a><time datetime="2026-07-02T12:45:25.014Z" title="发表于 2026-07-02 20:45:25">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/02/machine_learning/20260702-math/" title="高等数学">高等数学</a><time datetime="2026-07-02T12:05:42.000Z" title="发表于 2026-07-02 20:05:42">2026-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/paper/Eyes/v3/20260509-Untitled-2/" title="Untitled 2">Untitled 2</a><time datetime="2026-05-09T07:00:54.000Z" title="发表于 2026-05-09 15:00:54">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/07/paper/Eyes/v3/20260507-Untitled-1/" title="Untitled 1">Untitled 1</a><time datetime="2026-05-07T13:46:03.000Z" title="发表于 2026-05-07 21:46:03">2026-05-07</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By SolitudeAB</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="/pluginsSrc/medium-zoom/dist/medium-zoom.min.js?v=1.1.0"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        loader: {
+          load: [
+            // Four font extension packages (optional)
+            //- '[tex]/bbm',
+            //- '[tex]/bboldx',
+            //- '[tex]/dsfont',
+            '[tex]/mhchem'
+          ],
+          paths: {
+            'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+
+            //- // Four font extension packages (optional)
+            //- 'mathjax-bbm-extension': '[mathjax]/../@mathjax/mathjax-bbm-font-extension',
+            //- 'mathjax-bboldx-extension': '[mathjax]/../@mathjax/mathjax-bboldx-font-extension',
+            //- 'mathjax-dsfont-extension': '[mathjax]/../@mathjax/mathjax-dsfont-font-extension',
+            'mathjax-mhchem-extension': '[mathjax]/../@mathjax/mathjax-mhchem-font-extension'
+          }
+        },
+        output: {
+          font: 'mathjax-newcm',
+        },
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+          packages: {
+            '[+]': [
+              'mhchem'
+            ]
+          }
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          menuOptions: {
+            settings: {
+              enrich: false  // Turn off Braille and voice narration text automatic generation
+            }
+          },
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = '/pluginsSrc/mathjax/tex-mml-chtml.js?v=4.1.0'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><div id="aplayer"></div><script src="/js/custom.js"></script><script id="canvas_nest" defer="defer" color="222,172,150" opacity="0.5" zIndex="-1" count="99" mobile="false" src="/pluginsSrc/butterfly-extsrc/dist/canvas-nest.min.js?v=1.1.6"></script><link rel="stylesheet" href="/pluginsSrc/aplayer/dist/APlayer.min.css?v=1.10.1" media="print" onload="this.media='all'"><script src="/pluginsSrc/aplayer/dist/APlayer.min.js?v=1.10.1"></script><script src="/pluginsSrc/butterfly-extsrc/metingjs/dist/Meting.min.js?v=1.1.6"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="/pluginsSrc/pjax/pjax.min.js?v=0.2.8" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章..." type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.4"></script></div></div></body></html>
