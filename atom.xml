@@ -9,7 +9,7 @@
   <link href="https://solitudeab.github.io/atom.xml" rel="self"/>
   <rights>All rights reserved 2026, SolitudeAB</rights>
   <title>我的博客</title>
-  <updated>2026-07-02T12:45:25.136Z</updated>
+  <updated>2026-07-03T23:50:31.842Z</updated>
   <entry>
     <author>
       <name>SolitudeAB</name>
@@ -17,9 +17,9 @@
     <content>
       <![CDATA[<ul><li>踩在落叶上的声音，就像踏过初雪，夕阳，是疼痛的解药，把人间的疲倦慢慢消解，你看云朵聚了又散，从不急切，人生本就有高耸的山川和狂阔的原野，那些倒在秋天的花朵，会在春天，更加热烈（《秋天，就是倒着的春天》）</li></ul><p><img src="/%E8%AF%AD%E5%BD%95/%E5%9B%BE2.jpg" alt="图2"></p><ul><li>北风呼啸，雨打寒霜。倦鸟归巢，游子还乡。路迢迢水迢迢，东方欲晓君行早。风萧萧雨潇潇，青山不老红颜老。阿爷谆谆诲，问儿几时回。风瑟瑟，乱云飞，望断长江水。游子泪偷垂，孤鸿声韵悲。寒星坠，客愁堆，归期却问谁。梦醒空床家何在，方知此心最相思。抬眼尽是他乡客，不曾得见故乡人。青灯燃十载，端的是墨香铜臭。黄卷阅千章，终究为道明心澄。可怜寒窗苦读十几载，依旧是空无用处。漂泊客停舟，半世逸尘游。一曲相思上心头，平添几更愁。鸿鹄志难酬，提笔泪先流。梦绕魂牵何时休，霜雪落白头。酒过三巡，难遣寂寞，戎马半生，何时封侯。壮志未歇不敢语，恐惊天上人。家书迟来无言对，羞诉凡尘苦。孤星冷月，角楼残缺，何处相逢又话别。凄风苦雪，音断路绝，更惹情深与意切。举杯停著，恍惚来时路。欲问行人到何处，暮霭停步，争渡—争渡，山水几重悟。是非恩怨转头空，浮生一场黄粱梦。镜花水月难自流，无边世事总随风。楚楚梅花影，吹落雪纷纷。野径寻芳客，翩然醉黄昏。去岁东信至，琼花漫野时。今临数九冽，瑞叶却来迟。想来上天自有安排，一年更有一年好景致。长夜露华浓，辗转无眠意。残烛照孤影，一任到天明。梦里长波未静，念及年岁渐长，学业未精，总不安宁。（《燕子》）</li></ul><p><img src="/%E8%AF%AD%E5%BD%95/%E5%9B%BE1.jpg" alt="图1"></p>]]>
     </content>
-    <id>https://solitudeab.github.io/2026/07/02/%E8%AF%AD%E5%BD%95/</id>
-    <link href="https://solitudeab.github.io/2026/07/02/%E8%AF%AD%E5%BD%95/"/>
-    <published>2026-07-02T12:45:25.136Z</published>
+    <id>https://solitudeab.github.io/2026/07/03/%E8%AF%AD%E5%BD%95/</id>
+    <link href="https://solitudeab.github.io/2026/07/03/%E8%AF%AD%E5%BD%95/"/>
+    <published>2026-07-03T23:50:31.842Z</published>
     <summary>
       <![CDATA[<ul>
 <li>踩在落叶上的声音，就像踏过初雪，夕阳，是疼痛的解药，把人间的疲倦慢慢消解，你看云朵聚了又散，从不急切，人生本就有高耸的山川和狂阔的原野，那些倒在秋天的花朵，会在春天，更加热烈（《秋天，就是倒着的春天》）</li>
@@ -27,7 +27,7 @@
 <p><img src="/%E8%]]>
     </summary>
     <title>语录</title>
-    <updated>2026-07-02T12:45:25.136Z</updated>
+    <updated>2026-07-03T23:50:31.842Z</updated>
   </entry>
   <entry>
     <author>
@@ -36,14 +36,14 @@
     <content>
       <![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]>
     </content>
-    <id>https://solitudeab.github.io/2026/07/02/hello-world/</id>
-    <link href="https://solitudeab.github.io/2026/07/02/hello-world/"/>
-    <published>2026-07-02T12:45:25.014Z</published>
+    <id>https://solitudeab.github.io/2026/07/03/hello-world/</id>
+    <link href="https://solitudeab.github.io/2026/07/03/hello-world/"/>
+    <published>2026-07-03T23:50:31.720Z</published>
     <summary>
       <![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for]]>
     </summary>
     <title>Hello World</title>
-    <updated>2026-07-02T12:45:25.014Z</updated>
+    <updated>2026-07-03T23:50:31.720Z</updated>
   </entry>
   <entry>
     <author>
@@ -61,7 +61,7 @@
       <![CDATA[<h3 id="高等数学"><a href="#高等数学" class="headerlink" title="高等数学"></a>高等数学</h3><h4 id="1-导数定义："><a href="#1-导数定义：" class="headerlink" title="1.导]]>
     </summary>
     <title>高等数学</title>
-    <updated>2026-07-02T12:45:25.084Z</updated>
+    <updated>2026-07-03T23:50:31.790Z</updated>
   </entry>
   <entry>
     <author>
@@ -86,7 +86,7 @@
 <th style="text-align:right">SSIM]]>
     </summary>
     <title>Untitled 2</title>
-    <updated>2026-07-02T12:45:25.109Z</updated>
+    <updated>2026-07-03T23:50:31.815Z</updated>
   </entry>
   <entry>
     <author>
@@ -108,7 +108,7 @@
       <![CDATA[<h3 id="多维先验调制增强生成网络-PMEG-SCR-深度解构"><a href="#多维先验调制增强生成网络-PMEG-SCR-深度解构" class="headerlink" title="多维先验调制增强生成网络 (PMEG-SCR) 深度解构"></a><stron]]>
     </summary>
     <title>Untitled 1</title>
-    <updated>2026-07-02T12:45:25.109Z</updated>
+    <updated>2026-07-03T23:50:31.815Z</updated>
   </entry>
   <entry>
     <author>
@@ -133,7 +133,7 @@
     <title>
       <![CDATA[PNSR & SSIM]]>
     </title>
-    <updated>2026-07-02T12:45:24.810Z</updated>
+    <updated>2026-07-03T23:50:31.517Z</updated>
   </entry>
   <entry>
     <author>
@@ -145,7 +145,7 @@
     <link href="https://solitudeab.github.io/2026/05/01/%E6%97%A5%E5%BF%97/20260502/"/>
     <published>2026-05-01T16:00:00.000Z</published>
     <title>Day1</title>
-    <updated>2026-07-02T12:45:25.134Z</updated>
+    <updated>2026-07-03T23:50:31.840Z</updated>
   </entry>
   <entry>
     <author>
@@ -165,7 +165,7 @@
       <![CDATA[<h3 id="Baseline"><a href="#Baseline" class="headerlink" title="Baseline"></a>Baseline</h3><figure class="highlight plaintext"><table><tr><t]]>
     </summary>
     <title>日志</title>
-    <updated>2026-07-02T12:45:25.108Z</updated>
+    <updated>2026-07-03T23:50:31.814Z</updated>
   </entry>
   <entry>
     <author>
@@ -173,8 +173,8 @@
     </author>
     <category term="论文实验" scheme="https://solitudeab.github.io/categories/%E8%AE%BA%E6%96%87%E5%AE%9E%E9%AA%8C/"/>
     <category term="眼底图像增强" scheme="https://solitudeab.github.io/tags/%E7%9C%BC%E5%BA%95%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/"/>
-    <category term="Markdown" scheme="https://solitudeab.github.io/tags/Markdown/"/>
     <category term="论文实验" scheme="https://solitudeab.github.io/tags/%E8%AE%BA%E6%96%87%E5%AE%9E%E9%AA%8C/"/>
+    <category term="Markdown" scheme="https://solitudeab.github.io/tags/Markdown/"/>
     <content>
       <![CDATA[<p>以下是根据 <code>network.md</code>、<code>test.md</code> 以及你提供的 <code>loss.md</code> 逻辑，还原并完善后的完整 Markdown 文档。</p><hr><h1 id="面向-PSNR-与临床结构保真的损失函数设计（PMEG-SCR-改进版）"><a href="#面向-PSNR-与临床结构保真的损失函数设计（PMEG-SCR-改进版）" class="headerlink" title="面向 PSNR 与临床结构保真的损失函数设计（PMEG-SCR 改进版）"></a>面向 PSNR 与临床结构保真的损失函数设计（PMEG-SCR 改进版）</h1><h2 id="1-目标与核心矛盾分析"><a href="#1-目标与核心矛盾分析" class="headerlink" title="1. 目标与核心矛盾分析"></a>1. 目标与核心矛盾分析</h2><p>在眼底图像增强任务中，现有的优化准则面临以下瓶颈：</p><ul><li><strong>指标脱节</strong>：使用纯 $L_1$ 或 $MSE$ 往往能获得极高的 SSIM（如 94+），但 PSNR 提升微弱（仅 1dB 左右），原因在于模型对“离群崩坏像素”缺乏惩罚。</li><li><strong>局部误差敏感性</strong>：PSNR 对绝对像素误差极度敏感，极少数的极端错误点（如伪影区、高光区）会显著拉低全局 PSNR 指标。</li><li><strong>临床保真度冲突</strong>：原 SCR-IG 框架偏重于病灶与拓扑结构的恢复，虽然提升了临床可用性，但在数学上并未直接最大化像素级的 PSNR。</li></ul><p>因此，本方案提出一种<strong>多维双目标损失函数</strong>，旨在稳步提升 PSNR 的同时，确保微米级病灶与血管拓扑的保真。</p><hr><h2 id="2-统一损失函数定义"><a href="#2-统一损失函数定义" class="headerlink" title="2. 统一损失函数定义"></a>2. 统一损失函数定义</h2><p>定义预测图为 $\hat{Y}$，真实标签为 $Y$。令复合重要性先验 $\bar{\alpha} = \max(\alpha<em>{lesion_s}, \alpha</em>{vessel})$。像素级误差记为 $E = |\hat{Y} - Y|$。</p><p>总损失函数 $\mathcal{L}_{total}$ 构造如下：</p><script type="math/tex; mode=display">\mathcal{L}_{total} = \lambda_{mse}\mathcal{L}_{mse} + \lambda_{hard}\mathcal{L}_{hard} + \lambda_{patho}\mathcal{L}_{patho} + \lambda_{ims}\mathcal{L}_{ims} + \lambda_{topo}\mathcal{L}_{clDice}</script><h3 id="2-1-PSNR-主导损失（MSE）"><a href="#2-1-PSNR-主导损失（MSE）" class="headerlink" title="2.1 PSNR 主导损失（MSE）"></a>2.1 PSNR 主导损失（MSE）</h3><p>直接针对 PSNR 的数学定义进行优化，是提升指标的基石：</p><script type="math/tex; mode=display">\mathcal{L}_{mse} = \|\hat{Y} - Y\|_2^2</script><ul><li><strong>作用</strong>：在训练全周期保持主导权重，确保模型收敛于像素级的平均值。</li></ul><h3 id="2-2-硬样本离群惩罚（Hard-Mining）"><a href="#2-2-硬样本离群惩罚（Hard-Mining）" class="headerlink" title="2.2 硬样本离群惩罚（Hard Mining）"></a>2.2 硬样本离群惩罚（Hard Mining）</h3><p>专门治理导致 PSNR 无法突破的“崩坏像素”。设 $TopK(E^2)$ 为全图误差平方最大的前 $k\%$ 像素集合：</p><script type="math/tex; mode=display">\mathcal{L}_{hard} = \frac{1}{|TopK|}\sum_{i \in TopK(E^2)} E_i^2</script><ul><li><strong>作用</strong>：强效压制离群点。建议初期 $k=5\%$，随着训练进行降至 $1\%$，精准歼灭残余的异常噪声点。</li></ul><h3 id="2-3-病灶重要性重建（Pathological-Reconstruction）"><a href="#2-3-病灶重要性重建（Pathological-Reconstruction）" class="headerlink" title="2.3 病灶重要性重建（Pathological Reconstruction）"></a>2.3 病灶重要性重建（Pathological Reconstruction）</h3><p>继承原论文对病理区域的关注，但通过指数平滑控制其对全局 MSE 的冲击：</p><script type="math/tex; mode=display">\mathcal{L}_{patho} = \sum_i \exp(\gamma \cdot \bar{\alpha}_i) \cdot |\hat{Y}_i - Y_i|</script><ul><li><strong>作用</strong>：确保出血、渗出等高危病灶在增强后具备更高的对比度与可见度。</li></ul><h3 id="2-4-重要性调制平滑（IMS）"><a href="#2-4-重要性调制平滑（IMS）" class="headerlink" title="2.4 重要性调制平滑（IMS）"></a>2.4 重要性调制平滑（IMS）</h3><p>抑制背景散斑噪声，同时保护结构边缘：</p><script type="math/tex; mode=display">\mathcal{L}_{ims} = \sum_{i} \sum_{j \in \mathcal{N}(i)} \left[ (1 - \bar{\alpha}_i) w_{i,j} |x_i - x_j| + \eta \bar{\alpha}_i \text{TV}_{edge}(x_i) \right]</script><ul><li><strong>作用</strong>：在健康背景区执行强力平滑，在病灶区执行保边去噪。</li></ul><h3 id="2-5-软骨架拓扑一致性（clDice）"><a href="#2-5-软骨架拓扑一致性（clDice）" class="headerlink" title="2.5 软骨架拓扑一致性（clDice）"></a>2.5 软骨架拓扑一致性（clDice）</h3><p>针对微血管连通性的高阶形态学约束：</p><script type="math/tex; mode=display">\mathcal{L}_{clDice} = 1 - 2 \frac{|S_{pred} \cap V_{GT}| + |V_{pred} \cap S_{GT}|}{|S_{pred}| + |V_{GT}| + |V_{pred}| + |S_{GT}|}</script><ul><li><strong>作用</strong>：强制血管端点与分叉处的拓扑守恒，规避假阴性断裂。</li></ul><hr><h2 id="3-两阶段课程学习策略"><a href="#3-两阶段课程学习策略" class="headerlink" title="3. 两阶段课程学习策略"></a>3. 两阶段课程学习策略</h2><p>为解决多目标优化中的梯度冲突，建议采用以下调度策略：</p><h3 id="Phase-I：基础重构与-PSNR-攻坚（前-60-Epochs）"><a href="#Phase-I：基础重构与-PSNR-攻坚（前-60-Epochs）" class="headerlink" title="Phase I：基础重构与 PSNR 攻坚（前 60% Epochs）"></a>Phase I：基础重构与 PSNR 攻坚（前 60% Epochs）</h3><p>目标是建立稳健的光照基线，消除大面积退化。</p><ul><li><strong>损失配置</strong>：$\mathcal{L} = 1.0\mathcal{L}<em>{mse} + 0.3\mathcal{L}</em>{hard} + 0.1\mathcal{L}<em>{patho} + 0.05\mathcal{L}</em>{ims}$</li><li><strong>状态</strong>：$\mathcal{L}_{clDice}$ 设为 0。此阶段优先保证像素级的快速咬合。</li></ul><h3 id="Phase-II：结构精修与拓扑锁定（后-40-Epochs）"><a href="#Phase-II：结构精修与拓扑锁定（后-40-Epochs）" class="headerlink" title="Phase II：结构精修与拓扑锁定（后 40% Epochs）"></a>Phase II：结构精修与拓扑锁定（后 40% Epochs）</h3><p>在 PSNR 稳定的基础上，注入高阶医学语义。</p><ul><li><strong>损失配置</strong>：$\mathcal{L} = 1.0\mathcal{L}<em>{mse} + 0.2\mathcal{L}</em>{hard} + 0.15\mathcal{L}<em>{patho} + 0.1\mathcal{L}</em>{ims} + 0.1\mathcal{L}_{clDice}$</li><li><strong>注意</strong>：若观察到 PSNR 下滑，应优先下调 $\lambda_{topo}$。</li></ul><hr><h2 id="4-相比原-SCR-IG-损失的关键改进"><a href="#4-相比原-SCR-IG-损失的关键改进" class="headerlink" title="4. 相比原 SCR-IG 损失的关键改进"></a>4. 相比原 SCR-IG 损失的关键改进</h2><ol><li><strong>新增离群治理</strong>：原论文未显式约束最差像素，$\mathcal{L}_{hard}$ 填补了 PSNR 提升的工程空白。</li><li><strong>权重引力中心偏移</strong>：本方案重新确立了 $\mathcal{L}_{mse}$ 的核心地位，将“病理导向”转变为“保底像素，点控病灶”。</li><li><strong>约束解耦</strong>：将拓扑损失 $\mathcal{L}_{clDice}$ 移至后期启用，减少了训练初期对像素收敛的干扰。</li><li><strong>动态日程表</strong>：强调了从“量”（PSNR）到“质”（拓扑）的阶段性演进，而非固定权重的混合。</li></ol><hr><h2 id="5-实验建议与指标验证"><a href="#5-实验建议与指标验证" class="headerlink" title="5. 实验建议与指标验证"></a>5. 实验建议与指标验证</h2><p>固定 512 尺度输入，建议进行以下四组消融实验以验证 PSNR 的稳步提升：</p><div class="table-container"><table><thead><tr><th><strong>实验组</strong></th><th><strong>损失组合</strong></th><th><strong>预期效果</strong></th></tr></thead><tbody><tr><td><strong>Exp 1</strong></td><td>$MSE$ (Baseline)</td><td>PSNR 基本盘，SSIM 适中。</td></tr><tr><td><strong>Exp 2</strong></td><td>$MSE + Hard$</td><td>PSNR 显著提升，消除明显的局部伪影坏点。</td></tr><tr><td><strong>Exp 3</strong></td><td>$MSE + Hard + Patho + IMS$</td><td>保持 PSNR 的同时，病灶对比度与背景纯净度大幅改善。</td></tr><tr><td><strong>Exp 4</strong></td><td><strong>Full PMEG-SCR Loss</strong></td><td>实现指标与临床拓扑连通性的双重最优。</td></tr></tbody></table></div><p><strong>评估维度：</strong></p><ul><li><strong>全局指标</strong>：PSNR / SSIM。</li><li><strong>坏点治理</strong>：计算最差 5% 样本的平均 PSNR，验证系统鲁棒性。</li><li><strong>临床评价</strong>：针对微血管断裂点进行局部可视化分析。</li></ul>]]>
     </content>
@@ -187,7 +187,7 @@
 <h1 id="面向-PSNR-与临床结构保真]]>
     </summary>
     <title>loss</title>
-    <updated>2026-07-02T12:45:25.108Z</updated>
+    <updated>2026-07-03T23:50:31.814Z</updated>
   </entry>
   <entry>
     <author>
@@ -209,7 +209,7 @@
       <![CDATA[<h1 id="基于KD-SIPG重要性张量的眼底图像增强与跨领域融合模块深度研究报告"><a href="#基于KD-SIPG重要性张量的眼底图像增强与跨领域融合模块深度研究报告" class="headerlink" title="基于KD-SIPG重要性张量的眼底图像增强与]]>
     </summary>
     <title>test</title>
-    <updated>2026-07-02T12:45:25.108Z</updated>
+    <updated>2026-07-03T23:50:31.814Z</updated>
   </entry>
   <entry>
     <author>
@@ -228,7 +228,7 @@
       <![CDATA[<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span]]>
     </summary>
     <title>服务器代理</title>
-    <updated>2026-07-02T12:45:25.111Z</updated>
+    <updated>2026-07-03T23:50:31.817Z</updated>
   </entry>
   <entry>
     <author>
@@ -250,7 +250,7 @@
       <![CDATA[<h2 id="3-1-Overview-of-the-Architecture"><a href="#3-1-Overview-of-the-Architecture" class="headerlink" title="3.1 Overview of the Architec]]>
     </summary>
     <title>network</title>
-    <updated>2026-07-02T12:45:25.108Z</updated>
+    <updated>2026-07-03T23:50:31.814Z</updated>
   </entry>
   <entry>
     <author>
@@ -273,7 +273,7 @@
 <p>血管 （fragi）                                            —&gt]]>
     </summary>
     <title>Untitled</title>
-    <updated>2026-07-02T12:45:25.108Z</updated>
+    <updated>2026-07-03T23:50:31.814Z</updated>
   </entry>
   <entry>
     <author>
@@ -293,7 +293,7 @@
       <![CDATA[<p>这是一个非常聪明且极其严谨的工程策略！在深度学习开发中，这种<strong>“先搭骨架，再逐个外挂模块”</strong>的方法被称为<strong>增量式开发（Incremental Development）</strong>。它不仅能最大程度避免代码跑通后却不知道哪里出]]>
     </summary>
     <title>路线</title>
-    <updated>2026-07-02T12:45:25.108Z</updated>
+    <updated>2026-07-03T23:50:31.814Z</updated>
   </entry>
   <entry>
     <author>
@@ -314,7 +314,7 @@
       <![CDATA[<h3 id="阶段零：项目立项与“地基”夯实-Foundation-amp-Risk-Mitigation"><a href="#阶段零：项目立项与“地基”夯实-Foundation-amp-Risk-Mitigation" class="headerlink" title="]]>
     </summary>
     <title>gemini</title>
-    <updated>2026-07-02T12:45:25.108Z</updated>
+    <updated>2026-07-03T23:50:31.814Z</updated>
   </entry>
   <entry>
     <author>
@@ -335,7 +335,7 @@
       <![CDATA[<h1 id="针对SCR-IG眼底图像增强框架的独创性、半监督SOTA指标及CCF-B类会议录用可行性的深度调研报告"><a href="#针对SCR-IG眼底图像增强框架的独创性、半监督SOTA指标及CCF-B类会议录用可行性的深度调研报告" class="headerlin]]>
     </summary>
     <title>deepseach</title>
-    <updated>2026-07-02T12:45:25.108Z</updated>
+    <updated>2026-07-03T23:50:31.814Z</updated>
   </entry>
   <entry>
     <author>
@@ -354,7 +354,7 @@
       <![CDATA[<h1 id="度学习驱动的眼底图像增强研究（2019–2024）：下游临床任务、病灶保留机制与数据溯源全景评估"><a href="#度学习驱动的眼底图像增强研究（2019–2024）：下游临床任务、病灶保留机制与数据溯源全景评估" class="headerlink" tit]]>
     </summary>
     <title>眼底图像增强实验目的和现况调查</title>
-    <updated>2026-07-02T12:45:25.107Z</updated>
+    <updated>2026-07-03T23:50:31.813Z</updated>
   </entry>
   <entry>
     <author>
@@ -379,7 +379,7 @@
 </ol>]]>
     </summary>
     <title>2026.4.11日志</title>
-    <updated>2026-07-02T12:45:25.107Z</updated>
+    <updated>2026-07-03T23:50:31.813Z</updated>
   </entry>
   <entry>
     <author>
@@ -399,7 +399,7 @@
       <![CDATA[<h3 id="Page-02-Method-重点聚焦-CQA-的构建与训练"><a href="#Page-02-Method-重点聚焦-CQA-的构建与训练" class="headerlink" title="Page 02 / Method (重点聚焦 CQA 的构建与训]]>
     </summary>
     <title>汇报</title>
-    <updated>2026-07-02T12:45:25.113Z</updated>
+    <updated>2026-07-03T23:50:31.819Z</updated>
   </entry>
   <entry>
     <author>
@@ -419,6 +419,6 @@
       <![CDATA[<h2 id="第一阶段：构建多模型-多Agent的“专家会诊”系统（小批量离线标注）"><a href="#第一阶段：构建多模型-多Agent的“专家会诊”系统（小批量离线标注）" class="headerlink" title="第一阶段：构建多模型+多Agent的“专家会]]>
     </summary>
     <title>路线</title>
-    <updated>2026-07-02T12:45:25.113Z</updated>
+    <updated>2026-07-03T23:50:31.819Z</updated>
   </entry>
 </feed>

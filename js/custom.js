@@ -98,3 +98,37 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+/* ===== 首页分类快捷入口 ===== */
+function initHomeQuickPanel() {
+    const recentPosts = document.querySelector('#recent-posts');
+    if (!recentPosts || document.querySelector('.home-quick-panel')) return;
+
+    const categoryLinks = Array.from(document.querySelectorAll('#aside-content .card-categories a'))
+        .filter(link => link.textContent.trim())
+        .slice(0, 8);
+
+    if (!categoryLinks.length) return;
+
+    const panel = document.createElement('section');
+    panel.className = 'home-quick-panel';
+    panel.innerHTML = [
+        '<div class="home-quick-panel__header">',
+        '<div class="home-quick-panel__title">按方向浏览</div>',
+        '<div class="home-quick-panel__hint">从学习、论文、随笔里快速进入</div>',
+        '</div>',
+        '<div class="home-quick-panel__chips"></div>'
+    ].join('');
+
+    const chips = panel.querySelector('.home-quick-panel__chips');
+    categoryLinks.forEach(link => {
+        const chip = link.cloneNode(true);
+        chip.removeAttribute('style');
+        chips.appendChild(chip);
+    });
+
+    recentPosts.insertBefore(panel, recentPosts.firstChild);
+}
+
+document.addEventListener('DOMContentLoaded', initHomeQuickPanel);
+document.addEventListener('pjax:complete', initHomeQuickPanel);
