@@ -20,15 +20,6 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/about/index.html</loc>
-    
-    <lastmod>2026-07-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://solitudeab.github.io/categories/index.html</loc>
     
     <lastmod>2026-07-04</lastmod>
@@ -38,25 +29,16 @@
   </url>
   
   <url>
+    <loc>https://solitudeab.github.io/about/index.html</loc>
+    
+    <lastmod>2026-07-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://solitudeab.github.io/2026/07/04/%E8%AF%AD%E5%BD%95/</loc>
-    
-    <lastmod>2026-07-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://solitudeab.github.io/2026/01/15/%E8%A9%B9%E5%8D%9A%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/Week3/20260115-Isecret%E5%A4%8D%E7%8E%B0%E7%BB%93%E6%9E%9C/</loc>
-    
-    <lastmod>2026-07-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://solitudeab.github.io/2026/01/10/%E8%A9%B9%E5%8D%9A%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E6%9D%8E%E6%B2%90%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/20260110-Day1/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -92,7 +74,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2026/01/11/%E8%A9%B9%E5%8D%9A%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/Week2/20260111-BNM%E6%A8%A1%E5%9D%97/</loc>
+    <loc>https://solitudeab.github.io/2026/01/02/%E8%A9%B9%E5%8D%9A%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/Week2/20260102-%E4%BB%A3%E7%A0%81%E7%BC%9D%E5%90%88/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -101,7 +83,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2026/01/02/%E8%A9%B9%E5%8D%9A%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/Week2/20260102-%E4%BB%A3%E7%A0%81%E7%BC%9D%E5%90%88/</loc>
+    <loc>https://solitudeab.github.io/2026/01/11/%E8%A9%B9%E5%8D%9A%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/Week2/20260111-BNM%E6%A8%A1%E5%9D%97/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -119,7 +101,25 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2026/05/01/%E6%97%A5%E5%BF%97/20260502/</loc>
+    <loc>https://solitudeab.github.io/2026/01/15/%E8%A9%B9%E5%8D%9A%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/Week3/20260115-Isecret%E5%A4%8D%E7%8E%B0%E7%BB%93%E6%9E%9C/</loc>
+    
+    <lastmod>2026-07-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://solitudeab.github.io/2026/01/10/%E8%A9%B9%E5%8D%9A%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E6%9D%8E%E6%B2%90%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/20260110-Day1/</loc>
+    
+    <lastmod>2026-07-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://solitudeab.github.io/2025/11/04/%E8%A9%B9%E5%8D%9A%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/Week1/20251104-Anoconda%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -137,7 +137,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2025/11/04/%E8%A9%B9%E5%8D%9A%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/Week1/20251104-Anoconda%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/</loc>
+    <loc>https://solitudeab.github.io/2026/05/01/%E6%97%A5%E5%BF%97/20260502/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -173,7 +173,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2025/02/20/%E4%B8%9A%E4%BD%99/20250220-z.nn.linear/</loc>
+    <loc>https://solitudeab.github.io/2025/02/20/%E4%B8%9A%E4%BD%99/20250220-z.softmax-%E5%87%BD%E6%95%B0/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -182,7 +182,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2025/02/20/%E4%B8%9A%E4%BD%99/20250220-z.softmax-%E5%87%BD%E6%95%B0/</loc>
+    <loc>https://solitudeab.github.io/2025/02/20/%E4%B8%9A%E4%BD%99/20250220-z.nn.linear/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -272,7 +272,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2026/03/24/paper/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/20260324-paper/</loc>
+    <loc>https://solitudeab.github.io/2026/03/24/paper/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/20260324-SCI_ISec/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -281,7 +281,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2026/03/24/paper/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/20260324-SCI_ISec/</loc>
+    <loc>https://solitudeab.github.io/2026/03/24/paper/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/20260324-paper/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -389,7 +389,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2026/04/21/paper/Eyes/v3/20260422-test/</loc>
+    <loc>https://solitudeab.github.io/2026/04/22/paper/Eyes/v3/20260422-loss/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -399,6 +399,15 @@
   
   <url>
     <loc>https://solitudeab.github.io/2026/04/22/paper/Eyes/v3/20260422-%E6%97%A5%E5%BF%97/</loc>
+    
+    <lastmod>2026-07-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://solitudeab.github.io/2026/04/21/paper/Eyes/v3/20260422-test/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -425,42 +434,6 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2026/03/12/paper/Eyes/deepsearch/20260312-two/</loc>
-    
-    <lastmod>2026-07-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://solitudeab.github.io/2026/03/20/paper/Eyes/deepsearch/20260320-deepsearch/</loc>
-    
-    <lastmod>2026-07-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://solitudeab.github.io/2026/04/11/paper/Eyes/deepsearch/20260411-%E7%9C%BC%E5%BA%95%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84%E5%92%8C%E7%8E%B0%E5%86%B5%E8%B0%83%E6%9F%A5/</loc>
-    
-    <lastmod>2026-07-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://solitudeab.github.io/2026/04/11/paper/Eyes/v2/20260411-2026.4.11%E6%97%A5%E5%BF%97/</loc>
-    
-    <lastmod>2026-07-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://solitudeab.github.io/2026/04/11/paper/Eyes/v2/20260411-deepseach/</loc>
     
     <lastmod>2026-07-04</lastmod>
@@ -479,7 +452,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2026/04/11/paper/Eyes/v2/20260411-%E8%B7%AF%E7%BA%BF/</loc>
+    <loc>https://solitudeab.github.io/2026/04/15/paper/Eyes/v2/20260415-Untitled/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -488,7 +461,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2026/04/15/paper/Eyes/v2/20260415-Untitled/</loc>
+    <loc>https://solitudeab.github.io/2026/04/11/paper/Eyes/v2/20260411-%E8%B7%AF%E7%BA%BF/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -506,7 +479,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2026/04/22/paper/Eyes/v3/20260422-loss/</loc>
+    <loc>https://solitudeab.github.io/2026/03/12/paper/Eyes/deepsearch/20260312-two/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -515,7 +488,25 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2026/03/31/paper/Eyes/20260331-SCI-IG_v2/</loc>
+    <loc>https://solitudeab.github.io/2026/04/11/paper/Eyes/v2/20260411-2026.4.11%E6%97%A5%E5%BF%97/</loc>
+    
+    <lastmod>2026-07-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://solitudeab.github.io/2026/04/11/paper/Eyes/deepsearch/20260411-%E7%9C%BC%E5%BA%95%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84%E5%92%8C%E7%8E%B0%E5%86%B5%E8%B0%83%E6%9F%A5/</loc>
+    
+    <lastmod>2026-07-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://solitudeab.github.io/2026/03/20/paper/Eyes/deepsearch/20260320-deepsearch/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -542,6 +533,15 @@
   </url>
   
   <url>
+    <loc>https://solitudeab.github.io/2026/03/31/paper/Eyes/20260331-SCI-IG_v2/</loc>
+    
+    <lastmod>2026-07-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://solitudeab.github.io/2026/03/12/paper/Eyes/deepsearch/20260312-one/</loc>
     
     <lastmod>2026-07-04</lastmod>
@@ -560,7 +560,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2026/03/13/paper/Eyes/20260313-2026.3.13%E6%97%A5%E5%BF%97/</loc>
+    <loc>https://solitudeab.github.io/2026/03/15/paper/Eyes/20260315-2026.3.15%E6%97%A5%E5%BF%97/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -569,7 +569,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2026/03/15/paper/Eyes/20260315-2026.3.15%E6%97%A5%E5%BF%97/</loc>
+    <loc>https://solitudeab.github.io/2026/03/13/paper/Eyes/20260313-2026.3.13%E6%97%A5%E5%BF%97/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -614,15 +614,6 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2026/03/01/paper/Eyes/20260301-2026.3.1%E6%97%A5%E5%BF%97/</loc>
-    
-    <lastmod>2026-07-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://solitudeab.github.io/2026/03/08/paper/20260308-%E9%9A%8F%E7%AC%942026.3.8/</loc>
     
     <lastmod>2026-07-04</lastmod>
@@ -641,7 +632,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2025/12/16/paper/20251216-DuDoDR-Net/</loc>
+    <loc>https://solitudeab.github.io/2026/03/01/paper/Eyes/20260301-2026.3.1%E6%97%A5%E5%BF%97/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -650,7 +641,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2025/12/23/paper/20251223-MAR/</loc>
+    <loc>https://solitudeab.github.io/2025/12/16/paper/20251216-DuDoDR-Net/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -686,6 +677,15 @@
   </url>
   
   <url>
+    <loc>https://solitudeab.github.io/2025/12/23/paper/20251223-MAR/</loc>
+    
+    <lastmod>2026-07-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://solitudeab.github.io/2026/02/26/paper/20260226-I-Secret/</loc>
     
     <lastmod>2026-07-04</lastmod>
@@ -695,7 +695,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2026/07/02/machine_learning/20260702-math/</loc>
+    <loc>https://solitudeab.github.io/2025/12/16/paper/20251216-CNNMAR/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -704,7 +704,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2025/12/16/paper/20251216-CNNMAR/</loc>
+    <loc>https://solitudeab.github.io/2026/07/02/machine_learning/20260702-math/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -794,7 +794,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2025/09/19/machine_learning/20250919-2.CS229-Prob/</loc>
+    <loc>https://solitudeab.github.io/2025/09/19/machine_learning/20250919-week10/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -803,7 +803,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2025/09/19/machine_learning/20250919-week10/</loc>
+    <loc>https://solitudeab.github.io/2025/09/19/machine_learning/20250919-2.CS229-Prob/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -1082,6 +1082,15 @@
   </url>
   
   <url>
+    <loc>https://solitudeab.github.io/2025/08/12/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/CNN%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/20250812-%E8%86%A8%E8%83%80%E4%B8%8E%E8%85%90%E8%9A%80/</loc>
+    
+    <lastmod>2026-07-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://solitudeab.github.io/2025/10/09/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20251009-504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/</loc>
     
     <lastmod>2026-07-04</lastmod>
@@ -1092,15 +1101,6 @@
   
   <url>
     <loc>https://solitudeab.github.io/2025/10/11/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20251011-Week9/</loc>
-    
-    <lastmod>2026-07-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://solitudeab.github.io/2025/08/12/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/CNN%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/20250812-%E8%86%A8%E8%83%80%E4%B8%8E%E8%85%90%E8%9A%80/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -1145,15 +1145,6 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/2025/08/24/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20250824-web/</loc>
-    
-    <lastmod>2026-07-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://solitudeab.github.io/2025/08/24/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20250824-%E8%AE%BA%E6%96%87%E6%96%B9%E5%90%91/</loc>
     
     <lastmod>2026-07-04</lastmod>
@@ -1164,6 +1155,15 @@
   
   <url>
     <loc>https://solitudeab.github.io/2025/09/03/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20250903-Week7/</loc>
+    
+    <lastmod>2026-07-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://solitudeab.github.io/2025/08/24/504%E5%8C%BB%E5%AD%A6AI%E5%85%A5%E9%97%A8/20250824-web/</loc>
     
     <lastmod>2026-07-04</lastmod>
     
@@ -1326,7 +1326,7 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://solitudeab.github.io/tags/%E8%AE%BA%E6%96%87%E5%AE%9E%E9%AA%8C/</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1341,13 +1341,6 @@
   
   <url>
     <loc>https://solitudeab.github.io/tags/%E7%9C%BC%E5%BA%95%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/</loc>
-    <lastmod>2026-07-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://solitudeab.github.io/tags/%E8%AE%BA%E6%96%87%E5%AE%9E%E9%AA%8C/</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1390,6 +1383,13 @@
   
   <url>
     <loc>https://solitudeab.github.io/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://solitudeab.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1461,13 +1461,6 @@
   </url>
   
   <url>
-    <loc>https://solitudeab.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2026-07-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://solitudeab.github.io/categories/%E8%AE%BA%E6%96%87%E5%AE%9E%E9%AA%8C/</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -1476,6 +1469,13 @@
   
   <url>
     <loc>https://solitudeab.github.io/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://solitudeab.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

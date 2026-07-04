@@ -565,3 +565,10 @@ div#post a:not(.headerlink):not(.social-icon):hover {
         box-sizing: border-box;
     }
 }
+
+/* MathJax shows a focus marker when a formula is clicked or inspected. */
+mjx-container:focus,
+mjx-container[tabindex]:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
